@@ -1,5 +1,6 @@
 const fretboard = document.getElementsByClassName('fretboard')[0];
-const topbar = document.getElementsByClassName('topbar')[0];
+const topbar = document.getElementsByClassName('sequence-wrapper')[0];
+const currentTitle = document.getElementsByClassName('current-title')[0];
 const setBtn = document.getElementsByClassName('set-btn')[0];
 const clearBtn = document.getElementsByClassName('clear-btn')[0];
 const finishBtn = document.getElementsByClassName('finish-btn')[0];
@@ -9,6 +10,7 @@ const sequences = document.getElementsByClassName('saved-sequence');
 
 let stepQuantity = 0;
 let mode = 'chord';
+let activeStep = 0;
 
 function createFretboard() {
   const stringQuantity = 6;
@@ -50,15 +52,26 @@ function addFretControls(fret) {
 }
 
 function addStepToSequence() {
-  let seq = document.createElement('div');
-  seq.classList.add('seq-step');
-  console.dir(fretNotes);
+  let step = document.createElement('div');
+  step.classList.add('seq-step');
   let ids = collectStepNotes();
-  seq.setAttribute('data-noteids', ids);
-  seq.addEventListener('click', () => { populateFretboard(seq) });
-  topbar.appendChild(seq);
-  seq.innerHTML = 'Step ' + stepQuantity;
+  step.setAttribute('data-noteids', ids);
+  step.setAttribute('data-step', stepQuantity + 1);
+  step.addEventListener('click', () => {
+    setActiveStep(step);
+    populateFretboard(step);
+  });
+  topbar.appendChild(step);
+  step.innerHTML = 'Step ' + stepQuantity;
   stepQuantity++;
+}
+
+function setActiveStep(step) {
+  const steps = document.getElementsByClassName('seq-step');
+  for (let s = 0; s < steps.length; s++) {
+    steps[s].style.background = 'white';
+  }
+  steps[activeStep].style.background = 'pink';
 }
 
 function collectStepNotes() {
@@ -68,7 +81,6 @@ function collectStepNotes() {
       noteIds.push(fretNotes[fn].dataset.noteid);
     }
   }
-  console.log(noteIds);
   return noteIds.join(',');
 }
 
@@ -102,7 +114,6 @@ function finishSequence() {
   let savableSteps = allSteps.join('.');
   let noteidsInput = document.getElementsByClassName('noteids-input')[0];
   let sequenceInput = document.getElementsByClassName('sequence-input')[0];
-  console.dir(noteidsInput);
   noteidsInput.value = savableIds;
   sequenceInput.value = savableSteps;
   document.getElementsByClassName('save-form')[0].style.display = 'block';
@@ -118,6 +129,7 @@ function populateSequence(sequence) {
   clearTopbar();
   let noteidsData = sequence.dataset.noteids;
   let stepsData = sequence.dataset.sequence;
+  currentTitle.textContent = sequence.children[0].textContent;
 
   let noteids = noteidsData.split('.');
   let steps = stepsData.split('.');
