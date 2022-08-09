@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 
-const { handlePasswordReset, handleNewUser } = require('./email');
+// const { handlePasswordReset, handleNewUser } = require('./email');
 const { ensureAuthenticated } = require('../config/auth');
 const User = require('../models/user');
 const router = express.Router();
@@ -108,7 +108,7 @@ router.post('/signup', (req, res) => {
               newUser.save()
                 .then(user => {
                   req.flash('success_msg', 'You have successfully registered');
-                  handleNewUser(email);
+                  // handleNewUser(email);
                   res.redirect('/login');
                 })
                 .catch(err => console.log(err));
@@ -127,19 +127,19 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-router.post('/password-reset', (req, res) => {
-  const email = req.body.email;
-  User.findOne({ email: email }).then(user => {
-    if (!user) {
-      res.render('password-reset.ejs', {
-        error: 'No account found with that email'
-      });
-    } else {
-      handlePasswordReset(email);
-      res.redirect('/');
-    }
-  })
-})
+// router.post('/password-reset', (req, res) => {
+//   const email = req.body.email;
+//   User.findOne({ email: email }).then(user => {
+//     if (!user) {
+//       res.render('password-reset.ejs', {
+//         error: 'No account found with that email'
+//       });
+//     } else {
+//       handlePasswordReset(email);
+//       res.redirect('/');
+//     }
+//   })
+// });
 
 // router.post('/save', (req, res) => {
 //   console.log(req.body);
