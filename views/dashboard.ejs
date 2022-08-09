@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <title>Niheigo - <%= data.username %></title>
+	<link rel="icon" size="310x310" href="images/logo 2.svg">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="css/sets.css">
+	<link rel="stylesheet" type="text/css" href="css/test.css">
+	<link rel="stylesheet" type="text/css" href="css/mobile.css">
+</head>
+<body>
+	<div class="navigation-bar">
+		<h1 class="niheigo">
+			<img class="niheigo-logo" onclick="updateView('Welcome')" src="images/logo 2.svg"/>
+		</h1>
+	</div>
+
+	<!-- <div class="opening-content">
+		<div class="opening-logo-wrapper" onclick="showHome()">
+			<img class="opening-logo" src="images/logo 2.svg"/>
+		</div>
+		<br>
+		<h2 class="opening-title">Welcome</h2>
+		<div class="logo-ring"></div>
+		<div class="canvas-wrapper"></div>
+	</div> -->
+
+	<div class="desktop-view">
+		<div class="navigation desktop-window">
+			<div class="nav-top">
+				<div class="nav-top-inside">
+					<div class="nav-top-col">
+						<img class="nav-top-img" src="images/logo 2.svg"/>
+					</div>
+					<div class="nav-top-col">
+						<% if (typeof data == 'object') { %>
+							<h1 class="username-title"><%= data.username %></h1>
+						<% } else { %>
+							<a class="nav-login-signup-link" href="/login">Login</a>
+							<a class="nav-login-signup-link" href="/signup">Signup</a>
+						<% } %>
+					</div>
+				</div>
+			</div>
+			<div class="nav-middle">
+				<div class="nav-content-wrapper">
+					<h3 class="nav-content-title">KANJI</h3>
+					<ul class="nav-content-list">
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">JLPT</p></li>
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">Verbs</p></li>
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">Adjectives</p></li>
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">Rendaku</p></li>
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">Kurikaeshi</p></li>
+					</ul>
+				</div>
+
+				<div class="nav-content-wrapper">
+					<h3 class="nav-content-title">SETS</h3>
+					<ul class="nav-content-list">
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">New Set</p></li>
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">View All</p></li>
+					</ul>
+				</div>
+
+				<div class="nav-content-wrapper">
+					<h3 class="nav-content-title">TESTS</h3>
+					<ul class="nav-content-list">
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">New Test</p></li>
+						<li class="content-item"><p class="nav-text" onclick="updateView(this)">My Scores</p></li>
+					</ul>
+				</div>
+			</div>
+			<div class="nav-bottom"></div>
+		</div>
+
+		<div class="view-main desktop-window">
+			<div class="view-head">
+				<h2 class="view-title"></h2>
+				<div class="view-title-underline"></div>
+				<ul class="jlpt-level-list">
+					<li class="jlpt-level" onclick="sortKanji('All')">All</li>
+					<li class="jlpt-level" onclick="sortKanji('N5')">N5</li>
+					<li class="jlpt-level" onclick="sortKanji('N4')">N4</li>
+					<li class="jlpt-level" onclick="sortKanji('N3')">N3</li>
+					<li class="jlpt-level" onclick="sortKanji('N2')">N2</li>
+					<li class="jlpt-level" onclick="sortKanji('N1')">N1</li>
+				</ul>
+			</div>
+			<div class="view-body">
+				<div class="welcome-content view-body-content">
+					<p class="content-para">Niheigo is a tool for learning Japanese kanji.
+						It provides various ways of looking at kanji data, testing one's knowledge,
+						and enhancing the language skills of its users. Take a look at the kanji page to
+						 start your learning journey. Exploring is encouraged.
+					</p>
+					<button class="welcome-kanji-btn para-btn" onclick="navigate('kanji', false, false)">Kanji</button>
+					<br>
+					<!-- <button onclick="updateSet()">Update me</button> -->
+				</div>
+
+				<div class="jlpt-content view-body-content">
+					<div class="person-example">
+		        <p class="person-example-text">ひと</p>
+		        <p class="person-example-text">人</p>
+		        <p class="person-example-text">じん</p>
+		      </div>
+		      <p class="content-para">Kanji are logographic characters that make up the main writing
+		        system of the Japanese language. Their sounds (readings) are simply taken from the
+		        much simpler looking hiragana/katakana alphabets. There are only 46 letters in the
+		        hiragana and katakana alphabets, while there are thousands of kanji. As a result,
+		        several kanji share the same reading and oftentimes, one kanji can have
+		        several readings. Take, for example, the kanji that represents "people" or "person".
+		      </p>
+		      <button onclick="showAllKanji()" class="para-btn">View Kanji</button>
+		      <!-- <br> -->
+		      <div id="made-kanji-here"></div>
+				</div>
+
+				<div class="viewall-content view-body-content">
+					<div class="sets-container">
+						<div class="set-wrapper" id="new-set-wrapper" onclick="createNewSet()">
+							<img class="new-set-plus" src="images/new set plus.png"/>
+							<p class="set-title new-set-title">New Set</p>
+						</div>
+						<% if (typeof kanjiset == 'object') { %>
+							<% for (var k = 0; k < kanjiset.length; k++) { %>
+								<div class="set-wrapper"
+										 data-setnum="0"
+										 data-kanjis="<%=kanjiset[k].kanji%>"
+										 onclick="viewSet(this)">
+									<p class="set-title"><%=kanjiset[k].setName %></p>
+								</div>
+							<% } %>
+						<% } %>
+					</div>
+				</div>
+
+				<div class="newtest-content view-body-content">
+					<div class="pretest-ui">
+						<h3 class="pretest-ui-title">Take a test</h3>
+						<div class="pretest-ui-box">
+							<div class="pretest-ui-box-top">
+								<div class="pubt-col pubt-kanji pubt-active" onclick="toggleTestType(this)">Kanji</div>
+								<div class="pubt-col pubt-vocab" onclick="toggleTestType(this)">Vocab</div>
+							</div>
+							<div class="pretest-ui-box-bottom">
+								<ul class="pretest-choice-list">
+									<li class="pcl-item">
+										<div class="pcl-item-col">Number of Questions</div>
+										<div class="pcl-item-col">
+											<input class="question-number">
+										</div>
+									</li>
+									<li class="pcl-item">
+										<div class="pcl-item-col">Test Content</div>
+										<div class="pcl-item-col">
+											<select class="content-type">
+												<option value="meaning">Meaning</option>
+												<option value="reading">Reading</option>
+											</select>
+										</div>
+									</li>
+								</ul>
+								<button class="begin-test-btn" onclick="randomTest()">Begin Test</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="verbs-content view-body-content"></div>
+				<div class="adjectives-content view-body-content"></div>
+				<div class="rendaku-content view-body-content"></div>
+				<div class="kurikaeshi-content view-body-content"></div>
+				<div class="newset-content view-body-content"></div>
+				<div class="myscores-content view-body-content"></div>
+			</div>
+		</div>
+
+		<div class="logout-wrapper">
+			<a class="logout-btn" href="/logout">Logout</a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/dashboard.js"></script>
+	<script type="text/javascript" src="js/help.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<!-- <script type="text/javascript" src="js/p5.min.js"></script>
+	<script type="text/javascript" src="js/intro.js"></script> -->
+	<!-- <script type="text/javascript" src="js/n5Kanji.js"></script>
+	<script type="text/javascript" src="js/n4Kanji.js"></script>
+	<script type="text/javascript" src="js/n3Kanji.js"></script>
+	<script type="text/javascript" src="js/n2Kanji.js"></script>
+	<script type="text/javascript" src="js/n1Kanji.js"></script> -->
+	<script type="text/javascript" src="js/kanji.js"></script>
+	<script type="text/javascript" src="js/test.js"></script>
+	<script type="text/javascript" src="js/sets.js"></script>
+	<script type="text/javascript">
+		function showHome() {
+			// let openingContent = document.getElementsByClassName('opening-content')[0];
+			let desktopView = document.getElementsByClassName('desktop-view')[0];
+			let navBar = document.getElementsByClassName('navigation-bar')[0];
+
+			// openingContent.style.opacity = '0';
+			desktopView.style.display = 'block';
+			navBar.style.display = 'block';
+
+			setTimeout(function() {
+				// openingContent.style.display = 'none';
+				desktopView.style.opacity = '1';
+				navBar.style.opacity = '1';
+			}, 850);
+		}
+		showHome();
+	</script>
+</body>
+</html>

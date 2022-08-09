@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <title>Jahmon</title>
+  <meta name="description" content="Music tablature application.">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <div class="jel topbar">.</div>
+  <button class="jel topbar-btn clear-topbar-btn">Clear</button>
+
+
+  <div class="jel sidebar">
+    <button class="sidebar-btn chord-btn">Chord</button>
+    <button class="sidebar-btn riff-btn">Riff</button>
+
+    <div class="saved-sequences">
+      <% if (data != undefined) { %>
+        <% for (var i = 0; i < data.length; i++) { %>
+          <div
+            class="saved-sequence"
+            data-noteids="<%= data[i].noteids %>"
+            data-sequence="<%= data[i].sequence %>"
+          >
+            <p class="sequence-title"><%= data[i].title %></p>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="jel fretboard"></div>
+
+  <button class="jel fretboard-btn set-btn">Set</button>
+  <button class="jel fretboard-btn clear-btn">Clear</button>
+  <button class="jel fretboard-btn finish-btn">Finish</button>
+
+  <form class="save-form" method="POST" action="/save">
+    <input name="noteids" class="save-input noteids-input">
+    <input name="sequence" class="save-input sequence-input">
+    <input name="title" class="save-input title-input">
+    <button id="submit">Submit</button>
+  </form>
+
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

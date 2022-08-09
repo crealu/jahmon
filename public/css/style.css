@@ -1,0 +1,145 @@
+.jel {
+  position: absolute;
+  display: block;
+}
+
+.topbar {
+  top: 0px;
+  left: 0px;
+  height: 100px;
+  background: lightgreen;
+  width: 100%;
+}
+
+.sidebar {
+  top: 100px;
+  left: 0px;
+  height: calc(100vh - 100px);
+  width: 200px;
+  background: pink;
+}
+
+.fretboard {
+  top: 200px;
+  left: 250px;
+  width: calc(100vw - 300px);
+  background: lightblue;
+}
+
+.string-row {
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+
+.string-div {
+  position: absolute;
+  height: 2px;
+  background: gold;
+  width: 100%;
+  top: 25px;
+  z-index: 1;
+}
+
+.fret {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: calc(100% / 25);
+  background: tan;
+  border-left: 1px solid lightgray;
+  height: 50px;
+}
+
+.fret:hover {
+  background: gray;
+  cursor: pointer;
+}
+
+.fret-note {
+  position: absolute;
+  background: green;
+  width: 20px;
+  height: 20px;
+  display: none;
+  margin: 0 auto;
+  left: 0px;
+  right: 0px;
+  border-radius: 50%;
+  top: 16px;
+  z-index: 2;
+}
+
+.fretboard-btn {
+  top: 510px;
+}
+
+.set-btn {
+  left: 250px;
+}
+
+.clear-btn {
+  left: 300px;
+}
+
+.finish-btn {
+  left: 350px;
+}
+
+.seq-step {
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+}
+
+.save-form {
+  display: none;
+  width: 400px;
+  height: 400px;
+  text-align: center;
+  position: absolute;
+  margin: 0 auto;
+  left: 0px;
+  right: 0px;
+  top: 200px;
+  background: white;
+  padding: 20px;
+}
+
+.save-input {
+  display: none;
+}
+
+.title-input {
+  display: block;
+}
+
+.saved-sequences {
+  padding-top: 20px;
+}
+
+.saved-sequence {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  background: lavender;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.sequence-title {
+  position: relative;
+  top: 40px;
+}
+
+.clear-topbar-btn {
+  top: 40px;
+  right: 40px;
+}

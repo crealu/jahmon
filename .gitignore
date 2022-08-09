@@ -1,0 +1,4 @@
+node_modules
+config/keys.js
+views/indexNiheigo.ejs
+routes/email.js
