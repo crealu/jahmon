@@ -2,7 +2,7 @@
   "name": "jahmon",
   "version": "1.0.0",
   "description": "Collaborative music tabulating app",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"
