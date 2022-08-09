@@ -8,8 +8,7 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 
 const { initPassport } = require('./config/passport');
-// const uri = require('./config/keys').MongoURI;
-const uri = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI || require('./config/keys').MongoURI;
 const port = process.env.PORT || 3220;
 const app = express();
 
@@ -22,7 +21,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
+app.use(express.json());
 
 app.use(session({
   secret: 'keyboard cat',
