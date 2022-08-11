@@ -21,13 +21,16 @@
       <% if (data != undefined) { %>
         <% for (var i = 0; i < data.length; i++) { %>
           <div
-            class="saved-sequence"
+            class="sequence saved-sequence"
             data-noteids="<%= data[i].noteids %>"
             data-steps="<%= data[i].steps %>"
           >
             <p class="sequence-title"><%= data[i].title %></p>
           </div>
         <% } %>
+        <div class="sequence new-sequence">
+          <p class="sequence-title">NEW</p>
+        </div>
       <% } %>
     </div>
   </div>
