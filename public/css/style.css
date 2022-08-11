@@ -37,8 +37,13 @@ body {
   text-align: center;
 }
 
-.clear-topbar-btn {
-  top: 40px;
+.topbar-clear-btn {
+  top: 50px;
+  right: 40px;
+}
+
+.topbar-save-btn {
+  top: 25px;
   right: 40px;
 }
 

@@ -9,9 +9,10 @@
 </head>
 <body>
   <div class="jel topbar">
-    <div class="current-title"></div>
+    <div class="current-title" data-isnew="new"></div>
     <div class="sequence-wrapper"></div>
-    <button class="jel topbar-btn clear-topbar-btn">Clear</button>
+    <button class="jel topbar-btn topbar-save-btn">Save</button>
+    <button class="jel topbar-btn topbar-clear-btn">Clear</button>
   </div>
 
   <div class="jel sidebar">
@@ -42,16 +43,16 @@
 
   <button class="jel fretboard-bottom-btn set-btn">Set</button>
   <button class="jel fretboard-bottom-btn clear-btn">Clear</button>
-  <button class="jel fretboard-bottom-btn finish-btn">Finish</button>
 
   <form class="save-form" method="POST" action="/save">
     <h3>Save Sequence</h3>
     <input name="noteids" class="save-input noteids-input">
-    <input name="sequence" class="save-input sequence-input">
+    <input name="steps" class="save-input steps-input">
     <label for="title">Title</label>
     <input name="title" class="save-input title-input">
     <br>
     <button id="submit">Submit</button>
+    <button id="cancel">Cancel</button>
   </form>
 
   <script type="text/javascript" src="js/main.js"></script>

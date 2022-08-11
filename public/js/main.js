@@ -2,17 +2,20 @@ const fretboard = document.getElementsByClassName('fretboard')[0];
 const topbar = document.getElementsByClassName('sequence-wrapper')[0];
 const currentTitle = document.getElementsByClassName('current-title')[0];
 const setBtn = document.getElementsByClassName('set-btn')[0];
-const clearBtn = document.getElementsByClassName('clear-btn')[0];
+const clearFretboardBtn = document.getElementsByClassName('clear-btn')[0];
 const finishBtn = document.getElementsByClassName('finish-btn')[0];
-const clearTopbarBtn = document.getElementsByClassName('clear-topbar-btn')[0];
+const clearSequenceBtn = document.getElementsByClassName('topbar-clear-btn')[0];
+const saveBtn = document.getElementsByClassName('topbar-save-btn')[0];
 const fretNotes = document.getElementsByClassName('fret-note');
 const sequences = document.getElementsByClassName('saved-sequence');
 const newSequence = document.getElementsByClassName('new-sequence')[0];
+const saveForm = document.getElementsByClassName('save-form')[0];
 
 let stepQuantity = 0;
 let mode = 'chord';
 let activeStep = 0;
 let stepSelected = false;
+let isNew = true;
 
 function createFretboard() {
   const stringQuantity = 6;
@@ -114,46 +117,18 @@ function clearFretboard() {
   }
 }
 
-function finishSequence() {
-  const sequence = document.getElementsByClassName('seq-step');
-  let allIds = [];
-  let allSteps = [];
-  for (let s = 0; s < sequence.length; s++) {
-    allIds.push(sequence[s].dataset.noteids);
-    allSteps.push(sequence[s].textContent);
-  }
-  let savableIds = allIds.join('.');
-  let savableSteps = allSteps.join('.');
-  let noteidsInput = document.getElementsByClassName('noteids-input')[0];
-  let sequenceInput = document.getElementsByClassName('sequence-input')[0];
-  noteidsInput.value = savableIds;
-  sequenceInput.value = savableSteps;
-  document.getElementsByClassName('save-form')[0].style.display = 'block';
-}
-
 function startNewSequence() {
-  clearTopbar();
+  clearSequence();
   clearFretboard();
   currentTitle.textContent = 'untitled';
+  isNew = true;
   stepSelected = false;
 }
 
-setBtn.addEventListener('click', () => {
-  // setSelected ? updateSeqStep() : addSeqStep();
-  if (stepSelected) {
-    updateSeqStep();
-  } else {
-    addSeqStep();
-  }
-});
-clearBtn.addEventListener('click', () => { clearFretboard() });
-finishBtn.addEventListener('click', () => { finishSequence() });
-clearTopbarBtn.addEventListener('click', () => { clearTopbar() });
-newSequence.addEventListener('click', () => { startNewSequence() });
-
 function populateSequence(sequence) {
   clearFretboard();
-  clearTopbar();
+  clearSequence();
+  isNew = false;
   let noteids = sequence.dataset.noteids.split('.');
   let steps = sequence.dataset.steps.split('.');
   currentTitle.textContent = sequence.children[0].textContent;
@@ -170,17 +145,54 @@ function populateSequence(sequence) {
   }
 }
 
-for (let z = 0; z < sequences.length; z++) {
-  sequences[z].addEventListener('click', () => {
-    populateSequence(sequences[z]);
-  });
-}
-
-function clearTopbar() {
+function clearSequence() {
   while (topbar.firstChild) {
     topbar.removeChild(topbar.firstChild);
   }
   stepQuantity = 0;
+}
+
+function finishSequence() {
+  const sequence = document.getElementsByClassName('seq-step');
+  let allIds = [];
+  let allSteps = [];
+  for (let s = 0; s < sequence.length; s++) {
+    allIds.push(sequence[s].dataset.noteids);
+    allSteps.push(sequence[s].textContent);
+  }
+  let savableIds = allIds.join('.');
+  let savableSteps = allSteps.join('.');
+  let noteidsInput = document.getElementsByClassName('noteids-input')[0];
+  let sequenceInput = document.getElementsByClassName('steps-input')[0];
+  noteidsInput.value = savableIds;
+  sequenceInput.value = savableSteps;
+  saveForm.style.display = 'block';
+
+  if (!isNew) {
+    // saveForm.setAttribute('method', 'PUT');
+    saveForm.setAttribute('action', '/update');
+    document.getElementsByClassName('title-input')[0].value = currentTitle.textContent;
+  }
+}
+
+setBtn.addEventListener('click', () => {
+  // setSelected ? updateSeqStep() : addSeqStep();
+  if (stepSelected) {
+    updateSeqStep();
+  } else {
+    addSeqStep();
+  }
+});
+
+clearFretboardBtn.addEventListener('click', () => { clearFretboard() });
+saveBtn.addEventListener('click', () => { finishSequence() });
+clearSequenceBtn.addEventListener('click', () => { clearSequence() });
+newSequence.addEventListener('click', () => { startNewSequence() });
+
+for (let z = 0; z < sequences.length; z++) {
+  sequences[z].addEventListener('click', () => {
+    populateSequence(sequences[z]);
+  });
 }
 
 window.onload = createFretboard();
