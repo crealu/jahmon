@@ -11,6 +11,7 @@ const sequences = document.getElementsByClassName('saved-sequence');
 let stepQuantity = 0;
 let mode = 'chord';
 let activeStep = 0;
+let stepSelected = false;
 
 function createFretboard() {
   const stringQuantity = 6;
@@ -42,7 +43,6 @@ function addFrets(stringRow, stringNum) {
 
 function addFretControls(fret) {
   fret.addEventListener('click', () => {
-    console.dir(fret);
     if (fret.children[0].style.display == 'block') {
       fret.children[0].style.display = 'none';
     } else {
@@ -51,27 +51,37 @@ function addFretControls(fret) {
   });
 }
 
-function addStepToSequence() {
+function setActiveStep(step) {
+  let steps = document.getElementsByClassName('seq-step');
+  for (let s = 0; s < steps.length; s++) {
+    steps[s].style.background = 'white';
+  }
+  if (activeStep == step.dataset.step) {
+    stepSelected = !stepSelected;
+  } else {
+    stepSelected = true;
+    populateFretboard(step);
+    step.style.background = 'green';
+    activeStep = step.dataset.step;
+  }
+}
+
+function addSeqStep() {
+  let ids = collectStepNotes();
   let step = document.createElement('div');
   step.classList.add('seq-step');
-  let ids = collectStepNotes();
   step.setAttribute('data-noteids', ids);
   step.setAttribute('data-step', stepQuantity + 1);
-  step.addEventListener('click', () => {
-    setActiveStep(step);
-    populateFretboard(step);
-  });
+  step.addEventListener('click', () => { setActiveStep(step) });
   topbar.appendChild(step);
   step.innerHTML = 'Step ' + stepQuantity;
   stepQuantity++;
 }
 
-function setActiveStep(step) {
-  const steps = document.getElementsByClassName('seq-step');
-  for (let s = 0; s < steps.length; s++) {
-    steps[s].style.background = 'white';
-  }
-  steps[activeStep].style.background = 'pink';
+function updateSeqStep() {
+  let step = document.getElementsByClassName('seq-step')[activeStep - 1];
+  let ids = collectStepNotes();
+  step.dataset.noteids = ids;
 }
 
 function collectStepNotes() {
@@ -84,9 +94,10 @@ function collectStepNotes() {
   return noteIds.join(',');
 }
 
-function populateFretboard(seq) {
+function populateFretboard(step) {
   clearFretboard();
-  let noteIds = seq.dataset.noteids.split(',');
+  let steps = document.getElementsByClassName('seq-step');
+  let noteIds = step.dataset.noteids.split(',');
   for (let n = 0; n < noteIds.length; n++) {
     for (let fn = 0; fn < fretNotes.length; fn++) {
       if (noteIds[n] == fretNotes[fn].dataset.noteid) {
@@ -119,7 +130,14 @@ function finishSequence() {
   document.getElementsByClassName('save-form')[0].style.display = 'block';
 }
 
-setBtn.addEventListener('click', () => { addStepToSequence() });
+setBtn.addEventListener('click', () => {
+  // setSelected ? updateSeqStep() : addSeqStep();
+  if (stepSelected) {
+    updateSeqStep();
+  } else {
+    addSeqStep();
+  }
+});
 clearBtn.addEventListener('click', () => { clearFretboard() });
 finishBtn.addEventListener('click', () => { finishSequence() });
 clearTopbarBtn.addEventListener('click', () => { clearTopbar() });
@@ -133,12 +151,13 @@ function populateSequence(sequence) {
   stepQuantity = steps.length;
 
   for (let n = 0; n < noteids.length; n++) {
-    let seq = document.createElement('div');
-    seq.classList.add('seq-step');
-    seq.setAttribute('data-noteids', noteids[n]);
-    seq.addEventListener('click', () => { populateFretboard(seq) });
-    topbar.appendChild(seq);
-    seq.innerHTML = steps[n];
+    let step = document.createElement('div');
+    step.classList.add('seq-step');
+    step.setAttribute('data-noteids', noteids[n]);
+    step.setAttribute('data-step', n + 1);
+    step.addEventListener('click', () => { setActiveStep(step) });
+    topbar.appendChild(step);
+    step.innerHTML = steps[n];
   }
 }
 
