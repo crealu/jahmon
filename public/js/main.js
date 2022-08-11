@@ -7,6 +7,7 @@ const finishBtn = document.getElementsByClassName('finish-btn')[0];
 const clearTopbarBtn = document.getElementsByClassName('clear-topbar-btn')[0];
 const fretNotes = document.getElementsByClassName('fret-note');
 const sequences = document.getElementsByClassName('saved-sequence');
+const newSequence = document.getElementsByClassName('new-sequence')[0];
 
 let stepQuantity = 0;
 let mode = 'chord';
@@ -130,6 +131,13 @@ function finishSequence() {
   document.getElementsByClassName('save-form')[0].style.display = 'block';
 }
 
+function startNewSequence() {
+  clearTopbar();
+  clearFretboard();
+  currentTitle.textContent = 'untitled';
+  stepSelected = false;
+}
+
 setBtn.addEventListener('click', () => {
   // setSelected ? updateSeqStep() : addSeqStep();
   if (stepSelected) {
@@ -141,6 +149,7 @@ setBtn.addEventListener('click', () => {
 clearBtn.addEventListener('click', () => { clearFretboard() });
 finishBtn.addEventListener('click', () => { finishSequence() });
 clearTopbarBtn.addEventListener('click', () => { clearTopbar() });
+newSequence.addEventListener('click', () => { startNewSequence() });
 
 function populateSequence(sequence) {
   clearFretboard();
