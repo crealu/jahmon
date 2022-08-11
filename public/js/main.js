@@ -17,44 +17,6 @@ let activeStep = 0;
 let stepSelected = false;
 let isNew = true;
 
-function createFretboard() {
-  const stringQuantity = 6;
-  for (let stringNum = 0; stringNum < stringQuantity; stringNum++) {
-    let stringRow = document.createElement('div');
-    let stringDiv = document.createElement('div');
-    stringRow.classList.add('string-row');
-    stringDiv.classList.add('string-div');
-    stringRow.appendChild(stringDiv);
-    addFrets(stringRow, stringNum);
-    fretboard.appendChild(stringRow);
-  }
-}
-
-function addFrets(stringRow, stringNum) {
-  const fretQuantity = 20;
-  for (let fretNum = 0; fretNum < fretQuantity; fretNum++) {
-    let fret = document.createElement('div');
-    let note = document.createElement('div');
-    let noteID = 's' + (6 - stringNum) + 'f' + fretNum;
-    fret.classList.add('fret');
-    note.classList.add('fret-note');
-    note.setAttribute('data-noteid', noteID);
-    fret.appendChild(note);
-    addFretControls(fret);
-    stringRow.appendChild(fret);
-  }
-}
-
-function addFretControls(fret) {
-  fret.addEventListener('click', () => {
-    if (fret.children[0].style.display == 'block') {
-      fret.children[0].style.display = 'none';
-    } else {
-      fret.children[0].style.display = 'block';
-    }
-  });
-}
-
 function setActiveStep(step) {
   let steps = document.getElementsByClassName('seq-step');
   for (let s = 0; s < steps.length; s++) {
@@ -211,7 +173,6 @@ function finishSequence() {
   saveForm.style.display = 'block';
 
   if (!isNew) {
-    // saveForm.setAttribute('method', 'PUT');
     saveForm.setAttribute('action', '/update');
     document.getElementsByClassName('title-input')[0].value = currentTitle.textContent;
   }
