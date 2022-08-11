@@ -127,12 +127,9 @@ clearTopbarBtn.addEventListener('click', () => { clearTopbar() });
 function populateSequence(sequence) {
   clearFretboard();
   clearTopbar();
-  let noteidsData = sequence.dataset.noteids;
-  let stepsData = sequence.dataset.sequence;
+  let noteids = sequence.dataset.noteids.split('.');
+  let steps = sequence.dataset.steps.split('.');
   currentTitle.textContent = sequence.children[0].textContent;
-
-  let noteids = noteidsData.split('.');
-  let steps = stepsData.split('.');
   stepQuantity = steps.length;
 
   for (let n = 0; n < noteids.length; n++) {
