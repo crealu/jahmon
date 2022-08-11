@@ -141,23 +141,6 @@ router.post('/login', (req, res, next) => {
 //   })
 // });
 
-// router.post('/save', (req, res) => {
-//   console.log(req.body);
-//   client.db.collection('jahms')
-//     .insertOne(req.body, (err, result) => {
-//       if (err) { return console.log(err) }
-//       res.redirect('/');
-//     });
-// });
-
-// router.post('/kanjisets', (req, res) => {
-//   client.db.collection('kanjisets')
-//     .insertOne(req.body, (err, result) => {
-//       if (err) { return console.log(err) }
-//       res.redirect('/dashboard');
-//     });
-// });
-//
 // router.post('/updateset', (req, res) => {
 //   console.log(req.body);
 //   client.db.collection('jahms').updateMany(
@@ -167,31 +150,5 @@ router.post('/login', (req, res, next) => {
 //   res.redirect('/');
 // });
 //
-// router.post('/kanjitests', (req, res) => {
-//   client.db.collection('kanjitests')
-//     .insertOne(req.body, (err, result) => {
-//       if (err) { return console.log(err) }
-//       res.redirect('/');
-//     })
-// });
 
 module.exports = router;
-
-/*
-app.put('/kanjisets', (req, res) => {
-  console.log(req.body);
-  const sets = client.db.collection("kanjisets")
-    .findOneAndUpdate({kanji: req.body}, {
-      $set: {
-        kanji: req.body
-      }
-    }, {
-      sort: {_id: 1},
-      upsert: true
-    }, (err, result) => {
-      if (err) { return res.send(err) }
-      res.send(result);
-    }
-  )
-});
-*/

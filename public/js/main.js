@@ -60,26 +60,71 @@ function setActiveStep(step) {
   for (let s = 0; s < steps.length; s++) {
     steps[s].style.background = 'white';
   }
-  if (activeStep == step.dataset.step) {
+  if (activeStep == step.dataset.stepnum) {
     stepSelected = !stepSelected;
   } else {
     stepSelected = true;
     populateFretboard(step);
     step.style.background = 'green';
-    activeStep = step.dataset.step;
+    activeStep = step.dataset.stepnum;
   }
+}
+
+let oneBeingMoved;
+
+function dragstartHandler(event) {
+  oneBeingMoved = event.target;
+  // event.dataTransfer.files = event.target.dataset.noteids;
+  event.dataTransfer.dropEffect = 'move';
+}
+
+function dragoverHandler(event) {
+  event.preventDefault();
+}
+
+function dropHandler(event) {
+  event.preventDefault();
+  let targetNum = event.target.dataset.stepnum;
+  console.dir(event.target);
+  if (oneBeingMoved.dataset.stepnum < targetNum) {
+    event.target.insertAdjacentElement('afterend', oneBeingMoved);
+  } else {
+    topbar.insertBefore(oneBeingMoved, event.target);
+  }
+  resetStepNumbers();
+}
+
+function resetStepNumbers() {
+  const steps = document.getElementsByClassName('seq-step');
+   for (let s = 1; s < steps.length; s++) {
+     steps[s].setAttribute('data-stepnum', s);
+   }
 }
 
 function addSeqStep() {
   let ids = collectStepNotes();
   let step = document.createElement('div');
-  step.classList.add('seq-step');
-  step.setAttribute('data-noteids', ids);
-  step.setAttribute('data-step', stepQuantity + 1);
-  step.addEventListener('click', () => { setActiveStep(step) });
+  setStepProps(step, ids, stepQuantity + 1);
   topbar.appendChild(step);
   step.innerHTML = 'Step ' + stepQuantity;
   stepQuantity++;
+}
+
+topbar.addEventListener('dragover', dragoverHandler);
+topbar.addEventListener('drop', dropHandler);
+
+function setStepProps(step, ids, num) {
+  step.classList.add('seq-step');
+  step.setAttribute('data-noteids', ids);
+  step.setAttribute('data-stepnum', num);
+  step.setAttribute('draggable', 'true');
+  step.addEventListener('click', () => { setActiveStep(step) });
+  step.addEventListener('dragstart', dragstartHandler);
+  // let dropZone = document.createElement('div');
+  // dropZone.classList.add('drop-zone');
+  // dropZone.addEventListener('dragover', dragoverHandler);
+  // dropZone.addEventListener('drop', dropHandler);
+  // topbar.appendChild(dropZone);
 }
 
 function updateSeqStep() {
@@ -126,8 +171,8 @@ function startNewSequence() {
 }
 
 function populateSequence(sequence) {
-  clearFretboard();
   clearSequence();
+  clearFretboard();
   isNew = false;
   let noteids = sequence.dataset.noteids.split('.');
   let steps = sequence.dataset.steps.split('.');
@@ -136,10 +181,7 @@ function populateSequence(sequence) {
 
   for (let n = 0; n < noteids.length; n++) {
     let step = document.createElement('div');
-    step.classList.add('seq-step');
-    step.setAttribute('data-noteids', noteids[n]);
-    step.setAttribute('data-step', n + 1);
-    step.addEventListener('click', () => { setActiveStep(step) });
+    setStepProps(step, noteids[n], n + 1);
     topbar.appendChild(step);
     step.innerHTML = steps[n];
   }
