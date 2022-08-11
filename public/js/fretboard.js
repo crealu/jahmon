@@ -12,11 +12,12 @@ function createFretboard() {
 }
 
 function addFrets(stringRow, stringNum) {
-  const fretQuantity = 20;
+  const fretQuantity = 21;
   for (let fretNum = 0; fretNum < fretQuantity; fretNum++) {
     let fret = document.createElement('div');
     let note = document.createElement('div');
     let noteID = 's' + (6 - stringNum) + 'f' + fretNum;
+    if (fretNum == 0) { fret.classList.add('fret-open') }
     fret.classList.add('fret');
     note.classList.add('fret-note');
     note.setAttribute('data-noteid', noteID);
@@ -30,10 +31,7 @@ function addFrets(stringRow, stringNum) {
 function checkNoteID(noteID) {
   const markedFrets = ['3', '5', '7', '9', '12', '15', '17'];
   return markedFrets.some(num => {
-    if (noteID.includes('s3f' + num)) {
-      return true
-    }
-    return false;
+    return noteID.includes('s3f' + num) ? true : false;
   });
 }
 

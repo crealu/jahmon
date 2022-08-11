@@ -19,13 +19,13 @@
     <h3 class="sidebar-title">Sequences</h3>
     <div class="saved-sequences">
       <% if (data != undefined) { %>
-        <% for (var i = 0; i < data.length; i++) { %>
+        <% for (var i = 0; i < data.jahms.length; i++) { %>
           <div
             class="sequence saved-sequence"
-            data-noteids="<%= data[i].noteids %>"
-            data-steps="<%= data[i].steps %>"
+            data-noteids="<%= data.jahms[i].noteids %>"
+            data-steps="<%= data.jahms[i].steps %>"
           >
-            <p class="sequence-title"><%= data[i].title %></p>
+            <p class="sequence-title"><%= data.jahms[i].title %></p>
           </div>
         <% } %>
         <div class="sequence new-sequence">

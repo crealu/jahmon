@@ -126,6 +126,10 @@ body {
   transition: 0.5s ease;
 }
 
+.fret-open {
+  background: #795548;
+}
+
 .fret:hover {
   background: lightgray;
   cursor: pointer;

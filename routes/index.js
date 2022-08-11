@@ -11,11 +11,21 @@ const User = require('../models/user');
 const router = express.Router();
 const client = mongoose.connection;
 
+const library = [
+  {
+    name: 'A',
+    noteids: 's6f0,s5f2,s4f2,s3f2,s2f0'
+  }
+]
+
 router.get('/', (req, res) => {
   client.db.collection('jahms')
     .find().toArray((err, result) => {
       res.render('index.ejs', {
-        data: result
+        data: {
+          jahms: result,
+          lib: library
+        }
       });
   });
 });

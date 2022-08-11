@@ -36,7 +36,6 @@ let oneBeingMoved;
 
 function dragstartHandler(event) {
   oneBeingMoved = event.target;
-  // event.dataTransfer.files = event.target.dataset.noteids;
   event.dataTransfer.dropEffect = 'move';
 }
 
@@ -72,8 +71,6 @@ function addSeqStep() {
   stepQuantity++;
 }
 
-topbar.addEventListener('dragover', dragoverHandler);
-topbar.addEventListener('drop', dropHandler);
 
 function setStepProps(step, ids, num) {
   step.classList.add('seq-step');
@@ -82,11 +79,6 @@ function setStepProps(step, ids, num) {
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
   step.addEventListener('dragstart', dragstartHandler);
-  // let dropZone = document.createElement('div');
-  // dropZone.classList.add('drop-zone');
-  // dropZone.addEventListener('dragover', dragoverHandler);
-  // dropZone.addEventListener('drop', dropHandler);
-  // topbar.appendChild(dropZone);
 }
 
 function updateSeqStep() {
@@ -150,9 +142,7 @@ function populateSequence(sequence) {
 }
 
 function clearSequence() {
-  while (topbar.firstChild) {
-    topbar.removeChild(topbar.firstChild);
-  }
+  while (topbar.firstChild) { topbar.removeChild(topbar.firstChild) }
   stepQuantity = 0;
 }
 
@@ -191,6 +181,8 @@ clearFretboardBtn.addEventListener('click', () => { clearFretboard() });
 saveBtn.addEventListener('click', () => { finishSequence() });
 clearSequenceBtn.addEventListener('click', () => { clearSequence() });
 newSequence.addEventListener('click', () => { startNewSequence() });
+topbar.addEventListener('dragover', dragoverHandler);
+topbar.addEventListener('drop', dropHandler);
 
 for (let z = 0; z < sequences.length; z++) {
   sequences[z].addEventListener('click', () => {
