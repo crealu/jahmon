@@ -16,7 +16,7 @@ const library = [
     name: 'A',
     noteids: 's6f0,s5f2,s4f2,s3f2,s2f0'
   }
-]
+];
 
 router.get('/', (req, res) => {
   client.db.collection('jahms')

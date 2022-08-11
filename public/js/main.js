@@ -10,12 +10,15 @@ const fretNotes = document.getElementsByClassName('fret-note');
 const sequences = document.getElementsByClassName('saved-sequence');
 const newSequence = document.getElementsByClassName('new-sequence')[0];
 const saveForm = document.getElementsByClassName('save-form')[0];
+const chordBtn = document.getElementsByClassName('chord-btn')[0];
+const riffBtn = document.getElementsByClassName('riff-btn')[0];
 
-let stepQuantity = 0;
+let numSteps = 0;
 let mode = 'chord';
 let activeStep = 0;
 let stepSelected = false;
 let isNew = true;
+let oneBeingMoved;
 
 function setActiveStep(step) {
   let steps = document.getElementsByClassName('seq-step');
@@ -32,8 +35,6 @@ function setActiveStep(step) {
   }
 }
 
-let oneBeingMoved;
-
 function dragstartHandler(event) {
   oneBeingMoved = event.target;
   event.dataTransfer.dropEffect = 'move';
@@ -46,7 +47,6 @@ function dragoverHandler(event) {
 function dropHandler(event) {
   event.preventDefault();
   let targetNum = event.target.dataset.stepnum;
-  console.dir(event.target);
   if (oneBeingMoved.dataset.stepnum < targetNum) {
     event.target.insertAdjacentElement('afterend', oneBeingMoved);
   } else {
@@ -65,12 +65,11 @@ function resetStepNumbers() {
 function addSeqStep() {
   let ids = collectStepNotes();
   let step = document.createElement('div');
-  setStepProps(step, ids, stepQuantity + 1);
+  setStepProps(step, ids, numSteps + 1);
   topbar.appendChild(step);
-  step.innerHTML = 'Step ' + stepQuantity;
-  stepQuantity++;
+  step.textContent = mode == 'chord' ? 'CH' + numSteps : 'R' + numSteps;
+  numSteps++;
 }
-
 
 function setStepProps(step, ids, num) {
   step.classList.add('seq-step');
@@ -131,7 +130,7 @@ function populateSequence(sequence) {
   let noteids = sequence.dataset.noteids.split('.');
   let steps = sequence.dataset.steps.split('.');
   currentTitle.textContent = sequence.children[0].textContent;
-  stepQuantity = steps.length;
+  numSteps = steps.length;
 
   for (let n = 0; n < noteids.length; n++) {
     let step = document.createElement('div');
@@ -143,7 +142,7 @@ function populateSequence(sequence) {
 
 function clearSequence() {
   while (topbar.firstChild) { topbar.removeChild(topbar.firstChild) }
-  stepQuantity = 0;
+  numSteps = 0;
 }
 
 function finishSequence() {
@@ -168,6 +167,32 @@ function finishSequence() {
   }
 }
 
+function setModeStyle(fretBorder, circleOpacity) {
+  let frets = document.getElementsByClassName('fret');
+  let fretCircles = document.getElementsByClassName('fret-circle');
+  for (let f = 0; f < frets.length; f++) {
+    frets[f].style.borderLeft = '1px solid ' + fretBorder;
+    if (frets[f].children[0].dataset.noteid.includes('f0')) {
+      frets[f].children[0].style.background = 'tan';
+    }
+  }
+  for (let fc = 0; fc < fretCircles.length; fc++) {
+    fretCircles[fc].style.opacity = circleOpacity;
+  }
+}
+
+function toggleMode(newMode) {
+  let riffNumbers = document.getElementsByClassName('riff-numbers')[0];
+  if (newMode == 'riff') {
+    setModeStyle('rgba(0, 0, 0, 0)', '0');
+    riffNumbers.style.opacity = '1';
+  } else if (newMode == 'chord') {
+    setModeStyle('lightgray', '1');
+    riffNumbers.style.opacity = '0';
+  }
+  mode = newMode;
+}
+
 setBtn.addEventListener('click', () => {
   // setSelected ? updateSeqStep() : addSeqStep();
   if (stepSelected) {
@@ -177,10 +202,12 @@ setBtn.addEventListener('click', () => {
   }
 });
 
+chordBtn.addEventListener('click', () => { toggleMode('chord') });
+riffBtn.addEventListener('click', () => { toggleMode('riff') });
 clearFretboardBtn.addEventListener('click', () => { clearFretboard() });
-saveBtn.addEventListener('click', () => { finishSequence() });
 clearSequenceBtn.addEventListener('click', () => { clearSequence() });
 newSequence.addEventListener('click', () => { startNewSequence() });
+saveBtn.addEventListener('click', () => { finishSequence() });
 topbar.addEventListener('dragover', dragoverHandler);
 topbar.addEventListener('drop', dropHandler);
 
@@ -191,3 +218,21 @@ for (let z = 0; z < sequences.length; z++) {
 }
 
 window.onload = createFretboard();
+
+// function getClassElements(className) {
+//   let elements = document.getElementsByClassName(className);
+//   let elArr = [];
+//   for (let e = 0; e < elements.length; e++) {
+//     elArr.push(elements[e]);
+//   }
+//   return elArr;
+// }
+//
+// function addNoteInputs() {
+//   let fretNotes = document.getElementsByClassName('fret-note');
+//   for (let fn = 0; fn < fretNotes.length; fn++) {
+//     let noteInput = document.createElement('input');
+//     noteInput.classList.add('note-input');
+//     fretNotes[fn].appendChild(noteInput);
+//   }
+// }

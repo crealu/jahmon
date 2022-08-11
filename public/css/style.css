@@ -149,6 +149,33 @@ body {
   z-index: 2;
 }
 
+.note-input {
+  width: 100%;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+.riff-numbers {
+  opacity: 0;
+  top: 450px;
+  left: 250px;
+  transition: 0.5s ease;
+}
+
+.note-bubble {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin: 10px 10px 10px 0px;
+  border-radius: 50%;
+  background: black;
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
 .fret-circle {
   position: absolute;
   display: block;
@@ -161,6 +188,8 @@ body {
   background: rgba(235, 235, 235, 1);
   border-radius: 50%;
   z-index: 1;
+  opacity: 1;
+  transition: 0.5s ease;
 }
 
 .fret-circle-12_1 {

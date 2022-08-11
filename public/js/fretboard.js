@@ -9,6 +9,7 @@ function createFretboard() {
     addFrets(stringRow, stringNum);
     fretboard.appendChild(stringRow);
   }
+  addRiffNumbers();
 }
 
 function addFrets(stringRow, stringNum) {
@@ -60,4 +61,62 @@ function addFretControls(fret) {
       fret.children[0].style.display = 'block';
     }
   });
+}
+
+let movedNoteBubble;
+function dragstartNoteBubble(event) {
+  movedNoteBubble = event.target;
+  event.dataTransfer.dropEffect = 'move';
+}
+
+function dragoverNoteBubble(event) {
+  event.preventDefault();
+  event.target.style.background = 'lightgray';
+}
+
+function dragleaveNoteBubble(event) {
+  event.preventDefault();
+  event.target.style.background = 'tan';
+}
+
+function dropNoteBubble(event) {
+  event.preventDefault();
+  let nodeCopy = movedNoteBubble.cloneNode(true);
+  event.target.appendChild(nodeCopy);
+  event.target.style.background = 'tan';
+}
+
+function trashNoteBubble(event) {
+  event.preventDefault();
+  event.target.appendChild(movedNoteBubble);
+  while (event.target.firstChild) {
+    event.target.removeChild(event.target.firstChild);
+  }
+}
+
+function addRiffNumbers() {
+  let riffNumbers = document.getElementsByClassName('riff-numbers')[0];
+  let frets = document.getElementsByClassName('fret');
+
+  for (let r = 0; r < 21; r++) {
+    let noteBubble = document.createElement('div');
+    noteBubble.classList.add('note-bubble');
+    noteBubble.setAttribute('draggable', 'true');
+    noteBubble.textContent = r;
+    noteBubble.addEventListener('dragstart', dragstartNoteBubble);
+    riffNumbers.appendChild(noteBubble);
+  }
+
+  let trash = document.createElement('div');
+  trash.classList.add('note-bubble');
+  trash.textContent = 'Trash';
+  trash.addEventListener('dragover', dragoverNoteBubble);
+  trash.addEventListener('drop', trashNoteBubble);
+  riffNumbers.appendChild(trash);
+
+  for (let f = 0; f < frets.length; f++) {
+    frets[f].addEventListener('dragover', dragoverNoteBubble);
+    frets[f].addEventListener('dragleave', dragleaveNoteBubble);
+    frets[f].addEventListener('drop', dropNoteBubble);
+  }
 }
