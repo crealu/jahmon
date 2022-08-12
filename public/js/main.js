@@ -63,13 +63,13 @@ function resetStepNumbers() {
 }
 
 function addSeqStep() {
-  let ids;
   let step = document.createElement('div');
   if (mode == 'chord') {
-    ids = collectChordNotes()
+    let ids = collectChordNotes()
     setChordProps(step, ids, numSteps + 1);
   } else {
-    setRiffProps(step, ids, )
+    let riffData = collectRiffNotes();
+    setRiffProps(step, riffData, numSteps + 1);
   }
   topbar.appendChild(step);
   step.textContent = mode == 'chord' ? 'CH' + numSteps : 'R' + numSteps;
@@ -79,6 +79,16 @@ function addSeqStep() {
 function setChordProps(step, ids, num) {
   step.classList.add('seq-step');
   step.setAttribute('data-noteids', ids);
+  step.setAttribute('data-stepnum', num);
+  step.setAttribute('draggable', 'true');
+  step.addEventListener('click', () => { setActiveStep(step) });
+  step.addEventListener('dragstart', dragstartHandler);
+}
+
+function setRiffProps(step, riffData, num) {
+  step.classList.add('seq-step');
+  step.setAttribute('data-noteids', riffData[0]);
+  step.setAttribute('data-fretnum', riffData[1]);
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
@@ -99,6 +109,18 @@ function collectChordNotes() {
     }
   }
   return noteIds.join(',');
+}
+
+function collectRiffNotes() {
+  let ids = [];
+  let nums = [];
+  let riffNotes = document.getElementsByClassName('note-bubble-fret');
+  for (let rn = 0; rn < riffNotes.length; rn++) {
+    ids.push(riffNotes[rn].parentElement.children[0].dataset.noteid)
+    nums.push(riffNotes[rn].textContent);
+  }
+
+  return [ids.join(','), nums.join(',')];
 }
 
 function populateFretboard(step) {
