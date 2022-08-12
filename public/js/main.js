@@ -63,15 +63,20 @@ function resetStepNumbers() {
 }
 
 function addSeqStep() {
-  let ids = collectStepNotes();
+  let ids;
   let step = document.createElement('div');
-  setStepProps(step, ids, numSteps + 1);
+  if (mode == 'chord') {
+    ids = collectChordNotes()
+    setChordProps(step, ids, numSteps + 1);
+  } else {
+    setRiffProps(step, ids, )
+  }
   topbar.appendChild(step);
   step.textContent = mode == 'chord' ? 'CH' + numSteps : 'R' + numSteps;
   numSteps++;
 }
 
-function setStepProps(step, ids, num) {
+function setChordProps(step, ids, num) {
   step.classList.add('seq-step');
   step.setAttribute('data-noteids', ids);
   step.setAttribute('data-stepnum', num);
@@ -82,11 +87,11 @@ function setStepProps(step, ids, num) {
 
 function updateSeqStep() {
   let step = document.getElementsByClassName('seq-step')[activeStep - 1];
-  let ids = collectStepNotes();
+  let ids = collectChordNotes();
   step.dataset.noteids = ids;
 }
 
-function collectStepNotes() {
+function collectChordNotes() {
   let noteIds = [];
   for (let fn = 0; fn < fretNotes.length; fn++) {
     if (fretNotes[fn].style.display == 'block') {
@@ -134,7 +139,7 @@ function populateSequence(sequence) {
 
   for (let n = 0; n < noteids.length; n++) {
     let step = document.createElement('div');
-    setStepProps(step, noteids[n], n + 1);
+    setChordProps(step, noteids[n], n + 1);
     topbar.appendChild(step);
     step.innerHTML = steps[n];
   }

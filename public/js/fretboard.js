@@ -65,25 +65,50 @@ function addFretControls(fret) {
 
 let movedNoteBubble;
 function dragstartNoteBubble(event) {
+  movedNoteBubble = event.target.cloneNode(true);
+  // movedNoteBubble = event.target;
+  console.dir(event.target.parentElement);
+  console.dir(movedNoteBubble.parentElement);
+  event.dataTransfer.dropEffect = 'copy';
+  console.log('drag start');
+}
+
+function dragFretBubble() {
   movedNoteBubble = event.target;
+  console.dir(event.target.parentElement);
+  console.dir(movedNoteBubble.parentElement);
   event.dataTransfer.dropEffect = 'move';
+  console.log('drag start');
 }
 
 function dragoverNoteBubble(event) {
   event.preventDefault();
-  event.target.style.background = 'lightgray';
+  if (event.target.classList[0] == 'fret') {
+    event.target.style.background = 'lightgray';
+  }
+  console.log('dragged over');
 }
 
 function dragleaveNoteBubble(event) {
   event.preventDefault();
-  event.target.style.background = 'tan';
+  if (event.target.classList[0] == 'fret') {
+    event.target.style.background = 'tan';
+  }
 }
+
+const targetIsFret = (e) => { return e.target.classList[0] == 'fret' };
 
 function dropNoteBubble(event) {
   event.preventDefault();
-  let nodeCopy = movedNoteBubble.cloneNode(true);
-  event.target.appendChild(nodeCopy);
-  event.target.style.background = 'tan';
+  if (targetIsFret(event)) {
+    movedNoteBubble.style.background = 'tan';
+    movedNoteBubble.classList.add('note-bubble-fret');
+    event.target.appendChild(movedNoteBubble);
+    event.target.style.background = 'tan';
+  }
+
+  resetFretBubbles();
+  console.log('dropped');
 }
 
 function trashNoteBubble(event) {
@@ -91,6 +116,14 @@ function trashNoteBubble(event) {
   event.target.appendChild(movedNoteBubble);
   while (event.target.firstChild) {
     event.target.removeChild(event.target.firstChild);
+  }
+}
+
+function resetFretBubbles() {
+  let noteBubbleFrets = document.getElementsByClassName('note-bubble-fret');
+  for (let n = 0; n < noteBubbleFrets.length; n++) {
+    noteBubbleFrets[n].removeEventListener('dragstart', dragstartNoteBubble);
+    noteBubbleFrets[n].addEventListener('dragstart', dragFretBubble);
   }
 }
 
