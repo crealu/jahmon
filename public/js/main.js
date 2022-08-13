@@ -78,6 +78,7 @@ function addSeqStep() {
 
 function setChordProps(step, ids, num) {
   step.classList.add('seq-step');
+  step.setAttribute('data-mode', 'chord');
   step.setAttribute('data-noteids', ids);
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
@@ -87,6 +88,7 @@ function setChordProps(step, ids, num) {
 
 function setRiffProps(step, riffData, num) {
   step.classList.add('seq-step');
+  step.setAttribute('data-mode', 'riff');
   step.setAttribute('data-noteids', riffData[0]);
   step.setAttribute('data-fretnum', riffData[1]);
   step.setAttribute('data-stepnum', num);
@@ -125,6 +127,7 @@ function collectRiffNotes() {
 
 function populateFretboard(step) {
   clearFretboard();
+  toggleMode(step.dataset.mode);
   let steps = document.getElementsByClassName('seq-step');
   let noteIds = step.dataset.noteids.split(',');
   for (let n = 0; n < noteIds.length; n++) {
