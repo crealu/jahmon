@@ -137,8 +137,15 @@ function populateFretboard(step) {
 }
 
 function clearFretboard() {
+  let noteBubbles = document.getElementsByClassName('note-bubble-fret');
   for (let fn = 0; fn < fretNotes.length; fn++) {
     fretNotes[fn].style.display = 'none';
+  }
+  for (let nb = 0; nb < noteBubbles.length; nb++) {
+    noteBubbles[nb].remove();
+  }
+  for (let n = 0; n < noteBubbles.length; n++) {
+    noteBubbles[n].remove();
   }
 }
 
