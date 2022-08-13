@@ -130,10 +130,27 @@ function populateFretboard(step) {
   toggleMode(step.dataset.mode);
   let steps = document.getElementsByClassName('seq-step');
   let noteIds = step.dataset.noteids.split(',');
+
+  let fretNums;
+  if (step.dataset.mode == 'riff') {
+    fretNums = step.dataset.fretnum.split(',');
+    console.log(fretNums);
+  }
+
   for (let n = 0; n < noteIds.length; n++) {
     for (let fn = 0; fn < fretNotes.length; fn++) {
       if (noteIds[n] == fretNotes[fn].dataset.noteid) {
-        fretNotes[fn].style.display = 'block';
+        if (step.dataset.mode == 'chord') {
+          fretNotes[fn].style.display = 'block';
+        } else {
+          let noteBubble = document.createElement('div');
+          noteBubble.classList.add('note-bubble');
+          noteBubble.classList.add('note-bubble-fret');
+          noteBubble.setAttribute('draggable', 'true');
+          noteBubble.addEventListener('dragstart', dragFretBubble);
+          noteBubble.textContent = fretNums[n];
+          fretNotes[fn].parentElement.appendChild(noteBubble);
+        }
       }
     }
   }
