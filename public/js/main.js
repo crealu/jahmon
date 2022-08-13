@@ -12,6 +12,7 @@ const newSequence = document.getElementsByClassName('new-sequence')[0];
 const saveForm = document.getElementsByClassName('save-form')[0];
 const chordBtn = document.getElementsByClassName('chord-btn')[0];
 const riffBtn = document.getElementsByClassName('riff-btn')[0];
+const cancelBtn = document.getElementsByClassName('cancel-btn')[0];
 
 let numSteps = 0;
 let mode = 'chord';
@@ -264,6 +265,9 @@ newSequence.addEventListener('click', () => { startNewSequence() });
 saveBtn.addEventListener('click', () => { finishSequence() });
 topbar.addEventListener('dragover', dragoverHandler);
 topbar.addEventListener('drop', dropHandler);
+cancelBtn.addEventListener('click', () => {
+  document.getElementsByClassName('save-form')[0].style.display = 'none';
+});
 
 for (let z = 0; z < sequences.length; z++) {
   sequences[z].addEventListener('click', () => {
