@@ -157,14 +157,27 @@ function populateFretboard(step) {
   }
 }
 
+let sequenceDS = {
+  title: '',
+  steps: [
+    {
+      name: '',
+      noteids: '',
+      fretnums: ''
+    }
+  ];
+}
+
 function clearFretboard() {
   let noteBubbles = document.getElementsByClassName('note-bubble-fret');
   for (let fn = 0; fn < fretNotes.length; fn++) {
     fretNotes[fn].style.display = 'none';
   }
+
   for (let nb = 0; nb < noteBubbles.length; nb++) {
     noteBubbles[nb].remove();
   }
+
   for (let n = 0; n < noteBubbles.length; n++) {
     noteBubbles[n].remove();
   }
@@ -204,16 +217,21 @@ function finishSequence() {
   const sequence = document.getElementsByClassName('seq-step');
   let allIds = [];
   let allSteps = [];
+  let allFretnums = [];
   for (let s = 0; s < sequence.length; s++) {
     allIds.push(sequence[s].dataset.noteids);
     allSteps.push(sequence[s].textContent);
+    allFretnums.push(sequence[s].dataset.fretnums);
   }
   let savableIds = allIds.join('.');
   let savableSteps = allSteps.join('.');
+  let savableFretnums = allSteps.join('.');
   let noteidsInput = document.getElementsByClassName('noteids-input')[0];
-  let sequenceInput = document.getElementsByClassName('steps-input')[0];
+  let stepsInput = document.getElementsByClassName('steps-input')[0];
+  let fretnumsInput = document.getElementsByClassName('fretnums-input')[0];
   noteidsInput.value = savableIds;
-  sequenceInput.value = savableSteps;
+  stepsInput.value = savableSteps;
+  fretnumsInput.value = savableFretnums;
   saveForm.style.display = 'block';
 
   if (!isNew) {
