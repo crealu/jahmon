@@ -76,7 +76,7 @@ function setStepProps(step, data, num) {
   step.classList.add('seq-step');
   step.setAttribute('data-mode', mode);
   step.setAttribute('data-noteids', data[0]);
-  step.setAttribute('data-fretnum', data[1]);
+  step.setAttribute('data-fretnums', data[1]);
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
@@ -117,37 +117,15 @@ function collectRiffNotes(ids, nums) {
   }
 }
 
-// function collectChordNotes() {
-//   let ids = [];
-//   for (let fn = 0; fn < fretNotes.length; fn++) {
-//     if (fretNotes[fn].style.display == 'block') {
-//       noteIds.push(fretNotes[fn].dataset.noteid);
-//     }
-//   }
-//   return ids.join(',');
-// }
-//
-// function collectRiffNotes() {
-//   let ids = [];
-//   let nums = [];
-//   let riffNotes = document.getElementsByClassName('note-bubble-fret');
-//   for (let rn = 0; rn < riffNotes.length; rn++) {
-//     ids.push(riffNotes[rn].parentElement.children[0].dataset.noteid)
-//     nums.push(riffNotes[rn].textContent);
-//   }
-//   return [ids.join(','), nums.join(',')];
-// }
-
 function populateFretboard(step) {
   clearFretboard();
   toggleMode(step.dataset.mode);
   let steps = document.getElementsByClassName('seq-step');
   let noteIds = step.dataset.noteids.split(',');
-
-  let fretNums;
+  let fretnums;
   if (step.dataset.mode == 'riff') {
-    fretNums = step.dataset.fretnum.split(',');
-    console.log(fretNums);
+    fretnums = step.dataset.fretnums.split(',');
+    console.log(fretnums);
   }
 
   for (let n = 0; n < noteIds.length; n++) {
@@ -161,7 +139,7 @@ function populateFretboard(step) {
           noteBubble.classList.add('note-bubble-fret');
           noteBubble.setAttribute('draggable', 'true');
           noteBubble.addEventListener('dragstart', dragFretBubble);
-          noteBubble.textContent = fretNums[n];
+          noteBubble.textContent = fretnums[n];
           fretNotes[fn].parentElement.appendChild(noteBubble);
         }
       }
@@ -174,6 +152,7 @@ let sequenceDS = {
   steps: [
     {
       name: '',
+      mode: '',
       noteids: '',
       fretnums: ''
     }
@@ -209,12 +188,18 @@ function populateSequence(sequence) {
   isNew = false;
   let noteids = sequence.dataset.noteids.split('.');
   let steps = sequence.dataset.steps.split('.');
+  let fretnums = sequence.dataset.fretnums.split('.');
   currentTitle.textContent = sequence.children[0].textContent;
   numSteps = steps.length;
 
+  console.log('Note ids', noteids);
+  console.log('Steps', steps);
+  console.log('Fret nums', fretnums);
+
+  // let data = [noteids, fretnums];
   for (let n = 0; n < noteids.length; n++) {
     let step = document.createElement('div');
-    setChordProps(step, noteids[n], n + 1);
+    setStepProps(step, [noteids[n], fretnums], n + 1);
     topbar.appendChild(step);
     step.innerHTML = steps[n];
   }
@@ -226,24 +211,29 @@ function clearSequence() {
 }
 
 function finishSequence() {
-  const sequence = document.getElementsByClassName('seq-step');
+  const steps = document.getElementsByClassName('seq-step');
   let allIds = [];
   let allSteps = [];
   let allFretnums = [];
-  for (let s = 0; s < sequence.length; s++) {
-    allIds.push(sequence[s].dataset.noteids);
-    allSteps.push(sequence[s].textContent);
-    allFretnums.push(sequence[s].dataset.fretnums);
+  let allModes = [];
+  for (let s = 0; s < steps.length; s++) {
+    allIds.push(steps[s].dataset.noteids);
+    allSteps.push(steps[s].textContent);
+    allFretnums.push(steps[s].dataset.fretnums);
+    allModes.push(steps[s].dataset.mode);
   }
   let savableIds = allIds.join('.');
   let savableSteps = allSteps.join('.');
-  let savableFretnums = allSteps.join('.');
+  let savableFretnums = allFretnums.join('.');
+  let savableModes = allModes.join('.');
   let noteidsInput = document.getElementsByClassName('noteids-input')[0];
   let stepsInput = document.getElementsByClassName('steps-input')[0];
   let fretnumsInput = document.getElementsByClassName('fretnums-input')[0];
+  let modesInput = document.getElementsByClassName('modes-input')[0];
   noteidsInput.value = savableIds;
   stepsInput.value = savableSteps;
   fretnumsInput.value = savableFretnums;
+  modesInput.value = savableModes;
   saveForm.style.display = 'block';
 
   if (!isNew) {

@@ -24,11 +24,8 @@
             class="sequence saved-sequence"
             data-noteids="<%= data.jahms[i].noteids %>"
             data-steps="<%= data.jahms[i].steps %>"
-            data-fretnums="
-              <% if (data.jahms[i].fretnums != undefined) { %>
-                <%= data.jahms[i].fretnums %>
-              <% } %>
-            "
+            data-modes="<%= data.jahms[i].modes %>"
+            data-fretnums="<%= data.jahms[i].fretnums %>"
           >
             <p class="sequence-title"><%= data.jahms[i].title %></p>
           </div>
@@ -52,6 +49,7 @@
     <input name="noteids" class="save-input noteids-input">
     <input name="steps" class="save-input steps-input">
     <input name="fretnums" class="save-input fretnums-input">
+    <input name="modes" class="save-input modes-input">
     <label for="title">Title</label>
     <input name="title" class="save-input title-input">
     <br>
