@@ -83,6 +83,17 @@ function setStepProps(step, data, num) {
   step.addEventListener('dragstart', dragstartHandler);
 }
 
+function setStepPropsFromDB(step, data, num) {
+  step.classList.add('seq-step');
+  step.setAttribute('data-noteids', data[0]);
+  step.setAttribute('data-fretnums', data[1]);
+  step.setAttribute('data-mode', data[2]);
+  step.setAttribute('data-stepnum', num);
+  step.setAttribute('draggable', 'true');
+  step.addEventListener('click', () => { setActiveStep(step) });
+  step.addEventListener('dragstart', dragstartHandler);
+}
+
 function updateSeqStep() {
   let step = document.getElementsByClassName('seq-step')[activeStep - 1];
   let ids = collectChordNotes();
@@ -122,10 +133,11 @@ function populateFretboard(step) {
   toggleMode(step.dataset.mode);
   let steps = document.getElementsByClassName('seq-step');
   let noteIds = step.dataset.noteids.split(',');
-  let fretnums;
+  let fretnums, trueFretnums;
+
   if (step.dataset.mode == 'riff') {
     fretnums = step.dataset.fretnums.split(',');
-    console.log(fretnums);
+    trueFretnums = fretnums.filter((fretnum) => fretnum != '');
   }
 
   for (let n = 0; n < noteIds.length; n++) {
@@ -139,12 +151,16 @@ function populateFretboard(step) {
           noteBubble.classList.add('note-bubble-fret');
           noteBubble.setAttribute('draggable', 'true');
           noteBubble.addEventListener('dragstart', dragFretBubble);
-          noteBubble.textContent = fretnums[n];
+          noteBubble.textContent = trueFretnums[n];
           fretNotes[fn].parentElement.appendChild(noteBubble);
         }
       }
     }
   }
+}
+
+function tabulateRiff() {
+  
 }
 
 let sequenceDS = {
@@ -189,6 +205,7 @@ function populateSequence(sequence) {
   let noteids = sequence.dataset.noteids.split('.');
   let steps = sequence.dataset.steps.split('.');
   let fretnums = sequence.dataset.fretnums.split('.');
+  let modes = sequence.dataset.modes.split('.');
   currentTitle.textContent = sequence.children[0].textContent;
   numSteps = steps.length;
 
@@ -199,7 +216,7 @@ function populateSequence(sequence) {
   // let data = [noteids, fretnums];
   for (let n = 0; n < noteids.length; n++) {
     let step = document.createElement('div');
-    setStepProps(step, [noteids[n], fretnums], n + 1);
+    setStepPropsFromDB(step, [noteids[n], fretnums, modes[n]], n + 1);
     topbar.appendChild(step);
     step.innerHTML = steps[n];
   }
