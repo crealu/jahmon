@@ -131,7 +131,6 @@ function collectRiffNotes(ids, nums) {
 function populateFretboard(step) {
   clearFretboard();
   toggleMode(step.dataset.mode);
-  let steps = document.getElementsByClassName('seq-step');
   let noteIds = step.dataset.noteids.split(',');
   let fretnums, trueFretnums;
 
@@ -146,21 +145,21 @@ function populateFretboard(step) {
         if (step.dataset.mode == 'chord') {
           fretNotes[fn].style.display = 'block';
         } else {
-          let noteBubble = document.createElement('div');
-          noteBubble.classList.add('note-bubble');
-          noteBubble.classList.add('note-bubble-fret');
-          noteBubble.setAttribute('draggable', 'true');
-          noteBubble.addEventListener('dragstart', dragFretBubble);
-          noteBubble.textContent = trueFretnums[n];
-          fretNotes[fn].parentElement.appendChild(noteBubble);
+          tabulateRiff(trueFretnums, n, fn);
         }
       }
     }
   }
 }
 
-function tabulateRiff() {
-  
+function tabulateRiff(trueFretnums, n, fn) {
+  let noteBubble = document.createElement('div');
+  noteBubble.classList.add('note-bubble');
+  noteBubble.classList.add('note-bubble-fret');
+  noteBubble.setAttribute('draggable', 'true');
+  noteBubble.addEventListener('dragstart', dragFretBubble);
+  noteBubble.textContent = trueFretnums[n];
+  fretNotes[fn].parentElement.appendChild(noteBubble);
 }
 
 let sequenceDS = {
