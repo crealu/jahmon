@@ -65,33 +65,18 @@ function resetStepNumbers() {
 
 function addSeqStep() {
   let step = document.createElement('div');
-  if (mode == 'chord') {
-    let ids = collectChordNotes()
-    setChordProps(step, ids, numSteps + 1);
-  } else {
-    let riffData = collectRiffNotes();
-    setRiffProps(step, riffData, numSteps + 1);
-  }
+  let data = collectNotes();
+  setStepProps(step, data, numSteps + 1);
   topbar.appendChild(step);
   step.textContent = mode == 'chord' ? 'CH' + numSteps : 'R' + numSteps;
   numSteps++;
 }
 
-function setChordProps(step, ids, num) {
+function setStepProps(step, data, num) {
   step.classList.add('seq-step');
-  step.setAttribute('data-mode', 'chord');
-  step.setAttribute('data-noteids', ids);
-  step.setAttribute('data-stepnum', num);
-  step.setAttribute('draggable', 'true');
-  step.addEventListener('click', () => { setActiveStep(step) });
-  step.addEventListener('dragstart', dragstartHandler);
-}
-
-function setRiffProps(step, riffData, num) {
-  step.classList.add('seq-step');
-  step.setAttribute('data-mode', 'riff');
-  step.setAttribute('data-noteids', riffData[0]);
-  step.setAttribute('data-fretnum', riffData[1]);
+  step.setAttribute('data-mode', mode);
+  step.setAttribute('data-noteids', data[0]);
+  step.setAttribute('data-fretnum', data[1]);
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
@@ -104,27 +89,54 @@ function updateSeqStep() {
   step.dataset.noteids = ids;
 }
 
-function collectChordNotes() {
-  let noteIds = [];
-  for (let fn = 0; fn < fretNotes.length; fn++) {
-    if (fretNotes[fn].style.display == 'block') {
-      noteIds.push(fretNotes[fn].dataset.noteid);
-    }
-  }
-  return noteIds.join(',');
-}
-
-function collectRiffNotes() {
+function collectNotes() {
   let ids = [];
   let nums = [];
+  if (mode == 'chord') {
+    collectChordNotes(ids, nums);
+  } else {
+    collectRiffNotes(ids, nums);
+  }
+  return [ids.join(','), nums.join(',')];
+}
+
+function collectChordNotes(ids, nums) {
+  for (let fn = 0; fn < fretNotes.length; fn++) {
+    if (fretNotes[fn].style.display == 'block') {
+      ids.push(fretNotes[fn].dataset.noteid);
+      nums.push('');
+    }
+  }
+}
+
+function collectRiffNotes(ids, nums) {
   let riffNotes = document.getElementsByClassName('note-bubble-fret');
   for (let rn = 0; rn < riffNotes.length; rn++) {
     ids.push(riffNotes[rn].parentElement.children[0].dataset.noteid)
     nums.push(riffNotes[rn].textContent);
   }
-
-  return [ids.join(','), nums.join(',')];
 }
+
+// function collectChordNotes() {
+//   let ids = [];
+//   for (let fn = 0; fn < fretNotes.length; fn++) {
+//     if (fretNotes[fn].style.display == 'block') {
+//       noteIds.push(fretNotes[fn].dataset.noteid);
+//     }
+//   }
+//   return ids.join(',');
+// }
+//
+// function collectRiffNotes() {
+//   let ids = [];
+//   let nums = [];
+//   let riffNotes = document.getElementsByClassName('note-bubble-fret');
+//   for (let rn = 0; rn < riffNotes.length; rn++) {
+//     ids.push(riffNotes[rn].parentElement.children[0].dataset.noteid)
+//     nums.push(riffNotes[rn].textContent);
+//   }
+//   return [ids.join(','), nums.join(',')];
+// }
 
 function populateFretboard(step) {
   clearFretboard();
@@ -165,8 +177,8 @@ let sequenceDS = {
       noteids: '',
       fretnums: ''
     }
-  ];
-}
+  ]
+};
 
 function clearFretboard() {
   let noteBubbles = document.getElementsByClassName('note-bubble-fret');
