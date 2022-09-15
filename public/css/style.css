@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito|Comfortaa&display=swap');
+:root {
+  --skel_text_color: #606060;
+  --skel_bg_color: #FFFFFF;
+  --skel_sel_color: #D6D6D6;
+}
+
 body {
-  background: lightgray;
   overflow: hidden;
+  font-family: 'Comfortaa';
+  color: var(--skel_text_color);
 }
 
 .jel {
@@ -11,21 +19,45 @@ body {
 /* topbar */
 .topbar {
   top: 0px;
-  left: 0px;
-  height: 100px;
-  background: lightgreen;
-  width: 100%;
+  left: 200px;
+  height: 150px;
+  background: var(--skel_bg_color);
+  width: calc(100vw - 100px);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.topbar-btn-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(1);
+  float: right;
+  top: 20px;
+  left: -150px;
+  z-index: 15;
+}
+
+.topbar-btn {
+  grid-column: 1/1;
+  margin-bottom: 5px;
+}
+
+.ui-btn {
+  background: var(--skel_sel_color);
+  border: none;
+  padding: 5px 12px;
+  border-radius: 4px;
 }
 
 .current-title {
   position: absolute;
-  left: 80px;
-  top: 40px;
+  left: 30px;
+  top: 15px;
 }
 
 .sequence-wrapper {
   position: absolute;
-  left: 250px;
+  left: 30px;
+  top: 45px;
 }
 
 .seq-step {
@@ -39,6 +71,7 @@ body {
   text-align: center;
   float: left;
   cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
 }
 
 .drop-zone {
@@ -63,12 +96,13 @@ body {
 
 /* sidebar */
 .sidebar {
-  top: 100px;
+  top: 0px;
   left: 0px;
-  height: calc(100vh - 100px);
+  height: 100vh;
   width: 200px;
-  background: pink;
-  overflow-y: scroll;
+  background: var(--skel_bg_color);
+  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+  z-index: 10;
 }
 
 .sidebar-title {
@@ -77,30 +111,110 @@ body {
 
 .saved-sequences {
   padding-top: 20px;
-  cursor: pointer;
 }
 
 .sequence {
   position: relative;
   display: block;
   margin: 0 auto;
-  width: 100px;
-  height: 100px;
-  margin-bottom: 20px;
-  background: lavender;
-  border-radius: 8px;
+  margin-bottom: 40px;
   text-align: center;
+  width: 100px;
 }
 
 .sequence-title {
   position: relative;
-  top: 40px;
+  background: var(--skel_bg_color);
+  padding: 16px 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
-/* fretboard */
+.sequence-title:hover {
+  background: var(--skel_sel_color);
+}
+
+.settings-btn {
+  position: absolute;
+  display: block;
+  margin: 0 auto;
+  bottom: 40px;
+  left: 0%;
+  right: 0%;
+  width: 30px;
+  height: 30px;
+}
+
+.tab-btn {
+  position: absolute;
+  width: 24px;
+  height: 30px;
+  left: 188px;
+  top: 100px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+  text-align: right;
+}
+
+/* tableture */
+.tableture {
+  top: 150px;
+  left: 200px;
+}
+
+.tableture-top {
+  position: relative;
+  left: 30px;
+  width: calc(100vw - 330px);
+  height: 50px;
+}
+
+.mode-title {
+  position: relative;
+  float: left;
+  padding-right: 20px;
+  margin: 10px 0px 0px 0px;
+}
+
+.toggle-btns {
+  border: 1px solid black;
+  float: left;
+  margin-top: 8px;
+  border-radius: 6px;
+}
+
+.toggle-mode-btn {
+  width: 60px;
+  float: left;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.chord-btn {
+  border-top-left-radius: 6px 6px;
+  border-bottom-left-radius: 6px 6px;
+  background: white;
+}
+
+.riff-btn {
+  border-top-right-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+  background: var(--skel_sel_color);
+}
+
+.action-btn {
+  background: var(--skel_sel_color);
+  border: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0px 10px;
+}
+
 .fretboard {
-  top: 200px;
-  left: 250px;
+  left: 30px;
   width: calc(100vw - 300px);
   background: lightblue;
 }
@@ -163,8 +277,7 @@ body {
 
 .riff-numbers {
   opacity: 0;
-  top: 450px;
-  left: 250px;
+  left: 30px;
   transition: 0.5s ease;
 }
 
@@ -205,22 +318,6 @@ body {
   top: 72px;
 }
 
-.fretboard-top-btn {
-  top: 150px;
-}
-
-.fretboard-bottom-btn {
-  top: 510px;
-}
-
-.chord-btn {
-  left: 250px;
-}
-
-.riff-btn {
-  left: 330px;
-}
-
 .set-btn {
   left: 250px;
 }
@@ -258,4 +355,20 @@ body {
 
 .title-input {
   display: block;
+}
+
+/* library */
+.library {
+  bottom: 0px;
+  left: 200px;
+  background: white;
+  width: calc(100vw - 200px);
+  height: 200px;
+  z-index: 1;
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.library-title {
+  position: absolute;
+  left: 30px;
 }
