@@ -31,7 +31,7 @@ function setActiveStep(step) {
   } else {
     stepSelected = true;
     populateFretboard(step);
-    step.style.background = 'green';
+    step.style.background = '#D6D6D6';
     activeStep = step.dataset.stepnum;
   }
 }
