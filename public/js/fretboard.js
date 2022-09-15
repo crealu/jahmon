@@ -92,7 +92,7 @@ function dragoverNoteBubble(event) {
 function dragleaveNoteBubble(event) {
   event.preventDefault();
   if (event.target.classList[0] == 'fret') {
-    event.target.style.background = 'tan';
+    event.target.style.background = 'none';
   }
 }
 
@@ -101,10 +101,10 @@ const targetIsFret = (e) => { return e.target.classList[0] == 'fret' };
 function dropNoteBubble(event) {
   event.preventDefault();
   if (targetIsFret(event)) {
-    movedNoteBubble.style.background = 'tan';
+    // movedNoteBubble.style.background = 'tan';
     movedNoteBubble.classList.add('note-bubble-fret');
     event.target.appendChild(movedNoteBubble);
-    event.target.style.background = 'tan';
+    // event.target.style.background = 'tan';
   }
 
   resetFretBubbles();

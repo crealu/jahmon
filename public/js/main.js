@@ -8,11 +8,14 @@ const clearSequenceBtn = document.getElementsByClassName('topbar-clear-btn')[0];
 const saveBtn = document.getElementsByClassName('topbar-save-btn')[0];
 const fretNotes = document.getElementsByClassName('fret-note');
 const sequences = document.getElementsByClassName('saved-sequence');
-const newSequence = document.getElementsByClassName('new-sequence')[0];
+const newSequence = document.getElementsByClassName('new-sequence-btn')[0];
 const saveForm = document.getElementsByClassName('save-form')[0];
 const chordBtn = document.getElementsByClassName('chord-btn')[0];
 const riffBtn = document.getElementsByClassName('riff-btn')[0];
 const cancelBtn = document.getElementsByClassName('cancel-btn')[0];
+const sidebarTabBtn = document.getElementsByClassName('tab-btn')[0];
+const settingsBtn = document.getElementsByClassName('settings-btn')[0];
+const closeModalBtn = document.getElementsByClassName('close-modal-btn')[0];
 
 let numSteps = 0;
 let mode = 'chord';
@@ -208,10 +211,6 @@ function populateSequence(sequence) {
   currentTitle.textContent = sequence.children[0].textContent;
   numSteps = steps.length;
 
-  console.log('Note ids', noteids);
-  console.log('Steps', steps);
-  console.log('Fret nums', fretnums);
-
   // let data = [noteids, fretnums];
   for (let n = 0; n < noteids.length; n++) {
     let step = document.createElement('div');
@@ -263,9 +262,9 @@ function setModeStyle(fretBorder, circleOpacity) {
   let fretCircles = document.getElementsByClassName('fret-circle');
   for (let f = 0; f < frets.length; f++) {
     frets[f].style.borderLeft = '1px solid ' + fretBorder;
-    if (frets[f].children[0].dataset.noteid.includes('f0')) {
-      frets[f].children[0].style.background = 'tan';
-    }
+    // if (frets[f].children[0].dataset.noteid.includes('f0')) {
+    //   frets[f].children[0].style.background = 'tan';
+    // }
   }
   for (let fc = 0; fc < fretCircles.length; fc++) {
     fretCircles[fc].style.opacity = circleOpacity;
@@ -284,6 +283,30 @@ function toggleMode(newMode) {
   mode = newMode;
 }
 
+function toggleSidebar() {
+  const sidebar = document.getElementsByClassName('sidebar')[0];
+  const arrow = document.getElementsByClassName('arrow-left')[0];
+  if (sidebar.style.left == '0px') {
+    sidebar.style.left = '-200px';
+    arrow.style.borderLeft = '8px solid var(--skel_sel_color)';
+    arrow.style.borderRight = 'none';
+  } else {
+    sidebar.style.left = '0px';
+    arrow.style.borderLeft = 'none';
+    arrow.style.borderRight = '8px solid var(--skel_sel_color)';
+  }
+}
+
+function toggleModal() {
+  const modal = document.getElementsByClassName('settings-modal')[0];
+  modal.style.display = modal.style.display == 'block' ? 'none' : 'block';
+  // if (modal.style.display == 'block') {
+  //   modal.style.display = 'none';
+  // } else {
+  //   modal.style.display = 'block';
+  // }
+}
+
 setBtn.addEventListener('click', () => {
   // setSelected ? updateSeqStep() : addSeqStep();
   if (stepSelected) {
@@ -293,6 +316,9 @@ setBtn.addEventListener('click', () => {
   }
 });
 
+closeModalBtn.addEventListener('click', () => { toggleModal() });
+settingsBtn.addEventListener('click', () => { toggleModal() });
+sidebarTabBtn.addEventListener('click', () => { toggleSidebar() });
 chordBtn.addEventListener('click', () => { toggleMode('chord') });
 riffBtn.addEventListener('click', () => { toggleMode('riff') });
 clearFretboardBtn.addEventListener('click', () => { clearFretboard() });

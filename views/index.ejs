@@ -12,8 +12,8 @@
     <div class="current-title" data-isnew="new">untitled</div>
     <div class="sequence-wrapper"></div>
     <div class="topbar-btn-wrapper">
-      <button class="ui-btn topbar-btn topbar-save-btn">Delete</button>
       <button class="ui-btn topbar-btn topbar-save-btn">Save</button>
+      <button class="ui-btn topbar-btn topbar-delete-btn">Delete</button>
       <button class="ui-btn topbar-btn topbar-clear-btn">Clear</button>
     </div>
   </div>
@@ -33,11 +33,16 @@
             <p class="sequence-title"><%= data.jahms[i].title %></p>
           </div>
         <% } %>
-        <button class="sequence new-sequence">NEW</button>
+        <button class="sequence new-sequence-btn">
+          <div class="horizontal-bar plus-bar"></div>
+          <div class="vertical-bar plus-bar"></div>
+        </button>
       <% } %>
     </div>
-    <div class="tab-btn"><</div>
-    <div class="settings-btn"></div>
+    <div class="tab-btn">
+      <div class="arrow-left"></div>
+    </div>
+    <img class="settings-btn" src="img/settings-btn.png"/>
   </div>
 
   <div class="jel tableture">
@@ -74,6 +79,17 @@
     <button id="submit">Submit</button>
     <p class="cancel-btn">Cancel</p>
   </form>
+
+  <div class="settings-modal">
+    <span class="close-modal-btn">x</span>
+    <h4 class="settings-title">Settings</h4>
+    <label for="theme">Theme</label>
+    <select>
+      <option value="skel">Skel</option>
+      <option value="falcon">Falcon</option>
+      <option value="pastel">Pastel</option>
+    </select>
+  </div>
 
 
   <script type="text/javascript" src="js/themes.js"></script>
