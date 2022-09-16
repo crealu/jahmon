@@ -1,11 +1,70 @@
-{"chords":[
-	{"name":"A","type":"chord","noteids":["s6f0","s5f2","s4f2","s3f2","s2f0"]},
-	{"name":"Am","type":"chord","noteids":["s6f0","s5f1","s4f2","s3f2","s2f0"]},
-	{"name":"Am7","type":"chord","noteids":["s6f0","s5f1","s4f0","s3f2","s2f0"]},
-	{"name":"Asus4","type":"chord","noteids":["s6f0","s5f3","s4f2","s3f2","s2f0"]},
-	{"name":"A7sus4","type":"chord","noteids":["s6f0","s5f2","s4f0","s3f1","s2f0"]},
-	{"name":"A6","type":"chord","noteids":["s6f2","s5f2","s4f2","s3f2","s2f0"]},
-	{"name":"Am6","type":"chord","noteids":["s6f2","s5f1","s4f2","s3f2","s2f0"]},
-	{"name":"A7","type":"chord","noteids":["s6f0","s5f2","s4f0","s3f2","s2f0"]}
+{"chords": [
+		{
+			"name": "A",
+			"noteids": ["s6f0","s5f2","s4f2","s3f2","s2f0"]
+		},
+		{
+			"name": "Am",
+			"noteids": ["s6f0","s5f1","s4f2","s3f2","s2f0"]
+		},
+		{
+			"name": "Am7",
+			"noteids": ["s6f0","s5f1","s4f0","s3f2","s2f0"]
+		},
+		{
+			"name": "Asus4",
+			"noteids": ["s6f0","s5f3","s4f2","s3f2","s2f0"]
+		},
+		{
+			"name": "A7sus4",
+			"noteids": ["s6f0","s5f2","s4f0","s3f1","s2f0"]
+		},
+		{
+			"name": "A6",
+			"noteids": ["s6f2","s5f2","s4f2","s3f2","s2f0"]
+		},
+		{
+			"name": "Am6",
+			"noteids": ["s6f2","s5f1","s4f2","s3f2","s2f0"]
+		},
+		{
+			"name": "A7",
+			"noteids": ["s6f0","s5f2","s4f0","s3f2","s2f0"]
+		},
+		{
+			"name": "A9",
+			"noteids": ["s6f3","s5f2","s4f4","s3f2","s2f0"]
+		},
+		{
+			"name": "A5",
+			"noteids": ["s4f2","s3f2","s2f0"]
+		},
+		{
+			"name": "A6add9",
+			"noteids": ["s6f0","s5f2","s4f4","s3f4","s2f0"]
+		},
+		{
+			"name": "A11",
+			"noteids": ["s5f3","s3f5","s2f4","s1f5"]
+		},
+		{
+			"name": "A13",
+			"noteids": ["s6f2","s5f2","s4f4","s3f5","s2f0"]
+		},
+		{
+			"name": "Aadd9",
+			"noteids": ["s6f0","s5f2","s4f4","s3f2","s2f0"]
+		},
+		{
+			"name": "Am9",
+			"noteids": ["s6f3","s5f1","s4f4","s3f2","s2f0"]
+		},
+		{
+			"name": "Amaj9",
+			"noteids": ["s5f5","s4f4","s3f6","s2f4","s1f5"]},
+		{
+			"name": "A+",
+			"noteids": ["s4f2","s3f3","s2f4","s1f5"]
+		}
 	]
 }
