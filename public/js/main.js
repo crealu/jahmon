@@ -99,7 +99,7 @@ function setStepPropsFromDB(step, data, num) {
 
 function updateSeqStep() {
   let step = document.getElementsByClassName('seq-step')[activeStep - 1];
-  let ids = collectChordNotes();
+  let ids = collectChordNotes([], []);
   step.dataset.noteids = ids;
 }
 
@@ -262,9 +262,6 @@ function setModeStyle(fretBorder, circleOpacity) {
   let fretCircles = document.getElementsByClassName('fret-circle');
   for (let f = 0; f < frets.length; f++) {
     frets[f].style.borderLeft = '1px solid ' + fretBorder;
-    // if (frets[f].children[0].dataset.noteid.includes('f0')) {
-    //   frets[f].children[0].style.background = 'tan';
-    // }
   }
   for (let fc = 0; fc < fretCircles.length; fc++) {
     fretCircles[fc].style.opacity = circleOpacity;
@@ -276,9 +273,13 @@ function toggleMode(newMode) {
   if (newMode == 'riff') {
     setModeStyle('rgba(0, 0, 0, 0)', '0');
     riffNumbers.style.opacity = '1';
+    chordBtn.style.background = 'var(--skel_sel_color)';
+    riffBtn.style.background = 'var(--skel_bg_color)';
   } else if (newMode == 'chord') {
     setModeStyle('lightgray', '1');
     riffNumbers.style.opacity = '0';
+    chordBtn.style.background = 'var(--skel_bg_color)';
+    riffBtn.style.background = 'var(--skel_sel_color)';
   }
   mode = newMode;
 }
@@ -300,11 +301,6 @@ function toggleSidebar() {
 function toggleModal() {
   const modal = document.getElementsByClassName('settings-modal')[0];
   modal.style.display = modal.style.display == 'block' ? 'none' : 'block';
-  // if (modal.style.display == 'block') {
-  //   modal.style.display = 'none';
-  // } else {
-  //   modal.style.display = 'block';
-  // }
 }
 
 setBtn.addEventListener('click', () => {

@@ -48,6 +48,12 @@ body {
   border-radius: 4px;
   color: var(--skel_text_color);
   width: 80px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.ui-btn:hover {
+  background: darkgray;
 }
 
 .current-title {
@@ -281,6 +287,12 @@ body {
   padding: 3px 12px;
   float: left;
   border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.toggle-mode-btn:hover {
+  background: white;
 }
 
 .chord-btn {

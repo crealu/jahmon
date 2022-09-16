@@ -101,10 +101,11 @@ const targetIsFret = (e) => { return e.target.classList[0] == 'fret' };
 function dropNoteBubble(event) {
   event.preventDefault();
   if (targetIsFret(event)) {
-    // movedNoteBubble.style.background = 'tan';
+    movedNoteBubble.style.background = 'white';
+    movedNoteBubble.style.color = 'var(--skel_text_color)';
     movedNoteBubble.classList.add('note-bubble-fret');
     event.target.appendChild(movedNoteBubble);
-    // event.target.style.background = 'tan';
+    event.target.style.background = 'white';
   }
 
   resetFretBubbles();
