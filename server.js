@@ -44,6 +44,7 @@ app.use((req, res, next) => {
 
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/save'));
+app.use('/', require('./routes/lib'));
 // app.use('/', require('./routes/fun'));
 app.use(cookieParser());
 

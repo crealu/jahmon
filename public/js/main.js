@@ -303,6 +303,8 @@ function toggleModal() {
   modal.style.display = modal.style.display == 'block' ? 'none' : 'block';
 }
 
+
+
 setBtn.addEventListener('click', () => {
   // setSelected ? updateSeqStep() : addSeqStep();
   if (stepSelected) {
