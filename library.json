@@ -101,10 +101,18 @@
 		},
 		{
 			"name": "Bb6",
-			"noteids": ["s6f3","s5f3","s4f3","s3f3","s2f1"]},
+			"noteids": ["s6f3","s5f3","s4f3","s3f3","s2f1"]
+		},
 		{
 			"name": "Bbm6",
 			"noteids": ["s6f3","s5f2","s4f0","s3f3","s2f1"]
+		},
+		{
+			"name": "Bb7",
+			"noteids": ["s6f1","s5f3","s4f1","s3f3","s2f1"]},
+		{
+			"name": "Bb9",
+			"noteids": ["s6f1","s5f1","s4f1","s3f0","s2f1"]
 		}
 	]
 }
