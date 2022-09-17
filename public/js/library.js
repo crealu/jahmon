@@ -9,6 +9,11 @@ function setLibChordProps(chord, data) {
   step.setAttribute('data-fretnums', data[1]);
 }
 
+function populateFromLib(libchord) {
+  clearFretboard();
+  populateFretboard(libchord);
+}
+
 function addToLibrary() {
   let noteids = collectNotes()[0].split(',');
   for (let i = 0; i < noteids.length; i++) {
@@ -25,9 +30,14 @@ function populateLibrary(json) {
     const libChord = document.createElement('div');
     libChord.classList.add('lib-chord');
     libChord.innerHTML = chord.name;
-    libChord.setAttribute('noteids', chord.noteids.join(','));
+    libChord.setAttribute('data-noteids', chord.noteids.join(','));
+    libChord.setAttribute('data-mode', 'chord');
+    libChord.addEventListener('click', (event) => {
+      populateFromLib(event.target);
+    });
     libraryShelf.appendChild(libChord);
   });
+  console.log(json.chords);
 }
 
 function fetchLibrary() {

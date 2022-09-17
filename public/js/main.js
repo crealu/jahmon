@@ -131,17 +131,7 @@ function collectRiffNotes(ids, nums) {
   }
 }
 
-function populateFretboard(step) {
-  clearFretboard();
-  toggleMode(step.dataset.mode);
-  let noteIds = step.dataset.noteids.split(',');
-  let fretnums, trueFretnums;
-
-  if (step.dataset.mode == 'riff') {
-    fretnums = step.dataset.fretnums.split(',');
-    trueFretnums = fretnums.filter((fretnum) => fretnum != '');
-  }
-
+function placeNotes(step, noteIds, trueFretnums) {
   for (let n = 0; n < noteIds.length; n++) {
     for (let fn = 0; fn < fretNotes.length; fn++) {
       if (noteIds[n] == fretNotes[fn].dataset.noteid) {
@@ -153,6 +143,20 @@ function populateFretboard(step) {
       }
     }
   }
+}
+
+function populateFretboard(step) {
+  clearFretboard();
+  toggleMode(step.dataset.mode);
+  let noteIds = step.dataset.noteids.split(',');
+  let fretnums, trueFretnums;
+
+  if (step.dataset.mode == 'riff') {
+    fretnums = step.dataset.fretnums.split(',');
+    trueFretnums = fretnums.filter((fretnum) => fretnum != '');
+  }
+
+  placeNotes(step, noteIds, trueFretnums);
 }
 
 function tabulateRiff(trueFretnums, n, fn) {
