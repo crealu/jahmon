@@ -19,7 +19,6 @@ let mode = 'chord';
 let activeStep = 0;
 let stepSelected = false;
 let isNew = true;
-// let oneBeingMoved;
 
 function setActiveStep(step) {
   let steps = document.getElementsByClassName('seq-step');
