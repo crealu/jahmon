@@ -3,9 +3,6 @@ const topbar = document.getElementsByClassName('sequence-wrapper')[0];
 const currentTitle = document.getElementsByClassName('current-title')[0];
 const setBtn = document.getElementsByClassName('set-btn')[0];
 const clearFretboardBtn = document.getElementsByClassName('clear-btn')[0];
-const finishBtn = document.getElementsByClassName('finish-btn')[0];
-const clearSequenceBtn = document.getElementsByClassName('topbar-clear-btn')[0];
-const saveBtn = document.getElementsByClassName('topbar-save-btn')[0];
 const fretNotes = document.getElementsByClassName('fret-note');
 const sequences = document.getElementsByClassName('saved-sequence');
 const newSequence = document.getElementsByClassName('new-sequence-btn')[0];
@@ -22,7 +19,7 @@ let mode = 'chord';
 let activeStep = 0;
 let stepSelected = false;
 let isNew = true;
-let oneBeingMoved;
+// let oneBeingMoved;
 
 function setActiveStep(step) {
   let steps = document.getElementsByClassName('seq-step');
@@ -37,33 +34,6 @@ function setActiveStep(step) {
     step.style.background = '#D6D6D6';
     activeStep = step.dataset.stepnum;
   }
-}
-
-function dragstartHandler(event) {
-  oneBeingMoved = event.target;
-  event.dataTransfer.dropEffect = 'move';
-}
-
-function dragoverHandler(event) {
-  event.preventDefault();
-}
-
-function dropHandler(event) {
-  event.preventDefault();
-  let targetNum = event.target.dataset.stepnum;
-  if (oneBeingMoved.dataset.stepnum < targetNum) {
-    event.target.insertAdjacentElement('afterend', oneBeingMoved);
-  } else {
-    topbar.insertBefore(oneBeingMoved, event.target);
-  }
-  resetStepNumbers();
-}
-
-function resetStepNumbers() {
-  const steps = document.getElementsByClassName('seq-step');
-   for (let s = 1; s < steps.length; s++) {
-     steps[s].setAttribute('data-stepnum', s);
-   }
 }
 
 function addSeqStep() {
@@ -83,7 +53,6 @@ function setStepProps(step, data, num) {
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
-  step.addEventListener('dragstart', dragstartHandler);
 }
 
 function setStepPropsFromDB(step, data, num) {
@@ -94,7 +63,6 @@ function setStepPropsFromDB(step, data, num) {
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
-  step.addEventListener('dragstart', dragstartHandler);
 }
 
 function updateSeqStep() {
@@ -169,18 +137,6 @@ function tabulateRiff(trueFretnums, n, fn) {
   fretNotes[fn].parentElement.appendChild(noteBubble);
 }
 
-let sequenceDS = {
-  title: '',
-  steps: [
-    {
-      name: '',
-      mode: '',
-      noteids: '',
-      fretnums: ''
-    }
-  ]
-};
-
 function clearFretboard() {
   let noteBubbles = document.getElementsByClassName('note-bubble-fret');
   for (let fn = 0; fn < fretNotes.length; fn++) {
@@ -221,43 +177,6 @@ function populateSequence(sequence) {
     setStepPropsFromDB(step, [noteids[n], fretnums, modes[n]], n + 1);
     topbar.appendChild(step);
     step.innerHTML = steps[n];
-  }
-}
-
-function clearSequence() {
-  while (topbar.firstChild) { topbar.removeChild(topbar.firstChild) }
-  numSteps = 0;
-}
-
-function finishSequence() {
-  const steps = document.getElementsByClassName('seq-step');
-  let allIds = [];
-  let allSteps = [];
-  let allFretnums = [];
-  let allModes = [];
-  for (let s = 0; s < steps.length; s++) {
-    allIds.push(steps[s].dataset.noteids);
-    allSteps.push(steps[s].textContent);
-    allFretnums.push(steps[s].dataset.fretnums);
-    allModes.push(steps[s].dataset.mode);
-  }
-  let savableIds = allIds.join('.');
-  let savableSteps = allSteps.join('.');
-  let savableFretnums = allFretnums.join('.');
-  let savableModes = allModes.join('.');
-  let noteidsInput = document.getElementsByClassName('noteids-input')[0];
-  let stepsInput = document.getElementsByClassName('steps-input')[0];
-  let fretnumsInput = document.getElementsByClassName('fretnums-input')[0];
-  let modesInput = document.getElementsByClassName('modes-input')[0];
-  noteidsInput.value = savableIds;
-  stepsInput.value = savableSteps;
-  fretnumsInput.value = savableFretnums;
-  modesInput.value = savableModes;
-  saveForm.style.display = 'block';
-
-  if (!isNew) {
-    saveForm.setAttribute('action', '/update');
-    document.getElementsByClassName('title-input')[0].value = currentTitle.textContent;
   }
 }
 
@@ -307,8 +226,6 @@ function toggleModal() {
   modal.style.display = modal.style.display == 'block' ? 'none' : 'block';
 }
 
-
-
 setBtn.addEventListener('click', () => {
   // setSelected ? updateSeqStep() : addSeqStep();
   if (stepSelected) {
@@ -324,11 +241,7 @@ sidebarTabBtn.addEventListener('click', () => { toggleSidebar() });
 chordBtn.addEventListener('click', () => { toggleMode('chord') });
 riffBtn.addEventListener('click', () => { toggleMode('riff') });
 clearFretboardBtn.addEventListener('click', () => { clearFretboard() });
-clearSequenceBtn.addEventListener('click', () => { clearSequence() });
 newSequence.addEventListener('click', () => { startNewSequence() });
-saveBtn.addEventListener('click', () => { finishSequence() });
-topbar.addEventListener('dragover', dragoverHandler);
-topbar.addEventListener('drop', dropHandler);
 cancelBtn.addEventListener('click', () => {
   document.getElementsByClassName('save-form')[0].style.display = 'none';
 });
@@ -358,3 +271,14 @@ window.onload = createFretboard();
 //     fretNotes[fn].appendChild(noteInput);
 //   }
 // }
+// let sequenceDS = {
+//   title: '',
+//   steps: [
+//     {
+//       name: '',
+//       mode: '',
+//       noteids: '',
+//       fretnums: ''
+//     }
+//   ]
+// };
