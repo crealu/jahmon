@@ -91,6 +91,7 @@
 
 .tab-btn {
   position: absolute;
+  display: none;
   width: 24px;
   height: 30px;
   left: 150px;

@@ -62,7 +62,7 @@ body {
 
 .save-input {
   position: relative;
-  display: block;
+  display: none;
   margin: 0 auto;
 }
 

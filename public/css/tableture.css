@@ -127,7 +127,7 @@
 }
 
 .add-to-lib-form {
-  display: block;
+  display: none;
 }
 
 .tolib-btn {
