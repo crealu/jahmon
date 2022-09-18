@@ -158,6 +158,121 @@
 		{
 			"name": "B",
 			"noteids": ["s6f2","s5f4","s4f4","s3f4","s2f2"]
+		},
+		{
+			"name": "Bm",
+			"noteids": ["s6f2","s5f3","s4f4","s3f4","s2f2"]
+		},
+		{
+			"name": "Bmaj7",
+			"noteids": ["s6f2","s5f4","s4f3","s3f4","s2f2"]
+		},
+		{
+			"name": "Bm7",
+			"noteids": ["s6f2","s5f3","s4f2","s3f4","s2f2"]
+		},
+		{
+			"name": "Bsus4",
+			"noteids": ["s6f2","s5f5","s4f4","s3f4","s2f2"]
+		},
+		{
+			"name": "B7sus4",
+			"noteids": ["s6f2","s5f0","s4f2","s3f2","s2f2"]
+		},
+		{
+			"name": "B6",
+			"noteids": ["s5f7","s4f8","s3f6","s2f6","s1f7"]
+		},
+		{
+			"name": "Bm6",
+			"noteids": ["s6f2","s5f0","s4f1","s3f0","s2f2"]
+		},
+		{
+			"name": "B7",
+			"noteids": ["s6f2","s5f4","s4f2","s3f4","s2f2"]
+		},
+		{
+			"name": "B9",
+			"noteids": ["s6f2","s5f2","s4f2","s3f1","s2f2"]
+		},
+		{
+			"name": "B5",
+			"noteids": ["s4f4","s3f4","s2f2"]
+		},
+		{
+			"name": "B6add9",
+			"noteids": ["s6f2","s5f2","s4f1","s3f1","s2f2"]
+		},
+		{
+			"name": "B11",
+			"noteids": ["s6f0","s5f2","s4f2","s3f1","s2f2"]
+		},
+		{
+			"name": "B13",
+			"noteids": ["s6f4","s5f4","s4f2","s3f1","s2f2"]
+		},
+		{
+			"name": "Badd9",
+			"noteids": ["s5f7","s4f6","s3f9","s2f6","s1f7"]
+		},
+		{
+			"name": "Bm9",
+			"noteids": ["s6f2","s5f2","s4f2","s3f0","s2f2"]
+		},
+		{
+			"name": "Bmaj9",
+			"noteids": ["s5f2","s4f3","s3f1","s2f2"]
+		},
+		{
+			"name": "B+",
+			"noteids": ["s4f4","s3f5","s2f6","s1f7"]
+		},
+		{
+			"name": "B07",
+			"noteids": ["s6f1","s5f3","s4f1","s3f3","s2f2"]
+		},
+		{
+			"name": "B0",
+			"noteids": ["s5f3","s4f4","s3f3","s2f2"]
+		},
+		{
+			"name": "C",
+			"noteids": ["s6f0","s5f1","s4f0","s3f2","s2f3"]
+		},
+		{
+			"name": "Cm",
+			"noteids": ["s6f3","s5f4","s4f5","s3f5","s2f3"]
+		},
+		{
+			"name": "Cmaj7",
+			"noteids": ["s6f0","s5f0","s4f0","s3f2","s2f3"]
+		},
+		{
+			"name": "Cm7",
+			"noteids": ["s6f3","s5f4","s4f3","s3f5","s2f3"]
+		},
+		{
+			"name": "Csus4",
+			"noteids": ["s6f1","s5f1","s4f0","s3f3","s2f3"]
+		},
+		{
+			"name": "C7sus4",
+			"noteids": ["s6f3","s5f6","s4f3","s3f5","s2f3"]
+		},
+		{
+			"name": "C6",
+			"noteids": ["s5f8","s4f9","s3f7","s2f7","s1f8"]
+		},
+		{
+			"name": "Cm6",
+			"noteids": ["s6f3","s5f1","s4f2","s3f1","s2f3"]
+		},
+		{
+			"name": "C7",
+			"noteids": ["s6f0","s5f1","s4f3","s3f2","s2f3"]},
+		{
+			"name": "C9",
+			"noteids": ["s6f3","s5f3","s4f3","s3f2","s2f3"]
 		}
 	]
 }
