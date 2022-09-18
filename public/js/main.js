@@ -226,7 +226,7 @@ function toggleModal() {
 }
 
 setBtn.addEventListener('click', () => {
-  // setSelected ? updateSeqStep() : addSeqStep();
+  // stepSelected ? updateSeqStep() : addSeqStep();
   if (stepSelected) {
     updateSeqStep();
   } else {

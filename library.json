@@ -153,7 +153,8 @@
 		},
 		{
 			"name": "Bb0",
-			"noteids": ["s6f0","s5f2","s4f3","s3f2","s2f1"]},
+			"noteids": ["s6f0","s5f2","s4f3","s3f2","s2f1"]
+		},
 		{
 			"name": "B",
 			"noteids": ["s6f2","s5f4","s4f4","s3f4","s2f2"]
