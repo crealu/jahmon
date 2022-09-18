@@ -38,6 +38,11 @@ body {
   float: right;
 }
 
+.theme-select {
+  padding: 6px 10px;
+  margin-left: 10px;
+}
+
 /* save form */
 .save-form {
   position: absolute;
