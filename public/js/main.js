@@ -29,6 +29,7 @@ function setActiveStep(step) {
     stepSelected = !stepSelected;
   } else {
     stepSelected = true;
+    clearFretboard();
     populateFretboard(step);
     step.style.background = '#D6D6D6';
     activeStep = step.dataset.stepnum;
@@ -113,7 +114,6 @@ function placeNotes(step, noteIds, trueFretnums) {
 }
 
 function populateFretboard(step) {
-  clearFretboard();
   toggleMode(step.dataset.mode);
   let noteIds = step.dataset.noteids.split(',');
   let fretnums, trueFretnums;
@@ -143,7 +143,7 @@ function clearFretboard() {
   }
 
   for (let nb = 0; nb < noteBubbles.length; nb++) {
-    noteBubbles[nb].remove();
+    noteBubbles[nb].style.display = 'none';
   }
 
   for (let n = 0; n < noteBubbles.length; n++) {
