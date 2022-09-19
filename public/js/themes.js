@@ -40,6 +40,12 @@ const themes = {
         bgColor: '#FFFFFF'
       },
       {
+        all: true,
+        class: 'ui-btn',
+        textColor: '#606060',
+        bgColor: '#D6D6D6'
+      },
+      {
         class: 'tablature',
         textColor: '#606060',
         bgColor: '#FFFFFF'
@@ -70,6 +76,12 @@ const themes = {
         bgColor: '#494949'
       },
       {
+        all: true,
+        class: 'ui-btn',
+        textColor: '#E2E2E2',
+        bgColor: 'linear-gradient(180deg, #616161 0%, #2E2E2E 100%)'
+      },
+      {
         class: 'tablature',
         textColor: '#E2E2E2',
         bgColor: '#212121'
@@ -89,9 +101,21 @@ const themes = {
         bgColor: '#3F3F3F'
       },
       {
+        all: true,
+        class: 'sequence-title',
+        textColor: '#E2E2E2',
+        bgColor: 'none'
+      },
+      {
         class: 'topbar',
         textColor: '#E2E2E2',
         bgColor: '#494949'
+      },
+      {
+        all: true,
+        class: 'ui-btn',
+        textColor: '#E2E2E2',
+        bgColor: 'linear-gradient(180deg, #616161 0%, #2E2E2E 100%)'
       },
       {
         class: 'tablature',
@@ -111,11 +135,12 @@ const themeSelect = document.getElementsByClassName('theme-select')[0];
 
 function changeTheme(option) {
   themes[option].changes.forEach(change => {
-    if (change.all != null) {
-      changeAll(change);
-    } else {
-      changeOne(change);
-    }
+    change.all ? changeAll(change) : changeOne(change);
+    // if (change.all != null) {
+    //   changeAll(change);
+    // } else {
+    //   changeOne(change);
+    // }
   });
   console.log(themes[option].changes[0]);
 }
