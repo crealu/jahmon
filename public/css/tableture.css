@@ -1,12 +1,12 @@
-/* tableture */
-.tableture {
+/* tablature */
+.tablature {
   top: 150px;
   left: 200px;
   width: calc(100vw - 200px);
   height: calc(100vh - 370px);
 }
 
-.tableture-top {
+.tablature-top {
   position: relative;
   left: 30px;
   width: calc(100vw - 330px);

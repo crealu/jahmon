@@ -40,7 +40,7 @@ const themes = {
         bgColor: '#FFFFFF'
       },
       {
-        class: 'tableture',
+        class: 'tablature',
         textColor: '#606060',
         bgColor: '#FFFFFF'
       },
@@ -70,7 +70,7 @@ const themes = {
         bgColor: '#494949'
       },
       {
-        class: 'tableture',
+        class: 'tablature',
         textColor: '#E2E2E2',
         bgColor: '#212121'
       },
@@ -94,7 +94,7 @@ const themes = {
         bgColor: '#494949'
       },
       {
-        class: 'tableture',
+        class: 'tablature',
         textColor: '#E2E2E2',
         bgColor: '#212121'
       },
