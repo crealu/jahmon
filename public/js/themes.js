@@ -51,6 +51,12 @@ const themes = {
         bgColor: '#FFFFFF'
       },
       {
+        all: true,
+        class: 'lib-chord',
+        textColor: '#606060',
+        bgColor: '#FFFFFF'
+      },
+      {
         class: 'library',
         textColor: '#606060',
         bgColor: '#FFFFFF'
@@ -87,6 +93,12 @@ const themes = {
         bgColor: '#212121'
       },
       {
+        all: true,
+        class: 'lib-chord',
+        textColor: '#E2E2E2',
+        bgColor: '#565656'
+      },
+      {
         class: 'library',
         textColor: '#E2E2E2',
         bgColor: '#494949'
@@ -121,6 +133,12 @@ const themes = {
         class: 'tablature',
         textColor: '#E2E2E2',
         bgColor: '#212121'
+      },
+      {
+        all: true,
+        class: 'lib-chord',
+        textColor: '#E2E2E2',
+        bgColor: '#565656'
       },
       {
         class: 'library',
