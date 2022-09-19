@@ -269,10 +269,50 @@
 		},
 		{
 			"name": "C7",
-			"noteids": ["s6f0","s5f1","s4f3","s3f2","s2f3"]},
+			"noteids": ["s6f0","s5f1","s4f3","s3f2","s2f3"]
+		},
 		{
 			"name": "C9",
 			"noteids": ["s6f3","s5f3","s4f3","s3f2","s2f3"]
+		},
+		{
+			"name": "C5",
+			"noteids": ["s4f5","s3f5","s2f3"]
+		},
+		{
+			"name": "C6add9",
+			"noteids": ["s6f3","s5f3","s4f2","s3f2","s2f3"]
+		},
+		{
+			"name": "C11",
+			"noteids": ["s6f1","s5f1","s4f3","s3f2","s2f3"]
+		},
+		{
+			"name": "C13",
+			"noteids": ["s6f5","s5f3","s4f3","s3f2","s2f3"]
+		},
+		{
+			"name": "Cadd9",
+			"noteids": ["s6f3","s5f3","s4f0","s3f2","s2f3"]
+		},
+		{
+			"name": "Cm9",
+			"noteids": ["s4f7","s3f8","s2f6","s1f8"]
+		},
+		{
+			"name": "C+",
+			"noteids": ["s6f0","s5f1","s4f1","s3f2","s2f3"]
+		},
+		{
+			"name": "C07",
+			"noteids": ["s5f4","s4f2","s3f4","s2f3"]
+		},
+		{
+			"name": "C0",
+			"noteids": ["s5f4","s4f5","s3f4","s2f3"]},
+		{
+			"name": "C#",
+			"noteids": ["s6f1","s5f2","s4f1","s3f3","s2f4"]
 		}
 	]
 }
