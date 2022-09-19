@@ -1,62 +1,137 @@
-const themes = [
-  {
-    name: 'skel',
-    sequence: {
-      textColor: '606060',
-      backgroundColor: 'FFFFFF',
-      selectedColor: 'D6D6D6'
-    }
-  },
-  {
-    name: 'dark',
-    sequence: {
-      textColor: 'E2E2E2',
-      backgroundColor: '3F3F3F',
-      selectedColor: '1E1E1E'
-    }
-  },
-  {
-    name: 'pastel'
-  }
-];
-
-// const themes = {
-//   skel: {
-//     changes: [
-//       {
-//         element: 'saved-sequences',
-//         color: ''
-//       }
-//     ]
+// const themes = [
+//   {
+//     name: 'skel',
 //     sequence: {
-//       textColor: '606060',
-//       backgroundColor: 'FFFFFF',
-//       selectedColor: 'D6D6D6'
+//       texttextColor: '606060',
+//       bgColor: 'FFFFFF',
+//       selectedtextColor: 'D6D6D6'
 //     }
 //   },
-//   dark: {
+//   {
+//     name: 'dark',
 //     sequence: {
-//       textColor: 'E2E2E2',
-//       backgroundColor: '3F3F3F',
-//       selectedColor: '1E1E1E'
+//       texttextColor: 'E2E2E2',
+//       bgColor: '3F3F3F',
+//       selectedtextColor: '1E1E1E'
 //     }
 //   },
-//   pastel: {
-//     sequence: {
-//       textColor: '606060',
-//       backgroundColor: 'FFFFFF',
-//       selectedColor: 'D6D6D6'
-//     }
+//   {
+//     name: 'pastel'
 //   }
-// }
+// ];
+
+const themes = {
+  skel: {
+    changes: [
+      {
+        class: 'sidebar',
+        textColor: '#606060',
+        bgColor: '#FFFFFF'
+      },
+      {
+        all: true,
+        class: 'sequence-title',
+        textColor: '#606060',
+        bgColor: '#FFFFFF'
+      },
+      {
+        class: 'topbar',
+        textColor: '#606060',
+        bgColor: '#FFFFFF'
+      },
+      {
+        class: 'tableture',
+        textColor: '#606060',
+        bgColor: '#FFFFFF'
+      },
+      {
+        class: 'library',
+        textColor: '#606060',
+        bgColor: '#FFFFFF'
+      }
+    ]
+  },
+  falcon: {
+    changes: [
+      {
+        class: 'sidebar',
+        textColor: '#E2E2E2',
+        bgColor: '#3F3F3F'
+      },
+      {
+        all: true,
+        class: 'sequence-title',
+        textColor: '#E2E2E2',
+        bgColor: 'none'
+      },
+      {
+        class: 'topbar',
+        textColor: '#E2E2E2',
+        bgColor: '#494949'
+      },
+      {
+        class: 'tableture',
+        textColor: '#E2E2E2',
+        bgColor: '#212121'
+      },
+      {
+        class: 'library',
+        textColor: '#E2E2E2',
+        bgColor: '#494949'
+      }
+    ]
+  },
+  pastel: {
+    changes: [
+      {
+        class: 'sidebar',
+        textColor: '#E2E2E2',
+        bgColor: '#3F3F3F'
+      },
+      {
+        class: 'topbar',
+        textColor: '#E2E2E2',
+        bgColor: '#494949'
+      },
+      {
+        class: 'tableture',
+        textColor: '#E2E2E2',
+        bgColor: '#212121'
+      },
+      {
+        class: 'library',
+        textColor: '#E2E2E2',
+        bgColor: '#494949'
+      }
+    ]
+  }
+}
 
 const themeSelect = document.getElementsByClassName('theme-select')[0];
 
 function changeTheme(option) {
-  for (theme in themes) {
+  themes[option].changes.forEach(change => {
+    if (change.all != null) {
+      changeAll(change);
+    } else {
+      changeOne(change);
+    }
+  });
+  console.log(themes[option].changes[0]);
+}
 
-    console.log(themes[theme]);
+function changeAll(theChange) {
+  let els = document.getElementsByClassName(theChange.class);
+  for (let e = 0; e < els.length; e++) {
+    els[e].style.color = theChange.textColor;
+    els[e].style.background = theChange.bgColor;
   }
+}
+
+function changeOne(theChange) {
+  let el = document.getElementsByClassName(theChange.class)[0];
+  el.style.color = theChange.textColor;
+  el.style.background = theChange.bgColor;
 }
 
 themeSelect.addEventListener('change', (e) => {
