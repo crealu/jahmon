@@ -1,25 +1,3 @@
-// const themes = [
-//   {
-//     name: 'skel',
-//     sequence: {
-//       texttextColor: '606060',
-//       bgColor: 'FFFFFF',
-//       selectedtextColor: 'D6D6D6'
-//     }
-//   },
-//   {
-//     name: 'dark',
-//     sequence: {
-//       texttextColor: 'E2E2E2',
-//       bgColor: '3F3F3F',
-//       selectedtextColor: '1E1E1E'
-//     }
-//   },
-//   {
-//     name: 'pastel'
-//   }
-// ];
-
 const themes = {
   skel: {
     changes: [
@@ -52,12 +30,18 @@ const themes = {
       },
       {
         all: true,
-        class: 'lib-chord',
+        class: 'fret-note',
+        textColor: 'none',
+        bgColor: 'black'
+      },
+      {
+        class: 'library',
         textColor: '#606060',
         bgColor: '#FFFFFF'
       },
       {
-        class: 'library',
+        all: true,
+        class: 'lib-chord',
         textColor: '#606060',
         bgColor: '#FFFFFF'
       }
@@ -94,14 +78,20 @@ const themes = {
       },
       {
         all: true,
-        class: 'lib-chord',
-        textColor: '#E2E2E2',
-        bgColor: '#565656'
+        class: 'fret-note',
+        textColor: 'none',
+        bgColor: '#ff4949'
       },
       {
         class: 'library',
         textColor: '#E2E2E2',
         bgColor: '#494949'
+      },
+      {
+        all: true,
+        class: 'lib-chord',
+        textColor: '#E2E2E2',
+        bgColor: '#565656'
       }
     ]
   },
