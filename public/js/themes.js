@@ -144,11 +144,6 @@ const themeSelect = document.getElementsByClassName('theme-select')[0];
 function changeTheme(option) {
   themes[option].changes.forEach(change => {
     change.all ? changeAll(change) : changeOne(change);
-    // if (change.all != null) {
-    //   changeAll(change);
-    // } else {
-    //   changeOne(change);
-    // }
   });
   console.log(themes[option].changes[0]);
 }

@@ -20,6 +20,37 @@ let activeStep = 0;
 let stepSelected = false;
 let isNew = true;
 
+let oneBeingMoved;
+
+function dragstartHandler(event) {
+  oneBeingMoved = event.target;
+  event.dataTransfer.dropEffect = 'move';
+  console.log(event.target);
+}
+
+function dragoverHandler(event) {
+  event.preventDefault();
+}
+
+function dropHandler(event) {
+  event.preventDefault();
+  let targetNum = event.target.dataset.stepnum;
+  if (oneBeingMoved.dataset.stepnum < targetNum) {
+    event.target.insertAdjacentElement('afterend', oneBeingMoved);
+  } else {
+    topbar.insertBefore(oneBeingMoved, event.target);
+  }
+  resetStepNumbers();
+}
+
+function resetStepNumbers() {
+  const steps = document.getElementsByClassName('seq-step');
+   for (let s = 1; s < steps.length; s++) {
+     steps[s].setAttribute('data-stepnum', s);
+     steps[s].addEventListener('dragstart', dragstartHandler);
+   }
+}
+
 function setActiveStep(step) {
   let steps = document.getElementsByClassName('seq-step');
   for (let s = 0; s < steps.length; s++) {
@@ -53,6 +84,7 @@ function setStepProps(step, data, num) {
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
+  step.addEventListener('dragstart', (e) => { dragstartHandler(e) });
 }
 
 function setStepPropsFromDB(step, data, num) {
@@ -63,6 +95,7 @@ function setStepPropsFromDB(step, data, num) {
   step.setAttribute('data-stepnum', num);
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
+  step.addEventListener('dragstart', (e) => { dragstartHandler(e) });
 }
 
 function updateSeqStep() {

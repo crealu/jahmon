@@ -2,35 +2,7 @@ const finishBtn = document.getElementsByClassName('finish-btn')[0];
 const clearSequenceBtn = document.getElementsByClassName('topbar-clear-btn')[0];
 const saveBtn = document.getElementsByClassName('topbar-save-btn')[0];
 
-let oneBeingMoved;
 
-function dragstartHandler(event) {
-  oneBeingMoved = event.target;
-  event.dataTransfer.dropEffect = 'move';
-}
-
-function dragoverHandler(event) {
-  event.preventDefault();
-}
-
-function dropHandler(event) {
-  event.preventDefault();
-  let targetNum = event.target.dataset.stepnum;
-  if (oneBeingMoved.dataset.stepnum < targetNum) {
-    event.target.insertAdjacentElement('afterend', oneBeingMoved);
-  } else {
-    topbar.insertBefore(oneBeingMoved, event.target);
-  }
-  resetStepNumbers();
-}
-
-function resetStepNumbers() {
-  const steps = document.getElementsByClassName('seq-step');
-   for (let s = 1; s < steps.length; s++) {
-     steps[s].setAttribute('data-stepnum', s);
-     steps[s].addEventListener('dragstart', dragstartHandler);
-   }
-}
 
 function finishSequence() {
   const steps = document.getElementsByClassName('seq-step');
