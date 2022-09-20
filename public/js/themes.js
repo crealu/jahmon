@@ -24,6 +24,12 @@ const themes = {
         bgColor: '#D6D6D6'
       },
       {
+        all: true,
+        class: 'seq-step',
+        textColor: '#606060',
+        bgColor: '#FFFFFF'
+      },
+      {
         class: 'tablature',
         textColor: '#606060',
         bgColor: '#FFFFFF'
@@ -59,6 +65,12 @@ const themes = {
         class: 'sequence-title',
         textColor: '#E2E2E2',
         bgColor: 'none'
+      },
+      {
+        all: true,
+        class: 'seq-step',
+        textColor: '#E2E2E2',
+        bgColor: '#565656'
       },
       {
         class: 'topbar',
@@ -118,6 +130,12 @@ const themes = {
         class: 'ui-btn',
         textColor: '#E2E2E2',
         bgColor: 'linear-gradient(180deg, #616161 0%, #2E2E2E 100%)'
+      },
+      {
+        all: true,
+        class: 'seq-step',
+        textColor: '#E2E2E2',
+        bgColor: '#494949'
       },
       {
         class: 'tablature',
