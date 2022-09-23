@@ -112,7 +112,7 @@ const themes = {
       {
         class: 'sidebar',
         textColor: '#E2E2E2',
-        bgColor: '#3F3F3F'
+        bgColor: '#FDACAC'
       },
       {
         all: true,
@@ -123,7 +123,7 @@ const themes = {
       {
         class: 'topbar',
         textColor: '#E2E2E2',
-        bgColor: '#494949'
+        bgColor: '#87F5B3'
       },
       {
         all: true,
@@ -140,7 +140,7 @@ const themes = {
       {
         class: 'tablature',
         textColor: '#E2E2E2',
-        bgColor: '#212121'
+        bgColor: '#F9F5A1'
       },
       {
         all: true,
@@ -151,7 +151,7 @@ const themes = {
       {
         class: 'library',
         textColor: '#E2E2E2',
-        bgColor: '#494949'
+        bgColor: '#D8B2EF'
       }
     ]
   }
