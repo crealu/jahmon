@@ -13,6 +13,7 @@ const cancelBtn = document.getElementsByClassName('cancel-btn')[0];
 const sidebarTabBtn = document.getElementsByClassName('tab-btn')[0];
 const settingsBtn = document.getElementsByClassName('settings-btn')[0];
 const closeModalBtn = document.getElementsByClassName('close-modal-btn')[0];
+const deleteBtn = document.getElementsByClassName('topbar-delete-btn')[0];
 
 let numSteps = 0;
 let mode = 'chord';
@@ -268,6 +269,12 @@ setBtn.addEventListener('click', () => {
   }
 });
 
+function deleteStep() {
+  const stepToDelete = document.getElementsByClassName('seq-step')[activeStep - 1];
+  topbar.removeChild(stepToDelete);
+  console.log(activeStep);
+}
+
 closeModalBtn.addEventListener('click', () => { toggleModal() });
 settingsBtn.addEventListener('click', () => { toggleModal() });
 sidebarTabBtn.addEventListener('click', () => { toggleSidebar() });
@@ -278,6 +285,7 @@ newSequence.addEventListener('click', () => { startNewSequence() });
 cancelBtn.addEventListener('click', () => {
   document.getElementsByClassName('save-form')[0].style.display = 'none';
 });
+deleteBtn.addEventListener('click', () => { deleteStep() });
 
 for (let z = 0; z < sequences.length; z++) {
   sequences[z].addEventListener('click', () => {
