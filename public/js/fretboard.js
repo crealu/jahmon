@@ -127,8 +127,9 @@ function resetFretBubbles() {
     noteBubbleFrets[n].removeEventListener('dragstart', dragstartNoteBubble);
     noteBubbleFrets[n].addEventListener('dragstart', dragFretBubble);
     noteBubbleFrets[n].addEventListener('dblclick', (e) => {
-      console.log(e.target.contenteditable, typeof(e.target.contenteditable));
-      e.target.setAttribute('contenteditable', 'true');
+      const wasEditable = e.target.getAttribute('contenteditable');
+      const isEditable = wasEditable == 'true' ? 'false' : 'true';
+      e.target.setAttribute('contenteditable', isEditable);
     });
     noteBubbleFrets[n].addEventListener('input', (e) => {
       const textLength = e.target.textContent.length;
