@@ -104,8 +104,9 @@ function dropNoteBubble(event) {
     movedNoteBubble.style.background = 'white';
     movedNoteBubble.style.color = 'var(--skel_text_color)';
     movedNoteBubble.classList.add('note-bubble-fret');
+    movedNoteBubble.setAttribute('contenteditable', 'false');
     event.target.appendChild(movedNoteBubble);
-    event.target.style.background = 'white';
+    event.target.style.background = 'none';
   }
 
   resetFretBubbles();
@@ -125,6 +126,17 @@ function resetFretBubbles() {
   for (let n = 0; n < noteBubbleFrets.length; n++) {
     noteBubbleFrets[n].removeEventListener('dragstart', dragstartNoteBubble);
     noteBubbleFrets[n].addEventListener('dragstart', dragFretBubble);
+    noteBubbleFrets[n].addEventListener('dblclick', (e) => {
+      console.log(e.target.contenteditable, typeof(e.target.contenteditable));
+      e.target.setAttribute('contenteditable', 'true');
+    });
+    noteBubbleFrets[n].addEventListener('input', (e) => {
+      const textLength = e.target.textContent.length;
+      if (textLength > 1) {
+        e.target.style.width = (textLength * 11) + 'px';
+      }
+      console.log(e.target.textContent.length);
+    })
   }
 }
 
@@ -141,8 +153,10 @@ function addRiffNumbers() {
     riffNumbers.appendChild(noteBubble);
   }
 
-  let trash = document.createElement('div');
+  let trash = document.createElement('img');
+  trash.src = 'img/trash-bin-dark.png';
   trash.classList.add('note-bubble');
+  trash.classList.add('trash-bin');
   trash.textContent = 'Trash';
   trash.addEventListener('dragover', dragoverNoteBubble);
   trash.addEventListener('drop', trashNoteBubble);

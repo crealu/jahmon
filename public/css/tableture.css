@@ -88,7 +88,7 @@
   border-left: 1px solid #8D8D8D;
   transition: 0.5s ease;
   z-index: 2;
-  opacity: 0.7;
+  opacity: 1.0;
 }
 
 .fret:hover {
@@ -126,6 +126,7 @@
   top: 300px;
   left: 30px;
   transition: 0.5s ease;
+  width: calc(100vw - 300px);
 }
 
 .add-to-lib-form {
@@ -173,6 +174,14 @@
   float: none;
   margin: 0 auto;
   top: 3px;
+}
+
+.trash-bin {
+  background: white;
+  width: 30px;
+  height: 30px;
+  top: -5px;
+  float: right;
 }
 
 .fret-circle {
