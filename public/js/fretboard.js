@@ -121,23 +121,26 @@ function trashNoteBubble(event) {
   }
 }
 
+function dblclickHandler(event) {
+  const wasEditable = event.target.getAttribute('contenteditable');
+  const isEditable = wasEditable == 'true' ? 'false' : 'true';
+  event.target.setAttribute('contenteditable', isEditable);
+}
+
+function fretInputHandler(event) {
+  const textLength = event.target.textContent.length;
+  if (textLength > 1) {
+    event.target.style.width = (textLength * 11) + 'px';
+  }
+}
+
 function resetFretBubbles() {
   let noteBubbleFrets = document.getElementsByClassName('note-bubble-fret');
   for (let n = 0; n < noteBubbleFrets.length; n++) {
     noteBubbleFrets[n].removeEventListener('dragstart', dragstartNoteBubble);
     noteBubbleFrets[n].addEventListener('dragstart', dragFretBubble);
-    noteBubbleFrets[n].addEventListener('dblclick', (e) => {
-      const wasEditable = e.target.getAttribute('contenteditable');
-      const isEditable = wasEditable == 'true' ? 'false' : 'true';
-      e.target.setAttribute('contenteditable', isEditable);
-    });
-    noteBubbleFrets[n].addEventListener('input', (e) => {
-      const textLength = e.target.textContent.length;
-      if (textLength > 1) {
-        e.target.style.width = (textLength * 11) + 'px';
-      }
-      console.log(e.target.textContent.length);
-    })
+    noteBubbleFrets[n].addEventListener('dblclick', dblclickHandler);
+    noteBubbleFrets[n].addEventListener('input', fretInputHandler);
   }
 }
 
