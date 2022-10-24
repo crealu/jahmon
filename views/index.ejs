@@ -27,12 +27,22 @@
     <div class="saved-sequences">
       <% if (data != undefined) { %>
         <% for (var i = 0; i < data.jahms.length; i++) { %>
+          <% var theNoteIds = ''; %>
+          <% var theStepNames = ''; %>
+          <% var theModes = ''; %>
+          <% var theFretNums = ''; %>
+          <% for (var j = 0; j < data.jahms[i].steps.length; j++) { %>
+            <% theNoteIds = theNoteIds + data.jahms[i].steps[j].noteids + '.'; %>
+            <% theStepNames = theStepNames + data.jahms[i].steps[j].title + '.'; %>
+            <% theModes = theModes + data.jahms[i].steps[j].mode + '.'; %>
+            <% theFretNums = theFretNums + data.jahms[i].steps[j].fretnums + '.'; %>
+          <% } %>
           <div
             class="sequence saved-sequence"
-            data-noteids="<%= data.jahms[i].noteids %>"
-            data-steps="<%= data.jahms[i].steps %>"
-            data-modes="<%= data.jahms[i].modes %>"
-            data-fretnums="<%= data.jahms[i].fretnums %>"
+            data-noteids="<%= theNoteIds %>"
+            data-steps="<%= theStepNames %>"
+            data-modes="<%= theModes %>"
+            data-fretnums="<%= theFretNums %>"
           >
             <p class="sequence-title"><%= data.jahms[i].title %></p>
           </div>

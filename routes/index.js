@@ -19,7 +19,6 @@ const library = [
 ];
 
 router.get('/', (req, res) => {
-  // res.render('formy.ejs', {data: 'hey'});
   client.db.collection('jahms')
     .find().toArray((err, result) => {
       res.render('index.ejs', {

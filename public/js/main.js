@@ -197,10 +197,10 @@ function populateSequence(sequence) {
   clearSequence();
   clearFretboard();
   isNew = false;
-  let noteids = sequence.dataset.noteids.split('.');
-  let steps = sequence.dataset.steps.split('.');
-  let fretnums = sequence.dataset.fretnums.split('.');
-  let modes = sequence.dataset.modes.split('.');
+  let noteids = sequence.dataset.noteids.split('.').filter(d => d != '');
+  let steps = sequence.dataset.steps.split('.').filter(d => d != '');
+  let fretnums = sequence.dataset.fretnums.split('.').filter(d => d != '');
+  let modes = sequence.dataset.modes.split('.').filter(d => d != '');
   currentTitle.textContent = sequence.children[0].textContent;
   numSteps = steps.length;
 

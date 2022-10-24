@@ -3,14 +3,35 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const client = mongoose.connection;
 
-// router.post('/save', (req, res) => {
-//   console.log(req.body);
-//   client.db.collection('/jahms')
-//     .insertOne(req.body, (err, result) => {
-//       if (err) { return console.log(err) }
-//       res.redirect('/');
-//     });
-// });
+function organizeData(reqBody) {
+  let stepsArray = [];
+  let steps = reqBody.steps.split('.');
+  let fretnums = reqBody.fretnums.split('.');
+  let noteids = reqBody.noteids.split('.');
+  let modes = reqBody.modes.split('.');
+  for (let i = 0; i < steps.length; i++) {
+    stepsArray.push({
+      title: steps[i],
+      mode: modes[i],
+      noteids: noteids[i],
+      fretnums: fretnums[i]
+    });
+  }
+  return {
+    title: reqBody.title,
+    steps: stepsArray
+  }
+}
+
+router.post('/save', (req, res) => {
+  console.log(req.body);
+  const sequence = organizeData(req.body)
+  client.db.collection('jahms')
+    .insertOne(sequence, (err, result) => {
+      if (err) { return console.log(err) }
+      res.redirect('/');
+    });
+});
 //
 // router.post('/update', (req, res) => {
 //   console.log(req.body);
@@ -21,41 +42,21 @@ const client = mongoose.connection;
 //   )
 //   res.redirect('/');
 // });
-function organizeData(reqBody) {
-  let stepsArray = [];
-  for (let i = 0; i < reqBody.step.length; i++) {
-    stepsArray.push({
-      title: reqBody.step[i],
-      noteids: reqBody.noteids[i],
-      mode: reqBody.mode[i],
-      fretnums: reqBody.fretnums[i]
-    });
-  }
-  return {
-    name: reqBody.name,
-    steps: stepsArray
-  }
-}
-
-router.post('/save', (req, res) => {
-  console.log(req.body);
-  const sequence = organizeData(req.body);
-  client.db.collection('formtest')
-    .insertOne(sequence, (err, result) => {
-      if (err) { return console.log(err) }
-      res.redirect('/');
-    });
-});
-
-// router.post('/update', (req, res) => {
-//   console.log(req.body);
-//   client.db.collection('jahms').findOneAndUpdate(
-//     { title: req.body.title },
-//     { $set: { steps: req.body.steps, noteids: req.body.noteids }},
-//     { sort: { _id: 1 }, upsert: true }
-//   )
-//   res.redirect('/');
-// });
+// function organizeData(reqBody) {
+//   let stepsArray = [];
+//   for (let i = 0; i < reqBody.step.length; i++) {
+//     stepsArray.push({
+//       title: reqBody.step[i],
+//       noteids: reqBody.noteids[i],
+//       mode: reqBody.mode[i],
+//       fretnums: reqBody.fretnums[i]
+//     });
+//   }
+//   return {
+//     name: reqBody.name,
+//     steps: stepsArray
+//   }
+// }
 
 // router.post('/update', (req, res) => {
 //   console.log('update called');
