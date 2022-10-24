@@ -2,8 +2,6 @@ const finishBtn = document.getElementsByClassName('finish-btn')[0];
 const clearSequenceBtn = document.getElementsByClassName('topbar-clear-btn')[0];
 const saveBtn = document.getElementsByClassName('topbar-save-btn')[0];
 
-
-
 function finishSequence() {
   const steps = document.getElementsByClassName('seq-step');
   let allIds = [];

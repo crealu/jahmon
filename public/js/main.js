@@ -76,6 +76,13 @@ function addSeqStep() {
   numSteps++;
 }
 
+function updateSeqStep() {
+  let step = document.getElementsByClassName('seq-step')[activeStep - 1];
+  let ids = collectNotes();
+  step.dataset.noteids = ids;
+  console.log(activeStep, ids);
+}
+
 function setStepProps(step, data, num) {
   step.classList.add('seq-step');
   step.setAttribute('data-mode', mode);
@@ -96,12 +103,6 @@ function setStepPropsFromDB(step, data, num) {
   step.setAttribute('draggable', 'true');
   step.addEventListener('click', () => { setActiveStep(step) });
   step.addEventListener('dragstart', (e) => { dragstartHandler(e) });
-}
-
-function updateSeqStep() {
-  let step = document.getElementsByClassName('seq-step')[activeStep - 1];
-  let ids = collectChordNotes([], []);
-  step.dataset.noteids = ids;
 }
 
 function collectNotes() {
@@ -165,7 +166,7 @@ function tabulateRiff(trueFretnums, n, fn) {
   noteBubble.classList.add('note-bubble-fret');
   noteBubble.setAttribute('draggable', 'true');
   noteBubble.addEventListener('dragstart', dragFretBubble);
-  noteBubble.textContent = trueFretnums[n];
+  noteBubble.textContent = trueFretnums[n] != null ? trueFretnums[n] : '';
   fretNotes[fn].parentElement.appendChild(noteBubble);
 }
 
