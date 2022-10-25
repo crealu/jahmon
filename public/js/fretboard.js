@@ -158,7 +158,7 @@ function addRiffNumbers() {
   }
 
   let trash = document.createElement('img');
-  trash.src = 'img/trash-bin-dark.png';
+  trash.src = 'img/icons/trash-bin-gray.png';
   trash.classList.add('note-bubble');
   trash.classList.add('trash-bin');
   trash.textContent = 'Trash';
