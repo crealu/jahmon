@@ -42,4 +42,12 @@ router.post('/update', (req, res) => {
   res.redirect('/');
 });
 
+router.post('/save-type', (req, res) => {
+  client.db.collection('tef')
+    .inserOne(req.body, (err, result) => {
+      if (err) { return console.log(err) }
+      res.redirect('/');
+    })
+})
+
 module.exports = router;
