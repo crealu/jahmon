@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "webpack serve --open --hot"
   },
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.6",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
@@ -26,14 +27,32 @@
     "mongoose": "^6.1.7",
     "nodemailer": "^6.7.2",
     "passport": "^0.5.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "redux": "^4.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/react": "^18.0.23",
+    "@types/react-dom": "^18.0.7",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
     "nodemon": "^2.0.6",
-    "typescript": "^4.8.4"
+    "regenerator-runtime": "^0.13.10",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.8.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
   },
   "bugs": {
     "url": "https://github.com/crealu/jahmon/issues"
-  },
-  "homepage": "https://github.com/crealu/jahmon#readme"
+  }
 }
