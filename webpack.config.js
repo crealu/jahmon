@@ -60,12 +60,12 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    port: 3700
-    // proxy: {
-    //   '/api/*': {
-    //     target: 'http://localhost:5500',
-    //     secure: false
-    //   }
-    // }
+    port: 3700,
+    proxy: {
+      '/save-*': {
+        target: 'http://localhost:3220',
+        secure: false
+      }
+    }
   }
 }

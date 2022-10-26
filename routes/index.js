@@ -4,12 +4,16 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
+const path = require('path');
 
 // const { handlePasswordReset, handleNewUser } = require('./email');
 const { ensureAuthenticated } = require('../config/auth');
 const User = require('../models/user');
 const router = express.Router();
 const client = mongoose.connection;
+const pathToBuild = path.join(__dirname, '../build');
+
+router.use(express.static(pathToBuild));
 
 const library = [
   {
@@ -19,16 +23,19 @@ const library = [
 ];
 
 router.get('/', (req, res) => {
-  client.db.collection('jahms')
-    .find().toArray((err, result) => {
-      res.render('index.ejs', {
-        data: {
-          jahms: result,
-          lib: library
-        }
-      });
-  });
+  res.sendFile('index.html', {root: './build'});
 });
+// router.get('/', (req, res) => {
+//   client.db.collection('jahms')
+//     .find().toArray((err, result) => {
+//       res.render('index.ejs', {
+//         data: {
+//           jahms: result,
+//           lib: library
+//         }
+//       });
+//   });
+// });
 
 let loginError = '';
 router.get('/signup', (req, res) => {

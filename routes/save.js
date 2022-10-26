@@ -43,11 +43,20 @@ router.post('/update', (req, res) => {
 });
 
 router.post('/save-type', (req, res) => {
+  console.log(req.body);
   client.db.collection('tef')
-    .inserOne(req.body, (err, result) => {
+    .insertOne(req.body, (err, result) => {
       if (err) { return console.log(err) }
       res.redirect('/');
     })
-})
+});
+
+router.get('/save-get-type', (req, res) => {
+  client.db.collection('tef')
+    .find().toArray((err, result) => {
+      console.log(result);
+      res.send(result);
+    })
+});
 
 module.exports = router;
