@@ -48,15 +48,22 @@ router.post('/save-type', (req, res) => {
     .insertOne(req.body, (err, result) => {
       if (err) { return console.log(err) }
       res.redirect('/');
+      // res.send(result);
     })
 });
 
 router.get('/save-get-type', (req, res) => {
   client.db.collection('tef')
     .find().toArray((err, result) => {
-      console.log(result);
       res.send(result);
     })
+});
+
+router.delete('/save-delete', (req, res) => {
+  client.db.collection('tef')
+    .deleteOne({name: {$eq: req.body.name}}, (err, result) => {
+      res.send(result);
+    });
 });
 
 module.exports = router;

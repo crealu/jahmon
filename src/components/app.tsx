@@ -26,18 +26,21 @@ export const App: React.FC = (): React.ReactElement => {
       .catch(err => { throw err });
   }
 
-  function deleteHandler() {
-    axios.get('/save-get-type')
-      .then(res => { setTheSaved(res.data) })
-      .catch(err => { throw err });
+  async function deleteHandler(idx) {
+    const nameToDelete = document.getElementsByClassName('saved')[idx].textContent;
+    console.log(nameToDelete)
+    const res = await axios.delete('/save-delete', { name: nameToDelete })
+      .then()
+      .catch();
+    console.log(res);
   }
 
   const returnSaved = () => {
-    return theSaved.map((s) => {
+    return theSaved.map((s, i) => {
       return (
         <div className="saved-wrapper">
           <div className="saved">{s.name}</div>
-          <span className="delete-btn" onClick={deleteHandler}>x</span>
+          <span className="delete-btn" onClick={() => { deleteHandler(i) }}>x</span>
         </div>
       )
     })
