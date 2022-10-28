@@ -13,8 +13,6 @@ const router = express.Router();
 const client = mongoose.connection;
 const pathToBuild = path.join(__dirname, '../build');
 
-router.use(express.static(pathToBuild));
-
 const library = [
   {
     name: 'A',
@@ -23,6 +21,7 @@ const library = [
 ];
 
 router.get('/ts', (req, res) => {
+  router.use(express.static(pathToBuild));
   res.sendFile('index.html', { root: './build' });
 });
 
