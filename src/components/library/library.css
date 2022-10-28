@@ -1,0 +1,5 @@
+.library {
+  position: relative;
+  height: 50vh;
+  border-left: 1px solid var(--dark-divider);
+}

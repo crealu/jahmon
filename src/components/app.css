@@ -1,5 +1,33 @@
-h1 {
-  color: red;
+@import url('https://fonts.googleapis.com/css?family=Nunito|Comfortaa&display=swap');
+
+:root {
+  --dark-bg: #2B2B2B;
+  --dark-divider: #606060;
+  --skel_text_color: #B7B7B7;
+  --skel_bg_color: #FFFFFF;
+  --skel_sel_color: #D6D6D6;
+}
+
+body {
+  overflow: hidden;
+  font-family: 'Comfortaa';
+  color: var(--skel_text_color);
+  margin: 0;
+  padding: 0px;
+  background: var(--dark-bg);
+}
+
+.jahmon-ui {
+  display: grid;
+  grid-template-columns: 70vw 30vw;
+}
+
+.section-title {
+  position: relative;
+  float: left;
+  margin: 10px 30px;
+  top: 15px;
+  font-size: 18px;
 }
 
 .saved-wrapper {

@@ -45,6 +45,14 @@ module.exports = {
             loader: 'css-loader',
           }
         ]
+      },
+      {
+        test: /\.(png|jpe?g)/,
+        use: [
+          {
+            loader: 'file-loader',
+          }
+        ]
       }
     ]
   },

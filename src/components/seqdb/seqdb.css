@@ -1,0 +1,32 @@
+.db-sequences {
+  position: relative;
+  height: 50vh;
+  border-left: 1px solid var(--dark-divider);
+  border-top: 1px solid var(--dark-divider);
+}
+
+.saved-sequences {
+  padding-top: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.db-sequence {
+  position: relative;
+  display: block;
+  padding: 10px 0px 10px 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.db-sequence:hover {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+.saved-sequences::-webkit-scrollbar {
+  width: 0 !important;
+}
