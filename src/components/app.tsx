@@ -11,7 +11,7 @@ import './app.css';
 export const App: React.FC = (): React.ReactElement => {
   const name = useAppSelector(sequenceName);
   const dispatch = useDispatch<AppDispatch>();
-  const [theSaved, setTheSaved] = useState([0, 0]);
+  const [theSaved, setTheSaved] = useState([]);
 
   const changeName = (e) => { dispatch(changeSequenceName(e.target.value)) }
 
@@ -26,12 +26,19 @@ export const App: React.FC = (): React.ReactElement => {
       .catch(err => { throw err });
   }
 
-  
+  function deleteHandler() {
+    axios.get('/save-get-type')
+      .then(res => { setTheSaved(res.data) })
+      .catch(err => { throw err });
+  }
 
   const returnSaved = () => {
     return theSaved.map((s) => {
       return (
-        <div>{s.name}</div>
+        <div className="saved-wrapper">
+          <div className="saved">{s.name}</div>
+          <span className="delete-btn" onClick={deleteHandler}>x</span>
+        </div>
       )
     })
   }

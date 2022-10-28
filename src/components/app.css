@@ -1,3 +1,24 @@
 h1 {
   color: red;
 }
+
+.saved-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.saved {
+  position: relative;
+  float: left;
+}
+
+.delete-btn {
+  position: relative;
+  float: right;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+  color: red;
+}

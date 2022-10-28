@@ -22,20 +22,21 @@ const library = [
   }
 ];
 
-router.get('/', (req, res) => {
-  res.sendFile('index.html', {root: './build'});
+router.get('/ts', (req, res) => {
+  res.sendFile('index.html', { root: './build' });
 });
-// router.get('/', (req, res) => {
-//   client.db.collection('jahms')
-//     .find().toArray((err, result) => {
-//       res.render('index.ejs', {
-//         data: {
-//           jahms: result,
-//           lib: library
-//         }
-//       });
-//   });
-// });
+
+router.get('/', (req, res) => {
+  client.db.collection('jahms')
+    .find().toArray((err, result) => {
+      res.render('index.ejs', {
+        data: {
+          jahms: result,
+          lib: library
+        }
+      });
+  });
+});
 
 let loginError = '';
 router.get('/signup', (req, res) => {
