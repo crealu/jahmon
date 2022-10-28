@@ -28,10 +28,8 @@ export const App: React.FC = (): React.ReactElement => {
 
   async function deleteHandler(idx) {
     const nameToDelete = document.getElementsByClassName('saved')[idx].textContent;
-    console.log(nameToDelete)
-    const res = await axios.delete('/save-delete', { name: nameToDelete })
-      .then()
-      .catch();
+    console.log(idx, nameToDelete)
+    const res = await axios.post('/save-delete', { name: nameToDelete }).then().catch();
     console.log(res);
   }
 

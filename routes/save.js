@@ -55,13 +55,14 @@ router.post('/save-type', (req, res) => {
 router.get('/save-get-type', (req, res) => {
   client.db.collection('tef')
     .find().toArray((err, result) => {
+      if (err) { return console.log(err) }
       res.send(result);
     })
 });
 
-router.delete('/save-delete', (req, res) => {
-  client.db.collection('tef')
-    .deleteOne({name: {$eq: req.body.name}}, (err, result) => {
+router.post('/save-delete', (req, res) => {
+  console.log(req.body);
+  client.db.collection('tef').deleteOne(req.body, (err, result) => {
       res.send(result);
     });
 });
