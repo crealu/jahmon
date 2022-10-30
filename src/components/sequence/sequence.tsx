@@ -18,7 +18,7 @@ export const Sequence: React.FC = (): React.ReactElement => {
       <div className="sequence-top">
         <SequenceTitle />
         <div className="sequence-btn-wrapper">
-          <img className="sequence-btn" src="img/icons/delete-btn-gray.png"/>
+          <img className="sequence-btn delete-btn" src="img/icons/delete-btn-gray.png"/>
           <img className="sequence-btn" src="img/icons/clear-btn-gray.png"/>
           <img className="sequence-btn" src="img/icons/save-btn-gray.png"/>
         </div>

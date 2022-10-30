@@ -38,9 +38,9 @@ export const Fretboard: React.FC = (): React.ReactElement => {
       <div className="fretboard-top">
         <h3 className="section-title">Fretboard</h3>
         <div className="sequence-btn-wrapper">
-          <img className="sequence-btn" src="../../../public/img/icons/delete-btn-gray.png"/>
-          <img className="sequence-btn" src="../public/img/icons/"/>
-          <img className="sequence-btn" src="../public/img/icons/"/>
+          <img className="sequence-btn delete-btn" src="img/icons/delete-btn-gray.png"/>
+          <img className="sequence-btn" src="img/icons/clear-btn-gray.png"/>
+          <img className="sequence-btn" src="img/icons/save-btn-gray.png"/>
         </div>
       </div>
       <TheFretboard />
