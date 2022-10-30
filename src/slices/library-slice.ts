@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 export interface LibraryState {
+  test: string;
   chords: any[];
 }
 
@@ -22,21 +23,21 @@ export const libraryInitialState: LibraryState = {
 		{
 			name: "Asus4",
 			noteids: ["s6f0","s5f3","s4f2","s3f2","s2f0"]
-		},
+		}
   ],
+  test: 'hey'
 };
 
 export const librarySlice = createSlice({
   initialState: libraryInitialState,
   name: 'library',
   reducers: {
-    changelibraryName(state, action: PayloadAction<string>) {
-      state.name = action.payload;
-      console.log('name was changed');
+    changeLibrary(state) {
+      console.log('hi');
     },
   }
 });
 
-export const { changelibraryName } = librarySlice.actions;
-export const libraryName = ({ library: { name }}: RootState): string => name;
+export const { changelibrary } = librarySlice.actions;
+export const libraryChords = ({ library: { chords }}: RootState): any[] => chords;
 export default librarySlice.reducer;
