@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { setCurrentSequence } from '../../slices/sequence-slice';
-
 import axios from 'axios';
 
 import './seqdb.css';
