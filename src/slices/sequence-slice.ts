@@ -2,13 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 export interface SequenceState {
-  name: string;
+  inputTest: string;
   steps: any[];
+  title: string;
 }
 
 export const sequenceInitialState: SequenceState = {
-  name: '',
+  inputTest: '',
   steps: [],
+  title: '',
 };
 
 export const sequenceSlice = createSlice({
@@ -16,12 +18,15 @@ export const sequenceSlice = createSlice({
   name: 'sequence',
   reducers: {
     changeSequenceName(state, action: PayloadAction<string>) {
-      state.name = action.payload;
-      console.log('name was changed');
+      state.inputTest = action.payload;
+    },
+    setCurrentSequence(state, action: PayloadAction<string>) {
+      state.title = action.payload;
     },
   }
 });
 
-export const { changeSequenceName } = sequenceSlice.actions;
-export const sequenceName = ({ sequence: { name }}: RootState): string => name;
+export const { changeSequenceName, setCurrentSequence } = sequenceSlice.actions;
+export const inputTest = ({ sequence: { inputTest }}: RootState): string => inputTest;
+export const currentTitle = ({ sequence: { title }}: RootState): string => title;
 export default sequenceSlice.reducer;

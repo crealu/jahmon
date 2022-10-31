@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
 import { useAppSelector } from '../hooks';
-import { sequenceName, changeSequenceName } from '../slices/sequence-slice';
+import { inputTest, changeSequenceName } from '../slices/sequence-slice';
 import axios from 'axios';
 
 import Sequence from './sequence/sequence';
@@ -15,7 +15,7 @@ import SequencesDB from './seqdb/seqdb';
 import './app.css';
 
 export const App: React.FC = (): React.ReactElement => {
-  const name = useAppSelector(sequenceName);
+  const name = useAppSelector(inputTest);
   const dispatch = useDispatch<AppDispatch>();
   const [theSaved, setTheSaved] = useState([]);
 

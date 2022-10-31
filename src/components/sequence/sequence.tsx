@@ -1,13 +1,17 @@
 import * as React from 'react';
 import './sequence.css';
+import { useState, useEffect } from 'react';
+import { useAppSelector } from '../../hooks';
+import { currentTitle } from '../../slices/sequence-slice';
 
 const SequenceTitle = () => {
+  const title = useAppSelector(currentTitle);
   return (
     <div
       className="section-title"
       data-isnew="new"
     >
-      untitled
+      {title == '' ? 'untitled' : title}
     </div>
   )
 }

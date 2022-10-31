@@ -1,11 +1,23 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { useAppSelector } from '../../hooks';
+import { setCurrentSequence } from '../../slices/sequence-slice';
+
 import axios from 'axios';
 
 import './seqdb.css';
 
 export const SequencesDB: React.FC = (): React.ReactElement => {
   const [sequences, setSequences] = useState([]);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const changeSequence = (e) => {
+    const currentSequence = e.target.textContent;
+    console.log(currentSequence);
+    dispatch(setCurrentSequence(currentSequence))
+  }
 
   useEffect(() => {
     axios.get('/save-get-type')
@@ -19,7 +31,7 @@ export const SequencesDB: React.FC = (): React.ReactElement => {
       <div class="saved-sequences">
         {sequences.map(sequence => {
           return (
-            <div className="db-sequence">
+            <div onClick={(e) => { changeSequence(e)}} className="db-sequence">
               {sequence.name}
             </div>
           )
