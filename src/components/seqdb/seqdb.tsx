@@ -12,17 +12,26 @@ export const SequencesDB: React.FC = (): React.ReactElement => {
   const [sequences, setSequences] = useState([]);
   const dispatch = useDispatch<AppDispatch>();
 
-  const changeSequence = (e) => {
-    const currentSequence = e.target.textContent;
-    console.log(currentSequence);
-    dispatch(setCurrentSequence(currentSequence))
+  const changeSequence = (e, steps) => {
+    const title = e.target.textContent;
+    console.log(title, steps);
+    dispatch(setCurrentSequence(
+      {
+        title: title,
+        steps: steps
+      }
+    ))
   }
 
-  useEffect(() => {
-    axios.get('/save-get-type')
+  function getHandler() {
+    axios.get('/save-g-jahms')
       .then(res => { setSequences(res.data) })
       .catch(err => { throw err });
-  }, [])
+  }
+
+  useEffect((sequences) => {
+    getHandler();
+  }, [sequences])
 
   return (
     <div className="db-sequences">
@@ -30,8 +39,11 @@ export const SequencesDB: React.FC = (): React.ReactElement => {
       <div class="saved-sequences">
         {sequences.map(sequence => {
           return (
-            <div onClick={(e) => { changeSequence(e)}} className="db-sequence">
-              {sequence.name}
+            <div
+              onClick={(e) => { changeSequence(e, sequence.steps)}}
+              className="db-sequence"
+            >
+              {sequence.title}
             </div>
           )
         })}
@@ -39,5 +51,8 @@ export const SequencesDB: React.FC = (): React.ReactElement => {
     </div>
   )
 }
+
+// <div>{sequence.name}</div>
+
 
 export default SequencesDB;

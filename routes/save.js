@@ -23,6 +23,23 @@ function organizeData(reqBody) {
   }
 }
 
+router.get('/save-g-jahms', (req, res) => {
+  client.db.collection('jahms')
+    .find().toArray((err, result) => {
+      if (err) { return console.log(err) }
+      res.send(result);
+    })
+});
+
+router.get('/save-get-type', (req, res) => {
+  client.db.collection('tef')
+    .find().toArray((err, result) => {
+      if (err) { return console.log(err) }
+      res.send(result);
+    })
+});
+
+
 router.post('/save', (req, res) => {
   const sequence = organizeData(req.body)
   client.db.collection('jahms')
@@ -49,14 +66,6 @@ router.post('/save-type', (req, res) => {
       if (err) { return console.log(err) }
       res.redirect('/');
       // res.send(result);
-    })
-});
-
-router.get('/save-get-type', (req, res) => {
-  client.db.collection('tef')
-    .find().toArray((err, result) => {
-      if (err) { return console.log(err) }
-      res.send(result);
     })
 });
 

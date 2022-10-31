@@ -2,10 +2,11 @@ import * as React from 'react';
 import './sequence.css';
 import { useState, useEffect } from 'react';
 import { useAppSelector } from '../../hooks';
-import { currentTitle } from '../../slices/sequence-slice';
+import { currentTitle, currentSeq } from '../../slices/sequence-slice';
 
 const SequenceTitle = () => {
   const title = useAppSelector(currentTitle);
+
   return (
     <div
       className="section-title"
@@ -17,6 +18,13 @@ const SequenceTitle = () => {
 }
 
 export const Sequence: React.FC = (): React.ReactElement => {
+  const seq = useAppSelector(currentSeq);
+  const [steps, setSteps] = useState(seq);
+
+  const printSteps = () => {
+    console.log(seq);
+  }
+
   return (
     <div className="sequence">
       <div className="sequence-top">
@@ -27,7 +35,20 @@ export const Sequence: React.FC = (): React.ReactElement => {
           <img className="sequence-btn" src="img/icons/save-btn-gray.png"/>
         </div>
       </div>
-      <div className="steps-wrapper"></div>
+      <div className="steps-wrapper">
+      {seq.map(step => {
+        return (
+            <div
+              className="seq-step"
+              dataset-noteids={step.noteids}
+              dataset-modes={step.modes}
+              dataset-fretnums={step.fretnums}
+            >
+              {step.title}
+            </div>
+          )
+      })}
+      </div>
     </div>
   )
 }

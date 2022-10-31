@@ -60,10 +60,12 @@
 
 
 
-.sequence-wrapper {
-  position: absolute;
-  left: 30px;
+.steps-wrapper {
+  position: relative;
+  padding-left: 30px;
   top: 45px;
+  width: calc(100% - 30px);
+  height: 60px;
 }
 
 .seq-step {
