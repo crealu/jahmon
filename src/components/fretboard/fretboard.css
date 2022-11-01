@@ -126,12 +126,32 @@
   text-align: center;
 }
 
-.riff-numbers {
-  opacity: 0;
-  top: 300px;
+.riff-numbers-wrapper {
+  position: relative;
   left: 30px;
+  width: 90%;
+  height: 40px;
+  margin-top: 10px;
+  opacity: 1;
   transition: 0.5s ease;
-  width: calc(100vw - 300px);
+}
+
+.riff-number {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  padding: 1px;
+  margin: 10px 10px 10px 0px;
+  border-radius: 50%;
+  color: var(--skel_text_color);
+  text-align: left;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  float: left;
+  cursor: pointer;
 }
 
 .add-to-lib-form {
@@ -157,23 +177,7 @@
   display: none;
 }
 
-.note-bubble {
-  position: relative;
-  width: 22px;
-  height: 22px;
-  padding: 1px;
-  margin: 10px 10px 10px 0px;
-  border-radius: 50%;
-  background: black;
-  color: white;
-  text-align: center;
-  z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  float: left;
-}
+
 
 .note-bubble-fret {
   float: none;

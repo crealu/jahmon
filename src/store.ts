@@ -3,11 +3,13 @@ import { AnyAction } from 'redux';
 
 import sequenceReducer, { sequenceInitialState } from './slices/sequence-slice';
 import libraryReducer, { libraryInitialState } from './slices/library-slice';
+import fretboardReducer, { fretboardInitialState } from './slices/fretboard-slice';
 
 const store = configureStore({
   reducer: {
     sequence: sequenceReducer,
-    library: libraryReducer
+    library: libraryReducer,
+    fretboard: fretboardReducer,
   }
 });
 
@@ -17,6 +19,7 @@ export type AppDispatch = typeof store.dispatch & ThunkDispatch<RootState, null,
 export const RootInitialState: RootState = {
   sequence: sequenceInitialState,
   library: libraryInitialState,
+  fretboard: fretboardInitialState,
 };
 
 export default store;

@@ -3,12 +3,18 @@ import './sequence.css';
 import { useState, useEffect } from 'react';
 import { useAppSelector } from '../../hooks';
 import { currentTitle, currentSeq } from '../../slices/sequence-slice';
+import { RootInitialState } from '../../store';
 
-const SequenceTitle = () => {
+const SequenceTitle: React.FC = (): React.ReactElement => {
   const title = useAppSelector(currentTitle);
+  const [seqState, setSeqState] = useState(RootInitialState.sequence);
 
   return (
-    <div className="section-title" data-isnew="new">
+    <div
+      className="section-title"
+      data-isnew="new"
+      onClick={() => {console.log(seqState)}}
+    >
       {title == '' ? 'untitled' : title}
     </div>
   )

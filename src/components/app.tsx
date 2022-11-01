@@ -1,11 +1,9 @@
 import * as React from 'react';
-
 import Sequence from './sequence/sequence';
 import Fretboard from './fretboard/fretboard';
 import Lyrics from './lyrics/lyrics';
 import Library from './library/library';
 import SequencesDB from './seqdb/seqdb';
-
 import './app.css';
 
 export const App: React.FC = (): React.ReactElement => {
@@ -23,3 +21,5 @@ export const App: React.FC = (): React.ReactElement => {
     </div>
   )
 }
+
+export default App;

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import './fretboard.css';
-import TheFretboard from './thefretboard';
-import Mode from './mode';
+
+import Frets from './frets/frets';
+import Mode from './mode/mode';
+import Riff from './riff/riff';
 
 export const Fretboard: React.FC = (): React.ReactElement => {
   return (
@@ -16,7 +18,8 @@ export const Fretboard: React.FC = (): React.ReactElement => {
         <Mode />
         <div className="seq-step-name"></div>
       </div>
-      <TheFretboard />
+      <Frets />
+      <Riff />
     </div>
   )
 }
