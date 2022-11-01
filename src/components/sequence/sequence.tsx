@@ -26,16 +26,20 @@ export const Sequence: React.FC = (): React.ReactElement => {
   const [activeStep, setActiveStep] = useState(0);
 
   function updateActiveStep(step, propers, idx) {
-    console.log(step);
-    let steps = document.getElementsByClassName('seq-step');
-    for (let s = 0; s < steps.length; s++) {
-      steps[s].style.background = 'none';
-    }
-    step.style.background = 'white';
+    restyleSteps(step);
     clearFretboard();
     populateFretboard(step, propers);
     setActiveStep(step.dataset.stepnum);
-    // activeStep = step.dataset.stepnum;
+  }
+
+  function restyleSteps(step) {
+    let steps = document.getElementsByClassName('seq-step');
+    for (let s = 0; s < steps.length; s++) {
+      steps[s].style.boxShadow = 'none';
+      steps[s].style.border = '1px solid var(--skel_text_color)';
+    }
+    step.style.boxShadow = '0px 0px 10px rgba(255, 255, 255, 0.7)';
+    step.style.border = '1px solid white';
   }
 
   function clearFretboard() {
@@ -56,7 +60,7 @@ export const Sequence: React.FC = (): React.ReactElement => {
   }
 
   function populateFretboard(step, propers) {
-    toggleMode(step.data.mode);
+    // toggleMode(step.dataset.mode);
     const noteIds = propers.noteids.split(',');
     let fretnums, trueFretnums;
 
@@ -84,32 +88,32 @@ export const Sequence: React.FC = (): React.ReactElement => {
     }
   }
 
-  function toggleMode(newMode) {
-    let riffNumbers = document.getElementsByClassName('riff-numbers')[0];
-    if (newMode == 'riff') {
-      setModeStyle('rgba(0, 0, 0, 0)', '0');
-      riffNumbers.style.opacity = '1';
-      chordBtn.style.background = 'var(--skel_sel_color)';
-      riffBtn.style.background = 'var(--skel_bg_color)';
-    } else if (newMode == 'chord') {
-      setModeStyle('lightgray', '1');
-      riffNumbers.style.opacity = '0';
-      chordBtn.style.background = 'var(--skel_bg_color)';
-      riffBtn.style.background = 'var(--skel_sel_color)';
-    }
-    mode = newMode;
-  }
-
-  function setModeStyle(fretBorder, circleOpacity) {
-    let frets = document.getElementsByClassName('fret');
-    let fretCircles = document.getElementsByClassName('fret-circle');
-    for (let f = 0; f < frets.length; f++) {
-      frets[f].style.borderLeft = '1px solid ' + fretBorder;
-    }
-    for (let fc = 0; fc < fretCircles.length; fc++) {
-      fretCircles[fc].style.opacity = circleOpacity;
-    }
-  }
+  // function toggleMode(newMode) {
+  //   let riffNumbers = document.getElementsByClassName('riff-numbers')[0];
+  //   if (newMode == 'riff') {
+  //     setModeStyle('rgba(0, 0, 0, 0)', '0');
+  //     riffNumbers.style.opacity = '1';
+  //     chordBtn.style.background = 'var(--skel_sel_color)';
+  //     riffBtn.style.background = 'var(--skel_bg_color)';
+  //   } else if (newMode == 'chord') {
+  //     setModeStyle('lightgray', '1');
+  //     riffNumbers.style.opacity = '0';
+  //     chordBtn.style.background = 'var(--skel_bg_color)';
+  //     riffBtn.style.background = 'var(--skel_sel_color)';
+  //   }
+  //   mode = newMode;
+  // }
+  //
+  // function setModeStyle(fretBorder, circleOpacity) {
+  //   let frets = document.getElementsByClassName('fret');
+  //   let fretCircles = document.getElementsByClassName('fret-circle');
+  //   for (let f = 0; f < frets.length; f++) {
+  //     frets[f].style.borderLeft = '1px solid ' + fretBorder;
+  //   }
+  //   for (let fc = 0; fc < fretCircles.length; fc++) {
+  //     fretCircles[fc].style.opacity = circleOpacity;
+  //   }
+  // }
 
   return (
     <div className="sequence">
