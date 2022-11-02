@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { setCurrentSequence } from '../../slices/sequence-slice';
+import { setActiveSequence } from '../../slices/sequence-slice';
 import axios from 'axios';
 
 import './seqdb.css';
@@ -15,7 +15,7 @@ export const SequencesDB: React.FC = (): React.ReactElement => {
   const changeSequence = (e, steps) => {
     const title = e.target.textContent;
     console.log(title, steps);
-    dispatch(setCurrentSequence(
+    dispatch(setActiveSequence(
       {
         title: title,
         steps: steps
