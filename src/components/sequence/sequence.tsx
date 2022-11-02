@@ -6,25 +6,15 @@ import Steps from './steps/steps';
 import Buttons from './buttons/buttons';
 import './sequence.css';
 
-const SequenceTitle: React.FC = (): React.ReactElement => {
+export const Sequence: React.FC = (): React.ReactElement => {
   const title = useAppSelector(currentTitle);
 
   return (
-    <div
-      className="section-title"
-      data-isnew="new"
-      onClick={() => {console.log(seqState)}}
-    >
-      {title == '' ? 'untitled' : title}
-    </div>
-  )
-}
-
-export const Sequence: React.FC = (): React.ReactElement => {
-  return (
     <div className="sequence">
       <div className="sequence-top">
-        <SequenceTitle />
+        <div className="section-title" contentEditable="true">
+          {title == '' ? 'untitled' : title}
+        </div>
         <Buttons />
       </div>
       <Steps />

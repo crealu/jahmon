@@ -1,11 +1,11 @@
 import * as React from 'react';
-import './lyrics.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { inputTest, changeSequenceName } from '../../slices/sequence-slice';
 import axios from 'axios';
+import './lyrics.css';
 
 export const Lyrics: React.FC = (): React.ReactElement => {
   const name = useAppSelector(inputTest);

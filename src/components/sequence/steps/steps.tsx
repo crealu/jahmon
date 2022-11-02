@@ -14,7 +14,8 @@ export const Steps: React.FC = (): React.ReactElement => {
   const activeStep = useAppSelector(theActiveStep);
   const mode = useAppSelector(theMode);
 
-  const updateActiveStep = (step, idx) => {
+  const updateActiveStep = (event) => {
+    const step = event.target;
     restyleSteps(step);
     clearFretboard();
     dispatch(setMode(step.dataset.mode));
@@ -52,12 +53,12 @@ export const Steps: React.FC = (): React.ReactElement => {
         return (
             <div
               className="seq-step"
-              data-test="test"
+              data-stepnum={i}
               data-noteids={step.noteids}
               data-mode={step.mode}
               data-fretnums={step.fretnums}
               draggable="true"
-              onClick={(e) => { updateActiveStep(e.target, i)}}
+              onClick={(e) => { updateActiveStep(e)}}
             >
               {step.title}
             </div>

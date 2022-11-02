@@ -11,3 +11,5 @@ export const clearFretboard = () => {
     fretNotes[fn].classList.remove('riff-note');
   }
 }
+
+export const refresh = () => { location.reload() }

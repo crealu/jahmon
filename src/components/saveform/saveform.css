@@ -1,0 +1,12 @@
+.save-form {
+  position: absolute;
+  display: none;
+  margin: 0 auto;
+  left: 0px;
+  right: 0px;
+  top: 150px;
+  width: calc(100vw - 300px);
+  height: calc(100vh - 300px);
+  background: white;
+  z-index: 100;
+}

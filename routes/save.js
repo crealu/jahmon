@@ -39,6 +39,25 @@ router.get('/save-get-type', (req, res) => {
     })
 });
 
+router.post('/save-seq', (req, res) => {
+  console.log(req.body);
+  client.db.collection('jahms')
+  .insertOne(req.body, (err, result) => {
+    if (err) { return console.log(err) }
+    res.redirect('/');
+  });
+});
+
+router.post('/save-update-seq', (req, res) => {
+  console.log(req.body);
+  client.db.collection('jahms')
+    .findOneAndUpdate(
+      { title: req.body.title },
+      { $set: { steps: req.body.steps }},
+      { sort: { _id: 1 }, upsert: true }
+    )
+  res.send('Save Successful');
+});
 
 router.post('/save', (req, res) => {
   const sequence = organizeData(req.body)

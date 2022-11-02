@@ -4,6 +4,7 @@ import Fretboard from './fretboard/fretboard';
 import Lyrics from './lyrics/lyrics';
 import Library from './library/library';
 import SequencesDB from './seqdb/seqdb';
+import SaveForm from './saveform/saveform';
 import './app.css';
 
 export const App: React.FC = (): React.ReactElement => {
@@ -18,6 +19,7 @@ export const App: React.FC = (): React.ReactElement => {
         <Library />
         <SequencesDB />
       </div>
+      <SaveForm />
     </div>
   )
 }

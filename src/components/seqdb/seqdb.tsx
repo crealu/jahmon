@@ -14,16 +14,12 @@ export const SequencesDB: React.FC = (): React.ReactElement => {
 
   const changeSequence = (e, steps) => {
     const title = e.target.textContent;
-    console.log(title, steps);
     dispatch(setActiveSequence(
-      {
-        title: title,
-        steps: steps
-      }
+      { title: title, steps: steps }
     ))
   }
 
-  function getHandler() {
+  const getHandler = () => {
     axios.get('/save-g-jahms')
       .then(res => { setSequences(res.data) })
       .catch(err => { throw err });

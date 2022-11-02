@@ -6,6 +6,8 @@ export interface SequenceState {
   steps: any[];
   title: string;
   activeStep: number;
+  save: boolean;
+  isNew: boolean;
 }
 
 export const sequenceInitialState: SequenceState = {
@@ -13,6 +15,8 @@ export const sequenceInitialState: SequenceState = {
   steps: [],
   title: '',
   activeStep: 0,
+  save: false,
+  isNew: false,
 };
 
 export const sequenceSlice = createSlice({
@@ -29,6 +33,18 @@ export const sequenceSlice = createSlice({
     setActiveStep(state, action: PayloadAction<number>) {
       state.activeStep = action.payload;
     },
+    removeStep(state) {
+      state.steps.splice(state.activeStep, 1);
+    },
+    clearSequence(state) {
+      state.steps = [];
+    },
+    toggleSave(state, action: PayloadAction<boolean>) {
+      state.save = action.payload;
+    },
+    setIsNew(state, action: Payload<boolean>) {
+      state.isNew = action.payload;
+    },
   }
 });
 
@@ -36,9 +52,16 @@ export const {
   changeSequenceName,
   setActiveSequence,
   setActiveStep,
+  removeStep,
+  clearSequence,
+  toggleSave,
  } = sequenceSlice.actions;
+
 export const inputTest = ({ sequence: { inputTest }}: RootState): string => inputTest;
 export const currentTitle = ({ sequence: { title }}: RootState): string => title;
 export const currentSeq = ({ sequence: { steps }}: RootState): any[] => steps;
 export const theActiveStep = ({ sequence: { activeStep }}: RootState): number => activeStep;
+export const isSaving = ({ sequence: { save }}: RootState): boolean => save;
+export const seqIsNew = ({ sequence: { isNew }}: RootState): boolean => isNew;
+
 export default sequenceSlice.reducer;
