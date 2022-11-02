@@ -16,21 +16,18 @@
   width: 20px;
 }
 
-.mode-toggle-btn {
+.mode-btn {
   padding: 3px 0px;
   cursor: pointer;
   transition: 0.25s ease;
   text-align: left;
-}
-
-.mode-toggle-btn:hover {
-  color: var(--skel_text_color);
-}
-
-.chord-btn {
-  color: var(--skel_text_color);
-}
-
-.riff-btn {
   color: #434343;
+}
+
+.mode-btn:hover {
+  color: var(--skel_text_color);
+}
+
+.active-mode {
+  color: var(--skel_text_color);
 }

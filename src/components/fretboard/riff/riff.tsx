@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { setMovedRiffNumber } from '../../../slices/fretboard-slice';
+import { setRiffen } from '../../../slices/fretboard-slice';
 import './riff.css';
 
 export const Riff = () => {
@@ -9,11 +9,9 @@ export const Riff = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const dragStartHandler = (event) => {
-    // event.preventDefault();
     const draggedNumber = event.target.cloneNode(true);
     event.dataTransfer.dropEffect = 'copy';
-    console.log('drag started with ' + event.target.textContent);
-    dispatch(setMovedRiffNumber(event.target.textContent));
+    dispatch(setRiffen(event.target.textContent));
   }
 
   const dragHandler = (event) => {

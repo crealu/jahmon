@@ -1,14 +1,39 @@
 import * as React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../store';
+import { theRiffen, setMode } from '../../../slices/fretboard-slice';
 import './mode.css';
 
 export const Mode = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const [activeMode, setActiveMode] = useState('chord');
+
+  const setFretboardMode = (event) => {
+    const mode = event.target.textContent.toLowerCase();
+    setActiveMode(mode)
+    dispatch(setMode(mode));
+  }
+
+  const checkMode = (mode) => { return activeMode == mode ? 'active-mode' : ''; }
+
   return (
     <div className="mode-wrapper">
       <p className="mode-title mode-toggle">Mode</p>
-      <img className="mode-trail mode-toggle" src="img/icons/mode-trail-chord.png"/>
-      <div className="mode-type-wrapper mode-toggle">
-        <div className="mode-toggle-btn chord-btn" onClick="">Chord</div>
-        <div className="mode-toggle-btn riff-btn">Riff</div>
+      <img className="mode-trail mode-toggle" src={`img/icons/mode-trail-${activeMode}.png`}/>
+      <div className="mode-btns mode-toggle">
+        <div
+          className={`mode-btn chord-btn ${checkMode('chord')}`}
+          onClick={(e) => setFretboardMode(e)}
+        >
+          Chord
+        </div>
+        <div
+          className={`mode-btn chord-btn ${checkMode('riff')}`}
+          onClick={(e) => setFretboardMode(e)}
+        >
+          Riff
+        </div>
       </div>
     </div>
   )

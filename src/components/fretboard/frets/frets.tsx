@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useState, useCallback } from 'react';
 import { useAppSelector } from '../../../hooks';
-import { moved } from '../../../slices/fretboard-slice';
+import { theRiffen, theMode } from '../../../slices/fretboard-slice';
 import './frets.css';
 
 export const Frets = () => {
   const strings = new Array(6).fill(0);
   const frets = new Array(22).fill(0);
-  const theMoved = useAppSelector(moved);
+  const riffen = useAppSelector(theRiffen);
+  const mode = useAppSelector(theMode);
 
   const returnStringClass = (sn) => {
     return `string-row ${ sn == 0 ? ' small-e-string' : sn == 5 ? ' big-e-string' : ''}`;
@@ -40,7 +41,7 @@ export const Frets = () => {
   }
 
   const updateFretNote = (fretNote) => {
-    fretNote.textContent = theMoved;
+    fretNote.textContent = riffen;
     fretNote.classList.add('riff-note');
     fretNote.draggable = 'true';
     fretNote.addEventListener('dragstart', (event) => {
@@ -66,7 +67,7 @@ export const Frets = () => {
             {frets.map((fret, fn) => {
               return (
                 <div
-                  className="fret"
+                  className={`fret fret-${mode}`}
                   onClick={(e) => placeNote(e)}
                   onDragOver={(e) => dragOverHandler(e)}
                   onDragLeave={(e) => dragLeaveHandler(e)}

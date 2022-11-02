@@ -37,7 +37,6 @@
   float: left;
   width: 100%;
   height: 30px;
-  border-left: 1px solid var(--dark-divider);
   transition: 0.5s ease;
   z-index: 2;
   opacity: 1.0;
@@ -47,6 +46,14 @@
   opacity: 0.7;
   background: lightgray;
   cursor: pointer;
+}
+
+.fret-chord {
+  border-left: 1px solid var(--dark-divider);
+}
+
+.fret-riff {
+  border-left: 1px solid rgba(0, 0, 0, 0);
 }
 
 .fret-note {
