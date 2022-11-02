@@ -119,6 +119,14 @@
   background: var(--skel_text_color);
 }
 
+.riff-note {
+  top: 4px;
+  display: block;
+  padding: 4px;
+  text-align: center;
+  background: var(--dark-bg);
+}
+
 .note-input {
   width: 100%;
   background: black;
