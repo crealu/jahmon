@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { setMovedRiffNumber } from '../../../slices/fretboard-slice';
-import '../fretboard.css';
+import './riff.css';
 
 export const Riff = () => {
   const numbers = new Array(17).fill(0).map((n, i) => { return i });

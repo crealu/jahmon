@@ -1,12 +1,36 @@
+.mode-title {
+  position: relative;
+  top: 15px;
+}
+
+.mode-toggle {
+  float: left;
+  margin-top: 8px;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.mode-trail {
+  position: relative;
+  top: 10px;
+  width: 20px;
+}
+
+.mode-toggle-btn {
+  padding: 3px 0px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-align: left;
+}
+
+.mode-toggle-btn:hover {
+  color: var(--skel_text_color);
+}
 
 .chord-btn {
-  border-top-left-radius: 6px 6px;
-  border-bottom-left-radius: 6px 6px;
-  background: white;
+  color: var(--skel_text_color);
 }
 
 .riff-btn {
-  border-top-right-radius: 6px 6px;
-  border-bottom-right-radius: 6px 6px;
-  background: var(--skel_sel_color);
+  color: #434343;
 }

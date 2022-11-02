@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../fretboard.css';
+import './mode.css';
 
 export const Mode = () => {
   return (

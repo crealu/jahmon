@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useCallback } from 'react';
 import { useAppSelector } from '../../../hooks';
 import { moved } from '../../../slices/fretboard-slice';
-import '../fretboard.css';
+import './frets.css';
 
 export const Frets = () => {
   const strings = new Array(6).fill(0);
