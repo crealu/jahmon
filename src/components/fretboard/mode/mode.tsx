@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { useAppSelector } from '../../../hooks';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { theRiffen, setMode } from '../../../slices/fretboard-slice';
+import { theRiffen, setMode, theMode } from '../../../slices/fretboard-slice';
 import './mode.css';
 
 export const Mode = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [activeMode, setActiveMode] = useState('chord');
+  const activeMode = useAppSelector(theMode);
 
   const setFretboardMode = (event) => {
     const mode = event.target.textContent.toLowerCase();
-    setActiveMode(mode)
     dispatch(setMode(mode));
   }
 

@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { currentSeq } from '../../../slices/sequence-slice';
+import { setMode } from '../../../slices/fretboard-slice';
 import '../sequence.css';
 
 export const Steps: React.FC = (): React.ReactElement => {
+  const dispatch = useDispatch<AppDispatch>();
   const seq = useAppSelector(currentSeq);
   const [steps, setSteps] = useState(seq);
   const [activeStep, setActiveStep] = useState(0);
@@ -12,9 +16,12 @@ export const Steps: React.FC = (): React.ReactElement => {
   function updateActiveStep(step, propers, idx) {
     restyleSteps(step);
     clearFretboard();
+    updateMode(propers.mode);
     populateFretboard(step, propers);
     setActiveStep(step.dataset.stepnum);
   }
+
+  const updateMode = (mode) => { dispatch(setMode(mode)) };
 
   function restyleSteps(step) {
     const steps = document.getElementsByClassName('seq-step');
@@ -59,6 +66,7 @@ export const Steps: React.FC = (): React.ReactElement => {
     }
   }
 
+
   // function toggleMode(newMode) {
   //   let riffNumbers = document.getElementsByClassName('riff-numbers')[0];
   //   if (newMode == 'riff') {
@@ -92,6 +100,7 @@ export const Steps: React.FC = (): React.ReactElement => {
         return (
             <div
               className="seq-step"
+              data-test="test"
               onClick={(e) => { updateActiveStep(e.target, {
                 noteids: step.noteids,
                 mode: step.mode,
