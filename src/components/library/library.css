@@ -1,5 +1,33 @@
 .library {
   position: relative;
+  width: 100%;
   height: 50vh;
   border-left: 1px solid var(--dark-divider);
+}
+
+.lib-chord-wrapper {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.lib-chord {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  left: 30px;
+  border-radius: 8px;
+  margin: 15px 20px 15px 0px;
+  text-align: center;
+  float: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  transition: 0.25s ease
+}
+
+.lib-chord:hover {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 }
