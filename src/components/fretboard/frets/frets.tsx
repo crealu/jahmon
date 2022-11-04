@@ -63,7 +63,7 @@ export const Frets = () => {
         return (
           <div className={returnStringClass(sn)}>
             <div className="string-div"></div>
-            <div className="fret-open" data-noteid={`s${sn + 1}f0`}></div>
+            <div className="fret-open" data-noteid={`s${6-sn}f0`}></div>
             {frets.map((fret, fn) => {
               return (
                 <div
@@ -73,7 +73,7 @@ export const Frets = () => {
                   onDragLeave={(e) => dragLeaveHandler(e)}
                   onDrop={(e) => dropHandler(e)}
                 >
-                  <div className="fret-note" data-noteid={`s${sn}f${fn}`}></div>
+                  <div className="fret-note" data-noteid={`s${6-sn}f${fn + 1}`}></div>
                 </div>
               )
             })}
