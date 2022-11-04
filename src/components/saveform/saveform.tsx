@@ -30,8 +30,8 @@ export const SaveForm = () => {
       {steps.map(step => {
         return <div>{step.title}</div>
       })}
-      <button onClick={() => saveSeqToDB}>Save</button>
-      <div onClick={() => hideForm} >X</div>
+      <button onClick={() => saveSeqToDB()}>Save</button>
+      <div onClick={() => hideForm()} >X</div>
     </div>
   )
 }

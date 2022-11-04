@@ -45,6 +45,9 @@ export const sequenceSlice = createSlice({
     setIsNew(state, action: Payload<boolean>) {
       state.isNew = action.payload;
     },
+    addStep(state, action: Payload<object>) {
+      state.steps = [...state.steps, action.payload];
+    },
   }
 });
 
@@ -55,6 +58,7 @@ export const {
   removeStep,
   clearSequence,
   toggleSave,
+  addStep,
  } = sequenceSlice.actions;
 
 export const inputTest = ({ sequence: { inputTest }}: RootState): string => inputTest;

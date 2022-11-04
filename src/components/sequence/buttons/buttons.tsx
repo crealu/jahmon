@@ -17,17 +17,17 @@ export const Buttons: React.FC = (): React.ReactElement => {
       <img
         className="sequence-btn delete-btn"
         src="img/icons/delete-btn-gray.png"
-        onClick={() => deleteStep}
+        onClick={() => deleteStep()}
       />
       <img
         className="sequence-btn"
         src="img/icons/clear-btn-gray.png"
-        onClick={() => clearSeq}
+        onClick={() => clearSeq()}
       />
       <img
         className="sequence-btn"
         src="img/icons/save-btn-gray.png"
-        onClick={() => saveSeq}
+        onClick={() => saveSeq()}
       />
     </div>
   )
