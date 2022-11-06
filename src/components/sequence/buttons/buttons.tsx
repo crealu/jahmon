@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../hooks';
 import { removeStep, clearSequence, toggleSave } from '../../../slices/sequence-slice';
 import '../sequence.css';
 
-export const Buttons: React.FC = (): React.ReactElement => {
+export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const deleteStep = () => { dispatch(removeStep()); }
   const clearSeq = () => { dispatch(clearSequence()) };

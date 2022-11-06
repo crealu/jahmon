@@ -5,7 +5,7 @@ import Mode from './mode/mode';
 import Riff from './riff/riff';
 import Buttons from './buttons/buttons';
 
-export const Fretboard: React.FC = (): React.ReactElement => {
+export const Fretboard: React.FC = () => {
   return (
     <div className="fretboard">
       <div className="fretboard-top">

@@ -7,7 +7,7 @@ import { setActiveSequence } from '../../slices/sequence-slice';
 import axios from 'axios';
 import './seqdb.css';
 
-export const SequencesDB: React.FC = (): React.ReactElement => {
+export const SequencesDB: React.FC = () => {
   const [sequences, setSequences] = useState([]);
   const dispatch = useDispatch<AppDispatch>();
 

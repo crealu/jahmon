@@ -10,7 +10,7 @@ import '../fretboard.css';
 import axios from 'axios';
 
 
-export const Buttons: React.FC = (): React.ReactElement => {
+export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const chord = useAppSelector(libChord);
 

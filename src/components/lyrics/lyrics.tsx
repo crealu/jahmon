@@ -6,11 +6,12 @@ import { useAppSelector } from '../../hooks';
 import { inputTest, changeSequenceName } from '../../slices/sequence-slice';
 import axios from 'axios';
 import './lyrics.css';
+import Line from './line/line';
 
 const canvas = document.createElement("canvas");
 const context = canvas.getContext("2d");
 
-export const Lyrics: React.FC = (): React.ReactElement => {
+export const Lyrics: React.FC = () => {
   const name = useAppSelector(inputTest);
   const dispatch = useDispatch<AppDispatch>();
   const [theSaved, setTheSaved] = useState([]);
@@ -50,7 +51,7 @@ export const Lyrics: React.FC = (): React.ReactElement => {
     return theSaved.map((s, i) => {
       return (
         <div className="lyric-wrapper">
-          <div className="lyric-line" style={{width: lineWidth + 'px'}}></div>
+          <Line width={lineWidth} />
           <input
             className="lyric-input"
             onChange={(e) => { changeName(e) }}
@@ -76,6 +77,7 @@ export const Lyrics: React.FC = (): React.ReactElement => {
 
 // <div className="saved">{s.name}</div>
 // <span className="delete-btn" onClick={(e) => { deleteHandler(e) }}>x</span>
+// <div className="lyric-line" style={{width: lineWidth + 'px'}}></div>
 
 // <div className="lyric-line" style={{width: lineWidth + 'px'}}></div>
 // <input className="lyric-input" onChange={(e) => { changeName(e) }}/>

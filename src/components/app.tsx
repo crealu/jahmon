@@ -7,7 +7,7 @@ import SequencesDB from './seqdb/seqdb';
 import SaveForm from './saveform/saveform';
 import './app.css';
 
-export const App: React.FC = (): React.ReactElement => {
+export const App: React.FC = () => {
   return (
     <div className="jahmon-ui">
       <div className="jahmon-ui-col">

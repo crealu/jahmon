@@ -6,7 +6,7 @@ import Steps from './steps/steps';
 import Buttons from './buttons/buttons';
 import './sequence.css';
 
-export const Sequence: React.FC = (): React.ReactElement => {
+export const Sequence: React.FC = () => {
   const title = useAppSelector(currentTitle);
 
   return (

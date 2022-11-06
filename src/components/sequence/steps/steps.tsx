@@ -9,7 +9,7 @@ import { libChord } from '../../../slices/library-slice';
 import { clearFretboard } from '../../../common/handlers';
 import '../sequence.css';
 
-export const Steps: React.FC = (): React.ReactElement => {
+export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const seq = useAppSelector(currentSeq);
   const activeStep = useAppSelector(theActiveStep);
