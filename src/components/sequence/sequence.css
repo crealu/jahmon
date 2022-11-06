@@ -69,10 +69,8 @@
   position: relative;
   width: var(--step-width);
   height: var(--step-height);
-  /* border-radius: 8px; */
   border: 1px solid var(--skel_text_color);
   background: none;
-  /* margin: 15px 0px 15px 0px; */
   text-align: center;
   float: left;
   cursor: pointer;

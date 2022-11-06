@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
-import { libraryChords, setGrabbed } from '../../slices/library-slice';
+import { libraryChords, setLibraryChords, setGrabbed } from '../../slices/library-slice';
 import { clearFretboard } from '../../common/handlers';
+import axios from 'axios';
 
 export const Library: React.FC = (): React.ReactElement => {
   const chords = useAppSelector(libraryChords);
   const dispatch = useDispatch<AppDispatch>();
-  
+
   const placeNotes = (event) => {
     clearFretboard();
     const noteIds = event.target.dataset.noteids.split(',');
@@ -44,8 +45,14 @@ export const Library: React.FC = (): React.ReactElement => {
     event.preventDefault();
   }
 
+  const getChords = () => {
+    axios.get('/save-get-lib')
+      .then(res => { dispatch(setLibraryChords(res.data)) })
+      .catch(err => { throw err });
+  }
+
   return (
-    <div className="library">
+    <div className="library" onClick={() => getChords()}>
       <h3 className="section-title">Library</h3>
       <div className="lib-chord-wrapper">
         {chords.map(chord => {
