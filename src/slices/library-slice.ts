@@ -4,6 +4,7 @@ import type { RootState } from '../store';
 export interface LibraryState {
   test: string;
   chords: any[];
+  grabbed: object;
 }
 
 export const libraryInitialState: LibraryState = {
@@ -25,7 +26,11 @@ export const libraryInitialState: LibraryState = {
 			noteids: ["s6f0","s5f3","s4f2","s3f2","s2f0"]
 		}
   ],
-  test: 'hey'
+  test: 'hey',
+  grabbed: {
+    name: '',
+    noteids: ''
+  }
 };
 
 export const librarySlice = createSlice({
@@ -35,9 +40,13 @@ export const librarySlice = createSlice({
     changeLibrary(state) {
       console.log('hi');
     },
+    setGrabbed(state,  action: PaloadAction<object>) {
+      state.grabbed = action.payload;
+    },
   }
 });
 
-export const { changelibrary } = librarySlice.actions;
+export const { changelibrary, setGrabbed } = librarySlice.actions;
 export const libraryChords = ({ library: { chords }}: RootState): any[] => chords;
+export const libChord = ({ library: { grabbed }}: RootState): object => grabbed;
 export default librarySlice.reducer;

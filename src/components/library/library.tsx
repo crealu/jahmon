@@ -1,14 +1,16 @@
 import * as React from 'react';
 import './library.css';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
-import { libraryChords } from '../../slices/library-slice';
+import { libraryChords, setGrabbed } from '../../slices/library-slice';
 import { clearFretboard } from '../../common/handlers';
 
 export const Library: React.FC = (): React.ReactElement => {
   const chords = useAppSelector(libraryChords);
-  // const [chords, setChords] = useState(theChords);
-
+  const dispatch = useDispatch<AppDispatch>();
+  
   const placeNotes = (event) => {
     clearFretboard();
     const noteIds = event.target.dataset.noteids.split(',');
@@ -26,6 +28,22 @@ export const Library: React.FC = (): React.ReactElement => {
     }
   }
 
+  const dragStartHandler = (event) => {
+    const draggedNumber = event.target.cloneNode(true);
+    event.dataTransfer.dropEffect = 'copy';
+    // console.log(event.target.data.name);
+    console.log(event.target.dataset.name);
+    const chord = {
+      name: event.target.dataset.name,
+      noteids: event.target.dataset.noteids
+    }
+    dispatch(setGrabbed(chord));
+  }
+
+  const dragHandler = (event) => {
+    event.preventDefault();
+  }
+
   return (
     <div className="library">
       <h3 className="section-title">Library</h3>
@@ -34,8 +52,12 @@ export const Library: React.FC = (): React.ReactElement => {
           return (
             <div
               className="lib-chord"
+              draggable="true"
+              data-name={chord.name}
               data-noteids={chord.noteids.join(',')}
               onClick={(e) => placeNotes(e)}
+              onDragStart={(e) => dragStartHandler(e)}
+              onDrag={(e) => dragHandler(e)}
             >
               {chord.name}
             </div>

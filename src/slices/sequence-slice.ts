@@ -48,6 +48,9 @@ export const sequenceSlice = createSlice({
     addStep(state, action: Payload<object>) {
       state.steps = [...state.steps, action.payload];
     },
+    addLibChord(state, action: Payload<object>) {
+      state.steps = [...state.steps, action.payload];
+    },
   }
 });
 
@@ -59,6 +62,7 @@ export const {
   clearSequence,
   toggleSave,
   addStep,
+  addLibChord
  } = sequenceSlice.actions;
 
 export const inputTest = ({ sequence: { inputTest }}: RootState): string => inputTest;

@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentSeq, theActiveStep, setActiveStep } from '../../../slices/sequence-slice';
+import { currentSeq, theActiveStep, setActiveStep, addLibChord } from '../../../slices/sequence-slice';
 import { theMode, setMode } from '../../../slices/fretboard-slice';
+import { libChord } from '../../../slices/library-slice';
 import { clearFretboard } from '../../../common/handlers';
 import '../sequence.css';
 
@@ -13,6 +14,7 @@ export const Steps: React.FC = (): React.ReactElement => {
   const seq = useAppSelector(currentSeq);
   const activeStep = useAppSelector(theActiveStep);
   const mode = useAppSelector(theMode);
+  const libraryChord = useAppSelector(libChord);
 
   const updateActiveStep = (event) => {
     const step = event.target;
@@ -47,8 +49,35 @@ export const Steps: React.FC = (): React.ReactElement => {
     }
   }
 
+  const dragOverHandler = (event) => {
+    event.preventDefault();
+    event.target.style.background = 'rgba(210, 100, 150, 0.4)';
+  }
+
+  const dragLeaveHandler = (event) => {
+    event.preventDefault();
+    event.target.style.background = 'none';
+  }
+
+  const dropHandler = (event) => {
+    event.preventDefault();
+    const newStep = {
+      title: libraryChord.name,
+      noteids: libraryChord.noteids,
+      mode: 'chord',
+      fretnums: ''
+    }
+    dispatch(addLibChord(newStep));
+    event.target.style.background = 'none';
+  }
+
   return (
-    <div className="steps-wrapper">
+    <div
+      className="steps-wrapper"
+      onDrop={(e) => dropHandler(e)}
+      onDragOver={(e) => dragOverHandler(e)}
+      onDragLeave={(e) => dragLeaveHandler(e)}
+    >
       {seq.map((step, i) => {
         return (
             <div
