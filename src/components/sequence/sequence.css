@@ -58,6 +58,11 @@
   height: var(--step-height);
   border-top: 1px solid var(--dark-divider);
   border-bottom: 1px solid var(--dark-divider);
+  overflow-x: scroll;
+}
+
+.steps-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .seq-step {
