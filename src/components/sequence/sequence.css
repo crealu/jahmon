@@ -1,4 +1,9 @@
 /* topbar */
+:root {
+  --step-width: 70px;
+  --step-height: 70px;
+}
+
 .sequence {
   top: 0px;
   left: 200px;
@@ -42,24 +47,27 @@
 }
 
 .delete-btn {
-  top: 13px;
+  top: 10px;
+  height: 8px;
 }
 
 .steps-wrapper {
   position: relative;
-  padding-left: 30px;
-  width: calc(100% - 30px);
-  height: 80px;
+  margin-left: 30px;
+  width: calc(100% - 80px);
+  height: var(--step-height);
+  border-top: 1px solid var(--dark-divider);
+  border-bottom: 1px solid var(--dark-divider);
 }
 
 .seq-step {
   position: relative;
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
+  width: var(--step-width);
+  height: var(--step-height);
+  /* border-radius: 8px; */
   border: 1px solid var(--skel_text_color);
   background: none;
-  margin: 15px 20px 15px 0px;
+  /* margin: 15px 0px 15px 0px; */
   text-align: center;
   float: left;
   cursor: pointer;
