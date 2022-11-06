@@ -1,4 +1,5 @@
-{"chords": [
+{
+	"chords": [
 		{
 			"name": "A",
 			"noteids": ["s6f0","s5f2","s4f2","s3f2","s2f0"]
@@ -309,7 +310,8 @@
 		},
 		{
 			"name": "C0",
-			"noteids": ["s5f4","s4f5","s3f4","s2f3"]},
+			"noteids": ["s5f4","s4f5","s3f4","s2f3"]
+		},
 		{
 			"name": "C#",
 			"noteids": ["s6f1","s5f2","s4f1","s3f3","s2f4"]
