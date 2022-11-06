@@ -3,11 +3,10 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep } from '../../../slices/sequence-slice';
+import { addStep, toggleSave } from '../../../slices/sequence-slice';
 import { libChord } from '../../../slices/library-slice';
 import { clearFretboard } from '../../../common/handlers';
 import '../fretboard.css';
-
 import axios from 'axios';
 
 
@@ -33,16 +32,7 @@ export const Buttons: React.FC = (): React.ReactElement => {
   }
 
   const clearFrets = () => { clearFretboard() };
-
-  const saveToLibrary = () => {
-    const data = {
-      name: libChord.name,
-      noteids: libChord.noteids,
-    };
-    axios.post('/save-lib', data)
-      .then(res => { console.log(res)})
-      .catch(err => { throw err });
-  }
+  const saveToLibrary = () => { dispatch(toggleSave(true)) };
 
   return (
     <div className="sequence-btn-wrapper">

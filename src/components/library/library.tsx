@@ -20,10 +20,6 @@ export const Library: React.FC = (): React.ReactElement => {
       for (let fn = 0; fn < fretNotes.length; fn++) {
         if (noteIds[n] == fretNotes[fn].dataset.noteid) {
           fretNotes[fn].style.display = 'block';
-          // if (mode == 'riff') {
-          //   const fretnums = step.dataset.fretnums.split(',');
-          //   const trueFretnums = fretnums.filter((fretnum) => fretnum != '');
-          // }
         }
       }
     }
@@ -46,14 +42,18 @@ export const Library: React.FC = (): React.ReactElement => {
   }
 
   const getChords = () => {
-    axios.get('/save-get-lib')
+    axios.get('/api-get-lib')
       .then(res => { dispatch(setLibraryChords(res.data)) })
       .catch(err => { throw err });
   }
 
+  useEffect(() => {
+    getChords();
+  }, [])
+
   return (
-    <div className="library" onClick={() => getChords()}>
-      <h3 className="section-title">Library</h3>
+    <div className="library" >
+      <h3 className="section-title" onClick={() => getChords()}>Library</h3>
       <div className="lib-chord-wrapper">
         {chords.map(chord => {
           return (

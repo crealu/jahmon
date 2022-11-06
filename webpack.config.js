@@ -70,7 +70,7 @@ module.exports = {
     hot: true,
     port: 3700,
     proxy: {
-      '/save-*': {
+      '/api-*': {
         target: 'http://localhost:3220',
         secure: false
       }

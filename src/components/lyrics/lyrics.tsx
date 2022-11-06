@@ -15,12 +15,12 @@ export const Lyrics: React.FC = (): React.ReactElement => {
   const changeName = (e) => { dispatch(changeSequenceName(e.target.value)) }
 
   async function postHandler() {
-    const res = await axios.post('/save-type', { name: name }).then().catch();
+    const res = await axios.post('/api-save-type', { name: name }).then().catch();
     console.log(res);
   }
 
   function getHandler() {
-    axios.get('/save-get-type')
+    axios.get('/api-get-type')
       .then(res => { setTheSaved(res.data) })
       .catch(err => { throw err });
   }
@@ -28,7 +28,7 @@ export const Lyrics: React.FC = (): React.ReactElement => {
   async function deleteHandler(idx) {
     const nameToDelete = document.getElementsByClassName('saved')[idx].textContent;
     console.log(idx, nameToDelete)
-    const res = await axios.post('/save-delete', { name: nameToDelete }).then().catch();
+    const res = await axios.post('/api-delete-type', { name: nameToDelete }).then().catch();
     console.log(res);
   }
 

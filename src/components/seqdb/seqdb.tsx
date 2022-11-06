@@ -5,7 +5,6 @@ import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { setActiveSequence } from '../../slices/sequence-slice';
 import axios from 'axios';
-
 import './seqdb.css';
 
 export const SequencesDB: React.FC = (): React.ReactElement => {
@@ -20,7 +19,7 @@ export const SequencesDB: React.FC = (): React.ReactElement => {
   }
 
   const getHandler = () => {
-    axios.get('/save-g-jahms')
+    axios.get('/api-save-g-jahms')
       .then(res => { setSequences(res.data) })
       .catch(err => { throw err });
   }

@@ -43,9 +43,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/', require('./routes/index'));
-app.use('/', require('./routes/save'));
+app.use('/', require('./routes/seq'));
 app.use('/', require('./routes/lib'));
-// app.use('/', require('./routes/fun'));
+app.use('/', require('./routes/lyrics'));
 app.use(cookieParser());
 
 app.listen(port, console.log('listening on ' + port));
