@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './fretboard.css';
-
 import Frets from './frets/frets';
 import Mode from './mode/mode';
 import Riff from './riff/riff';

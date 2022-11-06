@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { setRiffen } from '../../../slices/fretboard-slice';
+import { useAppSelector } from '../../../hooks';
+import { setRiffen, theMode } from '../../../slices/fretboard-slice';
 import './riff.css';
 
 export const Riff = () => {
-  const numbers = new Array(17).fill(0).map((n, i) => { return i });
   const dispatch = useDispatch<AppDispatch>();
+  const numbers = new Array(17).fill(0).map((n, i) => { return i });
+  const mode = useAppSelector(theMode);
 
   const dragStartHandler = (event) => {
     const draggedNumber = event.target.cloneNode(true);
@@ -19,7 +21,8 @@ export const Riff = () => {
   }
 
   return (
-    <div className="riff-numbers-wrapper">
+    <div className="riff-numbers-wrapper"
+      style={{opacity: mode == 'chord' ? '0' : '1'}}>
       {numbers.map(number => {
         return (
           <div
