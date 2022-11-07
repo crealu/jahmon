@@ -4,22 +4,25 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
 import { currentTitle, currentSeq, isSaving, seqIsNew, toggleSave } from '../../slices/sequence-slice';
+import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/handlers';
 import axios from 'axios';
 import './saveform.css';
 
 export const SaveForm = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const saving = useAppSelector(isSaving);
   const title = useAppSelector(currentTitle);
   const steps = useAppSelector(currentSeq);
+  const lyrics = useAppSelector(lyricLines);
+
+  const saving = useAppSelector(isSaving);
   const isNew = useAppSelector(seqIsNew);
   const [chordName, setChordName] = useState('');
 
   const saveData = () => { steps.length > 0 ? saveSequence() : saveChord() }
 
   const saveSequence = () => {
-    const data = { title: title, steps: steps }
+    const data = { title: title, steps: steps, lyrics: lyrics }
     const url = isNew ? '/api-save-seq' : '/api-update-seq';
     axios.post(url, data).then(res => { console.log(res)}).catch(err => { throw err });
   }
@@ -46,12 +49,24 @@ export const SaveForm = () => {
 
   return (
     <div className="save-form" style={{display: saving ? 'block' : 'none'}}>
-      <div>{title}</div>
-      {steps.map(step => {
-        return <div>{step.title}</div>
-      })}
-      <button onClick={() => saveData()}>Save</button>
-      <div onClick={() => hideForm()} >X</div>
+      <div className="form-view">
+        <div className="form-data form-label">Sequence:</div>
+        <div className="form-data">{title}</div>
+        <div className="form-data form-label">Steps</div>
+        <div className="form-data">
+          {steps.map(step => {
+            return <div>{step.title}</div>
+          })}
+        </div>
+        <div className="form-data form-label">Lyrics:</div>
+        <div className="form-data">
+          {lyrics.map(lyric => {
+            return <div>{lyric.text}</div>
+          })}
+        </div>
+      </div>
+      <button className="save-btn" onClick={() => saveData()}>Save</button>
+      <button className="cancel-btn" onClick={() => hideForm()}>Cancel</button>
       <input onInput={(e) => changeChordName(e)}/>
       <div>{chordName}</div>
     </div>

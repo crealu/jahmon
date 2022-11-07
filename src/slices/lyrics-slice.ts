@@ -18,7 +18,10 @@ export const lyricsSlice = createSlice({
     addLine(state, action: PayloadAction<any>) {
       state.lines = [...state.lines, action.payload]
     },
-    updateLines(state, action: PayloadAction<any>) {
+    updateLine(state, action: PayloadAction<string>) {
+      state.lines[state.activeLine].text = action.payload;
+    },
+    updateAllLines(state, action: PayloadAction<any>) {
       state.lines = action.payload;
     },
     activateLine(state, action: PayloadAction<number>) {
@@ -35,7 +38,8 @@ export const lyricsSlice = createSlice({
 
 export const {
   addLine,
-  updateLines,
+  updateLine,
+  updateAllLines,
   activateLine,
   addStepToPanel,
   updatePanelStep,

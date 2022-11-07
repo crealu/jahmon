@@ -60,6 +60,7 @@
   /* border-top: 1px solid var(--dark-divider); */
   overflow-x: scroll;
   background: rgba(0, 0, 0, 0.2);
+  overflow-y: hidden;
 }
 
 .steps-wrapper::-webkit-scrollbar {
@@ -89,7 +90,7 @@
 
 .active-step {
   border: 1px solid white;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.7);
 }
 
 .drop-zone {

@@ -28,6 +28,13 @@ body {
   margin: 10px 30px;
   top: 15px;
   font-size: 18px;
+  background:none;
+  color: var(--skel_text_color);
+  border: none;
+}
+
+.section-title:focus-visible {
+  outline: none;
 }
 
 .saved-wrapper {

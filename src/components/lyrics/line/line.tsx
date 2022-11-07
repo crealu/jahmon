@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord } from '../../../slices/library-slice';
-import { lyricLines, theActiveLine, activateLine } from '../../../slices/lyrics-slice';
+import { lyricLines, theActiveLine, activateLine, updateLine } from '../../../slices/lyrics-slice';
 import '../lyrics.css';
 
 type LineProps<any> = {
@@ -27,6 +27,7 @@ export const Line: React.FC<LineProps> = (props) => {
     const offset = textWidth / 1.5;
     e.target.style.width = textWidth + offset + 'px';
     setWidth(textWidth + offset);
+    dispatch(updateLine(e.target.value));
   }
 
   const setActive = (num) => { dispatch(activateLine(num)) }

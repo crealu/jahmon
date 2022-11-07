@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { inputTest, changeSequenceName } from '../../slices/sequence-slice';
-import { lyricLines, updateLines } from '../../slices/lyrics-slice';
+import { lyricLines, updateAllLines } from '../../slices/lyrics-slice';
 import axios from 'axios';
 import './lyrics.css';
 import Line from './line/line';
@@ -27,7 +27,7 @@ export const Lyrics: React.FC = () => {
         }]
       })
     });
-    dispatch(updateLines(theLines));
+    dispatch(updateAllLines(theLines));
   }
 
   const postHandler = async () => {

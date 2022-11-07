@@ -16,7 +16,7 @@ export const sequenceInitialState: SequenceState = {
   title: '',
   activeStep: 0,
   save: false,
-  isNew: false,
+  isNew: true,
 };
 
 export const sequenceSlice = createSlice({
@@ -29,6 +29,9 @@ export const sequenceSlice = createSlice({
     setActiveSequence(state, action: PayloadAction<object>) {
       state.title = action.payload.title;
       state.steps = action.payload.steps;
+    },
+    setCurrentTitle(state, action: PayloadAction<string>) {
+      state.title = action.payload;
     },
     setActiveStep(state, action: PayloadAction<number>) {
       state.activeStep = action.payload;
@@ -62,7 +65,8 @@ export const {
   clearSequence,
   toggleSave,
   addStep,
-  addLibChord
+  addLibChord,
+  setCurrentTitle,
  } = sequenceSlice.actions;
 
 export const inputTest = ({ sequence: { inputTest }}: RootState): string => inputTest;

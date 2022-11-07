@@ -9,4 +9,46 @@
   height: calc(100vh - 300px);
   background: white;
   z-index: 100;
+  color: black;
+}
+
+.form-view {
+  position: relative;
+  display: grid;
+  left: 0px;
+  right: 0px;
+  margin: 0 auto;
+  grid-template-columns: 30% 70%;
+  width: 700px;
+  padding-top: 30px;
+}
+
+.form-label {
+
+}
+
+.form-data {
+  padding: 20px;
+}
+
+.cancel-btn {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  padding: 8px 16px;
+  background: red;
+  color: white;
+  font-size: 20px;
+  border-radius: 8px;
+}
+
+.save-btn {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  padding: 8px 16px;
+  background: green;
+  color: white;
+  font-size: 20px;
+  border-radius: 8px;
 }
