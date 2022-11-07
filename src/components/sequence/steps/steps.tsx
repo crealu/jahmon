@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { currentSeq, theActiveStep, setActiveStep, addLibChord } from '../../../slices/sequence-slice';
 import { theMode, setMode } from '../../../slices/fretboard-slice';
-import { libChord } from '../../../slices/library-slice';
+import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard } from '../../../common/handlers';
 import '../sequence.css';
 
@@ -49,6 +49,16 @@ export const Steps: React.FC = () => {
     }
   }
 
+  const dragStartHandler = (event) => {
+    const draggedNumber = event.target.cloneNode(true);
+    event.dataTransfer.dropEffect = 'copy';
+    const chord = {
+      title: event.target.textContent,
+      noteids: event.target.dataset.noteids
+    }
+    dispatch(setGrabbed(chord));
+  }
+
   const dragOverHandler = (event) => {
     event.preventDefault();
     event.target.style.background = 'rgba(210, 100, 150, 0.4)';
@@ -61,13 +71,15 @@ export const Steps: React.FC = () => {
 
   const dropHandler = (event) => {
     event.preventDefault();
-    const newStep = {
-      title: libraryChord.name,
-      noteids: libraryChord.noteids,
-      mode: 'chord',
-      fretnums: ''
+    if (libraryChord.hasOwnProperty('name')) {
+      const newStep = {
+        title: libraryChord.name,
+        noteids: libraryChord.noteids,
+        mode: 'chord',
+        fretnums: ''
+      }
+      dispatch(addLibChord(newStep));
     }
-    dispatch(addLibChord(newStep));
     event.target.style.background = 'none';
   }
 
@@ -88,6 +100,7 @@ export const Steps: React.FC = () => {
               data-fretnums={step.fretnums}
               draggable="true"
               onClick={(e) => { updateActiveStep(e)}}
+              onDragStart={(e) => dragStartHandler(e)}
             >
               {step.title}
             </div>

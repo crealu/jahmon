@@ -15,7 +15,6 @@ export const Line: React.FC<LineProps> = (props) => {
   const { width } = props;
 
   const dragOverHandler = (event) => {
-    console.log(width);
     event.preventDefault();
     event.target.style.background = 'rgba(210, 100, 150, 0.4)';
   }
@@ -27,8 +26,12 @@ export const Line: React.FC<LineProps> = (props) => {
 
   const dropHandler = (event) => {
     event.preventDefault();
-    console.log(chord.title);
-    event.target.style.background = 'pink';
+    console.log(chord);
+    const inlineStep = document.createElement('p');
+    inlineStep.classList.add('line-step');
+    inlineStep.textContent = chord.title;
+    event.target.appendChild(inlineStep);
+    event.target.style.background = 'none';
   }
 
   return (

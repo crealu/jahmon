@@ -8,7 +8,7 @@ import { libraryChords, setLibraryChords, setGrabbed } from '../../slices/librar
 import { clearFretboard } from '../../common/handlers';
 import axios from 'axios';
 
-export const Library: React.FC = (): React.ReactElement => {
+export const Library: React.FC = () => {
   const chords = useAppSelector(libraryChords);
   const dispatch = useDispatch<AppDispatch>();
 

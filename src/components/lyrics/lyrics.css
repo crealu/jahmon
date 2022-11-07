@@ -21,6 +21,7 @@
 
 .lyric-line {
   height: 10px;
+  width: 100%;
 }
 
 .lyric-input {
@@ -32,14 +33,14 @@
   color: var(--skel_text_color);
 }
 
-/* input {
-  border: none;
-} */
-
 .lyric-input:focus-visible {
   outline: none;
 }
 
 .lyric-line:hover {
   background: black;
+}
+
+.line-step {
+  font-size: 16px;
 }

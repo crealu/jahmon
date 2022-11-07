@@ -16,7 +16,7 @@ export const Lyrics: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [theSaved, setTheSaved] = useState([]);
   const [lineWidth, setLineWidth] = useState(0);
-  const [currentBar, setCurrentBar] = useState(0);
+  const [currentBar, setCurrentBar] = useState(100);
 
   const changeName = (e) => {
     const textWidth = context.measureText(e.target.value).width;
