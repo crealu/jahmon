@@ -16,14 +16,26 @@ export const Lyrics: React.FC = () => {
   const lines = useAppSelector(lyricLines);
   const [lineWidth, setLineWidth] = useState(100);
 
+  const setLines = (data) => {
+    let theLines = [];
+    data.forEach(line => {
+      theLines.push({
+        text: line.name,
+        panel: [{
+          chord: '',
+          offset: ''
+        }]
+      })
+    });
+    dispatch(updateLines(theLines));
+  }
+
   const postHandler = async () => {
     const res = await axios.post('/api-save-type', { name: name }).then().catch();
   }
 
   const getHandler = () => {
-    axios.get('/api-get-type')
-      .then(res => { dispatch(updateLines(res.data)) })
-      .catch(err => { throw err });
+    axios.get('/api-get-type').then(res => { setLines(res.data) }).catch(err => { throw err });
   }
 
   useEffect(() => { getHandler() }, []);
@@ -35,11 +47,15 @@ export const Lyrics: React.FC = () => {
         {lines.map((s, i) => {
           return (
             <div className="lyric-wrapper">
-              <Panel width={lineWidth} />
+              <Panel
+                width={lineWidth}
+                steps={s.panel}
+               />
               <Line
                 width={lineWidth}
                 setWidth={setLineWidth}
-                text={s.name}
+                lineNum={i}
+                text={s.text}
               />
             </div>
           )
