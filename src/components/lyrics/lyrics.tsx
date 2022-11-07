@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { inputTest, changeSequenceName } from '../../slices/sequence-slice';
+import { lyricLines, updateLines } from '../../slices/lyrics-slice';
 import axios from 'axios';
 import './lyrics.css';
 import Line from './line/line';
@@ -12,11 +13,11 @@ const canvas = document.createElement("canvas");
 const context = canvas.getContext("2d");
 
 export const Lyrics: React.FC = () => {
-  const name = useAppSelector(inputTest);
   const dispatch = useDispatch<AppDispatch>();
-  const [theSaved, setTheSaved] = useState([]);
-  const [lineWidth, setLineWidth] = useState(0);
-  const [currentBar, setCurrentBar] = useState(100);
+  const name = useAppSelector(inputTest);
+  const lines = useAppSelector(lyricLines);
+  const [lineWidth, setLineWidth] = useState(100);
+  const [currentBar, setCurrentBar] = useState(0);
 
   const changeName = (e) => {
     const textWidth = context.measureText(e.target.value).width;
@@ -35,7 +36,7 @@ export const Lyrics: React.FC = () => {
 
   const getHandler = () => {
     axios.get('/api-get-type')
-      .then(res => { setTheSaved(res.data) })
+      .then(res => { dispatch(updateLines(res.data)) })
       .catch(err => { throw err });
   }
 
@@ -47,8 +48,12 @@ export const Lyrics: React.FC = () => {
     console.log(res);
   }
 
-  const returnSaved = () => {
-    return theSaved.map((s, i) => {
+  useEffect(() => {
+    getHandler();
+  }, []);
+
+  const returnLines = () => {
+    return lines.map((s, i) => {
       return (
         <div className="lyric-wrapper">
           <Line width={lineWidth} />
@@ -63,14 +68,10 @@ export const Lyrics: React.FC = () => {
     })
   }
 
-  useEffect((theSaved) => {
-    getHandler();
-  }, [theSaved]);
-
   return (
     <div className="lyrics">
       <h3 className="section-title">Lyrics</h3>
-      <div className="all-lyrics">{returnSaved()}</div>
+      <div className="all-lyrics">{returnLines()}</div>
     </div>
   )
 }

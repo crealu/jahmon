@@ -4,12 +4,14 @@ import { AnyAction } from 'redux';
 import sequenceReducer, { sequenceInitialState } from './slices/sequence-slice';
 import libraryReducer, { libraryInitialState } from './slices/library-slice';
 import fretboardReducer, { fretboardInitialState } from './slices/fretboard-slice';
+import lyricsReducer, { lyricsInitialState } from './slices/lyrics-slice';
 
 const store = configureStore({
   reducer: {
     sequence: sequenceReducer,
     library: libraryReducer,
     fretboard: fretboardReducer,
+    lyrics: lyricsReducer,
   }
 });
 
@@ -20,6 +22,7 @@ export const RootInitialState: RootState = {
   sequence: sequenceInitialState,
   library: libraryInitialState,
   fretboard: fretboardInitialState,
+  lyrics: lyricsInitialState,
 };
 
 export default store;
