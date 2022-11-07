@@ -8,40 +8,35 @@ import '../lyrics.css';
 
 type LineProps<any> = {
   width: number;
+  setWidth: any;
+  text: string;
 }
 
+const canvas = document.createElement("canvas");
+const context = canvas.getContext("2d");
+
 export const Line: React.FC<LineProps> = (props) => {
-  const chord = useAppSelector(libChord);
-  const { width } = props;
+  const [currentBar, setCurrentBar] = useState(0);
+  const { width, setWidth, text } = props;
 
-  const dragOverHandler = (event) => {
-    event.preventDefault();
-    event.target.style.background = 'rgba(210, 100, 150, 0.4)';
+  const changeName = (e) => {
+    const textWidth = context.measureText(e.target.value).width;
+    const factor = textWidth / 1.5;
+    e.target.style.width = textWidth + factor + 'px';
+    console.log(textWidth);
+    setWidth(textWidth + factor);
+    console.log(theSaved);
   }
 
-  const dragLeaveHandler = (event) => {
-    event.preventDefault();
-    event.target.style.background = 'none';
-  }
-
-  const dropHandler = (event) => {
-    event.preventDefault();
-    console.log(chord);
-    const inlineStep = document.createElement('p');
-    inlineStep.classList.add('line-step');
-    inlineStep.textContent = chord.title;
-    event.target.appendChild(inlineStep);
-    event.target.style.background = 'none';
-  }
+  const changeBar = (idx) => { setCurrentBar(idx) };
 
   return (
-    <div
+    <input
       className="lyric-line"
-      style={{width: width + 'px'}}
-      onDrop={(e) => dropHandler(e)}
-      onDragOver={(e) => dragOverHandler(e)}
-      onDragLeave={(e) => dragLeaveHandler(e)}
-    ></div>
+      onChange={(e) => { changeName(e) }}
+      onClick={(e) => { changeBar(i) }}
+      placeholder={text}
+    />
   )
 }
 

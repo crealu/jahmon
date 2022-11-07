@@ -19,28 +19,33 @@
   margin: 4px 0px;
 }
 
-.lyric-line {
+.lyric-panel {
   height: 10px;
   width: 100%;
 }
 
-.lyric-input {
+.lyric-panel:hover {
+  background: black;
+}
+
+.lyric-line {
   padding: 4px 0px 4px 0px;
-  background: none;
   border: none;
   border-bottom: 1px solid var(--skel_text_color);
   caret-color: var(--skel_text_color);
   color: var(--skel_text_color);
+  background: none;
+  font-size: 16px;
 }
 
-.lyric-input:focus-visible {
+.lyric-line:focus-visible {
   outline: none;
 }
 
-.lyric-line:hover {
-  background: black;
-}
-
-.line-step {
-  font-size: 16px;
+.panel-step {
+  position: relative;
+  display: inline-block;
+  margin: 0px;
+  font-size: 14px;
+  color: #03a9f4;
 }
