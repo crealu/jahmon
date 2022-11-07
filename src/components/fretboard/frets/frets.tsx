@@ -63,7 +63,9 @@ export const Frets = () => {
         return (
           <div className={returnStringClass(sn)}>
             <div className="string-div"></div>
-            <div className="fret-open" data-noteid={`s${6-sn}f0`}></div>
+            <div className="fret fret-open" onClick={(e) => placeNote(e)}>
+              <div className="fret-note" data-noteid={`s${6-sn}f0`}></div>
+            </div>
             {frets.map((fret, fn) => {
               return (
                 <div
