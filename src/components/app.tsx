@@ -11,8 +11,8 @@ export const App: React.FC = () => {
   return (
     <div className="jahmon-ui">
       <div className="jahmon-ui-col">
-        <Sequence />
         <Fretboard />
+        <Sequence />
         <Lyrics />
       </div>
       <div className="jahmon-ui-col">

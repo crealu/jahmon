@@ -1,5 +1,8 @@
 .fretboard {
-    margin: 30px 0px 50px 0px;}
+  padding-bottom: 30px;
+  margin: 10px 0px 10px 0px;
+  border-bottom: 1px solid var(--dark-divider);
+}
 
 .fretboard-top {
   height: 60px;
