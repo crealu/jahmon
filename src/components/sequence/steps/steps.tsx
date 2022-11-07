@@ -80,7 +80,7 @@ export const Steps: React.FC = () => {
       }
       dispatch(addLibChord(newStep));
     }
-    event.target.style.background = 'none';
+    event.target.style.background = 'rgba(0, 0, 0, 0.2)';
   }
 
   return (
