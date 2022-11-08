@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { setActiveSequence } from '../../slices/sequence-slice';
+import { setActiveSequence, setIsNew } from '../../slices/sequence-slice';
 import { updateAllLines } from '../../slices/lyrics-slice';
 import axios from 'axios';
 import './seqdb.css';
@@ -17,8 +17,8 @@ export const SequencesDB: React.FC = () => {
     dispatch(setActiveSequence(
       { title: title, steps: steps }
     ));
-    console.log(lyrics);
     dispatch(updateAllLines(lyrics));
+    dispatch(setIsNew(false));
   }
 
   const getHandler = () => {
