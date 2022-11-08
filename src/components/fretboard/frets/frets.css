@@ -30,6 +30,14 @@
   border-bottom: 1px solid var(--dark-divider);
 }
 
+.small-e-riff {
+  border-top: 1px solid rgba(0, 0, 0, 0);
+}
+
+.big-e-riff {
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+
 .fret {
   position: relative;
   display: inline-block;

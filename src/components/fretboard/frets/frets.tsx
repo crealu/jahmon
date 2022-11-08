@@ -11,7 +11,9 @@ export const Frets = () => {
   const mode = useAppSelector(theMode);
 
   const returnStringClass = (sn) => {
-    return `string-row ${ sn == 0 ? ' small-e-string' : sn == 5 ? ' big-e-string' : ''}`;
+    return mode == 'chord'
+      ? `string-row ${sn == 0 ? ' small-e-string' : sn == 5 ? ' big-e-string' : ''}`
+      : `string-row ${sn == 0 ? ' small-e-riff' : sn == 5 ? ' big-e-riff' : ''}`
   };
 
   const toggleNote = (element) => {
@@ -101,7 +103,7 @@ export const Frets = () => {
               return (
                 <div
                   className={`fret fret-${mode}`}
-                  onClick={(e) => placeNote(e)}
+                  onClick={mode == 'chord' ? (e) => placeNote(e) : null}
                   onDragOver={(e) => dragOverHandler(e)}
                   onDragLeave={(e) => dragLeaveHandler(e)}
                   onDrop={(e) => dropHandler(e)}

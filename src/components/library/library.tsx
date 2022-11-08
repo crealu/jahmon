@@ -47,9 +47,9 @@ export const Library: React.FC = () => {
       .catch(err => { throw err });
   }
 
-  useEffect(() => {
-    getChords();
-  }, [])
+  // useEffect(() => {
+  //   getChords();
+  // }, [])
 
   return (
     <div className="library" >

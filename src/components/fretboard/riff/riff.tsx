@@ -26,7 +26,7 @@ export const Riff = () => {
       {numbers.map(number => {
         return (
           <div
-            className="riff-number"
+            className={`riff-number ${number == 0 ? 'riff-number-0' : ''}`}
             draggable="true"
             onDragStart={(e) => dragStartHandler(e)}
             onDrag={(e) => dragHandler(e)}
