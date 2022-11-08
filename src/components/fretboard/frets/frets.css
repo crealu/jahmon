@@ -74,3 +74,27 @@
 .fret-open {
   background: var(--skel_text_color);
 }
+
+.fret-circle {
+  position: absolute;
+  display: block;
+  top: -8px;
+  width: 18px;
+  height: 18px;
+  margin: 0 auto;
+  left: 0px;
+  right: 0px;
+  background: #434343;
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 1;
+  transition: 0.5s ease;
+}
+
+.fret-circle-12_1 {
+  top: -38px;
+}
+
+.fret-circle-12_2 {
+  top: 22px;
+}

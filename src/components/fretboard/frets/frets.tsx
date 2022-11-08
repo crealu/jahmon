@@ -14,12 +14,18 @@ export const Frets = () => {
     return `string-row ${ sn == 0 ? ' small-e-string' : sn == 5 ? ' big-e-string' : ''}`;
   };
 
-  const toggleNote = (el) => {
-    el.style.display = el.style.display == 'block' ? 'none' : 'block';
-  };
+  const toggleNote = (element) => {
+    element.style.display = element.style.display == 'block' ? 'none' : 'block';
+  }
 
   const placeNote = (e) => {
-    e.target.children[0] ? toggleNote(e.target.children[0]) : toggleNote(e.target);
+    if (e.target.children[0]) {
+      toggleNote(e.target.children[0]);
+    } else if (e.target.classList[0] == 'fret-circle') {
+        toggleNote(e.target.previousSibling);
+    } else {
+      toggleNote(e.target);
+    }
   };
 
   const dragOverHandler = (event) => {
@@ -37,6 +43,7 @@ export const Frets = () => {
   const dragStartHandlerFret = (event) => {
     // event.target.textContent = '';
     event.dataTransfer.dropEffect = 'move';
+    event.target.background = 'red';
     console.log(event.target);
   }
 
@@ -55,6 +62,30 @@ export const Frets = () => {
     event.target.style.background = 'none';
     console.dir(event.target.children[0]);
     console.log('dropped');
+  }
+
+  const checkNoteID = (noteID) => {
+    const markedFrets = ['3', '5', '7', '9', '12', '15', '17'];
+    return markedFrets.some(num => {
+      return noteID.includes('s3f' + num) ? true : false;
+    });
+  }
+
+  const addFretDetails = (noteID) => {
+    if (checkNoteID(noteID)) {
+      if (noteID == 's3f12') {
+        for (let f = 1; f < 3; f++) {
+          return (
+            <div>
+              <div className={`fret-circle-12_1 fret-circle`}></div>
+              <div className={`fret-circle-12_2 fret-circle`}></div>
+            </div>
+          )
+        }
+      } else {
+        return <div className="fret-circle"></div>
+      }
+    }
   }
 
   return (
@@ -76,6 +107,7 @@ export const Frets = () => {
                   onDrop={(e) => dropHandler(e)}
                 >
                   <div className="fret-note" data-noteid={`s${6-sn}f${fn + 1}`}></div>
+                  {mode == 'chord' ? addFretDetails(`s${6-sn}f${fn + 1}`) : ''}
                 </div>
               )
             })}

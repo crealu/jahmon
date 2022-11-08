@@ -41,28 +41,4 @@ export const Lyrics: React.FC = () => {
   )
 }
 
-
-// {returnLines()}
-//
-// async function deleteHandler(event) {
-//   // const nameToDelete = document.getElementsByClassName('saved')[idx].textContent;
-//   const nameToDelete = event.target.prevSibling.textContent;
-//   console.log(nameToDelete)
-//   const res = await axios.post('/api-delete-type', { name: nameToDelete }).then().catch();
-//   console.log(res);
-// }
-
-// <div className="saved">{s.name}</div>
-// <span className="delete-btn" onClick={(e) => { deleteHandler(e) }}>x</span>
-// <div className="lyric-line" style={{width: lineWidth + 'px'}}></div>
-
-// <div className="lyric-line" style={{width: lineWidth + 'px'}}></div>
-// <input className="lyric-input" onChange={(e) => { changeName(e) }}/>
-// <div style={{display: 'none', position: 'absolute', bottom: '100px'}}>
-//   <p>{name}</p>
-//   <input onChange={(e) => { changeName(e) }}/>
-//   <button onClick={postHandler}>Post</button>
-//   <div>{returnSaved()}</div>
-// </div>
-
 export default Lyrics;
