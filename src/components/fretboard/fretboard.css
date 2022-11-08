@@ -1,10 +1,10 @@
 .fretboard {
-  padding-bottom: 30px;
-  margin: 10px 0px 10px 0px;
+  margin: 20px 0px 20px 0px;
 }
 
 .fretboard-top {
-  height: 60px;
+  margin: 0px 50px 0px 30px;
+  height: 50px;
 }
 
 .toggle-mode-btn:hover {
@@ -14,74 +14,6 @@
 .action-btn {
   display: inline-block;
   margin: 8px 10px;
-}
-
-.the-fretboard {
-  position: relative;
-  margin: 20px 0px 0px 30px;
-  width: calc(100% - 80px);
-}
-
-.string-row {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(23, calc(100% / 23));
-  width: 100%;
-  height: 30px;
-}
-
-.small-e-string {
-  border-top: 1px solid var(--dark-divider);
-}
-
-.big-e-string {
-  border-bottom: 1px solid var(--dark-divider);
-}
-
-.string-div {
-  position: absolute;
-  top: 15px;
-  height: 2px;
-  width: calc(100% - 20px);
-  margin-left: 20px;
-  background: var(--skel_text_color);
-  z-index: 1;
-}
-
-.fret {
-  position: relative;
-  display: inline-block;
-  float: left;
-  width: 100%;
-  height: 30px;
-  border-left: 1px solid var(--dark-divider);
-  transition: 0.5s ease;
-  z-index: 2;
-  opacity: 1.0;
-}
-
-.fret:hover {
-  opacity: 0.7;
-  background: lightgray;
-  cursor: pointer;
-}
-
-.fret-note {
-  position: absolute;
-  display: none;
-  margin: 0 auto;
-  background: red;
-  top: 8px;
-  width: 18px;
-  height: 18px;
-  left: 0px;
-  right: 0px;
-  border-radius: 50%;
-  z-index: 15;
-}
-
-.fret-open {
-  background: var(--skel_text_color);
 }
 
 .add-to-lib-form {

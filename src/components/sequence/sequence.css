@@ -23,17 +23,18 @@
 .sequence-btn-wrapper {
   position: relative;
   display: grid;
-  grid-template-columns: 30% 30% 30%;
-  float: left;
+  grid-template-columns: repeat(5, 50px);
+  float: right;
   top: 8px;
   margin-top: 10px;
+  right: 40px;
 }
 
 .sequence-btn {
   position: relative;
   width: 25px;
   margin: 0px 15px;
-  opacity: 0.8;
+  opacity: 0.7;
   transition: 0.25s ease;
   display: flex;
   justify-content: center;

@@ -66,7 +66,7 @@ export const Steps: React.FC = () => {
 
   const dragLeaveHandler = (event) => {
     event.preventDefault();
-    event.target.style.background = 'none';
+    event.target.style.background = 'rgba(0, 0, 0, 0.2)';
   }
 
   const dropHandler = (event) => {

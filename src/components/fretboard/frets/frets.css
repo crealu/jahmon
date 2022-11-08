@@ -1,4 +1,3 @@
-
 .the-fretboard {
   position: relative;
   margin: 20px 0px 0px 30px;
@@ -37,6 +36,8 @@
   float: left;
   width: 100%;
   height: 30px;
+  /* border-left: 1px solid var(--dark-divider); */
+
   transition: 0.5s ease;
   z-index: 2;
   opacity: 1.0;

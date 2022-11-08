@@ -9,9 +9,8 @@ export const Fretboard: React.FC = () => {
   return (
     <div className="fretboard">
       <div className="fretboard-top">
-        <h3 className="section-title">Fretboard</h3>
-        <Buttons />
         <Mode />
+        <Buttons />
         <div className="seq-step-name"></div>
       </div>
       <Frets />

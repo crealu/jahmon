@@ -1,3 +1,7 @@
+.mode-wrapper {
+  position: relative;
+}
+
 .mode-title {
   position: relative;
   top: 15px;
