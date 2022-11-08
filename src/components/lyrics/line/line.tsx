@@ -37,6 +37,7 @@ export const Line: React.FC<LineProps> = (props) => {
       className="lyric-line"
       onChange={(e) => { changeName(e) }}
       onClick={(e) => { setActive(lineNum) }}
+      value={text}
       placeholder={text}
     />
   )

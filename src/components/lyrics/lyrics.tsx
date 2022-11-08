@@ -16,30 +16,6 @@ export const Lyrics: React.FC = () => {
   const lines = useAppSelector(lyricLines);
   const [lineWidth, setLineWidth] = useState(100);
 
-  const setLines = (data) => {
-    let theLines = [];
-    data.forEach(line => {
-      theLines.push({
-        text: line.name,
-        panel: [{
-          chord: '',
-          offset: ''
-        }]
-      })
-    });
-    dispatch(updateAllLines(theLines));
-  }
-
-  const postHandler = async () => {
-    const res = await axios.post('/api-save-type', { name: name }).then().catch();
-  }
-
-  const getHandler = () => {
-    axios.get('/api-get-type').then(res => { setLines(res.data) }).catch(err => { throw err });
-  }
-
-  useEffect(() => { getHandler() }, []);
-
   return (
     <div className="lyrics">
       <h3 className="section-title">Lyrics</h3>

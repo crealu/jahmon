@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { setActiveSequence } from '../../slices/sequence-slice';
+import { updateAllLines } from '../../slices/lyrics-slice';
 import axios from 'axios';
 import './seqdb.css';
 
@@ -11,22 +12,27 @@ export const SequencesDB: React.FC = () => {
   const [sequences, setSequences] = useState([]);
   const dispatch = useDispatch<AppDispatch>();
 
-  const changeSequence = (e, steps) => {
-    const title = e.target.textContent;
+  const changeSequence = (event, steps, lyrics) => {
+    const title = event.target.textContent;
     dispatch(setActiveSequence(
       { title: title, steps: steps }
-    ))
+    ));
+    console.log(lyrics);
+    dispatch(updateAllLines(lyrics));
   }
 
   const getHandler = () => {
     axios.get('/api-save-g-jahms')
-      .then(res => { setSequences(res.data) })
+      .then(res => {
+        setSequences(res.data);
+        console.log(res.data);
+      })
       .catch(err => { throw err });
   }
 
-  useEffect((sequences) => {
+  useEffect(() => {
     getHandler();
-  }, [sequences])
+  }, [])
 
   return (
     <div className="db-sequences">
@@ -35,7 +41,7 @@ export const SequencesDB: React.FC = () => {
         {sequences.map(sequence => {
           return (
             <div
-              onClick={(e) => { changeSequence(e, sequence.steps)}}
+              onClick={(e) => { changeSequence(e, sequence.steps, sequence.lyrics)}}
               className="db-sequence"
             >
               {sequence.title}

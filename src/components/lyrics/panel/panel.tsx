@@ -9,12 +9,13 @@ import '../lyrics.css';
 
 type PanelProps<any> = {
   width: number;
-  steps: object;
+  steps: any[];
 }
 
 export const Panel: React.FC<PanelProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const chord = useAppSelector(libChord);
+  // const lines = useAppSelector(lyricLines);
   const { width, steps } = props;
 
   const dragOverHandler = (event) => {

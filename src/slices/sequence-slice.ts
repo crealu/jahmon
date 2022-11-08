@@ -64,6 +64,7 @@ export const {
   removeStep,
   clearSequence,
   toggleSave,
+  setIsNew,
   addStep,
   addLibChord,
   setCurrentTitle,
