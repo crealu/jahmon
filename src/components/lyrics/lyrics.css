@@ -1,6 +1,4 @@
-.lyrics {
-  border-top: 1px solid var(--dark-divider);
-}
+.lyrics {}
 
 .all-lyrics {
   position: relative;
