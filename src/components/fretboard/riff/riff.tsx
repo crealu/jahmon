@@ -2,22 +2,21 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { setRiffen, theMode } from '../../../slices/fretboard-slice';
+import { setRiffen, theMode, theRiffNums } from '../../../slices/fretboard-slice';
 import './riff.css';
 
 export const Riff = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const numbers = new Array(17).fill(0).map((n, i) => { return i });
+  const numbers = useAppSelector(theRiffNums);
   const mode = useAppSelector(theMode);
 
   const dragStartHandler = (event) => {
-    const draggedNumber = event.target.cloneNode(true);
-    event.dataTransfer.dropEffect = 'copy';
-    dispatch(setRiffen(event.target.textContent));
-  }
-
-  const dragHandler = (event) => {
-    event.preventDefault();
+    if (event.target.dataset.static) {
+      dispatch(setRiffen(event.target.cloneNode(true)));
+    } else {
+      dispatch(setRiffen(event.target));
+    }
+    console.log(event.target);
   }
 
   return (
@@ -28,8 +27,8 @@ export const Riff = () => {
           <div
             className={`riff-number ${number == 0 ? 'riff-number-0' : ''}`}
             draggable="true"
+            data-static="true"
             onDragStart={(e) => dragStartHandler(e)}
-            onDrag={(e) => dragHandler(e)}
           >
             {number}
           </div>

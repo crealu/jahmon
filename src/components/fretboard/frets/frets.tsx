@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theRiffen, theMode } from '../../../slices/fretboard-slice';
+import { setRiffen, theRiffen, theMode } from '../../../slices/fretboard-slice';
 import './frets.css';
 
 export const Frets = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const strings = new Array(6).fill(0);
   const frets = new Array(22).fill(0);
   const riffen = useAppSelector(theRiffen);
@@ -24,46 +27,52 @@ export const Frets = () => {
     if (e.target.children[0]) {
       toggleNote(e.target.children[0]);
     } else if (e.target.classList[0] == 'fret-circle') {
-        toggleNote(e.target.previousSibling);
+      toggleNote(e.target.previousSibling);
     } else {
       toggleNote(e.target);
     }
   };
 
+  const placeRiffNote = (e) => { };
+
   const dragOverHandler = (event) => {
     event.preventDefault();
-    event.target.style.background = 'red';
+    if (event.target.classList[0] == 'fret') {
+      event.target.style.background = 'lightgreen';
+      event.target.style.borderRadius = '50%';
+      event.target.parentElement.children[0].style.background = 'lightgreen';
+    }
   }
 
   const dragLeaveHandler = (event) => {
     event.preventDefault();
-    event.target.style.background = 'none';
-    event.target.children[0].classList.remove('riff-note');
-    event.target.children[0].textContent = '';
+    if (event.target.classList[0] == 'fret') {
+      event.target.style.background = 'none';
+      event.target.style.borderRadius = '0%';
+      event.target.parentElement.children[0].style.background = 'var(--skel_text_color)';
+    }
   }
 
-  const dragStartHandlerFret = (event) => {
-    // event.target.textContent = '';
-    event.dataTransfer.dropEffect = 'move';
-    event.target.background = 'red';
-    console.log(event.target);
-  }
-
-  const updateFretNote = (fretNote) => {
-    fretNote.textContent = riffen;
-    fretNote.classList.add('riff-note');
-    fretNote.draggable = 'true';
-    fretNote.addEventListener('dragstart', (event) => {
-      dragStartHandlerFret(event);
-    });
+  const resetFretNotes = () => {
+    const riffFretNotes = document.getElementsByClassName('riff-note');
+    for (let n = 0; n < riffFretNotes.length; n++) {
+      riffFretNotes[n].addEventListener('dragstart', (event) => {
+        dispatch(setRiffen(event.target));
+      });
+    }
+    console.log(riffFretNotes);
   }
 
   const dropHandler = (event) => {
     event.preventDefault();
-    updateFretNote(event.target.children[0]);
+    event.target.appendChild(riffen);
+    riffen.classList.add('riff-note');
+    riffen.classList.remove('riff-number');
+    resetFretNotes();
+    dispatch(setRiffen(''))
     event.target.style.background = 'none';
-    console.dir(event.target.children[0]);
-    console.log('dropped');
+    event.target.style.borderRadius = '0%';
+    event.target.parentElement.children[0].style.background = 'var(--skel_text_color)';
   }
 
   const checkNoteID = (noteID) => {
@@ -76,14 +85,12 @@ export const Frets = () => {
   const addFretDetails = (noteID) => {
     if (checkNoteID(noteID)) {
       if (noteID == 's3f12') {
-        for (let f = 1; f < 3; f++) {
-          return (
-            <div>
-              <div className={`fret-circle-12_1 fret-circle`}></div>
-              <div className={`fret-circle-12_2 fret-circle`}></div>
-            </div>
-          )
-        }
+        return (
+          <div>
+            <div className={`fret-circle-12_1 fret-circle`}></div>
+            <div className={`fret-circle-12_2 fret-circle`}></div>
+          </div>
+        )
       } else {
         return <div className="fret-circle"></div>
       }
@@ -103,7 +110,7 @@ export const Frets = () => {
               return (
                 <div
                   className={`fret fret-${mode}`}
-                  onClick={mode == 'chord' ? (e) => placeNote(e) : null}
+                  onClick={(e) => { mode == 'chord' ? placeNote(e) : placeRiffNote(e)}}
                   onDragOver={(e) => dragOverHandler(e)}
                   onDragLeave={(e) => dragLeaveHandler(e)}
                   onDrop={(e) => dropHandler(e)}

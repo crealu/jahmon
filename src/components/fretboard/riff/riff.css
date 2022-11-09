@@ -1,7 +1,12 @@
 .riff-note {
-  top: 4px;
+  position: relative;
   display: block;
-  padding: 4px;
+  margin: 0 auto;
+  width: 22px;
+  height: 22px;
+  top: 6px;
+  padding: 2px;
+  border-radius: 50%;
   text-align: center;
   background: var(--dark-bg);
 }
