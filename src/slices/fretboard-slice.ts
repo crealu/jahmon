@@ -2,14 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 export interface FretboardState {
-  riffen: any;
+  frets: number[];
+  strings: number[];
   mode: string;
+  riffen: any;
   riffNums: number[];
 }
 
 export const fretboardInitialState: FretboardState = {
-  riffen: '',
+  frets: new Array(22).fill(0),
+  strings: new Array(6).fill(0),
   mode: 'chord',
+  riffen: '',
   riffNums: new Array(17).fill(0).map((n, i) => { return i })
 };
 
@@ -30,4 +34,6 @@ export const { setRiffen, setMode, updateRiffNotes, setActiveRiffNote, resetRiff
 export const theRiffen = ({ fretboard: { riffen }}: RootState): any => riffen;
 export const theMode = ({ fretboard: { mode }}: RootState): string => mode;
 export const theRiffNums = ({ fretboard: { riffNums }}: RootState): any[] => riffNums;
+export const theStrings = ({ fretboard: { strings }}: RootState): number[] => strings;
+export const theFrets = ({ fretboard: { frets }}: RootState): any[] => frets;
 export default fretboardSlice.reducer;

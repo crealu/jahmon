@@ -3,15 +3,15 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { setRiffen, theRiffen, theMode } from '../../../slices/fretboard-slice';
+import { setRiffen, theRiffen, theMode, theStrings, theFrets } from '../../../slices/fretboard-slice';
 import './frets.css';
 
 export const Frets = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const strings = new Array(6).fill(0);
-  const frets = new Array(22).fill(0);
-  const riffen = useAppSelector(theRiffen);
+  const frets = useAppSelector(theFrets);
+  const strings = useAppSelector(theStrings);
   const mode = useAppSelector(theMode);
+  const riffen = useAppSelector(theRiffen);
 
   const returnStringClass = (sn) => {
     return mode == 'chord'
@@ -60,7 +60,6 @@ export const Frets = () => {
         dispatch(setRiffen(event.target));
       });
     }
-    console.log(riffFretNotes);
   }
 
   const dropHandler = (event) => {
