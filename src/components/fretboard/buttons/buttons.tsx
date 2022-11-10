@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { clearFretboard } from '../../../common/handlers';
+import { clearFretboard, clearRiffs } from '../../../common/handlers';
 import { theMode, theRiffen, setRiffen } from '../../../slices/fretboard-slice';
 import './buttons.css';
 import axios from 'axios';
@@ -12,7 +12,6 @@ export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
   const riffen = useAppSelector(theRiffen);
-  const clearFrets = () => { clearFretboard() };
 
   const dropHandler = (event) => {
     event.preventDefault();
@@ -38,7 +37,7 @@ export const Buttons: React.FC = () => {
       <img
         className="fretboard-clear-btn fretboard-btn"
         src="img/icons/clear-btn-gray.png"
-        onClick={() => clearFrets()}
+        onClick={() => { mode == 'chord' ? clearFretboard() : clearRiffs()}}
       />
     </div>
   )

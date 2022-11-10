@@ -4,23 +4,30 @@ import { useAppSelector } from '../../../hooks';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { theRiffen, setMode, theMode } from '../../../slices/fretboard-slice';
+import { clearFretboard, toggleRiffs } from '../../../common/handlers';
 import './mode.css';
 
 export const Mode = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const activeMode = useAppSelector(theMode);
+  const mode = useAppSelector(theMode);
 
   const setFretboardMode = (event) => {
-    const mode = event.target.textContent.toLowerCase();
-    dispatch(setMode(mode));
+    const newMode = event.target.textContent.toLowerCase();
+    dispatch(setMode(newMode));
+    if (newMode == 'riff') {
+      clearFretboard();
+      toggleRiffs('block');
+    } else {
+      toggleRiffs('none');
+    }
   }
 
-  const checkMode = (mode) => { return activeMode == mode ? 'active-mode' : ''; }
+  const checkMode = (activeMode) => { return activeMode == mode ? 'active-mode' : ''; }
 
   return (
     <div className="mode-wrapper">
       <p className="mode-title mode-toggle">Mode</p>
-      <img className="mode-trail mode-toggle" src={`img/icons/mode-trail-${activeMode}.png`}/>
+      <img className="mode-trail mode-toggle" src={`img/icons/mode-trail-${mode}.png`}/>
       <div className="mode-btns mode-toggle">
         <div
           className={`mode-btn chord-btn ${checkMode('chord')}`}

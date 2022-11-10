@@ -115,7 +115,11 @@ export const Frets = () => {
                   onDragLeave={(e) => dragLeaveHandler(e)}
                   onDrop={(e) => dropHandler(e)}
                 >
-                  <div className="fret-note" data-noteid={`s${6-sn}f${fn + 1}`}></div>
+                  <div
+                    className="fret-note"
+                    data-noteid={`s${6-sn}f${fn + 1}`}
+                  >
+                  </div>
                   {mode == 'chord' ? addFretDetails(`s${6-sn}f${fn + 1}`) : ''}
                 </div>
               )

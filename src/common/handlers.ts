@@ -7,8 +7,20 @@ export const clearFretboard = () => {
   for (let fn = 0; fn < fretNotes.length; fn++) {
     fretNotes[fn].style.display = 'none';
     fretNotes[fn].style.background = 'red';
-    fretNotes[fn].textContent = '';
-    fretNotes[fn].classList.remove('riff-note');
+  }
+}
+
+export const clearRiffs = () => {
+  const allRiffs = document.getElementsByClassName('riff-note');
+  for (let ar = 0; ar < allRiffs.length; ar++) {
+    allRiffs[ar].parentNode.removeChild(allRiffs[ar]);
+  }
+}
+
+export const toggleRiffs = (displayValue) => {
+  const allRiffs = document.getElementsByClassName('riff-note');
+  for (let ar = 0; ar < allRiffs.length; ar++) {
+    allRiffs[ar].style.display = displayValue;
   }
 }
 
