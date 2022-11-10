@@ -10,10 +10,15 @@ export const clearFretboard = () => {
   }
 }
 
+
 export const clearRiffs = () => {
   const allRiffs = document.getElementsByClassName('riff-note');
-  for (let ar = 0; ar < allRiffs.length; ar++) {
-    allRiffs[ar].parentNode.removeChild(allRiffs[ar]);
+  for (let i = 0; i < 3; i++) {
+    for (let ar = 0; ar < allRiffs.length; ar++) {
+      setTimeout(() => {
+         allRiffs[ar].parentNode.removeChild(allRiffs[ar])
+      }, 50)
+    }
   }
 }
 
