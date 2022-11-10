@@ -30,7 +30,7 @@ export const fretboardSlice = createSlice({
   }
 });
 
-export const { setRiffen, setMode, updateRiffNotes, setActiveRiffNote, resetRiffNums } = fretboardSlice.actions;
+export const { setRiffen, setMode } = fretboardSlice.actions;
 export const theRiffen = ({ fretboard: { riffen }}: RootState): any => riffen;
 export const theMode = ({ fretboard: { mode }}: RootState): string => mode;
 export const theRiffNums = ({ fretboard: { riffNums }}: RootState): any[] => riffNums;

@@ -4,15 +4,27 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { clearFretboard } from '../../../common/handlers';
-import { theMode } from '../../../slices/fretboard-slice';
+import { theMode, theRiffen, setRiffen } from '../../../slices/fretboard-slice';
 import './buttons.css';
 import axios from 'axios';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
+  const riffen = useAppSelector(theRiffen);
   const clearFrets = () => { clearFretboard() };
-  const dropHandler = (event) => { console.log(event) }
+
+  const dropHandler = (event) => {
+    event.preventDefault();
+    event.target.appendChild(riffen);
+    while (event.target.firstChild) {
+      event.target.removeChild(event.target.firstChild);
+    }
+  }
+
+  const dragOverHandler = (event) => {
+    event.preventDefault();
+  }
 
   return (
     <div className="fretboard-btn-wrapper">
@@ -20,6 +32,7 @@ export const Buttons: React.FC = () => {
         className="fretboard-trash-btn fretboard-btn"
         src="img/icons/trash-bin-gray.png"
         onDrop={(e) => dropHandler(e)}
+        onDragOver={(e) => dragOverHandler(e)}
         style={{opacity: mode == 'riff' ? '1' : '0'}}
       />
       <img

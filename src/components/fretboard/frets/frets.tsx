@@ -67,6 +67,7 @@ export const Frets = () => {
     event.target.appendChild(riffen);
     riffen.classList.add('riff-note');
     riffen.classList.remove('riff-number');
+    riffen.setAttribute('data-noteid', event.target.children[0].dataset.noteid);
     resetFretNotes();
     dispatch(setRiffen(''))
     event.target.style.background = 'none';

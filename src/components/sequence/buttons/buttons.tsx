@@ -4,28 +4,46 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { addStep, removeStep, clearSequence, toggleSave } from '../../../slices/sequence-slice';
+import { theMode } from '../../../slices/fretboard-slice';
 import '../sequence.css';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const mode = useAppSelector(theMode);
   const deleteStep = () => { dispatch(removeStep()); }
   const clearSeq = () => { dispatch(clearSequence()) };
   const saveSeq = () => { dispatch(toggleSave(true)) };
   const saveToLibrary = () => { dispatch(toggleSave(true)) };
 
-  const addNewStep = () => {
-    let fretNotes = document.getElementsByClassName('fret-note');
+  const collectRiffNotes = () => {
+    let notes = document.getElementsByClassName('riff-note');
     let noteids = [];
-    for (let n = 0; n < fretNotes.length; n++) {
-      if (fretNotes[n].style.display == 'block') {
-        noteids.push(fretNotes[n].dataset.noteid);
+    let fretnums = [];
+    for (let n = 0; n < notes.length; n++) {
+      noteids.push(notes[n].dataset.noteid);
+      fretnums.push(notes[n].textContent);
+    }
+    return [noteids.join(','), fretnums.join(',')]
+  }
+
+  const collectChordNotes = () => {
+    let notes = document.getElementsByClassName('fret-note');
+    let noteids = [];
+    for (let n = 0; n < notes.length; n++) {
+      if (notes[n].style.display == 'block') {
+        noteids.push(notes[n].dataset.noteid);
       }
     }
+    return [noteids.join(','), '']
+  }
+
+  const addNewStep = () => {
+    let noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
     const newStep = {
       title: 'N1',
-      noteids: noteids,
-      mode: 'chord',
-      fretnums: ''
+      noteids: noteData[0],
+      mode: mode,
+      fretnums: noteData[1]
     };
     dispatch(addStep(newStep));
   }
