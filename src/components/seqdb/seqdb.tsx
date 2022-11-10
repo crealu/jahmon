@@ -14,25 +14,18 @@ export const SequencesDB: React.FC = () => {
 
   const changeSequence = (event, steps, lyrics) => {
     const title = event.target.textContent;
-    dispatch(setActiveSequence(
-      { title: title, steps: steps }
-    ));
+    dispatch(setActiveSequence({ title: title, steps: steps}));
     dispatch(updateAllLines(lyrics));
     dispatch(setIsNew(false));
   }
 
   const getHandler = () => {
     axios.get('/api-save-g-jahms')
-      .then(res => {
-        setSequences(res.data);
-        console.log(res.data);
-      })
+      .then(res => { setSequences(res.data) })
       .catch(err => { throw err });
   }
 
-  useEffect(() => {
-    getHandler();
-  }, [])
+  useEffect(() => { getHandler() }, [])
 
   return (
     <div className="db-sequences">
@@ -52,8 +45,5 @@ export const SequencesDB: React.FC = () => {
     </div>
   )
 }
-
-// <div>{sequence.name}</div>
-
 
 export default SequencesDB;

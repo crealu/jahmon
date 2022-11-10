@@ -14,7 +14,7 @@ export const fretboardInitialState: FretboardState = {
   strings: new Array(6).fill(0),
   mode: 'chord',
   riffen: '',
-  riffNums: new Array(17).fill(0).map((n, i) => { return i })
+  riffNums: new Array(21).fill(0).map((n, i) => { return i })
 };
 
 export const fretboardSlice = createSlice({

@@ -3,13 +3,14 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, removeStep, clearSequence, toggleSave } from '../../../slices/sequence-slice';
+import { addStep, removeStep, clearSequence, toggleSave, currentSeq } from '../../../slices/sequence-slice';
 import { theMode } from '../../../slices/fretboard-slice';
 import '../sequence.css';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
+  const seq = useAppSelector(currentSeq);
   const deleteStep = () => { dispatch(removeStep()); }
   const clearSeq = () => { dispatch(clearSequence()) };
   const saveSeq = () => { dispatch(toggleSave(true)) };
@@ -38,9 +39,10 @@ export const Buttons: React.FC = () => {
   }
 
   const addNewStep = () => {
-    let noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
+    const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
+    const stepTitle = mode == 'chord' ? 'C' : 'R';
     const newStep = {
-      title: 'N1',
+      title: stepTitle + seq.length,
       noteids: noteData[0],
       mode: mode,
       fretnums: noteData[1]

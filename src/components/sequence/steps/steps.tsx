@@ -8,82 +8,16 @@ import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs } from '../../../common/handlers';
 import '../sequence.css';
+import SeqStep from './seqstep';
 
 export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const seq = useAppSelector(currentSeq);
-  const activeStep = useAppSelector(theActiveStep);
   const mode = useAppSelector(theMode);
   const libraryChord = useAppSelector(libChord);
 
-  const updateActiveStep = (event) => {
-    const step = event.target;
-    restyleSteps(step);
-    clearFretboard();
-    clearRiffs();
-    dispatch(setMode(step.dataset.mode));
-    dispatch(setActiveStep(parseInt(step.dataset.stepnum)));
-    showFretNotes(step);
-  }
-
-  function restyleSteps(step) {
-    const steps = document.getElementsByClassName('seq-step');
-    for (let s = 0; s < steps.length; s++) {
-      steps[s].classList.remove('active-step');
-    }
-    step.classList.add('active-step');
-  }
-
-  const resetFretNotes = () => {
-    const riffFretNotes = document.getElementsByClassName('riff-note');
-    for (let n = 0; n < riffFretNotes.length; n++) {
-      riffFretNotes[n].addEventListener('dragstart', (event) => {
-        dispatch(setRiffen(event.target));
-      });
-    }
-  }
-
-  const addRiffFromStep = (parent, fretnum) => {
-    const riffNote = document.createElement('div');
-    riffNote.classList.add('riff-note');
-    riffNote.textContent = fretnum;
-    riffNote.draggable = true;
-    riffNote.addEventListener('dragstart', (event) => {
-      dispatch(setRiffen(event.target));
-    });
-    parent.appendChild(riffNote);
-  }
-
-  function showFretNotes(step) {
-    const noteIds = step.dataset.noteids.split(',');
-    const fretnums = step.dataset.fretnums.split(',');
-    const fretNotes = document.getElementsByClassName('fret-note');
-    for (let n = 0; n < noteIds.length; n++) {
-      for (let fn = 0; fn < fretNotes.length; fn++) {
-        if (noteIds[n] == fretNotes[fn].dataset.noteid) {
-          if (step.dataset.mode == 'riff') {
-            addRiffFromStep(fretNotes[fn].parentNode, fretnums[n]);
-          } else {
-            fretNotes[fn].style.display = 'block';
-          }
-          // if (mode == 'riff') {
-          //   const fretnums = step.dataset.fretnums.split(',');
-          //   const trueFretnums = fretnums.filter((fretnum) => fretnum != '');
-          // }
-        }
-      }
-    }
-    resetFretNotes();
-  }
-
-  const dragStartHandler = (event) => {
-    const draggedNumber = event.target.cloneNode(true);
-    event.dataTransfer.dropEffect = 'copy';
-    const chord = {
-      title: event.target.textContent,
-      noteids: event.target.dataset.noteids
-    }
-    dispatch(setGrabbed(chord));
+  const dragOverStepHandler = (event) => {
+    event.preventDefault();
   }
 
   const dragOverHandler = (event) => {
@@ -117,22 +51,7 @@ export const Steps: React.FC = () => {
       onDragOver={(e) => dragOverHandler(e)}
       onDragLeave={(e) => dragLeaveHandler(e)}
     >
-      {seq.map((step, i) => {
-        return (
-            <div
-              className="seq-step"
-              data-stepnum={i}
-              data-noteids={step.noteids}
-              data-mode={step.mode}
-              data-fretnums={step.fretnums}
-              draggable="true"
-              onClick={(e) => { updateActiveStep(e)}}
-              onDragStart={(e) => dragStartHandler(e)}
-            >
-              {step.title}
-            </div>
-          )
-      })}
+      {seq.map((step, i) => { return <SeqStep step={step} idx={i} /> })}
     </div>
   )
 }
