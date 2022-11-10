@@ -18,6 +18,9 @@ export const lyricsSlice = createSlice({
     addLine(state, action: PayloadAction<any>) {
       state.lines = [...state.lines, action.payload]
     },
+    deleteLine(state, action: PayloadAction<any>) {
+      state.lines = state.lines.filter(line => line.text != action.payload )
+    },
     updateLine(state, action: PayloadAction<string>) {
       state.lines[state.activeLine].text = action.payload;
     },
@@ -38,6 +41,7 @@ export const lyricsSlice = createSlice({
 
 export const {
   addLine,
+  deleteLine,
   updateLine,
   updateAllLines,
   activateLine,

@@ -15,7 +15,6 @@ type PanelProps<any> = {
 export const Panel: React.FC<PanelProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const chord = useAppSelector(libChord);
-  // const lines = useAppSelector(lyricLines);
   const { width, steps } = props;
 
   const dragOverHandler = (event) => {
@@ -31,7 +30,6 @@ export const Panel: React.FC<PanelProps> = (props) => {
   const dropHandler = (event) => {
     event.preventDefault();
     event.target.style.background = 'none';
-    // add chord to panel in state
     const panelChord = {
       chord: chord.title,
       offset: event.clientX - 30 + 'px',
