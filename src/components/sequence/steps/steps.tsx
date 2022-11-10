@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { currentSeq, theActiveStep, setActiveStep, addLibChord } from '../../../slices/sequence-slice';
-import { theMode, setMode } from '../../../slices/fretboard-slice';
+import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
-import { clearFretboard } from '../../../common/handlers';
+import { clearFretboard, clearRiffs } from '../../../common/handlers';
 import '../sequence.css';
 
 export const Steps: React.FC = () => {
@@ -20,6 +20,7 @@ export const Steps: React.FC = () => {
     const step = event.target;
     restyleSteps(step);
     clearFretboard();
+    clearRiffs();
     dispatch(setMode(step.dataset.mode));
     dispatch(setActiveStep(parseInt(step.dataset.stepnum)));
     showFretNotes(step);
@@ -33,20 +34,46 @@ export const Steps: React.FC = () => {
     step.classList.add('active-step');
   }
 
+  const resetFretNotes = () => {
+    const riffFretNotes = document.getElementsByClassName('riff-note');
+    for (let n = 0; n < riffFretNotes.length; n++) {
+      riffFretNotes[n].addEventListener('dragstart', (event) => {
+        dispatch(setRiffen(event.target));
+      });
+    }
+  }
+
+  const addRiffFromStep = (parent, fretnum) => {
+    const riffNote = document.createElement('div');
+    riffNote.classList.add('riff-note');
+    riffNote.textContent = fretnum;
+    riffNote.draggable = true;
+    riffNote.addEventListener('dragstart', (event) => {
+      dispatch(setRiffen(event.target));
+    });
+    parent.appendChild(riffNote);
+  }
+
   function showFretNotes(step) {
     const noteIds = step.dataset.noteids.split(',');
+    const fretnums = step.dataset.fretnums.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
     for (let n = 0; n < noteIds.length; n++) {
       for (let fn = 0; fn < fretNotes.length; fn++) {
         if (noteIds[n] == fretNotes[fn].dataset.noteid) {
-          fretNotes[fn].style.display = 'block';
-          if (mode == 'riff') {
-            const fretnums = step.dataset.fretnums.split(',');
-            const trueFretnums = fretnums.filter((fretnum) => fretnum != '');
+          if (step.dataset.mode == 'riff') {
+            addRiffFromStep(fretNotes[fn].parentNode, fretnums[n]);
+          } else {
+            fretNotes[fn].style.display = 'block';
           }
+          // if (mode == 'riff') {
+          //   const fretnums = step.dataset.fretnums.split(',');
+          //   const trueFretnums = fretnums.filter((fretnum) => fretnum != '');
+          // }
         }
       }
     }
+    resetFretNotes();
   }
 
   const dragStartHandler = (event) => {

@@ -30,13 +30,13 @@ export const Mode = () => {
       <img className="mode-trail mode-toggle" src={`img/icons/mode-trail-${mode}.png`}/>
       <div className="mode-btns mode-toggle">
         <div
-          className={`mode-btn chord-btn ${checkMode('chord')}`}
+          className={`mode-btn ${checkMode('chord')}`}
           onClick={(e) => setFretboardMode(e)}
         >
           Chord
         </div>
         <div
-          className={`mode-btn chord-btn ${checkMode('riff')}`}
+          className={`mode-btn ${checkMode('riff')}`}
           onClick={(e) => setFretboardMode(e)}
         >
           Riff
