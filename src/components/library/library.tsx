@@ -9,8 +9,8 @@ import { clearFretboard } from '../../common/handlers';
 import axios from 'axios';
 
 export const Library: React.FC = () => {
-  const chords = useAppSelector(libraryChords);
   const dispatch = useDispatch<AppDispatch>();
+  const chords = useAppSelector(libraryChords);
 
   const placeNotes = (event) => {
     clearFretboard();
@@ -28,7 +28,6 @@ export const Library: React.FC = () => {
   const dragStartHandler = (event) => {
     const draggedNumber = event.target.cloneNode(true);
     event.dataTransfer.dropEffect = 'copy';
-    // console.log(event.target.data.name);
     console.log(event.target.dataset.name);
     const chord = {
       name: event.target.dataset.name,

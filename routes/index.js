@@ -6,82 +6,26 @@ const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const path = require('path');
 
-// const { handlePasswordReset, handleNewUser } = require('./email');
+const { handlePasswordReset, handleNewUser } = require('./email');
 const { ensureAuthenticated } = require('../config/auth');
 const User = require('../models/user');
 const router = express.Router();
 const client = mongoose.connection;
 const pathToBuild = path.join(__dirname, '../build');
 
-const library = [
-  {
-    name: 'A',
-    noteids: 's6f0,s5f2,s4f2,s3f2,s2f0'
-  }
-];
+router.get('/', (req, res) => { res.render('index.ejs') });
 
-router.get('/ts', (req, res) => {
+router.get('/app', ensureAuthenticated, (req, res) => {
   router.use(express.static(pathToBuild));
   res.sendFile('index.html', { root: './build' });
 });
 
-router.get('/', (req, res) => {
-  client.db.collection('jahms')
-    .find().toArray((err, result) => {
-      res.render('index.ejs', {
-        data: {
-          jahms: result,
-          lib: library
-        }
-      });
-  });
-});
-
-let loginError = '';
-router.get('/signup', (req, res) => {
-  loginError = '';
-  res.render('signup.ejs', {
-    data: 'sign up'
-  });
-});
-
-router.get('/login', (req, res) => {
-  res.render('login.ejs', {
-    data: 'log in',
-    error: loginError
-  });
-});
-
-function failureRoute() {
-  loginError = 'Invalid email/password';
-  return '/login';
-}
-
-router.get('/dashboard', ensureAuthenticated, (req, res) => {
-  client.db.collection('jahms').find().toArray((err, res1) => {
-    client.db.collection('jahms').find().toArray((err, res2) => {
-      res.cookie();
-      res.render('index.ejs', {
-        data: {
-          user: req.user,
-          kanjisets: res1,
-          kanjitests: res2
-        }
-      });
-    });
-  });
-});
-
-router.get('/password-reset', (req, res) => {
-  res.render('password-reset.ejs', {
-    error: null
-  });
-});
-
-router.get('/logout', (req, res) => {
-  req.logout();
-  req.flash('success_msg', 'Logged out');
-  res.redirect('/');
+router.post('/pass', (req, res) => {
+  if (req.body.word == 'Colorfiler6!') {
+    res.send(JSON.stringify({msg: 'Password correct'}));
+  } else {
+    res.send(JSON.stringify({msg: 'Incorrect password'}));
+  }
 });
 
 router.post('/signup', (req, res) => {
@@ -125,7 +69,7 @@ router.post('/signup', (req, res) => {
               newUser.save()
                 .then(user => {
                   req.flash('success_msg', 'You have successfully registered');
-                  // handleNewUser(email);
+                  handleNewUser(email);
                   res.redirect('/login');
                 })
                 .catch(err => console.log(err));
@@ -138,34 +82,42 @@ router.post('/signup', (req, res) => {
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/dashboard',
+    successRedirect: '/app',
     failureRedirect: failureRoute(),
     failureFlash: true
   })(req, res, next);
 });
 
-// router.post('/password-reset', (req, res) => {
-//   const email = req.body.email;
-//   User.findOne({ email: email }).then(user => {
-//     if (!user) {
-//       res.render('password-reset.ejs', {
-//         error: 'No account found with that email'
-//       });
-//     } else {
-//       handlePasswordReset(email);
-//       res.redirect('/');
-//     }
-//   })
-// });
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success_msg', 'Logged out');
+  res.redirect('/');
+});
 
-// router.post('/updateset', (req, res) => {
-//   console.log(req.body);
-//   client.db.collection('jahms').updateMany(
-//     { setName: req.body.setname },
-//     { $pull: { kanji: { $in: req.body.kanji }}}
-//   )
-//   res.redirect('/');
-// });
-//
+let loginError = '';
+router.get('/signup', (req, res) => {
+  loginError = '';
+  res.render('signup.ejs', {
+    data: 'sign up'
+  });
+});
+
+router.get('/login', (req, res) => {
+  res.render('login.ejs', {
+    data: 'log in',
+    error: loginError
+  });
+});
+
+function failureRoute() {
+  loginError = 'Invalid email/password';
+  return '/login';
+}
+
+router.get('/password-reset', (req, res) => {
+  res.render('password-reset.ejs', {
+    error: null
+  });
+});
 
 module.exports = router;

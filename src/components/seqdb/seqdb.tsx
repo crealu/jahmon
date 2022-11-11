@@ -20,7 +20,7 @@ export const SequencesDB: React.FC = () => {
   }
 
   const getHandler = () => {
-    axios.get('/api-save-g-jahms')
+    axios.get('/api-get-jahms')
       .then(res => { setSequences(res.data) })
       .catch(err => { throw err });
   }

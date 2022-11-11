@@ -6,7 +6,6 @@ import { useAppSelector } from '../../../hooks';
 import { clearFretboard, clearRiffs } from '../../../common/handlers';
 import { theMode, theRiffen, setRiffen } from '../../../slices/fretboard-slice';
 import './buttons.css';
-import axios from 'axios';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
