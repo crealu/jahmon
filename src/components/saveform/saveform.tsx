@@ -47,12 +47,16 @@ export const SaveForm = () => {
   const changeChordName = (event) => { setChordName(event.target.value); }
   const hideForm = () => { dispatch(toggleSave(false)) };
 
+  const getSessionData = () => {
+    console.log(window.sessionStorage)
+  }
+
   return (
     <div className="save-form" style={{display: saving ? 'block' : 'none'}}>
       <div className="form-view">
         <div className="form-data form-label">Sequence:</div>
         <div className="form-data">{title}</div>
-        <div className="form-data form-label">Steps</div>
+        <div className="form-data form-label">Steps:</div>
         <div className="form-data">
           {steps.map(step => {
             return <div>{step.title}</div>
@@ -69,6 +73,10 @@ export const SaveForm = () => {
       <button className="cancel-btn" onClick={() => hideForm()}>Cancel</button>
       <input onInput={(e) => changeChordName(e)}/>
       <div>{chordName}</div>
+
+      <div className="session-data">
+        <button onClick={() => getSessionData()}>Session</button>
+      </div>
     </div>
   )
 }

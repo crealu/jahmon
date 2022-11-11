@@ -1,26 +1,32 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const User = require('../models/user');
 const router = express.Router();
-const client = mongoose.connection;
+const atlas = mongoose.connection;
+const { findUser } = require('../config/user');
 
-router.get('/api-get-jahms', (req, res) => {
-  client.db.collection('jahms')
-    .find().toArray((err, result) => {
+router.get('/api-get-jahms', async (req, res) => {
+  const username = await findUser(req, res);
+  atlas.db.collection('jahms')
+    .find({owner: username}).toArray((err, result) => {
       if (err) { return console.log(err) }
       res.send(result);
     })
 });
 
-router.post('/api-save-seq', (req, res) => {
-  client.db.collection('jahms')
-  .insertOne(req.body, (err, result) => {
-    if (err) { return console.log(err) }
-    res.redirect('/');
-  });
+router.post('/api-save-seq', async (req, res) => {
+  const username = await findUser(req, res);
+  const newCollection = {...req.body, onwer: username};
+  atlas.db.collection('jahms')
+    .insertOne(newCollection, (err, result) => {
+      if (err) { return console.log(err) }
+      res.send('Save successful');
+      // res.redirect('/');
+    });
 });
 
 router.post('/api-update-seq', (req, res) => {
-  client.db.collection('jahms')
+  atlas.db.collection('jahms')
     .findOneAndUpdate(
       { title: req.body.title },
       { $set: {
@@ -29,7 +35,7 @@ router.post('/api-update-seq', (req, res) => {
        }},
       { sort: { _id: 1 }, upsert: true }
     )
-  res.send('Save Successful');
+  res.send('Save successful');
 });
 
 module.exports = router;

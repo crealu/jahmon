@@ -27,8 +27,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: true,
   saveUninitialized: true,
-  // cookie: { secure: true },
-  maxAge: 360000
+  cookie: { maxAge: 60000 }
 }));
 
 app.use(passport.initialize());
@@ -43,9 +42,10 @@ app.use((req, res, next) => {
 });
 
 app.use('/', require('./routes/index'));
+app.use('/', require('./routes/signup'));
+app.use('/', require('./routes/login'));
 app.use('/', require('./routes/seq'));
 app.use('/', require('./routes/lib'));
-// app.use('/', require('./routes/lyrics'));
 app.use(cookieParser());
 
 app.listen(port, console.log('listening on ' + port));
