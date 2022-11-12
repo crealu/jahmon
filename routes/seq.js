@@ -16,7 +16,7 @@ router.get('/api-get-jahms', async (req, res) => {
 
 router.post('/api-save-seq', async (req, res) => {
   const username = await findUser(req, res);
-  const newCollection = {...req.body, onwer: username};
+  const newCollection = {...req.body, owner: username};
   atlas.db.collection('jahms')
     .insertOne(newCollection, (err, result) => {
       if (err) { return console.log(err) }

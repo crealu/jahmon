@@ -27,6 +27,4 @@ const userInSession = (session) => {
   console.log(session.cookie._expires.getTime());
 }
 
-// atlas.db.collection('jahms').updateMany({}, { $set: { owner: ''}})
-
 module.exports = router;
