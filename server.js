@@ -8,7 +8,7 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 
 const { initPassport } = require('./config/passport');
-const uri = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI || require('./config/keys').MongoURI;
 const port = process.env.PORT || 3220;
 const app = express();
 

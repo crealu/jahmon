@@ -2,7 +2,6 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const router = express.Router();
-const { handlePasswordReset, handleNewUser } = require('./email');
 
 router.get('/signup', (req, res) => {
   res.render('signup.ejs', {data: 'sign up'});
@@ -37,7 +36,6 @@ router.post('/signup', (req, res) => {
               newUser.save()
                 .then(user => {
                   req.flash('success_msg', 'You have successfully registered');
-                  handleNewUser(email);
                   res.redirect('/login');
                 })
                 .catch(err => console.log(err));
