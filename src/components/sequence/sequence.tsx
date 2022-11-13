@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { currentTitle, currentSeq, setCurrentTitle } from '../../slices/sequence-slice';
+import { currentTitle, setCurrentTitle } from '../../slices/sequence-slice';
 import Steps from './steps/steps';
 import Buttons from './buttons/buttons';
 import './sequence.css';

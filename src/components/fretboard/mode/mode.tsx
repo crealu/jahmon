@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../hooks';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { theRiffen, setMode, theMode } from '../../../slices/fretboard-slice';
+import { setMode, theMode } from '../../../slices/fretboard-slice';
 import { clearFretboard, toggleRiffs } from '../../../common/handlers';
 import './mode.css';
 

@@ -21,7 +21,6 @@ router.post('/api-save-seq', async (req, res) => {
     .insertOne(newCollection, (err, result) => {
       if (err) { return console.log(err) }
       res.send('Save successful');
-      // res.redirect('/');
     });
 });
 

@@ -47,10 +47,6 @@ export const SaveForm = () => {
   const changeChordName = (event) => { setChordName(event.target.value); }
   const hideForm = () => { dispatch(toggleSave(false)) };
 
-  const getSessionData = () => {
-    console.log(window.sessionStorage)
-  }
-
   return (
     <div className="save-form" style={{display: saving ? 'block' : 'none'}}>
       <div className="form-view">

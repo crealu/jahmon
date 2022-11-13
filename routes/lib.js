@@ -1,6 +1,6 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const atlas = mongoose.connection;
 
 router.get('/api-get-lib', (req, res) => {
