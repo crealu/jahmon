@@ -37,4 +37,9 @@ router.post('/api-update-seq', (req, res) => {
   res.send('Save successful');
 });
 
+router.get('/api-get-username', async (req, res) => {
+  // const username = await findUser(req, res);
+  res.send('username from res');
+});
+
 module.exports = router;
