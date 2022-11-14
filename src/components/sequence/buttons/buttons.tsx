@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, removeStep, clearSequence, toggleSave, currentSeq } from '../../../slices/sequence-slice';
+import { addStep, removeStep, clearSequence, toggleSave, toggleSettings, currentSeq } from '../../../slices/sequence-slice';
 import { theMode } from '../../../slices/fretboard-slice';
-import '../sequence.css';
+import './buttons.css';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,6 +15,7 @@ export const Buttons: React.FC = () => {
   const clearSeq = () => { dispatch(clearSequence()) };
   const saveSeq = () => { dispatch(toggleSave(true)) };
   const saveToLibrary = () => { dispatch(toggleSave(true)) };
+  const openSettings = () => { dispatch(toggleSettings(true)) };
 
   const collectRiffNotes = () => {
     let notes = document.getElementsByClassName('riff-note');
@@ -76,6 +77,11 @@ export const Buttons: React.FC = () => {
         className="sequence-btn"
         src="img/icons/save-btn-gray.png"
         onClick={() => saveSeq()}
+      />
+      <img
+        className="sequence-btn"
+        src="img/icons/settings-btn-gray.png"
+        onClick={() => openSettings()}
       />
     </div>
   )

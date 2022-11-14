@@ -5,6 +5,7 @@ import Lyrics from './lyrics/lyrics';
 import Library from './library/library';
 import SequencesDB from './seqdb/seqdb';
 import SaveForm from './saveform/saveform';
+import Settings from './settings/settings';
 import './app.css';
 
 export const App: React.FC = () => {
@@ -20,6 +21,7 @@ export const App: React.FC = () => {
         <SequencesDB />
       </div>
       <SaveForm />
+      <Settings />
     </div>
   )
 }

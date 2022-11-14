@@ -1,0 +1,27 @@
+.sequence-btn-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 50px);
+  float: left;
+  top: 8px;
+  margin-top: 10px;
+  right: 40px;
+}
+
+.sequence-btn {
+  position: relative;
+  width: 25px;
+  margin: 0px 15px;
+  opacity: 0.7;
+  transition: 0.25s ease;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.sequence-btn:hover {
+  opacity: 1.0;
+}

@@ -9,12 +9,11 @@ import { refresh } from '../../common/handlers';
 import axios from 'axios';
 import './saveform.css';
 
-export const SaveForm = () => {
+export const SaveForm: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const title = useAppSelector(currentTitle);
   const steps = useAppSelector(currentSeq);
   const lyrics = useAppSelector(lyricLines);
-
   const saving = useAppSelector(isSaving);
   const isNew = useAppSelector(seqIsNew);
   const [chordName, setChordName] = useState('');
@@ -48,7 +47,7 @@ export const SaveForm = () => {
   const hideForm = () => { dispatch(toggleSave(false)) };
 
   return (
-    <div className="save-form" style={{display: saving ? 'block' : 'none'}}>
+    <div className="save-form modal" style={{display: saving ? 'block' : 'none'}}>
       <div className="form-view">
         <div className="form-data form-label">Sequence:</div>
         <div className="form-data">{title}</div>

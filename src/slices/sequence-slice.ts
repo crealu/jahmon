@@ -8,6 +8,7 @@ export interface SequenceState {
   activeStep: number;
   save: boolean;
   isNew: boolean;
+  settings: boolean;
 }
 
 export const sequenceInitialState: SequenceState = {
@@ -17,6 +18,7 @@ export const sequenceInitialState: SequenceState = {
   activeStep: 0,
   save: false,
   isNew: true,
+  settings: false,
 };
 
 export const sequenceSlice = createSlice({
@@ -54,6 +56,9 @@ export const sequenceSlice = createSlice({
     addLibChord(state, action: Payload<object>) {
       state.steps = [...state.steps, action.payload];
     },
+    toggleSettings(state, action: Payload<boolean>) {
+      state.settings = action.payload;
+    }
   }
 });
 
@@ -61,11 +66,12 @@ export const {
   changeSequenceName,
   setActiveSequence,
   setActiveStep,
+  addStep,
   removeStep,
   clearSequence,
   toggleSave,
+  toggleSettings,
   setIsNew,
-  addStep,
   addLibChord,
   setCurrentTitle,
  } = sequenceSlice.actions;
@@ -75,6 +81,7 @@ export const currentTitle = ({ sequence: { title }}: RootState): string => title
 export const currentSeq = ({ sequence: { steps }}: RootState): any[] => steps;
 export const theActiveStep = ({ sequence: { activeStep }}: RootState): number => activeStep;
 export const isSaving = ({ sequence: { save }}: RootState): boolean => save;
+export const isSettings = ({ sequence: { settings }}: RootState): boolean => settings;
 export const seqIsNew = ({ sequence: { isNew }}: RootState): boolean => isNew;
 
 export default sequenceSlice.reducer;

@@ -7,7 +7,7 @@ import { currentSeq, theActiveStep, setActiveStep, addLibChord } from '../../../
 import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs } from '../../../common/handlers';
-import '../sequence.css';
+import './steps.css';
 
 type SeqStepProps = {
   step: object;
