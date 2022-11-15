@@ -1,5 +1,9 @@
 .lyrics {
-  
+  overflow-y: scroll;
+}
+
+.lyrics::-webkit-scrollbar {
+  display: none;
 }
 
 .all-lyrics {
@@ -48,4 +52,34 @@
   margin: 0px;
   font-size: 14px;
   color: #03a9f4;
+}
+
+.add-lyric-btn {
+  width: 20px;
+  padding: 2px;
+  border: 2px solid var(--dark-divider);
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.add-lyric-btn:hover {
+  background: purple;
+}
+
+.delete-lyric-btn {
+  display: none;
+  margin-left: 10px;
+  height: 3px;
+  width: 20px;
+  padding: 2px;
+  border: 1px solid var(--dark-divider);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.active-delete-lyric-btn {
+  display: inline-block;
 }

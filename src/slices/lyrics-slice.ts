@@ -7,7 +7,7 @@ export interface LyricsState {
 }
 
 export const lyricsInitialState: LyricsState = {
-  lines: [],
+  lines: [{ text: '..lyrics..', panel: [{ chord: '', offset: ''}]}],
   activeLine: 0,
 };
 

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { inputTest, changeSequenceName } from '../../slices/sequence-slice';
-import { lyricLines, updateAllLines, addLine, deleteLine } from '../../slices/lyrics-slice';
+import { lyricLines, theActiveLine, updateAllLines, addLine, deleteLine } from '../../slices/lyrics-slice';
 import axios from 'axios';
 import './lyrics.css';
 import Line from './line/line';
@@ -14,6 +14,7 @@ export const Lyrics: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const name = useAppSelector(inputTest);
   const lines = useAppSelector(lyricLines);
+  const active = useAppSelector(theActiveLine);
   const [lineWidth, setLineWidth] = useState(100);
 
   const addNewLine = () => {
@@ -25,6 +26,7 @@ export const Lyrics: React.FC = () => {
       }]
     };
     dispatch(addLine(newLine))
+    console.log(active);
   }
 
   const deleteThisLine = (event) => {
@@ -34,8 +36,12 @@ export const Lyrics: React.FC = () => {
 
   return (
     <div className="lyrics">
-      <h3 className="section-title">Lyrics</h3>
       <div className="all-lyrics">
+        <img
+          className="add-lyric-btn"
+          src="img/icons/add-btn-gray.png"
+          onClick={() => addNewLine()}
+        />
         {lines.map((s, i) => {
           return (
             <div className="lyric-wrapper">
@@ -50,18 +56,14 @@ export const Lyrics: React.FC = () => {
                 text={s.text}
               />
               <img
-                className="sequence-btn delete-btn"
+                className={`delete-lyric-btn ${active == i ? 'active-delete-lyric-btn': ''}`}
                 src="img/icons/delete-btn-gray.png"
                 onClick={(e) => deleteThisLine(e)}
               />
             </div>
           )
         })}
-        <img
-          className="new-lyric-btn"
-          src="img/icons/add-btn-gray.png"
-          onClick={() => addNewLine()}
-        />
+
       </div>
     </div>
   )
