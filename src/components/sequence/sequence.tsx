@@ -13,20 +13,19 @@ export const Sequence: React.FC = () => {
   const title = useAppSelector(currentTitle);
 
   const updateTitle = (event) => {
-    dispatch(setCurrentTitle(event.target.value));
-    console.log(event.target.value);
+    dispatch(setCurrentTitle(event.target.value))
   }
 
   return (
     <div className="sequence">
       <div className="sequence-top">
+        <Buttons />
         <input
-          className="section-title"
+          className="sequence-title"
           onChange={(e) => updateTitle(e)}
           value={title}
           placeholder="untitled"
         />
-        <Buttons />
       </div>
       <Steps />
     </div>

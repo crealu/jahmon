@@ -18,6 +18,21 @@
   height: 50px;
 }
 
+.sequence-title {
+  position: relative;
+  float: right;
+  text-align: right;
+  top: 15px;
+  right: 48px;
+  font-size: 18px;
+  background:none;
+  color: var(--skel_text_color);
+  border: none;
+}
+
+.sequence-title:focus-visible {
+  outline: none;
+}
 
 .delete-btn {
   top: 10px;
