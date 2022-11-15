@@ -6,9 +6,10 @@ const atlas = mongoose.connection;
 const { findUser } = require('../config/user');
 
 router.get('/api-get-jahms', async (req, res) => {
-  const username = await findUser(req, res);
+  // const username = await findUser(req, res);
+  // {owner: username}
   atlas.db.collection('jahms')
-    .find({owner: username}).toArray((err, result) => {
+    .find({title: 'Breathing'}).toArray((err, result) => {
       if (err) { return console.log(err) }
       res.send(result);
     })

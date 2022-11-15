@@ -16,7 +16,6 @@ export const SaveForm: React.FC = () => {
   const lyrics = useAppSelector(lyricLines);
   const saving = useAppSelector(isSaving);
   const isNew = useAppSelector(seqIsNew);
-  const [chordName, setChordName] = useState('');
 
   const saveData = () => { steps.length > 0 ? saveSequence() : saveChord() }
 
@@ -48,29 +47,27 @@ export const SaveForm: React.FC = () => {
 
   return (
     <div className="save-form modal" style={{display: saving ? 'block' : 'none'}}>
-      <div className="form-view">
-        <div className="form-data form-label">Sequence:</div>
-        <div className="form-data">{title}</div>
-        <div className="form-data form-label">Steps:</div>
-        <div className="form-data">
-          {steps.map(step => {
-            return <div>{step.title}</div>
-          })}
-        </div>
-        <div className="form-data form-label">Lyrics:</div>
-        <div className="form-data">
-          {lyrics.map(lyric => {
-            return <div>{lyric.text}</div>
-          })}
-        </div>
-      </div>
-      <button className="save-btn" onClick={() => saveData()}>Save</button>
-      <button className="cancel-btn" onClick={() => hideForm()}>Cancel</button>
-      <input onInput={(e) => changeChordName(e)}/>
-      <div>{chordName}</div>
-
-      <div className="session-data">
-        <button onClick={() => getSessionData()}>Session</button>
+      {steps.length > 0
+        ? <div className="seq-form-view form-view">
+            <div className="form-data form-label">Sequence:</div>
+            <div className="form-data">{title}</div>
+            <div className="form-data form-label">Steps:</div>
+            <div className=" form-data step-data">
+              {steps.map(step => { return <div>{step.title}, </div> })}
+            </div>
+            <div className="form-data form-label">Lyrics:</div>
+            <div className="form-data">
+              {lyrics.map(lyric => { return <div>{lyric.text}</div> })}
+            </div>
+          </div>
+       :  <div className="chord-form-view form-view">
+            <div className="chord-name-label">Chord name:</div>
+            <input className="chord-name-input" onInput={(e) => changeChordName(e)}/>
+          </div>
+      }
+      <div className="save-form-btns-wrapper">
+        <button className="save-btn save-form-btn" onClick={() => saveData()}>Save</button>
+        <button className="cancel-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
       </div>
     </div>
   )
