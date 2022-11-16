@@ -8,7 +8,7 @@ import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs } from '../../../common/handlers';
 import './steps.css';
-import SeqStep from './seqstep';
+import SeqStep from '../seqstep/seqstep';
 
 export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -16,18 +16,22 @@ export const Steps: React.FC = () => {
   const mode = useAppSelector(theMode);
   const libraryChord = useAppSelector(libChord);
 
-  const dragOverStepHandler = (event) => {
-    event.preventDefault();
-  }
-
   const dragOverHandler = (event) => {
     event.preventDefault();
-    event.target.style.background = 'rgba(210, 100, 150, 0.4)';
+    if (event.target.classList[0] == 'steps-wrapper') {
+      event.target.style.background = 'rgba(210, 100, 150, 0.4)';
+    } else {
+      event.target.style.border = '1px solid pink';
+    }
   }
 
   const dragLeaveHandler = (event) => {
     event.preventDefault();
-    event.target.style.background = 'rgba(0, 0, 0, 0.2)';
+    if (event.target.classList[0] == 'steps-wrapper') {
+      event.target.style.background = 'none';
+    } else {
+      event.target.style.border = '1px solid var(--skel_text_color)';
+    }
   }
 
   const dropHandler = (event) => {
@@ -41,7 +45,7 @@ export const Steps: React.FC = () => {
       }
       dispatch(addLibChord(newStep));
     }
-    event.target.style.background = 'rgba(0, 0, 0, 0.2)';
+    event.target.style.background = 'none';
   }
 
   return (

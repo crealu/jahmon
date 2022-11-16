@@ -1,0 +1,29 @@
+:root {
+  --step-width: 68px;
+  --step-height: 68px;
+}
+
+.seq-step {
+  position: relative;
+  width: var(--step-width);
+  height: var(--step-height);
+  border: 1px solid var(--skel_text_color);
+  background: var(--dark-bg);
+  text-align: center;
+  float: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  transition: 0.3s ease;
+}
+
+.seq-step:hover {
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+.active-step {
+  border: 1px solid white;
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.7);
+}

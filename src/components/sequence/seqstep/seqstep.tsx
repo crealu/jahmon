@@ -3,18 +3,11 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import {
-  currentSeq,
-  theActiveStep,
-  setActiveStep,
-  addLibChord,
-  setStepName,
-  theStepName,
-} from '../../../slices/sequence-slice';
+import { theActiveStep, setActiveStep, setStepName, theStepName } from '../../../slices/sequence-slice';
 import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
-import { clearFretboard, clearRiffs } from '../../../common/handlers';
-import './steps.css';
+import { clearFretboard, clearRiffs, restyleSteps } from '../../../common/handlers';
+import './seqstep.css';
 
 type SeqStepProps = {
   step: object;
@@ -38,14 +31,6 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     showFretNotes(step);
   }
 
-  function restyleSteps(step) {
-    const steps = document.getElementsByClassName('seq-step');
-    for (let s = 0; s < steps.length; s++) {
-      steps[s].classList.remove('active-step');
-    }
-    step.classList.add('active-step');
-  }
-
   const dragStartHandler = (event) => {
     const draggedNumber = event.target.cloneNode(true);
     event.dataTransfer.dropEffect = 'copy';
@@ -59,6 +44,12 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
 
   const dragOverStepHandler = (event) => {
     event.preventDefault();
+    const dropPoint = Math.round((event.nativeEvent.x - 30) / 70);
+    if (event.target.tabIndex == dropPoint) {
+      event.target.borderLeft = '1px solid pink';
+    } else if (event.target.tabIndex < dropPoint) {
+      event.target.borderRight = '1px solid pink';
+    }
   }
 
   const resetStepNumbers = () => {
@@ -82,6 +73,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     } else if (event.target.classList[0] == 'step-wrapper') {
       event.target.appendChild(movedStep);
     }
+    resetStepNumbers();
   }
 
   const resetFretNotes = () => {

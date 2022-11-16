@@ -6,8 +6,6 @@ import { useAppSelector } from '../../hooks';
 import {
   currentTitle,
   setCurrentTitle,
-  currentSeq,
-  theActiveStep,
   resetStepName,
   theStepName,
 } from '../../slices/sequence-slice';
@@ -19,7 +17,7 @@ export const Sequence: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const title = useAppSelector(currentTitle);
   const stepName = useAppSelector(theStepName);
-  
+
   const updateTitle = (event) => {
     dispatch(setCurrentTitle(event.target.value))
   }

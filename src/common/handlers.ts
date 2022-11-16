@@ -24,4 +24,12 @@ export const toggleRiffs = (displayValue) => {
   }
 }
 
+export const restyleSteps = (step) => {
+  const steps = document.getElementsByClassName('seq-step');
+  for (let s = 0; s < steps.length; s++) {
+    steps[s].classList.remove('active-step');
+  }
+  step.classList.add('active-step');
+}
+
 export const refresh = () => { location.reload() }
