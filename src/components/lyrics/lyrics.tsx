@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { inputTest, changeSequenceName } from '../../slices/sequence-slice';
 import { lyricLines, theActiveLine, updateAllLines, addLine, deleteLine } from '../../slices/lyrics-slice';
 import axios from 'axios';
 import './lyrics.css';
@@ -12,7 +11,6 @@ import Panel from './panel/panel';
 
 export const Lyrics: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const name = useAppSelector(inputTest);
   const lines = useAppSelector(lyricLines);
   const active = useAppSelector(theActiveLine);
   const [lineWidth, setLineWidth] = useState(100);
@@ -26,7 +24,6 @@ export const Lyrics: React.FC = () => {
       }]
     };
     dispatch(addLine(newLine))
-    console.log(active);
   }
 
   const deleteThisLine = (event) => {
