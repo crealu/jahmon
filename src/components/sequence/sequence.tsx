@@ -3,7 +3,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { currentTitle, setCurrentTitle } from '../../slices/sequence-slice';
+import {
+  currentTitle,
+  setCurrentTitle,
+  currentSeq,
+  theActiveStep,
+  resetStepName,
+  theStepName,
+} from '../../slices/sequence-slice';
 import Steps from './steps/steps';
 import Buttons from './buttons/buttons';
 import './sequence.css';
@@ -11,9 +18,14 @@ import './sequence.css';
 export const Sequence: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const title = useAppSelector(currentTitle);
-
+  const stepName = useAppSelector(theStepName);
+  
   const updateTitle = (event) => {
     dispatch(setCurrentTitle(event.target.value))
+  }
+
+  const updateStepName = (event) => {
+    dispatch(resetStepName(event.target.value));
   }
 
   return (
@@ -28,6 +40,11 @@ export const Sequence: React.FC = () => {
         />
       </div>
       <Steps />
+      <input
+        className="step-name"
+        onChange={(e) => updateStepName(e)}
+        placeholder={stepName}
+      />
     </div>
   )
 }

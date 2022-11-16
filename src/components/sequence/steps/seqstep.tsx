@@ -3,7 +3,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentSeq, theActiveStep, setActiveStep, addLibChord } from '../../../slices/sequence-slice';
+import {
+  currentSeq,
+  theActiveStep,
+  setActiveStep,
+  addLibChord,
+  setStepName,
+  theStepName,
+} from '../../../slices/sequence-slice';
 import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs } from '../../../common/handlers';
@@ -16,6 +23,8 @@ type SeqStepProps = {
 
 export const SeqStep: React.FC<SeqStepProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
+  const stepName = useAppSelector(theStepName);
+  const active = useAppSelector(theActiveStep);
   const { step, idx } = props;
 
   const updateActiveStep = (event) => {
@@ -24,7 +33,8 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     clearFretboard();
     clearRiffs();
     dispatch(setMode(step.dataset.mode));
-    dispatch(setActiveStep(parseInt(step.dataset.tabIndex)));
+    dispatch(setStepName(step.textContent));
+    dispatch(setActiveStep(parseInt(step.tabIndex)));
     showFretNotes(step);
   }
 
@@ -125,7 +135,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       onDragOver={(e) => dragOverStepHandler(e)}
       onDrop={(e) => dropStepHandler(e)}
     >
-      {step.title}
+      {idx == active ? stepName : step.title}
     </div>
   )
 }
