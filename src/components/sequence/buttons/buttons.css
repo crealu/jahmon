@@ -25,3 +25,8 @@
 .sequence-btn:hover {
   opacity: 1.0;
 }
+
+.delete-btn {
+  top: 10px;
+  height: 8px;
+}
