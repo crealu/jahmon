@@ -1,26 +1,28 @@
 .mode-wrapper {
   position: relative;
+  margin-left: 25px;
+  display: inline-block;
 }
 
 .mode-title {
   position: relative;
-  top: 15px;
+  top: -10px;
 }
 
 .mode-toggle {
   float: left;
-  margin-top: 8px;
   border-radius: 6px;
   margin-right: 10px;
 }
 
 .mode-trail {
   position: relative;
-  top: 10px;
   width: 20px;
 }
 
 .mode-btn {
+  position: relative;
+  top: -10px;
   padding: 3px 0px;
   cursor: pointer;
   transition: 0.25s ease;

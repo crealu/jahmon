@@ -50,7 +50,7 @@ export const Library: React.FC = () => {
 
   return (
     <div className="library" >
-      <h3 className="section-title" onClick={() => getChords()}>Library</h3>
+      <h3 className="section-title library-title" onClick={() => getChords()}>Library</h3>
       <div className="lib-chord-wrapper">
         {chords.map(chord => {
           return (

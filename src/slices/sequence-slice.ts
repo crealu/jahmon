@@ -43,7 +43,8 @@ export const sequenceSlice = createSlice({
       state.stepName = action.payload;
     },
     removeStep(state) {
-      state.steps.splice(state.activeStep, 1);
+      state.steps = state.steps.filter((s, i) => i != state.activeStep);
+      //state.steps.splice(state.activeStep, 1);
     },
     clearSequence(state) {
       state.steps = [];

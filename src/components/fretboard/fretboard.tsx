@@ -1,20 +1,32 @@
 import * as React from 'react';
-import './fretboard.css';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { useAppSelector } from '../../hooks';
+import { currentTitle, setCurrentTitle } from '../../slices/sequence-slice';
 import Frets from './frets/frets';
-import Mode from './mode/mode';
 import Riff from './riff/riff';
-import Buttons from './buttons/buttons';
+import './fretboard.css';
 
 export const Fretboard: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const title = useAppSelector(currentTitle);
+
+  const updateTitle = (event) => {
+    dispatch(setCurrentTitle(event.target.value))
+  }
+
   return (
     <div className="fretboard">
       <div className="fretboard-top">
-        <Mode />
-        <Buttons />
-        <div className="seq-step-name"></div>
+        <input
+          className="sequence-title"
+          onChange={(e) => updateTitle(e)}
+          value={title}
+          placeholder="untitled"
+        />
+        <Riff />
       </div>
       <Frets />
-      <Riff />
     </div>
   )
 }

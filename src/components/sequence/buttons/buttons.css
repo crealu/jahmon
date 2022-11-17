@@ -3,9 +3,7 @@
   display: grid;
   grid-template-columns: repeat(6, 50px);
   float: left;
-  top: 8px;
-  margin-top: 10px;
-  left:18px;
+  margin-left: 18px;
 }
 
 .sequence-btn {

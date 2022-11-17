@@ -16,8 +16,7 @@
   position: absolute;
   top: 15px;
   height: 2px;
-  width: calc(100% - 20px);
-  margin-left: 20px;
+  width: calc(100%);
   background: var(--skel_text_color);
   z-index: 1;
 }
@@ -82,8 +81,14 @@
   border-radius: 0px;
 }
 
-.fret-open {
-  background: var(--skel_text_color);
+.fret-open-chord {
+  border-left: 1px solid var(--dark-divider);
+  background: var(--dark-divider);
+}
+
+.fret-open-riff {
+  border-left: 1px solid rgba(0, 0, 0, 0);
+  background: none;
 }
 
 .fret-circle {

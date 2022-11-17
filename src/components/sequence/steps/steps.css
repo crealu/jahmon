@@ -3,8 +3,8 @@
   margin-left: 30px;
   width: calc(100% - 80px);
   height: 70px;
+  background: rgba(0, 0, 0, 0.1);
   overflow-x: scroll;
-  background: none;
   overflow-y: hidden;
 }
 

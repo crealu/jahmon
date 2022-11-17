@@ -20,7 +20,7 @@
 
 .riff-numbers-wrapper {
   position: relative;
-  left: 30px;
+  float: left;
   width: 90%;
   height: 40px;
   margin-top: 10px;

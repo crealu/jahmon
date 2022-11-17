@@ -54,20 +54,22 @@ export const Lyrics: React.FC = () => {
 
   return (
     <div className="lyrics">
-      <img
-        className="add-lyric-btn lyrics-btn"
-        src="img/icons/add-btn-gray.png"
-        onClick={() => addNewLine()}
-      />
-      <div
-        className="trash-wrapper"
-        onDrop={(e) => dropHandler(e)}
-        onDragOver={(e) => dragOverHandler(e)}
-      >
+      <div className="lyrics-btns-wrapper">
         <img
-          className="lyrics-trash-btn lyrics-btn"
-          src="img/icons/trash-bin-gray.png"
+          className="add-lyric-btn lyrics-btn"
+          src="img/icons/add-btn-gray.png"
+          onClick={() => addNewLine()}
         />
+        <div
+          className="trash-wrapper lyrics-btn"
+          onDrop={(e) => dropHandler(e)}
+          onDragOver={(e) => dragOverHandler(e)}
+        >
+          <img
+            className="lyrics-trash-btn"
+            src="img/icons/trash-bin-gray.png"
+          />
+        </div>
       </div>
       {lines.map((s, i) => {
         return (

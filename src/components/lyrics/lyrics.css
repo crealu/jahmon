@@ -12,6 +12,11 @@
   display: none;
 }
 
+.lyrics-btns-wrapper {
+  width: 200px;
+  margin-bottom: 30px;
+}
+
 .lyrics-btn {
   display: inline-block;
   position: relative;
@@ -26,7 +31,6 @@
 .add-lyric-btn {
   width: 20px;
   border: 2px solid var(--dark-divider);
-  margin-bottom: 20px;
 }
 
 .add-lyric-btn:hover {

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { addStep, removeStep, clearSequence, toggleSave, toggleSettings, currentSeq } from '../../../slices/sequence-slice';
-import { theMode } from '../../../slices/fretboard-slice';
+import { theMode, theRiffen } from '../../../slices/fretboard-slice';
 import './buttons.css';
 
 export const Buttons: React.FC = () => {
