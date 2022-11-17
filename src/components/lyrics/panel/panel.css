@@ -1,0 +1,12 @@
+.lyric-panel {
+  height: 10px;
+  width: 100%;
+}
+
+.panel-step {
+  position: absolute;
+  display: inline-block;
+  margin: 0px;
+  font-size: 14px;
+  color: #03a9f4;
+}

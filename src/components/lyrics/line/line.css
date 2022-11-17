@@ -1,0 +1,12 @@
+.lyric-line {
+  padding: 4px 0px 4px 0px;
+  border: none;
+  caret-color: var(--skel_text_color);
+  color: var(--skel_text_color);
+  background: none;
+  font-size: 16px;
+}
+
+.lyric-line:focus-visible {
+  outline: none;
+}

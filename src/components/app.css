@@ -11,15 +11,15 @@
 body {
   overflow: hidden;
   font-family: 'Comfortaa';
-  color: var(--skel_text_color);
   margin: 0;
   padding: 0px;
   background: var(--dark-bg);
+  color: var(--skel_text_color);
 }
 
 .jahmon-ui {
   display: grid;
-  grid-template-columns: 70vw 30vw;
+  grid-template-columns: 20vw 80vw;
 }
 
 .modal {

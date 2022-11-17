@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
-import { addStepToPanel, updatePanelStep } from '../../../slices/lyrics-slice';
-import '../lyrics.css';
+import { addPanelStep, updatePanelStep } from '../../../slices/lyrics-slice';
+import './panel.css';
 
 type PanelProps<any> = {
   width: number;
@@ -16,6 +16,18 @@ export const Panel: React.FC<PanelProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const chord = useAppSelector(libChord);
   const { width, steps } = props;
+
+  const dragStartHandler = (event, idx) => {
+    event.dataTransfer.dropEffect = 'move';
+    event.target.classList.add('moved-panel-chord')
+    const chord = {
+      title: event.target.textContent,
+      noteids: '',
+      ofPanel: true,
+      num: idx,
+    }
+    dispatch(setGrabbed(chord));
+  }
 
   const dragOverHandler = (event) => {
     event.preventDefault();
@@ -35,23 +47,11 @@ export const Panel: React.FC<PanelProps> = (props) => {
       offset: event.clientX - 30 + 'px',
       num: chord.num,
     }
-    console.log(chord);
     if (chord.hasOwnProperty('ofPanel')) {
       dispatch(updatePanelStep(panelChord))
     } else {
-      dispatch(addStepToPanel(panelChord))
+      dispatch(addPanelStep(panelChord))
     }
-  }
-
-  const dragStartHandler = (event, idx) => {
-    event.dataTransfer.dropEffect = 'move';
-    const chord = {
-      title: event.target.textContent,
-      noteids: '',
-      ofPanel: true,
-      num: idx,
-    }
-    dispatch(setGrabbed(chord));
   }
 
   return (
@@ -69,6 +69,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
             style={{left: step.offset}}
             draggable="true"
             onDragStart={(e) => dragStartHandler(e, idx)}
+            onDragOver={() => {}}
           >
             {step.chord}
           </div>

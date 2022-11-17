@@ -12,7 +12,7 @@ export interface SequenceState {
 }
 
 export const sequenceInitialState: SequenceState = {
-  steps: [],
+  steps: [{title: '', mode: 'chord', noteids: '', fretnums: ''}],
   title: '',
   activeStep: 0,
   save: false,

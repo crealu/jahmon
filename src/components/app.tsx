@@ -12,13 +12,13 @@ export const App: React.FC = () => {
   return (
     <div className="jahmon-ui">
       <div className="jahmon-ui-col">
+        <SequencesDB />
+        <Library />
+      </div>
+      <div className="jahmon-ui-col">
         <Fretboard />
         <Sequence />
         <Lyrics />
-      </div>
-      <div className="jahmon-ui-col">
-        <Library />
-        <SequencesDB />
       </div>
       <SaveForm />
       <Settings />

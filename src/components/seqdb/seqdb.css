@@ -1,8 +1,8 @@
 .db-sequences {
   position: relative;
-  height: 50vh;
-  border-left: 1px solid var(--dark-divider);
-  border-top: 1px solid var(--dark-divider);
+  height: 30vh;
+  border-right: 1px solid var(--dark-divider);
+  border-bottom: 1px solid var(--dark-divider);
 }
 
 .saved-sequences {

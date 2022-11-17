@@ -4,7 +4,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord } from '../../../slices/library-slice';
 import { lyricLines, theActiveLine, activateLine, updateLine } from '../../../slices/lyrics-slice';
-import '../lyrics.css';
+import './line.css';
 
 type LineProps<any> = {
   width: number;

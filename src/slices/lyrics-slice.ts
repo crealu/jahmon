@@ -30,12 +30,15 @@ export const lyricsSlice = createSlice({
     activateLine(state, action: PayloadAction<number>) {
       state.activeLine = action.payload;
     },
-    addStepToPanel(state, action: PayloadAction<object>) {
+    addPanelStep(state, action: PayloadAction<object>) {
       state.lines[state.activeLine].panel.push(action.payload);
     },
     updatePanelStep(state, action: PayloadAction<any>) {
       state.lines[state.activeLine].panel[action.payload.num].offset = action.payload.offset
     },
+    deletePanelStep(state, action: PayloadAction<any>) {
+      state.lines[state.activeLine].panel.filter(p => p.chord != action.payload);
+    }
   }
 });
 
@@ -45,8 +48,9 @@ export const {
   updateLine,
   updateAllLines,
   activateLine,
-  addStepToPanel,
+  addPanelStep,
   updatePanelStep,
+  deletePanelStep,
 } =  lyricsSlice.actions;
 export const lyricLines = ({ lyrics: { lines }}: RootState): any[] => lines;
 export const theActiveLine = ({ lyrics: { activeLine }}: RootState): any[] => activeLine;
