@@ -7,6 +7,7 @@ export interface FretboardState {
   mode: string;
   riffen: any;
   riffNums: number[];
+  snapshot: string[];
 }
 
 export const fretboardInitialState: FretboardState = {
@@ -14,7 +15,8 @@ export const fretboardInitialState: FretboardState = {
   strings: new Array(6).fill(0),
   mode: 'chord',
   riffen: '',
-  riffNums: new Array(21).fill(0).map((n, i) => { return i })
+  riffNums: new Array(21).fill(0).map((n, i) => { return i }),
+  snapshot: [],
 };
 
 export const fretboardSlice = createSlice({
@@ -27,13 +29,20 @@ export const fretboardSlice = createSlice({
     setMode(state, action: PayloadAction<string>) {
       state.mode = action.payload;
     },
+    addToSnapshot(state, action: PayloadAction<string>) {
+      state.snapshot = [...state.snapshot, action.payload]
+    },
+    removeFromSnapshot(state, action: PayloadAction<string>) {
+      state.snapshot = state.snapshot.filter(s => s != action.payload)
+    }
   }
 });
 
-export const { setRiffen, setMode } = fretboardSlice.actions;
+export const { setRiffen, setMode, addToSnapshot, removeFromSnapshot } = fretboardSlice.actions;
 export const theRiffen = ({ fretboard: { riffen }}: RootState): any => riffen;
 export const theMode = ({ fretboard: { mode }}: RootState): string => mode;
 export const theRiffNums = ({ fretboard: { riffNums }}: RootState): any[] => riffNums;
 export const theStrings = ({ fretboard: { strings }}: RootState): number[] => strings;
 export const theFrets = ({ fretboard: { frets }}: RootState): any[] => frets;
+export const theSnapshot = ({ fretboard: { snapshot }}: RootState): string[] => snapshot;
 export default fretboardSlice.reducer;

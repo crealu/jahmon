@@ -3,7 +3,17 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { setRiffen, theRiffen, theMode, theStrings, theFrets } from '../../../slices/fretboard-slice';
+import {
+  setRiffen,
+  theRiffen,
+  theMode,
+  theStrings,
+  theFrets,
+  theSnapshot,
+  addToSnapshot,
+  removeFromSnapshot,
+} from '../../../slices/fretboard-slice';
+import { libraryChords } from '../../../slices/library-slice';
 import './frets.css';
 
 export const Frets = () => {
@@ -12,6 +22,8 @@ export const Frets = () => {
   const strings = useAppSelector(theStrings);
   const mode = useAppSelector(theMode);
   const riffen = useAppSelector(theRiffen);
+  const chords = useAppSelector(libraryChords);
+  const snapshot = useAppSelector(theSnapshot);
 
   const returnStringClass = (sn) => {
     return mode == 'chord'
@@ -21,6 +33,7 @@ export const Frets = () => {
 
   const toggleNote = (element) => {
     element.style.display = element.style.display == 'block' ? 'none' : 'block';
+    snap(element);
   }
 
   const placeNote = (e) => {
@@ -32,6 +45,14 @@ export const Frets = () => {
       toggleNote(e.target);
     }
   };
+
+  const snap = (element) => {
+    if (element.style.display == 'block') {
+      dispatch(addToSnapshot(element.dataset.noteid));
+    } else {
+      dispatch(removeFromSnapshot(element.dataset.noteid));
+    }
+  }
 
   const placeRiffNote = (e) => { };
 

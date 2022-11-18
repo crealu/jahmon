@@ -10,7 +10,8 @@ import axios from 'axios';
 
 export const Library: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const chords = JSON.parse(localStorage.getItem('chords'))
+  // const chords = JSON.parse(localStorage.getItem('chords'));
+  const chords = useAppSelector(libraryChords);
 
   const placeNotes = (event) => {
     clearFretboard();
@@ -49,14 +50,29 @@ export const Library: React.FC = () => {
       .catch(err => { throw err });
   }
 
+  const setChordIds = () => {
+    let chordIds = [];
+    let arr = [], strArr = [];
+    chords.forEach(chord => {
+      arr = [];
+      chord.noteids.forEach(noteid => {
+        arr.push(parseInt(noteid.replace('s', '').replace('f', '')))
+      })
+      strArr = arr.sort().map(id => { return id.toString() })
+      chordIds.push(parseInt(strArr.join('')));
+    })
+    localStorage.setItem('chordIds', chordIds);
+  }
+
   useEffect(() => {
-    dispatch(setLibraryChords(chords))
+    dispatch(setLibraryChords(chords));
+    // setChordIds();
     // getChordsFromStorage();
     // getChordsFromDB() ;
   }, [])
 
   return (
-    <div className="library" onClick={() => getChordsFromStorage()}>
+    <div className="library">
       <h3 className="section-title library-title">Library</h3>
       <div className="lib-chord-wrapper">
         {chords.map(chord => {

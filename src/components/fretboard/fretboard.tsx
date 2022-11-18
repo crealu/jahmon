@@ -5,6 +5,7 @@ import { useAppSelector } from '../../hooks';
 import { currentTitle, setCurrentTitle } from '../../slices/sequence-slice';
 import Frets from './frets/frets';
 import Riff from './riff/riff';
+import Snapshot from './snapshot/snapshot';
 import './fretboard.css';
 
 export const Fretboard: React.FC = () => {
@@ -24,6 +25,7 @@ export const Fretboard: React.FC = () => {
           value={title}
           placeholder="untitled"
         />
+        <Snapshot />
         <Riff />
       </div>
       <Frets />
