@@ -10,7 +10,8 @@ import axios from 'axios';
 
 export const Library: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const chords = useAppSelector(libraryChords);
+  // const chords = useAppSelector(libraryChords);
+  const chords = JSON.parse(localStorage.getItem('chords'))
 
   const placeNotes = (event) => {
     clearFretboard();
@@ -40,17 +41,29 @@ export const Library: React.FC = () => {
     event.preventDefault();
   }
 
-  const getChords = () => {
+  const getChordsFromDB = () => {
     axios.get('/api-get-lib')
-      .then(res => { dispatch(setLibraryChords(res.data)) })
+      .then(res => {
+        // dispatch(setLibraryChords(res.data))
+        localStorage.setItem('chords', JSON.stringify(res.data));
+      })
       .catch(err => { throw err });
   }
 
-  useEffect(() => { getChords() }, [])
+  const getChordsFromStorage = () => {
+    const allChords = JSON.parse(localStorage.getItem('chords'));
+    console.log(allChords[0]);
+    setLibraryChords(allChords);
+  }
+
+  useEffect(() => {
+    getChordsFromStorage();
+    // getChordsFromDB() ;
+  }, [])
 
   return (
-    <div className="library" >
-      <h3 className="section-title library-title" onClick={() => getChords()}>Library</h3>
+    <div className="library" onClick={() => getChordsFromStorage()}>
+      <h3 className="section-title library-title">Library</h3>
       <div className="lib-chord-wrapper">
         {chords.map(chord => {
           return (
