@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../hooks';
 import { theActiveStep, setActiveStep, setStepName, theStepName } from '../../../slices/sequence-slice';
 import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
-import { clearFretboard, clearRiffs, restyleSteps } from '../../../common/handlers';
+import { clearFretboard, clearRiffs, restyleSteps, unstyleActive } from '../../../common/handlers';
 import './seqstep.css';
 
 type SeqStepProps = {
@@ -22,6 +22,12 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
 
   const updateActiveStep = (event) => {
     const step = event.target;
+    if (step.tabIndex == active) {
+      unstyleActive();
+      dispatch(setActiveStep(null));
+      dispatch(setStepName(''));
+      return;
+    }
     restyleSteps(step);
     clearFretboard();
     clearRiffs();
