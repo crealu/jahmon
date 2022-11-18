@@ -39,4 +39,26 @@ export const unstyleActive = () => {
   }
 }
 
+export const collectChordNotes = () => {
+  let notes = document.getElementsByClassName('fret-note');
+  let noteids = [];
+  for (let n = 0; n < notes.length; n++) {
+    if (notes[n].style.display == 'block') {
+      noteids.push(notes[n].dataset.noteid);
+    }
+  }
+  return [noteids.join(','), '']
+}
+
+export const collectRiffNotes = () => {
+  let notes = document.getElementsByClassName('riff-note');
+  let noteids = [];
+  let fretnums = [];
+  for (let n = 0; n < notes.length; n++) {
+    noteids.push(notes[n].dataset.noteid);
+    fretnums.push(notes[n].textContent);
+  }
+  return [noteids.join(','), fretnums.join(',')]
+}
+
 export const refresh = () => { location.reload() }

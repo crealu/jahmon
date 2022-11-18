@@ -33,8 +33,9 @@ export const sequenceSlice = createSlice({
       state.activeStep = null;
       state.stepName = '';
     },
-    updateStep(state, action: Payload<string>) {
-      state.steps[state.activeStep].noteids = action.payload;
+    updateStep(state, action: Payload<object>) {
+      state.steps[state.activeStep].noteids = action.payload.noteids;
+      state.steps[state.activeStep].fretnums = action.payload.fretnums;
     },
     setActiveSequence(state, action: PayloadAction<object>) {
       state.title = action.payload.title;
