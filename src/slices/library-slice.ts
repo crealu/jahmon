@@ -8,8 +8,10 @@ export interface LibraryState {
 }
 
 export const libraryInitialState: LibraryState = {
-  chords: JSON.parse(localStorage.getItem('chords')),
-  chordIds: localStorage.getItem('chordIds').split(',').map(id => { return parseInt(id) }),
+  chords: [],
+  chordIds: [],
+  // chords: JSON.parse(localStorage.getItem('chords')),
+  // chordIds: localStorage.getItem('chordIds'),
   grabbed: {
     name: '',
     noteids: ''
@@ -20,8 +22,11 @@ export const librarySlice = createSlice({
   initialState: libraryInitialState,
   name: 'library',
   reducers: {
-    setLibraryChords(state, action: Payload<any>) {
+    setLibraryChords(state, action: Payload<any[]>) {
       state.chords = action.payload;
+    },
+    setChordIds(state, action: Payload<string[]>) {
+      state.chordIds = action.payload;
     },
     setGrabbed(state,  action: PaloadAction<object>) {
       state.grabbed = action.payload;
@@ -29,8 +34,8 @@ export const librarySlice = createSlice({
   }
 });
 
-export const { setLibraryChords, setGrabbed } = librarySlice.actions;
-export const libraryChords = ({ library: { chords }}: RootState): any[] => chords;
+export const { setLibraryChords, setChordIds, setGrabbed } = librarySlice.actions;
+export const theChords = ({ library: { chords }}: RootState): any[] => chords;
 export const theChordIds = ({ library: { chordIds }}: RootState): any[] => chordIds;
 export const libChord = ({ library: { grabbed }}: RootState): object => grabbed;
 export default librarySlice.reducer;

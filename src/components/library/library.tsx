@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
-import { libraryChords, setLibraryChords, setGrabbed } from '../../slices/library-slice';
+import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../slices/library-slice';
+import { theSnapshot } from '../../slices/fretboard-slice';
 import { clearFretboard } from '../../common/handlers';
 import axios from 'axios';
 
 export const Library: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  // const chords = JSON.parse(localStorage.getItem('chords'));
-  const chords = useAppSelector(libraryChords);
+  const chords = useAppSelector(theChords);
 
   const placeNotes = (event) => {
     clearFretboard();
@@ -24,6 +24,8 @@ export const Library: React.FC = () => {
         }
       }
     }
+    // setSnapshot with noteids
+    // codify snapshot
   }
 
   const dragStartHandler = (event) => {
@@ -41,19 +43,20 @@ export const Library: React.FC = () => {
     event.preventDefault();
   }
 
-  const getChordsFromDB = () => {
-    axios.get('/api-get-lib')
+  const getChordsFromDB = async () => {
+    await axios.get('/api-get-lib')
       .then(res => {
-        // dispatch(setLibraryChords(res.data))
+        dispatch(setLibraryChords(res.data));
+        dispatch(setChordIds(convertChordIds(res.data)));
         localStorage.setItem('chords', JSON.stringify(res.data));
       })
       .catch(err => { throw err });
   }
 
-  const setChordIds = () => {
+  const convertChordIds = (tchords) => {
     let chordIds = [];
     let arr = [], strArr = [];
-    chords.forEach(chord => {
+    tchords.forEach(chord => {
       arr = [];
       chord.noteids.forEach(noteid => {
         arr.push(parseInt(noteid.replace('s', '').replace('f', '')))
@@ -61,11 +64,13 @@ export const Library: React.FC = () => {
       strArr = arr.sort().map(id => { return id.toString() })
       chordIds.push(parseInt(strArr.join('')));
     })
-    localStorage.setItem('chordIds', chordIds);
+    return chordIds.join(',');
+    // localStorage.setItem('chordIds', chordIds.join(','));
   }
 
   useEffect(() => {
-    dispatch(setLibraryChords(chords));
+    getChordsFromDB();
+    // dispatch(setLibraryChords(chords));
     // setChordIds();
     // getChordsFromStorage();
     // getChordsFromDB() ;

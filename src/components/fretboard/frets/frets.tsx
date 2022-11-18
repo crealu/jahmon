@@ -13,7 +13,7 @@ import {
   addToSnapshot,
   removeFromSnapshot,
 } from '../../../slices/fretboard-slice';
-import { libraryChords } from '../../../slices/library-slice';
+import { theChords } from '../../../slices/library-slice';
 import './frets.css';
 
 export const Frets = () => {
@@ -22,7 +22,7 @@ export const Frets = () => {
   const strings = useAppSelector(theStrings);
   const mode = useAppSelector(theMode);
   const riffen = useAppSelector(theRiffen);
-  const chords = useAppSelector(libraryChords);
+  const chords = useAppSelector(theChords);
   const snapshot = useAppSelector(theSnapshot);
 
   const returnStringClass = (sn) => {

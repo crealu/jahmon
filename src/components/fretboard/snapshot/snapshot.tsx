@@ -3,14 +3,15 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theMode, theSnapshot } from '../../../slices/fretboard-slice';
-import { libraryChords, theChordIds } from '../../../slices/library-slice';
+import { theChords, theChordIds } from '../../../slices/library-slice';
 import './snapshot.css';
 
 export const Snapshot: React.FC = () => {
   const snapshot = useAppSelector(theSnapshot);
-  const chords = useAppSelector(libraryChords);
   const mode = useAppSelector(theMode);
+  const chords = useAppSelector(theChords);
   const chordIds = useAppSelector(theChordIds);
+  console.dir(chordIds.toString().split(','));
 
   const codifySnapshot = () => {
     let arr = [], strArr = [];
@@ -22,10 +23,11 @@ export const Snapshot: React.FC = () => {
   }
 
   const trueSnapshot = codifySnapshot();
+  const trueIds = chordIds.toString().split(',').map(id => { return parseInt(id) });
 
   const matchSnapshot = () => {
     let chordName;
-    chordIds.forEach((id, i) => {
+    trueIds.forEach((id, i) => {
       if (id == trueSnapshot) {
         chordName = chords[i].name;
       }
