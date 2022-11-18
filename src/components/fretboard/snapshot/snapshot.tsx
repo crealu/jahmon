@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theMode, theSnapshot } from '../../../slices/fretboard-slice';
+import { theMode, theSnapshot, setSnapshotName } from '../../../slices/fretboard-slice';
 import { theChords, theChordIds } from '../../../slices/library-slice';
 import './snapshot.css';
 
@@ -11,7 +11,6 @@ export const Snapshot: React.FC = () => {
   const mode = useAppSelector(theMode);
   const chords = useAppSelector(theChords);
   const chordIds = useAppSelector(theChordIds);
-  console.dir(chordIds.toString().split(','));
 
   const codifySnapshot = () => {
     let arr = [], strArr = [];
@@ -30,6 +29,7 @@ export const Snapshot: React.FC = () => {
     trueIds.forEach((id, i) => {
       if (id == trueSnapshot) {
         chordName = chords[i].name;
+        setSnapshotName(chords[i].name);
       }
     })
     return chordName;

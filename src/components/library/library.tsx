@@ -65,7 +65,6 @@ export const Library: React.FC = () => {
       chordIds.push(parseInt(strArr.join('')));
     })
     return chordIds.join(',');
-    // localStorage.setItem('chordIds', chordIds.join(','));
   }
 
   useEffect(() => {

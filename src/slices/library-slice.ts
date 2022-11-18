@@ -10,8 +10,6 @@ export interface LibraryState {
 export const libraryInitialState: LibraryState = {
   chords: [],
   chordIds: [],
-  // chords: JSON.parse(localStorage.getItem('chords')),
-  // chordIds: localStorage.getItem('chordIds'),
   grabbed: {
     name: '',
     noteids: ''

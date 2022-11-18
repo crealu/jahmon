@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep } from '../../../slices/sequence-slice';
-import { theMode, theRiffen } from '../../../slices/fretboard-slice';
+import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive } from '../../../common/handlers';
 import './buttons.css';
 
@@ -13,6 +13,7 @@ export const Buttons: React.FC = () => {
   const mode = useAppSelector(theMode);
   const seq = useAppSelector(currentSeq);
   const active = useAppSelector(theActiveStep);
+  const snapshotName = useAppSelector(theSnapshotName);
   const clearSeq = () => { dispatch(clearSequence()) };
   const saveSeq = () => { dispatch(toggleSave(true)) };
   const saveToLibrary = () => { dispatch(toggleSave(true)) };
@@ -42,9 +43,11 @@ export const Buttons: React.FC = () => {
 
   const addThisStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-    const stepTitle = mode == 'chord' ? 'C' : 'R';
+    const stepTitle = mode == 'chord'
+      ? document.getElementsByClassName('snapshot')[0].textContent
+      : 'R' + steps.length;
     const newStep = {
-      title: stepTitle + seq.length,
+      title: stepTitle,
       noteids: noteData[0],
       mode: mode,
       fretnums: noteData[1]
@@ -59,7 +62,6 @@ export const Buttons: React.FC = () => {
 
   const updateThisStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-
     dispatch(updateStep(noteData[0]));
   }
 
