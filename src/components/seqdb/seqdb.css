@@ -1,15 +1,16 @@
 .db-sequences {
   position: relative;
-  height: 30vh;
+  height: 40vh;
   border-right: 1px solid var(--dark-divider);
   border-bottom: 1px solid var(--dark-divider);
 }
 
 .saved-sequences {
-  padding-top: 20px;
+  margin-top: 20px;
   overflow-y: scroll;
   overflow-x: hidden;
   width: 100%;
+  height: calc(40vh - 55px);
 }
 
 .db-sequence {
@@ -28,5 +29,5 @@
 }
 
 .saved-sequences::-webkit-scrollbar {
-  width: 0 !important;
+  display: none;
 }
