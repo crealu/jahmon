@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentSeq, theActiveStep, setActiveStep, addLibChord } from '../../../slices/sequence-slice';
+import { currentSeq, theActiveStep, setActiveStep, addStep } from '../../../slices/sequence-slice';
 import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs } from '../../../common/handlers';
@@ -43,7 +43,7 @@ export const Steps: React.FC = () => {
         mode: 'chord',
         fretnums: ''
       }
-      dispatch(addLibChord(newStep));
+      dispatch(addStep(newStep));
     }
     event.target.style.background = 'none';
   }

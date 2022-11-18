@@ -3,15 +3,19 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, removeStep, clearSequence, toggleSave, toggleSettings, currentSeq } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, clearSequence, toggleSave, toggleSettings, currentSeq } from '../../../slices/sequence-slice';
 import { theMode, theRiffen } from '../../../slices/fretboard-slice';
+import { unstyleActive } from '../../../common/handlers';
 import './buttons.css';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
   const seq = useAppSelector(currentSeq);
-  const deleteStep = () => { dispatch(removeStep()); }
+  const deleteThisStep = () => {
+    dispatch(deleteStep());
+    unstyleActive();
+  }
   const clearSeq = () => { dispatch(clearSequence()) };
   const saveSeq = () => { dispatch(toggleSave(true)) };
   const saveToLibrary = () => { dispatch(toggleSave(true)) };
@@ -39,7 +43,7 @@ export const Buttons: React.FC = () => {
     return [noteids.join(','), '']
   }
 
-  const addNewStep = () => {
+  const addThisStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
     const stepTitle = mode == 'chord' ? 'C' : 'R';
     const newStep = {
@@ -56,12 +60,12 @@ export const Buttons: React.FC = () => {
       <img
         className="sequence-btn add-step-btn"
         src="img/icons/add-btn-gray.png"
-        onClick={() => addNewStep()}
+        onClick={() => addThisStep()}
       />
       <img
         className="sequence-btn delete-btn"
         src="img/icons/delete-btn-gray.png"
-        onClick={() => deleteStep()}
+        onClick={() => deleteThisStep()}
       />
       <img
         className="sequence-btn"

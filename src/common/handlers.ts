@@ -32,4 +32,11 @@ export const restyleSteps = (step) => {
   step.classList.add('active-step');
 }
 
+export const unstyleActive = () => {
+  const steps = document.getElementsByClassName('seq-step');
+  for (let s = 0; s < steps.length; s++) {
+    steps[s].classList.remove('active-step');
+  }
+}
+
 export const refresh = () => { location.reload() }

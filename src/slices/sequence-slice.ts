@@ -12,9 +12,9 @@ export interface SequenceState {
 }
 
 export const sequenceInitialState: SequenceState = {
-  steps: [{title: '', mode: 'chord', noteids: '', fretnums: ''}],
+  steps: [],
   title: '',
-  activeStep: 0,
+  activeStep: null,
   save: false,
   isNew: true,
   settings: false,
@@ -25,6 +25,15 @@ export const sequenceSlice = createSlice({
   initialState: sequenceInitialState,
   name: 'sequence',
   reducers: {
+    addStep(state, action: Payload<object>) {
+      state.steps = [...state.steps, action.payload];
+    },
+    deleteStep(state) {
+      console.log(state.activeStep);
+      state.steps = state.steps.filter((s, i) => i != state.activeStep);
+      state.activeStep = null;
+      state.stepName = '';
+    },
     setActiveSequence(state, action: PayloadAction<object>) {
       state.title = action.payload.title;
       state.steps = action.payload.steps;
@@ -42,10 +51,6 @@ export const sequenceSlice = createSlice({
       state.steps[state.activeStep].title = action.payload;
       state.stepName = action.payload;
     },
-    removeStep(state) {
-      state.steps = state.steps.filter((s, i) => i != state.activeStep);
-      //state.steps.splice(state.activeStep, 1);
-    },
     clearSequence(state) {
       state.steps = [];
     },
@@ -55,12 +60,6 @@ export const sequenceSlice = createSlice({
     setIsNew(state, action: Payload<boolean>) {
       state.isNew = action.payload;
     },
-    addStep(state, action: Payload<object>) {
-      state.steps = [...state.steps, action.payload];
-    },
-    addLibChord(state, action: Payload<object>) {
-      state.steps = [...state.steps, action.payload];
-    },
     toggleSettings(state, action: Payload<boolean>) {
       state.settings = action.payload;
     }
@@ -68,15 +67,14 @@ export const sequenceSlice = createSlice({
 });
 
 export const {
+  addStep,
+  deleteStep,
   setActiveSequence,
   setActiveStep,
-  addStep,
-  removeStep,
   clearSequence,
   toggleSave,
   toggleSettings,
   setIsNew,
-  addLibChord,
   setCurrentTitle,
   setStepName,
   resetStepName
