@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, clearSequence, toggleSave, toggleSettings, currentSeq } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep } from '../../../slices/sequence-slice';
 import { theMode, theRiffen } from '../../../slices/fretboard-slice';
 import { unstyleActive } from '../../../common/handlers';
 import './buttons.css';
@@ -12,10 +12,7 @@ export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
   const seq = useAppSelector(currentSeq);
-  const deleteThisStep = () => {
-    dispatch(deleteStep());
-    unstyleActive();
-  }
+  const active = useAppSelector(theActiveStep);
   const clearSeq = () => { dispatch(clearSequence()) };
   const saveSeq = () => { dispatch(toggleSave(true)) };
   const saveToLibrary = () => { dispatch(toggleSave(true)) };
@@ -55,12 +52,23 @@ export const Buttons: React.FC = () => {
     dispatch(addStep(newStep));
   }
 
+  const deleteThisStep = () => {
+    dispatch(deleteStep());
+    unstyleActive();
+  }
+
+  const updateThisStep = () => {
+    const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
+
+    dispatch(updateStep(noteData[0]));
+  }
+
   return (
     <div className="sequence-btn-wrapper">
       <img
         className="sequence-btn add-step-btn"
         src="img/icons/add-btn-gray.png"
-        onClick={() => addThisStep()}
+        onClick={() => { active != null ? updateThisStep() : addThisStep()}}
       />
       <img
         className="sequence-btn delete-btn"

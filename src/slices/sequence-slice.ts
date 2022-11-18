@@ -29,10 +29,12 @@ export const sequenceSlice = createSlice({
       state.steps = [...state.steps, action.payload];
     },
     deleteStep(state) {
-      console.log(state.activeStep);
       state.steps = state.steps.filter((s, i) => i != state.activeStep);
       state.activeStep = null;
       state.stepName = '';
+    },
+    updateStep(state, action: Payload<string>) {
+      state.steps[state.activeStep].noteids = action.payload;
     },
     setActiveSequence(state, action: PayloadAction<object>) {
       state.title = action.payload.title;
@@ -69,6 +71,7 @@ export const sequenceSlice = createSlice({
 export const {
   addStep,
   deleteStep,
+  updateStep,
   setActiveSequence,
   setActiveStep,
   clearSequence,
