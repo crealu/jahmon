@@ -29,7 +29,7 @@ export const SequencesDB: React.FC = () => {
 
   return (
     <div className="db-sequences">
-      <h3 className="section-title" onClick={() => {console.log(sequences)}}>Sequences</h3>
+      <h3 className="section-title seqdb-title">Sequences</h3>
       <div className="saved-sequences">
         {sequences.map(sequence => {
           return (
