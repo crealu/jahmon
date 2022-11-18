@@ -5,6 +5,7 @@ import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { resetStepName, theStepName } from '../../slices/sequence-slice';
 import { theMode, theRiffen } from '../../slices/fretboard-slice';
+import { clearFretboard, clearRiffs } from '../../common/handlers';
 import Steps from './steps/steps';
 import Buttons from './buttons/buttons';
 import Mode from './mode/mode';
@@ -43,7 +44,7 @@ export const Sequence: React.FC = () => {
             onClick={() => { mode == 'chord' ? clearFretboard() : clearRiffs()}}
           >
             Clear
-          </div>  
+          </div>
           <img
             className="fretboard-trash-btn fretboard-btn"
             src="img/icons/trash-bin-gray.png"

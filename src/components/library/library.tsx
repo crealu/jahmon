@@ -10,7 +10,6 @@ import axios from 'axios';
 
 export const Library: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  // const chords = useAppSelector(libraryChords);
   const chords = JSON.parse(localStorage.getItem('chords'))
 
   const placeNotes = (event) => {
@@ -50,14 +49,9 @@ export const Library: React.FC = () => {
       .catch(err => { throw err });
   }
 
-  const getChordsFromStorage = () => {
-    const allChords = JSON.parse(localStorage.getItem('chords'));
-    console.log(allChords[0]);
-    setLibraryChords(allChords);
-  }
-
   useEffect(() => {
-    getChordsFromStorage();
+    dispatch(setLibraryChords(chords))
+    // getChordsFromStorage();
     // getChordsFromDB() ;
   }, [])
 
