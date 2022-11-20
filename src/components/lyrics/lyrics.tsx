@@ -39,13 +39,20 @@ export const Lyrics: React.FC = () => {
 
   const dropHandler = (event) => {
     event.preventDefault();
-    console.log(event.target);
-    event.target.appendChild(riffen);
-    while (event.target.children[1]) {
-      event.target.removeChild(event.target.children[1]);
-    }
     const movedPanelStep = document.getElementsByClassName('moved-panel-chord')[0];
-    dispatch(deletePanelStep(movedPanelStep.textContent));
+    if (event.target.classList[0] == 'lyrics-trash-btn') {
+      console.log(event.target.parentNode);
+      event.target.parentNode.appendChild(movedPanelStep);
+      while (event.target.parentNode.children[1]) {
+        event.target.parentNode.removeChild(event.target.parentNode.children[1]);
+      }
+    } else {
+      event.target.appendChild(movedPanelStep);
+      while (event.target.children[1]) {
+        event.target.removeChild(event.target.children[1]);
+      }
+    }
+    // dispatch(deletePanelStep(movedPanelStep.textContent));
   }
 
   const dragOverHandler = (event) => {
@@ -68,6 +75,8 @@ export const Lyrics: React.FC = () => {
           <img
             className="lyrics-trash-btn"
             src="img/icons/trash-bin-gray.png"
+            onDrop={(e) => dropHandler(e)}
+            onDragOver={(e) => dragOverHandler(e)}
           />
         </div>
       </div>
