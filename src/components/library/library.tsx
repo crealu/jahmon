@@ -53,6 +53,13 @@ export const Library: React.FC = () => {
       .catch(err => { throw err });
   }
 
+  const getChordsFromStorage = () => {
+    const storageChords = localStorage.getItem('chords').split(',');
+    const storageIds = localStorage.getItem('chordIds');
+    dispatch(setLibraryChords(storageChords));
+    dispatch(setChordIds(storageIds));
+  }
+
   const convertChordIds = (tchords) => {
     let chordIds = [];
     let arr = [], strArr = [];
