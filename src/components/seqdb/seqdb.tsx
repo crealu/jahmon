@@ -5,6 +5,7 @@ import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { setActiveSequence, setIsNew } from '../../slices/sequence-slice';
 import { updateAllLines } from '../../slices/lyrics-slice';
+import NewSeqBtn from './newseq';
 import axios from 'axios';
 import './seqdb.css';
 
@@ -41,6 +42,7 @@ export const SequencesDB: React.FC = () => {
             </div>
           )
         })}
+        <NewSeqBtn />
       </div>
     </div>
   )

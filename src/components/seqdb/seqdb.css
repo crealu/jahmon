@@ -14,7 +14,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
   width: 100%;
-  height: calc(40vh - 55px);
+  height: calc(40vh - 60px);
 }
 
 .db-sequence {
@@ -25,6 +25,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0);
   cursor: pointer;
   transition: 0.25s ease;
+  overflow-y: hidden;
 }
 
 .db-sequence:hover {
@@ -34,4 +35,16 @@
 
 .saved-sequences::-webkit-scrollbar {
   display: none;
+}
+
+.new-seq-btn-img {
+  float: left;
+  width: 20px;
+}
+
+.new-seq-btn-text {
+  float: left;
+  padding-left: 10px;
+  margin: 0px;
+  margin-top: 3px;
 }
