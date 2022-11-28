@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
 const atlas = mongoose.connection;
 
 router.get('/login', (req, res) => {
