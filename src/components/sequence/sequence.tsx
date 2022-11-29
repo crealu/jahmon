@@ -5,7 +5,7 @@ import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { resetStepName, theStepName } from '../../slices/sequence-slice';
 import { theMode, theRiffen } from '../../slices/fretboard-slice';
-import { clearFretboard, clearRiffs } from '../../common/handlers';
+import { clearFretboard, clearRiffs } from '../../common/helpers';
 import Steps from './steps/steps';
 import Buttons from './buttons/buttons';
 import Mode from './mode/mode';

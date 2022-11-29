@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
 import { currentTitle, currentSeq, isSaving, seqIsNew, toggleSave } from '../../slices/sequence-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
-import { refresh } from '../../common/handlers';
+import { refresh } from '../../common/helpers';
 import axios from 'axios';
 import './saveform.css';
 

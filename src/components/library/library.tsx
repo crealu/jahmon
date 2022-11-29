@@ -6,7 +6,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
 import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../slices/library-slice';
 import { theSnapshot } from '../../slices/fretboard-slice';
-import { clearFretboard } from '../../common/handlers';
+import { clearFretboard } from '../../common/helpers';
 import axios from 'axios';
 
 export const Library: React.FC = () => {

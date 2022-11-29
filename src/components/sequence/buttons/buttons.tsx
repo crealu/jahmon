@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep } from '../../../slices/sequence-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
-import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/handlers';
+import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import './buttons.css';
 
 export const Buttons: React.FC = () => {

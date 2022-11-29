@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../hooks';
 import { currentSeq, theActiveStep, setActiveStep, addStep } from '../../../slices/sequence-slice';
 import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
-import { clearFretboard, clearRiffs } from '../../../common/handlers';
+import { clearFretboard, clearRiffs } from '../../../common/helpers';
 import './steps.css';
 import SeqStep from '../seqstep/seqstep';
 

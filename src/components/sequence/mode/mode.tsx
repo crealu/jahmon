@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../hooks';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { setMode, theMode } from '../../../slices/fretboard-slice';
-import { clearFretboard, toggleRiffs } from '../../../common/handlers';
+import { clearFretboard, toggleRiffs } from '../../../common/helpers';
 import './mode.css';
 
 export const Mode = () => {
