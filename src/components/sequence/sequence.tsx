@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { resetStepName, theStepName } from '../../slices/sequence-slice';
+import { resetStepName, theStepName, theBtnText } from '../../slices/sequence-slice';
 import { theMode, theRiffen } from '../../slices/fretboard-slice';
 import { clearFretboard, clearRiffs } from '../../common/helpers';
 import Steps from './steps/steps';
@@ -16,6 +16,7 @@ export const Sequence: React.FC = () => {
   const stepName = useAppSelector(theStepName);
   const mode = useAppSelector(theMode);
   const riffen = useAppSelector(theRiffen);
+  const btnText = useAppSelector(theBtnText);
 
   const updateStepName = (event) => {
     dispatch(resetStepName(event.target.value));
@@ -55,6 +56,7 @@ export const Sequence: React.FC = () => {
 
         </div>
       </div>
+      <div className="button-text">{btnText}</div>
       <Steps />
       <input
         className="step-name"

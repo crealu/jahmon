@@ -9,6 +9,7 @@ export interface SequenceState {
   isNew: boolean;
   settings: boolean;
   stepName: string;
+  btnText: string;
 }
 
 export const sequenceInitialState: SequenceState = {
@@ -19,6 +20,7 @@ export const sequenceInitialState: SequenceState = {
   isNew: true,
   settings: false,
   stepName: '',
+  btnText: '',
 };
 
 export const sequenceSlice = createSlice({
@@ -65,6 +67,9 @@ export const sequenceSlice = createSlice({
     },
     toggleSettings(state, action: Payload<boolean>) {
       state.settings = action.payload;
+    },
+    setButtonText(state, action: Payload<string>) {
+      state.btnText = action.payload;
     }
   }
 });
@@ -81,7 +86,8 @@ export const {
   setIsNew,
   setCurrentTitle,
   setStepName,
-  resetStepName
+  resetStepName,
+  setButtonText
  } = sequenceSlice.actions;
 
 export const currentTitle = ({ sequence: { title }}: RootState): string => title;
@@ -91,5 +97,6 @@ export const isSaving = ({ sequence: { save }}: RootState): boolean => save;
 export const isSettings = ({ sequence: { settings }}: RootState): boolean => settings;
 export const seqIsNew = ({ sequence: { isNew }}: RootState): boolean => isNew;
 export const theStepName = ({ sequence: { stepName }}: RootState): string => stepName;
+export const theBtnText = ({ sequence: { btnText }}: RootState): string => btnText;
 
 export default sequenceSlice.reducer;

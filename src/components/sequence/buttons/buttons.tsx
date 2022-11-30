@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep, setButtonText } from '../../../slices/sequence-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import './buttons.css';
@@ -17,6 +17,18 @@ export const Buttons: React.FC = () => {
   const saveSeq = () => { dispatch(toggleSave(true)) };
   const saveToLibrary = () => { dispatch(toggleSave(true)) };
   const openSettings = () => { dispatch(toggleSettings(true)) };
+
+  const handleEnter = (event) => {
+    console.log(event.target.alt);
+    dispatch(setButtonText(event.target.alt));
+  };
+
+  const handleLeave = () => { dispatch(setButtonText('')) };
+
+  const deleteThisStep = () => {
+    dispatch(deleteStep());
+    unstyleActive();
+  }
 
   const changeThisStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
@@ -36,42 +48,56 @@ export const Buttons: React.FC = () => {
     }
   }
 
-  const deleteThisStep = () => {
-    dispatch(deleteStep());
-    unstyleActive();
-  }
 
   return (
     <div className="sequence-btn-wrapper">
       <img
         className="sequence-btn add-step-btn"
         src="img/icons/add-btn-gray.png"
-        onClick={() => { changeThisStep() }}
+        onClick={() => changeThisStep()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Add step"
       />
       <img
         className="sequence-btn delete-btn"
         src="img/icons/delete-btn-gray.png"
         onClick={() => deleteThisStep()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Remove step"
       />
       <img
         className="sequence-btn"
         src="img/icons/clear-btn-gray.png"
         onClick={() => clearSeq()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Clear sequence"
       />
       <img
         className="sequence-btn"
         src="img/icons/save-lib-btn.png"
         onClick={() => saveToLibrary()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Save step to library"
       />
       <img
         className="sequence-btn"
         src="img/icons/save-btn-gray.png"
         onClick={() => saveSeq()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Save sequence"
       />
       <img
         className="sequence-btn"
         src="img/icons/settings-btn-gray.png"
         onClick={() => openSettings()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Settings"
       />
     </div>
   )

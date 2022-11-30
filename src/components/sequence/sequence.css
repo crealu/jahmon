@@ -62,3 +62,8 @@
 .clear-frets-btn {
   top: 8px;
 }
+
+.button-text {
+  height: 20px;
+  margin: 0px 0px 10px 30px;
+}
