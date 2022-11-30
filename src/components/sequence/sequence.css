@@ -6,7 +6,7 @@
 
 .sequence-top {
   height: 50px;
-  margin: 30px 50px 10px 0px;
+  margin: 30px 50px 0px 0px;
 }
 
 .sequence-title {
@@ -26,12 +26,14 @@
 }
 
 .step-name {
+  width: 62px;
   font-size: 16px;
   padding: 4px;
   margin: 10px 0px 0px 30px;
   background: none;
   border: none;
   color: var(--skel_text_color);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .step-name:focus-visible {
