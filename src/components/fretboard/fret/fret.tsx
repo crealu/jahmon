@@ -3,58 +3,20 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import {
-  setRiffen,
-  theRiffen,
-  theMode,
-  theStrings,
-  theFrets,
-  theSnapshot,
-  addToSnapshot,
-  removeFromSnapshot,
-} from '../../../slices/fretboard-slice';
+import { theMode, theRiffen, setRiffen } from '../../../slices/fretboard-slice';
 import { theChords } from '../../../slices/library-slice';
-import './frets.css';
+import './fret.css';
 
-export const Frets = () => {
+type FretProps = {
+  noteid: string;
+  placeNote: () => {};
+}
+
+const Fret: React.FC<FretProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const frets = useAppSelector(theFrets);
-  const strings = useAppSelector(theStrings);
   const mode = useAppSelector(theMode);
   const riffen = useAppSelector(theRiffen);
-  const chords = useAppSelector(theChords);
-  const snapshot = useAppSelector(theSnapshot);
-
-  const returnStringClass = (sn) => {
-    return mode == 'chord'
-      ? `string-row ${sn == 0 ? ' small-e-string' : sn == 5 ? ' big-e-string' : ''}`
-      : `string-row ${sn == 0 ? ' small-e-riff' : sn == 5 ? ' big-e-riff' : ''}`
-  };
-
-  const toggleNote = (element) => {
-    element.style.display = element.style.display == 'block' ? 'none' : 'block';
-    snap(element);
-  }
-
-  const placeNote = (e) => {
-    if (e.target.children[0]) {
-      toggleNote(e.target.children[0]);
-    } else if (e.target.classList[0] == 'fret-circle') {
-      toggleNote(e.target.previousSibling);
-    } else {
-      toggleNote(e.target);
-    }
-  };
-
-  const snap = (element) => {
-    if (element.style.display == 'block') {
-      dispatch(addToSnapshot(element.dataset.noteid));
-    } else {
-      dispatch(removeFromSnapshot(element.dataset.noteid));
-    }
-  }
-
-  const placeRiffNote = (e) => { };
+  const { noteid, placeNote } = props;
 
   const dragOverHandler = (event) => {
     event.preventDefault();
@@ -119,37 +81,17 @@ export const Frets = () => {
   }
 
   return (
-    <div className="the-fretboard">
-      {strings.map((string, sn) => {
-        return (
-          <div className={returnStringClass(sn)}>
-            <div className="string-div"></div>
-            <div className={`fret fret-open-${mode}`} onClick={(e) => placeNote(e)}>
-              <div className="fret-note" data-noteid={`s${6-sn}f0`}></div>
-            </div>
-            {frets.map((fret, fn) => {
-              return (
-                <div
-                  className={`fret fret-${mode}`}
-                  onClick={(e) => { mode == 'chord' ? placeNote(e) : placeRiffNote(e)}}
-                  onDragOver={(e) => dragOverHandler(e)}
-                  onDragLeave={(e) => dragLeaveHandler(e)}
-                  onDrop={(e) => dropHandler(e)}
-                >
-                  <div
-                    className="fret-note"
-                    data-noteid={`s${6-sn}f${fn + 1}`}
-                  >
-                  </div>
-                  {mode == 'chord' ? addFretDetails(`s${6-sn}f${fn + 1}`) : ''}
-                </div>
-              )
-            })}
-          </div>
-        )
-      })}
+    <div
+      className={`fret fret-${mode}`}
+      onClick={(e) => placeNote(e)}
+      onDragOver={(e) => dragOverHandler(e)}
+      onDragLeave={(e) => dragLeaveHandler(e)}
+      onDrop={(e) => dropHandler(e)}
+    >
+      <div className="fret-note" data-noteid={noteid}></div>
+      {mode == 'chord' ? addFretDetails(noteid) : ''}
     </div>
   )
 }
 
-export default Frets;
+export default Fret;

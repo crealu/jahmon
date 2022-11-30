@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { currentTitle, setCurrentTitle } from '../../slices/sequence-slice';
-import Frets from './frets/frets';
+import Strings from './strings/strings';
 import Riff from './riff/riff';
 import Snapshot from './snapshot/snapshot';
 import './fretboard.css';
@@ -28,7 +28,7 @@ export const Fretboard: React.FC = () => {
         <Snapshot />
         <Riff />
       </div>
-      <Frets />
+      <Strings />
     </div>
   )
 }
