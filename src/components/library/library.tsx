@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
 import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../slices/library-slice';
-import { theSnapshot } from '../../slices/fretboard-slice';
-import { clearFretboard } from '../../common/helpers';
+import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName } from '../../slices/fretboard-slice';
+import { clearFretboard, codifySnapshot } from '../../common/helpers';
 import axios from 'axios';
 
 export const Library: React.FC = () => {
@@ -15,15 +15,18 @@ export const Library: React.FC = () => {
 
   const placeNotes = (event) => {
     clearFretboard();
+    dispatch(clearSnapshot());
     const noteIds = event.target.dataset.noteids.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
     for (let n = 0; n < noteIds.length; n++) {
       for (let fn = 0; fn < fretNotes.length; fn++) {
         if (noteIds[n] == fretNotes[fn].dataset.noteid) {
           fretNotes[fn].style.display = 'block';
+          dispatch(addToSnapshot(noteIds[n]));
         }
       }
     }
+
     // setSnapshot with noteids
     // codify snapshot
   }
