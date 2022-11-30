@@ -29,9 +29,9 @@ export const SequencesDB: React.FC = () => {
   useEffect(() => { getHandler() }, [])
 
   return (
-    <div className="db-sequences">
+    <div className="sequences">
       <h3 className="section-title seqdb-title">Sequences</h3>
-      <div className="saved-sequences">
+      <div className="db-sequences">
         {sequences.map(sequence => {
           return (
             <div

@@ -13,8 +13,8 @@ export const App: React.FC = () => {
   return (
     <div className="jahmon-ui">
       <div className="jahmon-ui-col ui-left">
-        <SequencesDB />
         <Library />
+        <SequencesDB />
       </div>
       <div className="jahmon-ui-col ui-right">
         <Sequence />
