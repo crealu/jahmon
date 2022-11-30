@@ -1,4 +1,6 @@
 .snapshot {
-  position: absolute;
-  margin-top: 40px;
+  position: relative;
+  margin-top: 0;
+  float: left;
+  padding-top: 10px;
 }

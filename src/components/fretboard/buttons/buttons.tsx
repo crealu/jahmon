@@ -3,13 +3,23 @@ import { useState } from 'react';
 import { useAppSelector } from '../../../hooks';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { theMode } from '../../../slices/fretboard-slice';
+import { theMode, theRiffen, clearSnapshot } from '../../../slices/fretboard-slice';
 import { clearFretboard, clearRiffs } from '../../../common/helpers';
 import './buttons.css';
 
-export const Mode: React.FC = () => {
+export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
+  const riffen = useAppSelector(theRiffen);
+
+  const clear = () => {
+    if (mode == 'chord') {
+      clearFretboard()
+    } else {
+      clearRiffs()
+    }
+    dispatch(clearSnapshot());
+  }
 
   const dropHandler = (event) => {
     event.preventDefault();
@@ -27,7 +37,7 @@ export const Mode: React.FC = () => {
     <div className="fretboard-btn-wrapper">
       <div
         className="fretboard-btn clear-frets-btn"
-        onClick={() => { mode == 'chord' ? clearFretboard() : clearRiffs()}}
+        onClick={() => clear()}
       >
         Clear
       </div>
@@ -42,4 +52,4 @@ export const Mode: React.FC = () => {
   )
 }
 
-export default Mode;
+export default Buttons;

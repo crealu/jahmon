@@ -1,6 +1,6 @@
 .strings {
   position: relative;
-  width: calc(100% - 80px);
+  width: 100%;
 }
 
 .string-row {
