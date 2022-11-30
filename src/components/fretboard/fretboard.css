@@ -1,4 +1,5 @@
 .fretboard {
+  display: block;
   margin: 20px 0px;
 }
 
@@ -52,14 +53,32 @@
   float: right;
 }
 
-.set-btn {
-  left: 250px;
+.toggle-view-btn {
+  height: 20px;
+  padding: 2px 8px;
+  margin-top: 10px;
+  border-top: 2px solid var(--skel_text_color);
+  border-radius: 20px;
+  float: right;
+  cursor: pointer;
+  transition: 0.25s ease;
 }
 
-.clear-btn {
-  left: 300px;
+.center-circle {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  background: var(--skel_text_color);
+  height: 12px;
+  width: 12px;
+  border-radius: 8px;
+  transition: 0.25s ease;
 }
 
-.finish-btn {
-  left: 360px;
+.toggle-view-btn:hover {
+  border-top: 2px solid lightblue;
+}
+
+.toggle-view-btn:hover .center-circle {
+  background: lightblue;
 }

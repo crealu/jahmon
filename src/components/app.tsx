@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Sequence from './sequence/sequence';
 import Fretboard from './fretboard/fretboard';
+import Eye from './fretboard/eye';
 import Lyrics from './lyrics/lyrics';
 import Library from './library/library';
 import SequencesDB from './seqdb/seqdb';
@@ -17,6 +18,7 @@ export const App: React.FC = () => {
       </div>
       <div className="jahmon-ui-col ui-right">
         <Sequence />
+        <Eye />
         <Fretboard />
         <Lyrics />
       </div>
