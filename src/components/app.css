@@ -22,6 +22,10 @@ body {
   grid-template-columns: 15vw 85vw;
 }
 
+.ui-right {
+  margin: 0px 60px;
+}
+
 .modal {
   background: var(--dark-bg);
   color: var(--skel_text_color);

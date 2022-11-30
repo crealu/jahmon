@@ -11,13 +11,13 @@ import './app.css';
 export const App: React.FC = () => {
   return (
     <div className="jahmon-ui">
-      <div className="jahmon-ui-col">
+      <div className="jahmon-ui-col ui-left">
         <SequencesDB />
         <Library />
       </div>
-      <div className="jahmon-ui-col">
-        <Fretboard />
+      <div className="jahmon-ui-col ui-right">
         <Sequence />
+        <Fretboard />
         <Lyrics />
       </div>
       <SaveForm />

@@ -7,7 +7,7 @@ import { setMode, theMode } from '../../../slices/fretboard-slice';
 import { clearFretboard, toggleRiffs } from '../../../common/helpers';
 import './mode.css';
 
-export const Mode = () => {
+export const Mode: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
 

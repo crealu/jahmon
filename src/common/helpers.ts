@@ -61,4 +61,13 @@ export const collectRiffNotes = () => {
   return [noteids.join(','), fretnums.join(',')]
 }
 
+export const codifySnapshot = (snapshot) => {
+  let arr = [], strArr = [];
+  snapshot.forEach(id => {
+    arr.push(parseInt(id.replace('s', '').replace('f', '')));
+  });
+  strArr = arr.sort().map(id => { return id.toString() });
+  return parseInt(strArr.join(''));
+}
+
 export const refresh = () => { location.reload() }

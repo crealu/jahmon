@@ -4,6 +4,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theMode, theSnapshot, setSnapshotName } from '../../../slices/fretboard-slice';
 import { theChords, theChordIds } from '../../../slices/library-slice';
+import { codifySnapshot } from '../../../common/helpers';
 import './snapshot.css';
 
 export const Snapshot: React.FC = () => {
@@ -11,17 +12,8 @@ export const Snapshot: React.FC = () => {
   const mode = useAppSelector(theMode);
   const chords = useAppSelector(theChords);
   const chordIds = useAppSelector(theChordIds);
-
-  const codifySnapshot = () => {
-    let arr = [], strArr = [];
-    snapshot.forEach(id => {
-      arr.push(parseInt(id.replace('s', '').replace('f', '')));
-    });
-    strArr = arr.sort().map(id => { return id.toString() });
-    return parseInt(strArr.join(''))
-  }
-
-  const trueSnapshot = codifySnapshot();
+  const trueSnapshot = codifySnapshot(snapshot);
+  
   const trueIds = chordIds.toString().split(',').map(id => { return parseInt(id) });
 
   const matchSnapshot = () => {

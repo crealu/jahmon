@@ -9,7 +9,7 @@ export interface SequenceState {
   isNew: boolean;
   settings: boolean;
   stepName: string;
-  btnText: string;
+  action: string;
 }
 
 export const sequenceInitialState: SequenceState = {
@@ -20,7 +20,7 @@ export const sequenceInitialState: SequenceState = {
   isNew: true,
   settings: false,
   stepName: '',
-  btnText: '',
+  action: '',
 };
 
 export const sequenceSlice = createSlice({
@@ -69,7 +69,7 @@ export const sequenceSlice = createSlice({
       state.settings = action.payload;
     },
     setButtonText(state, action: Payload<string>) {
-      state.btnText = action.payload;
+      state.action = action.payload;
     }
   }
 });
@@ -97,6 +97,6 @@ export const isSaving = ({ sequence: { save }}: RootState): boolean => save;
 export const isSettings = ({ sequence: { settings }}: RootState): boolean => settings;
 export const seqIsNew = ({ sequence: { isNew }}: RootState): boolean => isNew;
 export const theStepName = ({ sequence: { stepName }}: RootState): string => stepName;
-export const theBtnText = ({ sequence: { btnText }}: RootState): string => btnText;
+export const theAction = ({ sequence: { action }}: RootState): string => action;
 
 export default sequenceSlice.reducer;
