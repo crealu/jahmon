@@ -12,6 +12,10 @@ router.get('/api-get-jahms', async (req, res) => {
       res.send(result);
     })
 });
+router.get('/api-get-username', async (req, res) => {
+  const username = await findUser(req, res);
+  res.send(username);
+});
 
 router.post('/api-save-seq', async (req, res) => {
   const username = await findUser(req, res);
@@ -36,9 +40,25 @@ router.post('/api-update-seq', (req, res) => {
   res.send('Save successful');
 });
 
-router.get('/api-get-username', async (req, res) => {
-  const username = await findUser(req, res);
-  res.send(username);
-});
+//
+// router.get('/api-get-jahms', async (req, res) => {
+//   atlas.db.collection('jahms')
+//     .find().toArray((err, result) => {
+//       if (err) { return console.log(err) }
+//       res.send(result);
+//     })
+// });
+//
+// router.post('/api-save-seq', async (req, res) => {
+//   atlas.db.collection('jahms')
+//     .insertOne(req.body, (err, result) => {
+//       if (err) { return console.log(err) }
+//       res.send('Save successful');
+//     });
+// });
+//
+// router.get('/api-get-username', async (req, res) => {
+//   res.send('');
+// });
 
 module.exports = router;

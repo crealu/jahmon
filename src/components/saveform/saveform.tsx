@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
 import { currentTitle, currentSeq, isSaving, seqIsNew, toggleSave } from '../../slices/sequence-slice';
+import { theChordName, setChordName } from '../../slices/library-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/helpers';
 import axios from 'axios';
@@ -16,8 +17,11 @@ export const SaveForm: React.FC = () => {
   const lyrics = useAppSelector(lyricLines);
   const saving = useAppSelector(isSaving);
   const isNew = useAppSelector(seqIsNew);
+  const chordName = useAppSelector(theChordName);
 
-  const saveData = () => { steps.length > 0 ? saveSequence() : saveChord() }
+  const saveData = () => {
+    steps.length > 0 ? saveSequence() : saveChord()
+  }
 
   const saveSequence = () => {
     const data = { title: title, steps: steps, lyrics: lyrics }
@@ -40,9 +44,9 @@ export const SaveForm: React.FC = () => {
     axios.post('/api-save-chord', data)
       .then(res => { console.log(res)})
       .catch(err => { throw err });
-  }
+  };
 
-  const changeChordName = (event) => { setChordName(event.target.value); }
+  const changeChordName = (event) => { dispatch(setChordName(event.target.value)) }
   const hideForm = () => { dispatch(toggleSave(false)) };
 
   return (
@@ -62,7 +66,7 @@ export const SaveForm: React.FC = () => {
           </div>
        :  <div className="chord-form-view form-view">
             <div className="chord-name-label">Chord name:</div>
-            <input className="chord-name-input" onInput={(e) => changeChordName(e)}/>
+            <input className="chord-name-input" onChange={(e) => changeChordName(e)}/>
           </div>
       }
       <div className="save-form-btns-wrapper">

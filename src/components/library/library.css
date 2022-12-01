@@ -11,11 +11,11 @@
 }
 
 .lib-chord-wrapper {
-  width: 100%;
   display: inline-block;
+  width: 100%;
+  height: calc(100% - 80px);
   margin-bottom: 20px;
   overflow-y: scroll;
-  height: 100%;
 }
 
 .lib-chord-wrapper::-webkit-scrollbar {

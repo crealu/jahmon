@@ -19,4 +19,34 @@ router.post('/api-save-chord', (req, res) => {
     });
 });
 
+// ♯ °
+
+// const rewrite = (fixthese) => {
+//   for (let i = 0; i < fixthese.length; i++) {
+//     atlas.db.collection('library')
+//       .findOneAndUpdate(
+//         { name: fixthese[i][0] },
+//         { $set: {
+//           name: fixthese[i][1],
+//          }},
+//         { sort: { _id: 1 }, upsert: true }
+//       )
+//   }
+// }
+//
+// router.post('/api-save-chord', async (req, res) => {
+//   let fixthese = [];
+//   atlas.db.collection('library')
+//     .find().toArray((err, result) => {
+//       if (err) { return console.log(err) }
+//       for (let r = 0; r < result.length; r++) {
+//         if (result[r].name.includes('0')) {
+//           fixthese.push([result[r].name, result[r].name.replace('0', '°')]);
+//         }
+//       }
+//       console.log(fixthese);
+//       rewrite(fixthese);
+//     });
+// });
+
 module.exports = router;
