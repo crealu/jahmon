@@ -39,6 +39,12 @@ export const sequenceSlice = createSlice({
       state.steps[state.activeStep].noteids = action.payload.noteids;
       state.steps[state.activeStep].fretnums = action.payload.fretnums;
     },
+    toggleSave(state, action: PayloadAction<boolean>) {
+      state.save = action.payload;
+    },
+    toggleSettings(state, action: Payload<boolean>) {
+      state.settings = action.payload;
+    },
     setActiveSequence(state, action: PayloadAction<object>) {
       state.title = action.payload.title;
       state.steps = action.payload.steps;
@@ -59,16 +65,10 @@ export const sequenceSlice = createSlice({
     clearSequence(state) {
       state.steps = [];
     },
-    toggleSave(state, action: PayloadAction<boolean>) {
-      state.save = action.payload;
-    },
     setIsNew(state, action: Payload<boolean>) {
       state.isNew = action.payload;
     },
-    toggleSettings(state, action: Payload<boolean>) {
-      state.settings = action.payload;
-    },
-    setButtonText(state, action: Payload<string>) {
+    setActionText(state, action: Payload<string>) {
       state.action = action.payload;
     }
   }
@@ -87,7 +87,7 @@ export const {
   setCurrentTitle,
   setStepName,
   resetStepName,
-  setButtonText
+  setActionText
  } = sequenceSlice.actions;
 
 export const currentTitle = ({ sequence: { title }}: RootState): string => title;

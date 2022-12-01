@@ -1,7 +1,7 @@
 .sequence-btn-wrapper {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(6, 50px);
+  grid-template-columns: repeat(7, 50px);
   float: left;
   margin: 10px 0px;
   width: 100%;
@@ -28,4 +28,10 @@
 .delete-btn {
   top: 10px;
   height: 8px;
+}
+
+.clear-btn {
+  top: -5px;
+  left: -5px;
+  width: 40px;
 }

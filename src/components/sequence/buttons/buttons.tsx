@@ -3,10 +3,19 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep, setButtonText } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep, setActionText } from '../../../slices/sequence-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import './buttons.css';
+
+class Step {
+  constructor(title, mode, noteids, fretnums) {
+    this.title = title;
+    this.mode = mode;
+    this.noteids = noteids;
+    this.fretnums = fretnums;
+  }
+}
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,43 +27,39 @@ export const Buttons: React.FC = () => {
   const saveToLibrary = () => { dispatch(toggleSave(true)) };
   const openSettings = () => { dispatch(toggleSettings(true)) };
 
-  const handleEnter = (event) => {
-    console.log(event.target.alt);
-    dispatch(setButtonText(event.target.alt));
-  };
+  const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
+  const handleLeave = () => { dispatch(setActionText('')) };
 
-  const handleLeave = () => { dispatch(setButtonText('')) };
+  const returnStep = () => {
+    const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
+    const stepTitle = mode == 'chord'
+      ? document.getElementsByClassName('snapshot')[0].textContent
+      : 'Riff';
+
+    return new Step(stepTitle, mode, noteData[0], noteData[1]);
+  }
+
+  const addThisStep = () => {
+    const step = returnStep();
+    dispatch(addStep(step))
+  }
+
+  const updateThisStep = () => {
+    const step = returnStep();
+    dispatch(updateStep({noteids: step.noteData, fretnums: step.fretnums}))
+  }
 
   const deleteThisStep = () => {
     dispatch(deleteStep());
     unstyleActive();
   }
 
-  const changeThisStep = () => {
-    const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-    const stepTitle = mode == 'chord'
-      ? document.getElementsByClassName('snapshot')[0].textContent
-      : 'Riff';
-    const step = {
-      title: stepTitle,
-      mode: mode,
-      noteids: noteData[0],
-      fretnums: noteData[1]
-    };
-    if (active == null) {
-      dispatch(addStep(step))
-    } else {
-      dispatch(updateStep({noteids: noteData[0], fretnums: noteData[1]}))
-    }
-  }
-
-
   return (
     <div className="sequence-btn-wrapper">
       <img
         className="sequence-btn add-step-btn"
         src="img/icons/add-btn-gray.png"
-        onClick={() => changeThisStep()}
+        onClick={() => addThisStep()}
         onMouseEnter={(e) => handleEnter(e)}
         onMouseLeave={() => handleLeave()}
         alt="Add step"
@@ -65,15 +70,15 @@ export const Buttons: React.FC = () => {
         onClick={() => deleteThisStep()}
         onMouseEnter={(e) => handleEnter(e)}
         onMouseLeave={() => handleLeave()}
-        alt="Remove step"
+        alt="Delete step"
       />
       <img
         className="sequence-btn"
-        src="img/icons/clear-btn-gray.png"
-        onClick={() => clearSeq()}
+        src="img/icons/update-btn-gray.png"
+        onClick={() => updateThisStep()}
         onMouseEnter={(e) => handleEnter(e)}
         onMouseLeave={() => handleLeave()}
-        alt="Clear sequence"
+        alt="Update step"
       />
       <img
         className="sequence-btn"
@@ -98,6 +103,14 @@ export const Buttons: React.FC = () => {
         onMouseEnter={(e) => handleEnter(e)}
         onMouseLeave={() => handleLeave()}
         alt="Settings"
+      />
+      <img
+        className="sequence-btn clear-btn"
+        src="img/icons/clear-btn-gray.png"
+        onClick={() => clearSeq()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Clear sequence"
       />
     </div>
   )
