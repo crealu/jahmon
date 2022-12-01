@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './buttons.css';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -6,29 +7,7 @@ import { useAppSelector } from '../../../hooks';
 import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep, setActionText } from '../../../slices/sequence-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
-import './buttons.css';
-
-class Step {
-  constructor(title, mode, noteids, fretnums) {
-    this.title = title;
-    this.mode = mode;
-    this.noteids = noteids;
-    this.fretnums = fretnums;
-  }
-}
-
-class Button {
-  constructor(uniqueClass, src, action, click) {
-    this.uniqueClass = uniqueClass;
-    this.src = 'img/icons/seq-btn-gray/' + src + '.png';
-    this.action = action;
-    this.handleClick = click;
-  }
-
-  click() {
-    this.handleClick()
-  }
-}
+import { Step, Button } from '../../../common/classes';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -68,15 +47,18 @@ export const Buttons: React.FC = () => {
   const handleLeave = () => { dispatch(setActionText('')) };
 
   const buttons = useMemo(() => {
-    return [
-      new Button('add-step-btn', 'add', 'Add step', addThisStep),
-      new Button('delete-btn', 'delete', 'Delete step', deleteThisStep),
-      new Button('', 'update', 'Update step', updateThisStep),
-      new Button('', 'save-step', 'Save step', saveThisStep),
-      new Button('', 'save-seq', 'Save sequence', saveSeq),
-      new Button('', 'settings', 'Settings', openSettings),
-      new Button('clear-btn', 'clear', 'Clear sequence', clearSeq)
-    ]
+    const data = [
+      ['add-step-btn', 'add', 'Add step', addThisStep],
+      ['delete-btn', 'delete', 'Delete step', deleteThisStep],
+      ['', 'update', 'Update step', updateThisStep],
+      ['', 'save-step', 'Save step', saveThisStep],
+      ['', 'save-seq', 'Save sequence', saveSeq],
+      ['', 'settings', 'Settings', openSettings],
+      ['clear-btn', 'clear', 'Clear sequence', clearSeq]
+    ];
+    return data.map(btn => {
+      return new Button(btn[0], btn[1], btn[2], btn[3])
+    })
   }, [])
 
   return (
@@ -84,7 +66,7 @@ export const Buttons: React.FC = () => {
       {buttons.map(btn => {
         return (
           <img
-            className={`sequence-btn ${btn.uniqueClass}`}
+            className={btn.classes}
             src={btn.src}
             alt={btn.action}
             onClick={() => btn.click()}
