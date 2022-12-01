@@ -25,7 +25,7 @@ export const NewSeqBtn: React.FC = () => {
     >
       <img
         className="new-seq-btn-img"
-        src="img/icons/add-btn-gray.png"
+        src="img/icons/seq-btn-gray/add.png"
       />
       <p className="new-seq-btn-text">New</p>
     </div>

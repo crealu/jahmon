@@ -66,7 +66,7 @@ export const Lyrics: React.FC = () => {
       <div className="lyrics-btns-wrapper">
         <img
           className="add-lyric-btn lyrics-btn"
-          src="img/icons/add-btn-gray.png"
+          src="img/icons/seq-btn-gray/add.png"
           onClick={() => addNewLine()}
         />
         <div
