@@ -39,10 +39,10 @@ export const Buttons: React.FC = () => {
     unstyleActive();
   }
 
+  const clearSeq = () => { dispatch(clearSequence()) };
   const saveThisStep = () => { dispatch(toggleSave(true)) };
   const saveSeq = () => { dispatch(toggleSave(true)) };
   const openSettings = () => { dispatch(toggleSettings(true)) };
-  const clearSeq = () => { dispatch(clearSequence()) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
   const handleLeave = () => { dispatch(setActionText('')) };
 
@@ -50,11 +50,11 @@ export const Buttons: React.FC = () => {
     const data = [
       ['add-step-btn', 'add', 'Add step', addThisStep],
       ['delete-btn', 'delete', 'Delete step', deleteThisStep],
+      ['clear-btn', 'clear', 'Clear sequence', clearSeq],
       ['', 'update', 'Update step', updateThisStep],
       ['', 'save-step', 'Save step', saveThisStep],
       ['', 'save-seq', 'Save sequence', saveSeq],
-      ['', 'settings', 'Settings', openSettings],
-      ['clear-btn', 'clear', 'Clear sequence', clearSeq]
+      ['', 'settings', 'Settings', openSettings]
     ];
     return data.map(btn => {
       return new Button(btn[0], btn[1], btn[2], btn[3])
