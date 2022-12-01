@@ -19,14 +19,10 @@ class Step {
 
 class Button {
   constructor(uniqueClass, src, action, click) {
-    this.uniqueClass = uniqueClass;
-    this.src = 'img/icons/seq-btn-gray/' + src + '.png';
-    this.action = action;
-    this.handleClick = click;
-  }
-
-  click() {
-    this.handleClick()
+    this.uniqueClass: uniqueClass,
+    this.src: src,
+    this.action: action,
+    this.click = () => { click }
   }
 }
 
@@ -69,13 +65,13 @@ export const Buttons: React.FC = () => {
 
   const buttons = useMemo(() => {
     return [
-      new Button('add-step-btn', 'add', 'Add step', addThisStep),
-      new Button('delete-btn', 'delete', 'Delete step', deleteThisStep),
-      new Button('', 'update', 'Update step', updateThisStep),
-      new Button('', 'save-step', 'Save step', saveThisStep),
-      new Button('', 'save-seq', 'Save sequence', saveSeq),
-      new Button('', 'settings', 'Settings', openSettings),
-      new Button('clear-btn', 'clear', 'Clear sequence', clearSeq)
+      new Button('add-step-btn', 'add-btn-gray', 'Add step', addThisStep),
+      new Button('delete-btn', 'delete-btn-gray', 'Delete step', deleteThisStep),
+      new Button('', 'update-btn-gray', 'Update step', updateThisStep),
+      new Button('', 'save-lib-btn', 'Save step', saveThisStep),
+      new Button('', 'save-btn-gray', 'Save sequence', saveSeq),
+      new Button('', 'settings-btn-gray', 'Settings', openSettings),
+      new Button('clear-btn', 'clear-btn-gray', 'Settings', openSettings)
     ]
   }, [])
 
@@ -85,14 +81,70 @@ export const Buttons: React.FC = () => {
         return (
           <img
             className={`sequence-btn ${btn.uniqueClass}`}
-            src={btn.src}
+            src={`img/icons/${btn.src}.png`}
+            onClick={() => btn.click}
             alt={btn.action}
-            onClick={() => btn.click()}
             onMouseEnter={(e) => handleEnter(e)}
             onMouseLeave={() => handleLeave()}
           />
         )
       })}
+      <img
+        className="sequence-btn add-step-btn"
+        src="img/icons/add-btn-gray.png"
+        onClick={() => addThisStep()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Add step"
+      />
+      <img
+        className="sequence-btn delete-btn"
+        src="img/icons/delete-btn-gray.png"
+        onClick={() => deleteThisStep()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Delete step"
+      />
+      <img
+        className="sequence-btn"
+        src="img/icons/update-btn-gray.png"
+        onClick={() => updateThisStep()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Update step"
+      />
+      <img
+        className="sequence-btn"
+        src="img/icons/save-lib-btn.png"
+        onClick={() => saveToLibrary()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Save step to library"
+      />
+      <img
+        className="sequence-btn"
+        src="img/icons/save-btn-gray.png"
+        onClick={() => saveSeq()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Save sequence"
+      />
+      <img
+        className="sequence-btn"
+        src="img/icons/settings-btn-gray.png"
+        onClick={() => openSettings()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Settings"
+      />
+      <img
+        className="sequence-btn clear-btn"
+        src="img/icons/clear-btn-gray.png"
+        onClick={() => clearSeq()}
+        onMouseEnter={(e) => handleEnter(e)}
+        onMouseLeave={() => handleLeave()}
+        alt="Clear sequence"
+      />
     </div>
   )
 }
