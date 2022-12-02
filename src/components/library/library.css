@@ -10,6 +10,34 @@
   padding-bottom: 20px;
 }
 
+.lib-chord-nav {
+  position: absolute;
+  float: right;
+  right: 0px;
+  left: 11vw;
+  top: 18px;
+  padding: 10px;
+  background: var(--dark-bg);
+  z-index: 10;
+}
+
+.key-btn {
+  cursor: pointer;
+}
+
+.nav-key {
+  font-size: 14px;
+  padding-top: 10px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.25s ease;
+}
+
+.nav-key:hover {
+  opacity: 1;
+}
+
+
 .lib-chord-wrapper {
   display: inline-block;
   width: 100%;

@@ -9,6 +9,21 @@ import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName } from '../.
 import { clearFretboard, codifySnapshot } from '../../common/helpers';
 import axios from 'axios';
 
+const musicKeys = [
+  'A',
+  'A♯',
+  'B',
+  'C',
+  'C♯',
+  'D',
+  'D♯',
+  'E',
+  'F',
+  'F♯',
+  'G',
+  'G♯'
+];
+
 export const Library: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const chords = useAppSelector(theChords);
@@ -26,9 +41,6 @@ export const Library: React.FC = () => {
         }
       }
     }
-
-    // setSnapshot with noteids
-    // codify snapshot
   }
 
   const dragStartHandler = (event) => {
@@ -77,6 +89,31 @@ export const Library: React.FC = () => {
     return chordIds.join(',');
   }
 
+  const scroll = (event) => {
+    const wrapper = document.getElementsByClassName('lib-chord-wrapper')[0];
+    const allChords = document.getElementsByClassName('lib-chord');
+
+    console.log(event.target.textContent);
+    for (let i = 0; i < allChords.length; i++) {
+      if (allChords[i].textContent == event.target.textContent) {
+        console.log(allChords[i].scrollTop);
+      }
+    }
+    wrapper.scrollTo({
+      top: 40 * 19 * event.target.tabIndex,
+      behavior: 'smooth'
+    })
+  }
+
+  const toggleKeyList = () => {
+    const nav = document.getElementsByClassName('nav-keys')[0];
+    if (nav.style.display == 'none') {
+      nav.style.display = 'block';
+    } else {
+      nav.style.display = 'none';
+    }
+  }
+
   useEffect(() => {
     getChordsFromDB();
     // dispatch(setLibraryChords(chords));
@@ -88,6 +125,22 @@ export const Library: React.FC = () => {
   return (
     <div className="library">
       <h3 className="section-title library-title">Library</h3>
+      <div className="lib-chord-nav">
+        <div className="key-btn" onClick={() => toggleKeyList()}>Key</div>
+        <div className="nav-keys">
+          {musicKeys.map((key, idx) => {
+            return (
+              <div
+                className="nav-key"
+                onClick={(e) => scroll(e)}
+                tabIndex={idx}
+              >
+                {key}
+              </div>
+            )
+          })}
+        </div>
+      </div>
       <div className="lib-chord-wrapper">
         {chords.map(chord => {
           return (

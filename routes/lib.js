@@ -40,8 +40,8 @@ router.post('/api-save-chord', (req, res) => {
 //     .find().toArray((err, result) => {
 //       if (err) { return console.log(err) }
 //       for (let r = 0; r < result.length; r++) {
-//         if (result[r].name.includes('0')) {
-//           fixthese.push([result[r].name, result[r].name.replace('0', '°')]);
+//         if (result[r].name.includes('Bb')) {
+//           fixthese.push([result[r].name, result[r].name.replace('Bb', 'A♯')]);
 //         }
 //       }
 //       console.log(fixthese);
