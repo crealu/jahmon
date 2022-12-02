@@ -10,6 +10,7 @@ import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/helpers';
 import axios from 'axios';
 import Wrapper from '../lyrics/wrapper/wrapper';
+import StepData from './stepdata';
 
 export const Print: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -52,27 +53,17 @@ export const Print: React.FC = () => {
 
   return (
     <div className="print-form" style={{display: printing ? 'block' : 'none'}}>
-      <div className="seq-form-view form-view">
-        <div className="form-data form-label">Sequence:</div>
-        <div className="form-data">{title}</div>
-        <div className="form-data form-label">Steps:</div>
-        <div className=" form-data step-data">
-          {steps.map(step => { return <div>{step.title}, </div> })}
-        </div>
-
+      <div className="print-form-inner">
+        <div className="print-title">{title}</div>
+        <StepData />
         <Wrapper />
-      </div>
-      <div className="save-form-btns-wrapper">
-        <button className="save-btn save-form-btn" onClick={() => printSeq()}>Print</button>
-        <button className="save-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
+        <div className="save-form-btns-wrapper">
+          <button className="save-btn save-form-btn" onClick={() => printSeq()}>Print</button>
+          <button className="save-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
+        </div>
       </div>
     </div>
   )
 }
-
-// <div className="form-data form-label">Lyrics:</div>
-// <div className="form-data">
-//   {lyrics.map(lyric => { return <div>{lyric.text}</div> })}
-// </div>
 
 export default Print;

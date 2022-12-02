@@ -5,4 +5,33 @@
   top: 0px;
   z-index: 100;
   background: white;
+  color: black;
+}
+
+.print-form-inner {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  top: 100px;
+  width: 80%;
+}
+
+.print-title {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.print-steps {
+  position: relative;
+  display: block;
+  height: 200px;
+}
+
+.print-steps-row {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  width: 500px;
+  height: 30px;
 }
