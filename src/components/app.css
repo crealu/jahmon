@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Comfortaa&display=swap');
 
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
 :root {
   --dark-bg: #2B2B2B;
   --dark-divider: #606060;

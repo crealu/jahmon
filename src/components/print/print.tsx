@@ -15,41 +15,14 @@ import StepData from './stepdata';
 export const Print: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const title = useAppSelector(currentTitle);
-  const steps = useAppSelector(currentSeq);
-  const lyrics = useAppSelector(lyricLines);
   const printing = useAppSelector(isPrinting);
-  const isNew = useAppSelector(seqIsNew);
-  const chordName = useAppSelector(theChordName);
 
-  const saveData = () => {
-    steps.length > 0 ? saveSequence() : saveChord()
-  }
-
-  const saveSequence = () => {
-    const data = { title: title, steps: steps, lyrics: lyrics }
-    const url = isNew ? '/api-save-seq' : '/api-update-seq';
-    axios.post(url, data).then(res => { console.log(res)}).catch(err => { throw err });
-  }
-
-  const saveChord = () => {
-    let fretNotes = document.getElementsByClassName('fret-note');
-    let noteids = [];
-    for (let n = 0; n < fretNotes.length; n++) {
-      if (fretNotes[n].style.display == 'block') {
-        noteids.push(fretNotes[n].dataset.noteid);
-      }
-    }
-    const data = {
-      name: chordName,
-      noteids: noteids
-    };
-    axios.post('/api-save-chord', data)
-      .then(res => { console.log(res)})
-      .catch(err => { throw err });
-  };
-
-  const changeChordName = (event) => { dispatch(setChordName(event.target.value)) }
   const hideForm = () => { dispatch(togglePrint(false)) };
+  const printSeq = (e) => {
+    e.target.style.display = 'none';
+    console.log(e.target.nextSibling);
+    window.print();
+  }
 
   return (
     <div className="print-form" style={{display: printing ? 'block' : 'none'}}>
@@ -58,8 +31,8 @@ export const Print: React.FC = () => {
         <StepData />
         <Wrapper />
         <div className="save-form-btns-wrapper">
-          <button className="save-btn save-form-btn" onClick={() => printSeq()}>Print</button>
-          <button className="save-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
+          <button className="save-btn save-form-btn" onClick={(e) => printSeq(e)}>Print</button>
+          <button className="cancel-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
         </div>
       </div>
     </div>

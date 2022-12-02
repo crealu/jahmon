@@ -5,6 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { addPanelStep, updatePanelStep } from '../../../slices/lyrics-slice';
+import { isPrinting } from '../../../slices/sequence-slice';
 import './panel.css';
 
 type PanelProps<any> = {
@@ -15,6 +16,7 @@ type PanelProps<any> = {
 export const Panel: React.FC<PanelProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const chord = useAppSelector(libChord);
+  const printing = useAppSelector(isPrinting);
   const { width, steps } = props;
 
   const dragStartHandler = (event, idx) => {
@@ -66,7 +68,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
       {steps.map((step, idx) => {
         return (
           <div
-            className="panel-step"
+            className={`panel-step ${printing ? 'panel-step-print' : ''}`}
             style={{left: step.offset}}
             draggable="true"
             onDragStart={(e) => dragStartHandler(e, idx)}

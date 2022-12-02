@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { lyricLines, theActiveLine, deleteLine } from '../../../slices/lyrics-slice';
+import { isPrinting } from '../../../slices/sequence-slice';
 import './wrapper.css';
 import Line from '../line/line';
 import Panel from '../panel/panel';
@@ -12,6 +13,7 @@ const Wrapper: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const lines = useAppSelector(lyricLines);
   const active = useAppSelector(theActiveLine);
+  const printing = useAppSelector(isPrinting);
   const [lineWidth, setLineWidth] = useState(100);
 
   const deleteThisLine = (event) => {
@@ -26,11 +28,13 @@ const Wrapper: React.FC = () => {
           <div className="line-group">
             <Panel width={lineWidth} steps={line.panel} />
             <Line width={lineWidth} setWidth={setLineWidth} lineNum={idx} text={line.text} />
-            <img
-              className={`delete-lyric-btn lyrics-btn ${active == idx ? 'active-delete-lyric-btn': ''}`}
-              src="img/icons/delete-btn-gray.png"
-              onClick={(e) => deleteThisLine(e)}
-            />
+            {printing ? ''
+              : <img
+                  className={`delete-lyric-btn lyrics-btn ${active == idx ? 'active-delete-lyric-btn': ''}`}
+                  src="img/icons/delete-btn-gray.png"
+                  onClick={(e) => deleteThisLine(e)}
+                />
+            }
           </div>
         )
       })}

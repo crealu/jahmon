@@ -7,6 +7,10 @@
   font-size: 16px;
 }
 
+.lyric-line-print {
+  color: black;
+}
+
 .lyric-line:focus-visible {
   outline: none;
 }
