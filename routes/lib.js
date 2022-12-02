@@ -10,7 +10,7 @@ router.get('/api-get-lib', (req, res) => {
       res.send(result);
     })
 });
-
+//
 router.post('/api-save-chord', (req, res) => {
   atlas.db.collection('library')
     .insertOne(req.body, (err, result) => {
@@ -18,6 +18,18 @@ router.post('/api-save-chord', (req, res) => {
       res.send(result);
     });
 });
+
+router.post('/api-update-chord', (req, res) => {
+  atlas.db.collection('library')
+    .findOneAndUpdate(
+      { name: req.body.name },
+      { $set: {
+        name: req.body.name,
+        noteids: req.body.noteids
+      }},
+      { sort: { _id: 1 }, upsert: true }
+    )
+})
 
 // ♯ °
 
@@ -40,7 +52,7 @@ router.post('/api-save-chord', (req, res) => {
 //     .find().toArray((err, result) => {
 //       if (err) { return console.log(err) }
 //       for (let r = 0; r < result.length; r++) {
-//         if (result[r].name.includes('Bb')) {
+//         if (result[r].name.includes('Gmaj7')) {
 //           fixthese.push([result[r].name, result[r].name.replace('Bb', 'A♯')]);
 //         }
 //       }

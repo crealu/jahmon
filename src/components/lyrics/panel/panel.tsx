@@ -41,10 +41,8 @@ export const Panel: React.FC<PanelProps> = (props) => {
 
   const dropHandler = (event) => {
     event.preventDefault();
-    // const movedPanelStep = document.getElementsByClassName('moved-panel-chord')[0];
-    // movedPanelStep.classList.remove('moved-panel-chord');
     event.target.style.background = 'none';
-    const offsetLeft = event.clientX - ((17 * window.innerWidth) / 100) + 'px';
+    const offsetLeft = event.clientX - ((21 * window.innerWidth) / 100) + 'px';
     const panelChord = {
       chord: chord.title,
       offset: offsetLeft,

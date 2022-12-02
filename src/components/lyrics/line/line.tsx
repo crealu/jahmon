@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord } from '../../../slices/library-slice';
-import { lyricLines, theActiveLine, activateLine, updateLine } from '../../../slices/lyrics-slice';
+import { theActiveLine, activateLine, updateLine } from '../../../slices/lyrics-slice';
 import './line.css';
 
 type LineProps<any> = {
@@ -18,16 +18,15 @@ const context = canvas.getContext("2d");
 
 export const Line: React.FC<LineProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { width, setWidth, text, lineNum } = props;
-  const lines = useAppSelector(lyricLines);
   const active = useAppSelector(theActiveLine);
+  const { width, setWidth, text, lineNum } = props;
 
-  const changeName = (e) => {
+  const changeName = (event) => {
     const textWidth = context.measureText(e.target.value).width;
     const offset = textWidth / 1.5;
-    e.target.style.width = textWidth + offset + 'px';
+    event.target.style.width = textWidth + offset + 'px';
     setWidth(textWidth + offset);
-    dispatch(updateLine(e.target.value));
+    dispatch(updateLine(event.target.value));
   }
 
   const setActive = (num) => { dispatch(activateLine(num)) }
@@ -35,8 +34,8 @@ export const Line: React.FC<LineProps> = (props) => {
   return (
     <input
       className="lyric-line"
-      onChange={(e) => { changeName(e) }}
-      onClick={(e) => { setActive(lineNum) }}
+      onChange={(e) => changeName(e)}
+      onClick={(e) => setActive(lineNum)}
       value={text}
       placeholder={text}
     />

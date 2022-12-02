@@ -10,6 +10,7 @@ export interface SequenceState {
   settings: boolean;
   stepName: string;
   action: string;
+  print: boolean;
 }
 
 export const sequenceInitialState: SequenceState = {
@@ -19,6 +20,7 @@ export const sequenceInitialState: SequenceState = {
   save: false,
   isNew: true,
   settings: false,
+  print: false,
   stepName: '',
   action: '',
 };
@@ -44,6 +46,9 @@ export const sequenceSlice = createSlice({
     },
     toggleSettings(state, action: Payload<boolean>) {
       state.settings = action.payload;
+    },
+    togglePrint(state, action: Payload<boolean>) {
+      state.print = action.payload;
     },
     setActiveSequence(state, action: PayloadAction<object>) {
       state.title = action.payload.title;
@@ -87,7 +92,8 @@ export const {
   setCurrentTitle,
   setStepName,
   resetStepName,
-  setActionText
+  setActionText,
+  togglePrint
  } = sequenceSlice.actions;
 
 export const currentTitle = ({ sequence: { title }}: RootState): string => title;
@@ -95,6 +101,7 @@ export const currentSeq = ({ sequence: { steps }}: RootState): any[] => steps;
 export const theActiveStep = ({ sequence: { activeStep }}: RootState): number => activeStep;
 export const isSaving = ({ sequence: { save }}: RootState): boolean => save;
 export const isSettings = ({ sequence: { settings }}: RootState): boolean => settings;
+export const isPrinting = ({ sequence: { print }}: RootState): boolean => print;
 export const seqIsNew = ({ sequence: { isNew }}: RootState): boolean => isNew;
 export const theStepName = ({ sequence: { stepName }}: RootState): string => stepName;
 export const theAction = ({ sequence: { action }}: RootState): string => action;
