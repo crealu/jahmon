@@ -7,6 +7,7 @@ import Library from './library/library';
 import SequencesDB from './seqdb/seqdb';
 import SaveForm from './saveform/saveform';
 import Settings from './settings/settings';
+import Print from './print/print';
 import './app.css';
 
 export const App: React.FC = () => {
@@ -24,6 +25,7 @@ export const App: React.FC = () => {
       </div>
       <SaveForm />
       <Settings />
+      <Print />
     </div>
   )
 }
