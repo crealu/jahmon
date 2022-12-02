@@ -22,7 +22,7 @@ export const Line: React.FC<LineProps> = (props) => {
   const { width, setWidth, text, lineNum } = props;
 
   const changeName = (event) => {
-    const textWidth = context.measureText(e.target.value).width;
+    const textWidth = context.measureText(event.target.value).width;
     const offset = textWidth / 1.5;
     event.target.style.width = textWidth + offset + 'px';
     setWidth(textWidth + offset);
