@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep, setActionText } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep, setActionText, theAction } from '../../../slices/sequence-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import { Step, Button } from '../../../common/classes';
@@ -14,6 +14,11 @@ export const Buttons: React.FC = () => {
   const mode = useAppSelector(theMode);
   const seq = useAppSelector(currentSeq);
   const active = useAppSelector(theActiveStep);
+  const action = useAppSelector(theAction);
+
+  const setOpacity = () => {
+    return action == '' ? '0' : '1';
+  }
 
   const returnStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
@@ -24,15 +29,8 @@ export const Buttons: React.FC = () => {
     return new Step(stepTitle, mode, noteData[0], noteData[1]);
   }
 
-  const addThisStep = () => {
-    const step = returnStep();
-    dispatch(addStep(step));
-  }
-
-  const updateThisStep = () => {
-    const step = returnStep();
-    dispatch(updateStep({noteids: step.noteData, fretnums: step.fretnums}));
-  }
+  const addThisStep = () => { dispatch(addStep(returnStep())) }
+  const updateThisStep = () => { dispatch(updateStep(returnStep())) }
 
   const deleteThisStep = () => {
     dispatch(deleteStep());
@@ -63,18 +61,21 @@ export const Buttons: React.FC = () => {
 
   return (
     <div className="sequence-btn-wrapper">
-      {buttons.map(btn => {
-        return (
-          <img
-            className={btn.classes}
-            src={btn.src}
-            alt={btn.action}
-            onClick={() => btn.click()}
-            onMouseEnter={(e) => handleEnter(e)}
-            onMouseLeave={() => handleLeave()}
-          />
-        )
-      })}
+      <div className="sequence-btns-inner">
+        {buttons.map(btn => {
+          return (
+            <img
+              className={btn.classes}
+              src={btn.src}
+              alt={btn.action}
+              onClick={() => btn.click()}
+              onMouseEnter={(e) => handleEnter(e)}
+              onMouseLeave={() => handleLeave()}
+            />
+          )
+        })}
+      </div>
+      <div className="action-text" style={{opacity: setOpacity()}}>{action}</div>
     </div>
   )
 }

@@ -38,8 +38,7 @@ export const sequenceSlice = createSlice({
       state.stepName = '';
     },
     updateStep(state, action: Payload<object>) {
-      state.steps[state.activeStep].noteids = action.payload.noteids;
-      state.steps[state.activeStep].fretnums = action.payload.fretnums;
+      state.steps[state.activeStep] = action.payload;
     },
     toggleSave(state, action: PayloadAction<boolean>) {
       state.save = action.payload;
