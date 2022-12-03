@@ -5,59 +5,13 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../slices/library-slice';
-import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName } from '../../slices/fretboard-slice';
-import { clearFretboard, codifySnapshot } from '../../common/helpers';
 import axios from 'axios';
 import LibChords from './libchords/libchords';
-
-const musicKeys = [
-  'A',
-  'A♯',
-  'B',
-  'C',
-  'C♯',
-  'D',
-  'D♯',
-  'E',
-  'F',
-  'F♯',
-  'G',
-  'G♯'
-];
+import LibNav from './libnav/libnav';
 
 export const Library: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const chords = useAppSelector(theChords);
-
-  const placeNotes = (event) => {
-    clearFretboard();
-    dispatch(clearSnapshot());
-    const noteIds = event.target.dataset.noteids.split(',');
-    const fretNotes = document.getElementsByClassName('fret-note');
-    for (let n = 0; n < noteIds.length; n++) {
-      for (let fn = 0; fn < fretNotes.length; fn++) {
-        if (noteIds[n] == fretNotes[fn].dataset.noteid) {
-          fretNotes[fn].style.display = 'block';
-          dispatch(addToSnapshot(noteIds[n]));
-        }
-      }
-    }
-  }
-
-  const dragStartHandler = (event) => {
-    const draggedNumber = event.target.cloneNode(true);
-    event.dataTransfer.dropEffect = 'copy';
-    console.log(event.target.dataset.name);
-    const chord = {
-      name: event.target.dataset.name,
-      noteids: event.target.dataset.noteids
-    }
-    dispatch(setGrabbed(chord));
-  }
-
-  const dragHandler = (event) => {
-    event.preventDefault();
-  }
 
   const getChordsFromDB = async () => {
     await axios.get('/api-get-lib')
@@ -90,31 +44,6 @@ export const Library: React.FC = () => {
     return chordIds.join(',');
   }
 
-  const scroll = (event) => {
-    const wrapper = document.getElementsByClassName('lib-chord-wrapper')[0];
-    const allChords = document.getElementsByClassName('lib-chord');
-
-    console.log(event.target.textContent);
-    for (let i = 0; i < allChords.length; i++) {
-      if (allChords[i].textContent == event.target.textContent) {
-        console.log(allChords[i].scrollTop);
-      }
-    }
-    wrapper.scrollTo({
-      top: 40 * 19 * event.target.tabIndex,
-      behavior: 'smooth'
-    })
-  }
-
-  const toggleKeyList = () => {
-    const nav = document.getElementsByClassName('nav-keys')[0];
-    if (nav.style.display == 'none') {
-      nav.style.display = 'block';
-    } else {
-      nav.style.display = 'none';
-    }
-  }
-
   useEffect(() => {
     getChordsFromDB();
     // dispatch(setLibraryChords(chords));
@@ -126,42 +55,10 @@ export const Library: React.FC = () => {
   return (
     <div className="library">
       <h3 className="section-title library-title">Library</h3>
-      <div className="lib-chord-nav">
-        <div className="key-btn" onClick={() => toggleKeyList()}>Key</div>
-        <div className="nav-keys">
-          {musicKeys.map((key, idx) => {
-            return (
-              <div
-                className="nav-key"
-                onClick={(e) => scroll(e)}
-                tabIndex={idx}
-              >
-                {key}
-              </div>
-            )
-          })}
-        </div>
-      </div>
+      <LibNav />
       <LibChords />
     </div>
   )
 }
-// //
-// <div className="lib-chord-wrapper">
-//   {chords.map(chord => {
-//     return <LibChord />
-//   })}
-// </div>
-// <div
-//   className="lib-chord"
-//   draggable="true"
-//   data-name={chord.name}
-//   data-noteids={chord.noteids.join(',')}
-//   onClick={(e) => placeNotes(e)}
-//   onDragStart={(e) => dragStartHandler(e)}
-//   onDrag={(e) => dragHandler(e)}
-// >
-//   {chord.name}
-// </div>
 
 export default Library;
