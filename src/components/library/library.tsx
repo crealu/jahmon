@@ -2,12 +2,13 @@ import * as React from 'react';
 import './library.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../store';
+import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../slices/library-slice';
 import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName } from '../../slices/fretboard-slice';
 import { clearFretboard, codifySnapshot } from '../../common/helpers';
 import axios from 'axios';
+import LibChords from './libchords/libchords';
 
 const musicKeys = [
   'A',
@@ -141,25 +142,26 @@ export const Library: React.FC = () => {
           })}
         </div>
       </div>
-      <div className="lib-chord-wrapper">
-        {chords.map(chord => {
-          return (
-            <div
-              className="lib-chord"
-              draggable="true"
-              data-name={chord.name}
-              data-noteids={chord.noteids.join(',')}
-              onClick={(e) => placeNotes(e)}
-              onDragStart={(e) => dragStartHandler(e)}
-              onDrag={(e) => dragHandler(e)}
-            >
-              {chord.name}
-            </div>
-          )
-        })}
-      </div>
+      <LibChords />
     </div>
   )
 }
+// //
+// <div className="lib-chord-wrapper">
+//   {chords.map(chord => {
+//     return <LibChord />
+//   })}
+// </div>
+// <div
+//   className="lib-chord"
+//   draggable="true"
+//   data-name={chord.name}
+//   data-noteids={chord.noteids.join(',')}
+//   onClick={(e) => placeNotes(e)}
+//   onDragStart={(e) => dragStartHandler(e)}
+//   onDrag={(e) => dragHandler(e)}
+// >
+//   {chord.name}
+// </div>
 
 export default Library;
