@@ -18,9 +18,10 @@ export const Print: React.FC = () => {
   const printing = useAppSelector(isPrinting);
 
   const hideForm = () => { dispatch(togglePrint(false)) };
+
   const printSeq = (e) => {
     e.target.style.display = 'none';
-    console.log(e.target.nextSibling);
+    e.target.nextSibling.style.display = 'none';
     window.print();
   }
 

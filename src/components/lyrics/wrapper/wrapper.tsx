@@ -1,11 +1,11 @@
 import * as React from 'react';
+import './wrapper.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { lyricLines, theActiveLine, deleteLine } from '../../../slices/lyrics-slice';
 import { isPrinting } from '../../../slices/sequence-slice';
-import './wrapper.css';
 import Line from '../line/line';
 import Panel from '../panel/panel';
 
