@@ -16,7 +16,6 @@ export const Riff = () => {
     } else {
       dispatch(setRiffen(event.target));
     }
-    console.log(event.target);
   }
 
   return (

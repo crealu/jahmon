@@ -45,17 +45,26 @@ const Fret: React.FC<FretProps> = (props) => {
     }
   }
 
+  const fretIsAvailable = (target) => {
+    return target.classList[0] != 'riff-note' ?
+           target.children[1] == undefined ?
+           true : false : false;
+  }
+
   const dropHandler = (event) => {
     event.preventDefault();
-    event.target.appendChild(riffen);
-    riffen.classList.add('riff-note');
-    riffen.classList.remove('riff-number');
-    riffen.setAttribute('data-noteid', event.target.children[0].dataset.noteid);
-    resetFretNotes();
-    dispatch(setRiffen(''))
-    event.target.style.background = 'none';
-    event.target.style.borderRadius = '0%';
-    event.target.parentElement.children[0].style.background = 'var(--skel_text_color)';
+    // event.stopPropagation();
+    if (fretIsAvailable(event.target)) {
+      event.target.appendChild(riffen);
+      riffen.classList.add('riff-note');
+      riffen.classList.remove('riff-number');
+      riffen.setAttribute('data-noteid', event.target.children[0].dataset.noteid);
+      resetFretNotes();
+      dispatch(setRiffen(''))
+      event.target.style.background = 'none';
+      event.target.style.borderRadius = '0%';
+      event.target.parentElement.children[0].style.background = 'var(--skel_text_color)';
+    }
   }
 
   const checkNoteID = (noteID) => {
