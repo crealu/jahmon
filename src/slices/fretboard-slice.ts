@@ -25,10 +25,12 @@ export const fretboardSlice = createSlice({
   initialState: fretboardInitialState,
   name: 'fretboard',
   reducers: {
-    setRiffen(state, action: PayloadAction<string>) {
+    setRiffen(state, action: PayloadAction<object>) {
+      // return {...state, riffen: action.payload };
       state.riffen = action.payload;
     },
     setMode(state, action: PayloadAction<string>) {
+      // return {...state, mode: action.payload };
       state.mode = action.payload;
     },
     addToSnapshot(state, action: PayloadAction<string>) {

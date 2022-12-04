@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { setRiffen, theMode, theRiffNums } from '../../../slices/fretboard-slice';
-import './riff.css';
+import './riffnums.css';
 
 export const Riff = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Strings from './strings/strings';
-import Riff from './riff/riff';
+import RiffNums from './riffnums/riffnums';
 import Snapshot from './snapshot/snapshot';
 import Mode from './mode/mode';
 import Buttons from './buttons/buttons';
@@ -11,7 +11,7 @@ export const Fretboard: React.FC = () => {
     <div className="fretboard">
       <div className="fretboard-top">
         <Snapshot />
-        <Riff />
+        <RiffNums />
       </div>
       <Strings />
       <Mode />

@@ -29,21 +29,22 @@ export const sequenceSlice = createSlice({
   initialState: sequenceInitialState,
   name: 'sequence',
   reducers: {
-    addStep(state, action: Payload<object>) {
-      state.steps = [...state.steps, action.payload];
+    addStep(state, action: PayloadAction<object>) {
+      return {...state, steps: [...state.steps, action.payload]}
+      // state.steps = [...state.steps, action.payload];
     },
     deleteStep(state) {
       state.steps = state.steps.filter((s, i) => i != state.activeStep);
       state.activeStep = null;
       state.stepName = '';
     },
-    updateStep(state, action: Payload<object>) {
+    updateStep(state, action: PayloadAction<object>) {
       state.steps[state.activeStep] = action.payload;
     },
     toggleSave(state, action: PayloadAction<boolean>) {
       state.save = action.payload;
     },
-    toggleSettings(state, action: Payload<boolean>) {
+    toggleSettings(state, action: PayloadAction<boolean>) {
       state.settings = action.payload;
     },
     togglePrint(state, action: Payload<boolean>) {
@@ -69,10 +70,10 @@ export const sequenceSlice = createSlice({
     clearSequence(state) {
       state.steps = [];
     },
-    setIsNew(state, action: Payload<boolean>) {
+    setIsNew(state, action: PayloadAction<boolean>) {
       state.isNew = action.payload;
     },
-    setActionText(state, action: Payload<string>) {
+    setActionText(state, action: PayloadAction<string>) {
       state.action = action.payload;
     }
   }

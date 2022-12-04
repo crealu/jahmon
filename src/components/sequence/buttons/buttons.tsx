@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, currentSeq, theActiveStep, setActionText, theAction } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, theActiveStep, setActionText, theAction } from '../../../slices/sequence-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import { Step, Button } from '../../../common/classes';
@@ -12,25 +12,24 @@ import { Step, Button } from '../../../common/classes';
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
-  const seq = useAppSelector(currentSeq);
+  const riffen = useAppSelector(theRiffen);
   const active = useAppSelector(theActiveStep);
   const action = useAppSelector(theAction);
+  const snapshotName = useAppSelector(theSnapshotName);
 
-  const setOpacity = () => {
-    return action == '' ? '0' : '1';
-  }
-
-  const returnStep = () => {
+  const returnNewStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-    const stepTitle = mode == 'chord'
-      ? document.getElementsByClassName('snapshot')[0].textContent
-      : 'Riff';
-
-    return new Step(stepTitle, mode, noteData[0], noteData[1]);
+    const stepTitle = mode == 'chord' ? snapshotName : 'Riff';
+    return {
+      title: stepTitle,
+      mode: mode,
+      noteids: noteData[0],
+      fretnums: noteData[1]
+    }
   }
 
-  const addThisStep = () => { dispatch(addStep(returnStep())) }
-  const updateThisStep = () => { dispatch(updateStep(returnStep())) }
+  const addThisStep = () => { dispatch(addStep(returnNewStep())) };
+  const updateThisStep = () => { dispatch(updateStep(returnNewStep())) };
 
   const deleteThisStep = () => {
     dispatch(deleteStep());
@@ -43,6 +42,7 @@ export const Buttons: React.FC = () => {
   const openSettings = () => { dispatch(toggleSettings(true)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
   const handleLeave = () => { dispatch(setActionText('')) };
+  const setOpacity = () => { return action == '' ? '0' : '1' }
 
   const buttons = useMemo(() => {
     const data = [
@@ -57,7 +57,7 @@ export const Buttons: React.FC = () => {
     return data.map(btn => {
       return new Button(btn[0], btn[1], btn[2], btn[3])
     })
-  }, [])
+  }, [mode]);
 
   return (
     <div className="sequence-btn-wrapper">
