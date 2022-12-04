@@ -10,8 +10,8 @@ router.post('/pass', (req, res) => {
 });
 
 router.get('/password-reset', (req, res) => {
-  res.render('password-reset.ejs', {
-    error: null
+  res.render('password.ejs', {
+    data: { errors: null } 
   });
 });
 
