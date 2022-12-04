@@ -84,5 +84,4 @@ export const convertChordIds = (tchords) => {
   return chordIds.join(',');
 }
 
-
 export const refresh = () => { location.reload() }

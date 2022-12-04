@@ -1,10 +1,19 @@
 import * as React from 'react';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theMode, theStrings, theFrets, theSnapshot, addToSnapshot, removeFromSnapshot } from '../../../slices/fretboard-slice';
-import { theChords } from '../../../slices/library-slice';
+import {
+  theMode,
+  theStrings,
+  theFrets,
+  theSnapshot,
+  addToSnapshot,
+  removeFromSnapshot,
+  setSnapshotName,
+} from '../../../slices/fretboard-slice';
+import { theChords, theChordIds } from '../../../slices/library-slice';
+import { codifySnapshot } from '../../../common/helpers';
 import './strings.css';
 import Fret from '../fret/fret';
 
@@ -14,7 +23,9 @@ export const Strings: React.FC = () => {
   const strings = useAppSelector(theStrings);
   const mode = useAppSelector(theMode);
   const chords = useAppSelector(theChords);
+  const chordIds = useAppSelector(theChordIds);
   const snapshot = useAppSelector(theSnapshot);
+  const trueSnapshot = codifySnapshot(snapshot);
 
   const returnStringClass = (sn) => {
     return mode == 'chord'

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theActiveStep, setActiveStep, setStepName, theStepName } from '../../../slices/sequence-slice';
-import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
+import { theMode, setMode, setRiffen, setSnapshotName } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs, restyleSteps, unstyleActive } from '../../../common/helpers';
 import './seqstep.css';
@@ -33,6 +33,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     clearRiffs();
     dispatch(setMode(step.dataset.mode));
     dispatch(setStepName(step.textContent));
+    dispatch(setSnapshotName(step.textContent));
     dispatch(setActiveStep(parseInt(step.tabIndex)));
     showFretNotes(step);
   }

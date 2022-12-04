@@ -19,7 +19,9 @@ export const Buttons: React.FC = () => {
 
   const returnNewStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-    const stepTitle = mode == 'chord' ? snapshotName : 'Riff';
+    const stepTitle = mode == 'chord' ?
+      document.getElementsByClassName('snapshot')[0].textContent
+      : 'Riff';
     return {
       title: stepTitle,
       mode: mode,
