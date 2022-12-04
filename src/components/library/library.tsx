@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../slices/library-slice';
+import { convertChordIds } from '../../common/helpers';
 import axios from 'axios';
 import LibChords from './libchords/libchords';
 import LibNav from './libnav/libnav';
@@ -24,32 +25,19 @@ export const Library: React.FC = () => {
   }
 
   const getChordsFromStorage = () => {
-    const storageChords = localStorage.getItem('chords').split(',');
+    const storageChords = JSON.parse(localStorage.getItem('chords'));
     const storageIds = localStorage.getItem('chordIds');
     dispatch(setLibraryChords(storageChords));
     dispatch(setChordIds(storageIds));
   }
 
-  const convertChordIds = (tchords) => {
-    let chordIds = [];
-    let arr = [], strArr = [];
-    tchords.forEach(chord => {
-      arr = [];
-      chord.noteids.forEach(noteid => {
-        arr.push(parseInt(noteid.replace('s', '').replace('f', '')))
-      })
-      strArr = arr.sort().map(id => { return id.toString() })
-      chordIds.push(parseInt(strArr.join('')));
-    })
-    return chordIds.join(',');
-  }
-
   useEffect(() => {
-    getChordsFromDB();
-    // dispatch(setLibraryChords(chords));
-    // setChordIds();
-    // getChordsFromStorage();
-    // getChordsFromDB() ;
+    const localChords = localStorage.getItem('chords');
+    if (localChords == undefined) {
+      getChordsFromDB();
+    } else {
+      getChordsFromStorage();
+    }
   }, [])
 
   return (

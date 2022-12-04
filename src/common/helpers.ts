@@ -70,4 +70,19 @@ export const codifySnapshot = (snapshot) => {
   return parseInt(strArr.join(''));
 }
 
+export const convertChordIds = (tchords) => {
+  let chordIds = [];
+  let arr = [], strArr = [];
+  tchords.forEach(chord => {
+    arr = [];
+    chord.noteids.forEach(noteid => {
+      arr.push(parseInt(noteid.replace('s', '').replace('f', '')))
+    })
+    strArr = arr.sort().map(id => { return id.toString() })
+    chordIds.push(parseInt(strArr.join('')));
+  })
+  return chordIds.join(',');
+}
+
+
 export const refresh = () => { location.reload() }
