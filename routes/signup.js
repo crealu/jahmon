@@ -4,7 +4,7 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.get('/signup', (req, res) => {
-  res.render('signup.ejs', {data: 'sign up'});
+  res.render('nosignup.ejs', {data: 'sign up'});
 });
 
 router.post('/signup', (req, res) => {
