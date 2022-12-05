@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theActiveLine, updateAllLines, addLine, deleteLine } from '../../../slices/lyrics-slice';
+import { theActiveLine, updateAllLines, addLine, deleteLine, deletePanelStep } from '../../../slices/lyrics-slice';
 import { togglePrint } from '../../../slices/sequence-slice';
 import axios from 'axios';
 import './buttons.css';
@@ -13,10 +13,7 @@ export const Buttons: React.FC = () => {
   const active = useAppSelector(theActiveLine);
 
   const addNewLine = () => {
-    const newLine = {
-      text: '...',
-      panel: [{ chord: '', offset: ''}]
-    };
+    const newLine = { text: '...', panel: [{ chord: '', offset: ''}] };
     dispatch(addLine(newLine))
   }
 
@@ -44,7 +41,6 @@ export const Buttons: React.FC = () => {
   }
 
   const openPrintView = () => {
-    console.log('print clicked')
     dispatch(togglePrint(true))
   }
 
@@ -65,7 +61,12 @@ export const Buttons: React.FC = () => {
           src="img/icons/trash-bin-gray.png"
         />
       </div>
-      <div onClick={() => openPrintView()}>Print</div>
+      <img
+        className="lyrics-btn print-btn"
+        src="img/icons/seq-btn-gray/print.png"
+        onClick={() => openPrintView()}
+      />
+
     </div>
   )
 }
