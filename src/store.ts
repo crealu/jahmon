@@ -5,6 +5,7 @@ import sequenceReducer, { sequenceInitialState } from './slices/sequence-slice';
 import libraryReducer, { libraryInitialState } from './slices/library-slice';
 import fretboardReducer, { fretboardInitialState } from './slices/fretboard-slice';
 import lyricsReducer, { lyricsInitialState } from './slices/lyrics-slice';
+import viewReducer, { viewInitialState } from './slices/view-slice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     library: libraryReducer,
     fretboard: fretboardReducer,
     lyrics: lyricsReducer,
+    view: viewReducer,
   }
 });
 
@@ -23,6 +25,7 @@ export const RootInitialState: RootState = {
   library: libraryInitialState,
   fretboard: fretboardInitialState,
   lyrics: lyricsInitialState,
+  view: viewInitialState,
 };
 
 export default store;
