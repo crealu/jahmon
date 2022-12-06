@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theActiveLine, updateAllLines, addLine, deleteLine, deletePanelStep } from '../../../slices/lyrics-slice';
-import { togglePrint } from '../../../slices/sequence-slice';
+import { togglePrint } from '../../../slices/view-slice';
 import axios from 'axios';
 import './buttons.css';
 

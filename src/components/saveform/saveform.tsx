@@ -3,7 +3,8 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
-import { currentTitle, currentSeq, isSaving, seqIsNew, toggleSave } from '../../slices/sequence-slice';
+import { currentTitle, currentSeq, seqIsNew } from '../../slices/sequence-slice';
+import { isSavingSeq, toggleSaveSequence, isSavingStep, toggleSaveStep } from '../../slices/view-slice';
 import { theChordName, setChordName } from '../../slices/library-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/helpers';
@@ -15,7 +16,8 @@ export const SaveForm: React.FC = () => {
   const title = useAppSelector(currentTitle);
   const steps = useAppSelector(currentSeq);
   const lyrics = useAppSelector(lyricLines);
-  const saving = useAppSelector(isSaving);
+  const savingSeq = useAppSelector(isSavingSeq);
+  const savingStep = useAppSelector(isSavingStep);
   const isNew = useAppSelector(seqIsNew);
   const chordName = useAppSelector(theChordName);
 
@@ -47,10 +49,10 @@ export const SaveForm: React.FC = () => {
   };
 
   const changeChordName = (event) => { dispatch(setChordName(event.target.value)) }
-  const hideForm = () => { dispatch(toggleSave(false)) };
+  const hideForm = () => { dispatch(toggleSaveSequence(false)) };
 
   return (
-    <div className="save-form modal" style={{display: saving ? 'block' : 'none'}}>
+    <div className="save-form modal" style={{display: savingSeq ? 'block' : 'none'}}>
       {steps.length > 0
         ? <div className="seq-form-view form-view">
             <div className="form-data form-label">Sequence:</div>

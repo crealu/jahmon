@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { lyricLines, theActiveLine, deleteLine } from '../../../slices/lyrics-slice';
-import { isPrinting } from '../../../slices/sequence-slice';
+import { isPrinting } from '../../../slices/view-slice';
 import Line from '../line/line';
 import Panel from '../panel/panel';
 

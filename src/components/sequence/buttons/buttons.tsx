@@ -4,7 +4,8 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, updateStep, clearSequence, toggleSave, toggleSettings, theActiveStep, setActionText, theAction } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, theActiveStep, setActionText, theAction } from '../../../slices/sequence-slice';
+import { toggleSaveSequence, toggleSaveStep, toggleSettings } from '../../../slices/view-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import { Step, Button } from '../../../common/classes';
@@ -39,8 +40,8 @@ export const Buttons: React.FC = () => {
   }
 
   const clearSeq = () => { dispatch(clearSequence()) };
-  const saveThisStep = () => { dispatch(toggleSave(true)) };
-  const saveSeq = () => { dispatch(toggleSave(true)) };
+  const saveThisStep = () => { dispatch(toggleSaveStep(true)) };
+  const saveSeq = () => { dispatch(toggleSaveSequence(true)) };
   const openSettings = () => { dispatch(toggleSettings(true)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
   const handleLeave = () => { dispatch(setActionText('')) };

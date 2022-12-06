@@ -12,7 +12,7 @@ import Print from './print/print';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
 import { useAppSelector } from '../hooks';
-import { isPrinting } from '../slices/sequence-slice';
+import { isPrinting } from '../slices/view-slice';
 
 export const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

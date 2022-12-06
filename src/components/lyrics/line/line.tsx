@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord } from '../../../slices/library-slice';
 import { theActiveLine, activateLine, updateLine } from '../../../slices/lyrics-slice';
-import { isPrinting } from '../../../slices/sequence-slice';
+import { isPrinting } from '../../../slices/view-slice';
 
 type LineProps<any> = {
   width: number;

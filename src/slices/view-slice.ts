@@ -38,10 +38,11 @@ export const {
   toggleSaveSequence,
   toggleSaveStep,
   toggleSettings,
-  togglePrint
+  togglePrint,
 } = viewSlice.actions;
 
-export const isSaving = ({ view: { save }}: RootState): boolean => save;
+export const isSavingSeq = ({ view: { saveSequence }}: RootState): boolean => saveSequence;
+export const isSavingStep = ({ view: { saveStep }}: RootState): boolean => saveStep;
 export const isSettings = ({ view: { settings }}: RootState): boolean => settings;
 export const isPrinting = ({ view: { print }}: RootState): boolean => print;
 

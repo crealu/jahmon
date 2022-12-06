@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { addPanelStep, updatePanelStep } from '../../../slices/lyrics-slice';
-import { isPrinting } from '../../../slices/sequence-slice';
+import { isPrinting } from '../../../slices/view-slice';
 import './panel.css';
 
 type PanelProps<any> = {

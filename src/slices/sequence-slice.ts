@@ -5,23 +5,15 @@ export interface SequenceState {
   steps: any[];
   title: string;
   activeStep: number;
-  save: boolean;
   isNew: boolean;
-  settings: boolean;
   stepName: string;
   action: string;
-  print: boolean;
 }
 
 export const sequenceInitialState: SequenceState = {
   steps: [],
   title: '',
-  activeStep: null,
-  save: false,
-  isNew: true,
-  settings: false,
-  print: false,
-  stepName: '',
+  activeStep: null,  isNew: true,  stepName: '',
   action: '',
 };
 
@@ -40,15 +32,6 @@ export const sequenceSlice = createSlice({
     },
     updateStep(state, action: PayloadAction<object>) {
       state.steps[state.activeStep] = action.payload;
-    },
-    toggleSave(state, action: PayloadAction<boolean>) {
-      state.save = action.payload;
-    },
-    toggleSettings(state, action: PayloadAction<boolean>) {
-      state.settings = action.payload;
-    },
-    togglePrint(state, action: Payload<boolean>) {
-      state.print = action.payload;
     },
     setActiveSequence(state, action: PayloadAction<object>) {
       state.title = action.payload.title;
@@ -86,22 +69,16 @@ export const {
   setActiveSequence,
   setActiveStep,
   clearSequence,
-  toggleSave,
-  toggleSettings,
   setIsNew,
   setCurrentTitle,
   setStepName,
   resetStepName,
   setActionText,
-  togglePrint
  } = sequenceSlice.actions;
 
 export const currentTitle = ({ sequence: { title }}: RootState): string => title;
 export const currentSeq = ({ sequence: { steps }}: RootState): any[] => steps;
 export const theActiveStep = ({ sequence: { activeStep }}: RootState): number => activeStep;
-export const isSaving = ({ sequence: { save }}: RootState): boolean => save;
-export const isSettings = ({ sequence: { settings }}: RootState): boolean => settings;
-export const isPrinting = ({ sequence: { print }}: RootState): boolean => print;
 export const seqIsNew = ({ sequence: { isNew }}: RootState): boolean => isNew;
 export const theStepName = ({ sequence: { stepName }}: RootState): string => stepName;
 export const theAction = ({ sequence: { action }}: RootState): string => action;

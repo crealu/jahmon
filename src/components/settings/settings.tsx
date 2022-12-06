@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
-import { isSettings, toggleSettings } from '../../slices/sequence-slice';
+import { isSettings, toggleSettings } from '../../slices/view-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/helpers';
 import axios from 'axios';
