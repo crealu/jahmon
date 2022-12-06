@@ -1,14 +1,17 @@
 import * as React from 'react';
+import './riffnums.css';
+import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { setRiffen, theMode, theRiffNums } from '../../../slices/fretboard-slice';
-import './riffnums.css';
+import { setRiffen, theMode } from '../../../slices/fretboard-slice';
 
 export const Riff = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const numbers = useAppSelector(theRiffNums);
   const mode = useAppSelector(theMode);
+  const numbers = useMemo(() => {
+    return new Array(21).fill(0).map((n, i) => { return i })
+  }, []);
 
   const dragStartHandler = (event) => {
     if (event.target.dataset.static) {
