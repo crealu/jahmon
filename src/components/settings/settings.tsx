@@ -21,7 +21,7 @@ export const Settings: React.FC = () => {
       .catch(err => { throw err });
   }
 
-  useEffect(() => { getUsername() });
+  useEffect(() => { getUsername() }, []);
 
   return (
     <div className="settings modal" style={{display: settings ? 'block' : 'none'}}>

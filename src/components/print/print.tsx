@@ -9,7 +9,6 @@ import { isPrinting, togglePrint } from '../../slices/view-slice';
 import { theChordName, setChordName } from '../../slices/library-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/helpers';
-import axios from 'axios';
 import Wrapper from '../lyrics/wrapper/wrapper';
 import StepData from './stepdata';
 

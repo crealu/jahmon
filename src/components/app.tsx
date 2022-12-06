@@ -6,16 +6,13 @@ import Eye from './fretboard/eye';
 import Lyrics from './lyrics/lyrics';
 import Library from './library/library';
 import SequencesDB from './seqdb/seqdb';
-import SaveForm from './saveform/saveform';
+import Save from './save/save';
 import Settings from './settings/settings';
 import Print from './print/print';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store';
 import { useAppSelector } from '../hooks';
 import { isPrinting } from '../slices/view-slice';
 
 export const App: React.FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const printing = useAppSelector(isPrinting);
 
   return (
@@ -34,7 +31,7 @@ export const App: React.FC = () => {
           <Lyrics />
         </div>
       }
-      <SaveForm />
+      <Save />
       <Settings />
       <Print />
     </div>

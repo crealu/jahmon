@@ -1,0 +1,11 @@
+.seq-form-view {
+  grid-template-columns: 30% 70%;
+}
+
+.seq-form-data {
+  padding: 20px;
+}
+
+.seq-step-data div {
+  display: inline-block;
+}

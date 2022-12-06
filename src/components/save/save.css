@@ -20,44 +20,7 @@
   margin: 0 auto;
 }
 
-.seq-form-view {
-  grid-template-columns: 30% 70%;
-}
-
-.chord-form-view {
-  width: 400px;
-  grid-template-columns: 200px 100px;
-}
-
-.step-data div {
-  display: inline-block;
-}
-
-.form-data {
-  padding: 20px;
-}
-
-.chord-name-label {
-  padding: 4px;
-  margin-right: 10px;
-  text-align: right;
-  font-size: 20px;
-}
-
-.chord-name-input {
-  background: none;
-  color: var(--skel_text_color);
-  padding: 4px;
-  border: none;
-  border-bottom: 1px solid var(--skel_text_color);
-  font-size: 20px;
-}
-
-.chord-name-input:focus-visible {
-  outline: none;
-}
-
-.save-form-btns-wrapper {
+.save-form-btns {
   position: relative;
   display: grid;
   margin: 0 auto;
@@ -81,7 +44,6 @@
   cursor: pointer;
   transition: 0.3s ease;
   float: left;
-
 }
 
 .save-form-btn:hover {
