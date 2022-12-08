@@ -15,6 +15,7 @@ export const LibChords: React.FC = () => {
   const placeNotes = (event) => {
     clearFretboard();
     dispatch(clearSnapshot());
+    dispatch(setSnapshotName(event.target.textContent));
     const noteIds = event.target.dataset.noteids.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
     for (let n = 0; n < noteIds.length; n++) {
@@ -38,9 +39,7 @@ export const LibChords: React.FC = () => {
     dispatch(setGrabbed(chord));
   }
 
-  const dragHandler = (event) => {
-    event.preventDefault();
-  }
+  const dragHandler = (event) => { event.preventDefault() }
 
   return (
     <div className="lib-chord-wrapper">

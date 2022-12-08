@@ -16,9 +16,9 @@ import Fret from '../fret/fret';
 
 export const Strings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const mode = useAppSelector(theMode);
   const strings = useMemo(() => { return new Array(6).fill(0) }, []);
   const frets = useMemo(() => { return new Array(22).fill(0) }, []);
-  const mode = useAppSelector(theMode);
   // const snapshot = useAppSelector(theSnapshot);
   // const trueSnapshot = codifySnapshot(snapshot);
 

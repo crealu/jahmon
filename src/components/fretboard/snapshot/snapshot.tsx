@@ -17,22 +17,16 @@ export const Snapshot: React.FC = () => {
   const trueSnapshot = codifySnapshot(snapshot);
   const snapshotName = useAppSelector(theSnapshotName);
 
-  const trueIds = useMemo(() => {
-    return chordIds.toString().split(',').map(id => { return parseInt(id) })
-  }, [snapshot]);
+  const trueIds = chordIds.toString().split(',').map(id => { return parseInt(id) })
 
   const matchedSnapshot = useMemo(() => {
-    let chordName;
+    let chordName = '';
     trueIds.forEach((id, i) => {
       if (id == trueSnapshot) {
         chordName = chords[i].name;
-        dispatch(setSnapshotName(chords[i].name));
       }
-    })
-    if (mode == 'riff') {
-      chordName = '';
-    }
-    return mode == 'chord' ? chordName : '';
+    });
+    dispatch(setSnapshotName(chordName));
   }, [snapshot]);
 
   return (
