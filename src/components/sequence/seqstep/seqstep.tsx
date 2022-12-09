@@ -26,6 +26,8 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       unstyleActive();
       dispatch(setActiveStep(null));
       dispatch(setStepName(''));
+      dispatch(setSnapshotName(''));
+      clearFretboard();
       return;
     }
     restyleSteps(step);

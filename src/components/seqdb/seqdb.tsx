@@ -1,13 +1,15 @@
 import * as React from 'react';
+import './seqdb.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { setActiveSequence, setIsNew } from '../../slices/sequence-slice';
+import { setActiveSequence, setIsNew, setActiveStep } from '../../slices/sequence-slice';
+import { setSnapshotName } from '../../slices/fretboard-slice';
 import { updateAllLines } from '../../slices/lyrics-slice';
+import { clearFretboard, unstyleActive } from '../../common/helpers';
 import NewSeqBtn from './newseq';
 import axios from 'axios';
-import './seqdb.css';
 
 export const SequencesDB: React.FC = () => {
   const [sequences, setSequences] = useState([]);
@@ -18,6 +20,10 @@ export const SequencesDB: React.FC = () => {
     dispatch(setActiveSequence({ title: title, steps: steps}));
     dispatch(updateAllLines(lyrics));
     dispatch(setIsNew(false));
+    unstyleActive();
+    dispatch(setActiveStep(null));
+    dispatch(setSnapshotName(''));
+    clearFretboard();
   }
 
   const getHandler = () => {

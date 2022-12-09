@@ -6,7 +6,8 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../../slices/library-slice';
 import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName } from '../../../slices/fretboard-slice';
-import { clearFretboard, codifySnapshot } from '../../../common/helpers';
+import { setActiveStep } from '../../../slices/sequence-slice';
+import { clearFretboard, codifySnapshot, unstyleActive } from '../../../common/helpers';
 
 export const LibChords: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -14,8 +15,14 @@ export const LibChords: React.FC = () => {
 
   const placeNotes = (event) => {
     clearFretboard();
+    dispatch(setActiveStep(null));
+    unstyleActive();
+
     dispatch(clearSnapshot());
     dispatch(setSnapshotName(event.target.textContent));
+
+    // take noteids and add to snapshot
+
     const noteIds = event.target.dataset.noteids.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
     for (let n = 0; n < noteIds.length; n++) {
