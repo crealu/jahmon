@@ -1,4 +1,5 @@
 .lyric-line {
+  width: calc(100% - 60px);
   padding: 4px 0px 4px 0px;
   border: none;
   caret-color: var(--skel_text_color);

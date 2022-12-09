@@ -45,7 +45,7 @@ app.use('/', require('./routes/index'));
 app.use('/', require('./routes/signup'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/password'));
-app.use('/', require('./routes/seqme'));
+app.use('/', require('./routes/seq'));
 app.use('/', require('./routes/lib'));
 app.use(cookieParser());
 
