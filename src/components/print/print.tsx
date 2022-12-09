@@ -31,10 +31,10 @@ export const Print: React.FC = () => {
         <div className="print-title">{title}</div>
         <StepData />
         <Wrapper />
-        <div className="save-form-btns-wrapper">
-          <button className="save-btn save-form-btn" onClick={(e) => printSeq(e)}>Print</button>
-          <button className="cancel-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
-        </div>
+      </div>
+      <div className="print-form-btns-wrapper">
+        <button className="save-btn save-form-btn" onClick={(e) => printSeq(e)}>Print</button>
+        <button className="cancel-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
       </div>
     </div>
   )

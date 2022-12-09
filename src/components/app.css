@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Comfortaa&display=swap');
 
-@page {
+/* @page {
   size: auto;
   margin: 0mm;
+} */
+
+@media print {
+  @page {
+    size: 210mm 297mm;
+    margin: 0mm;
+  }
 }
 
 :root {
