@@ -16,11 +16,17 @@ export const SaveSeq: React.FC = () => {
   const steps = useAppSelector(currentSeq);
   const lyrics = useAppSelector(lyricLines);
   const isNew = useAppSelector(seqIsNew);
+  const [saveRes, setSaveRes] = useState('');
 
   const saveSeq = () => {
     const data = { title: title, steps: steps, lyrics: lyrics }
     const url = isNew ? '/api-save-seq' : '/api-update-seq';
-    axios.post(url, data).then(res => { console.log(res)}).catch(err => { throw err });
+    axios.post(url, data)
+      .then(res => {
+        console.log(res)
+        setSaveRes(res.data);
+      })
+      .catch(err => { throw err });
   }
 
   const hideForm = () => { dispatch(toggleSaveSequence(false)) };
@@ -40,6 +46,9 @@ export const SaveSeq: React.FC = () => {
       <div className="save-form-btns-wrapper">
         <button className="save-btn save-form-btn" onClick={() => saveSeq()}>Save</button>
         <button className="cancel-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
+      </div>
+      <div className="save-form-response">
+        {saveRes}
       </div>
     </div>
   )
