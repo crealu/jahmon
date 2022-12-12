@@ -23,16 +23,16 @@ export const librarySlice = createSlice({
   name: 'library',
   reducers: {
     setChordName(state,  action: PayloadAction<string>) {
-      state.chordName = action.payload;
+      return {...state, chordName: action.payload}
     },
     setLibraryChords(state, action: PayloadAction<any[]>) {
-      state.chords = action.payload;
+      return {...state, chords: action.payload}
     },
     setChordIds(state, action: PayloadAction<string[]>) {
-      state.chordIds = action.payload;
+      return {...state, chordIds: action.payload}
     },
     setGrabbed(state,  action: PayloadAction<object>) {
-      state.grabbed = action.payload;
+      return {...state, grabbed: action.payload}
     },
   }
 });
