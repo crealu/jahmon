@@ -30,9 +30,9 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       clearFretboard();
       return;
     }
+    console.log(step);
     restyleSteps(step);
-    clearFretboard();
-    clearRiffs();
+
     dispatch(setMode(step.dataset.mode));
     dispatch(setStepName(step.textContent));
     dispatch(setSnapshotName(step.textContent));
@@ -106,6 +106,8 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
   }
 
   function showFretNotes(step) {
+    clearFretboard();
+    clearRiffs();
     const noteIds = step.dataset.noteids.split(',');
     const fretnums = step.dataset.fretnums.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');

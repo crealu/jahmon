@@ -8,11 +8,9 @@ export const clearFretboard = () => {
 
 export const clearRiffs = () => {
   const allRiffs = document.getElementsByClassName('riff-note');
-  for (let i = 0; i < 3; i++) {
+  while (allRiffs.length > 0) {
     for (let ar = 0; ar < allRiffs.length; ar++) {
-      setTimeout(() => {
-         allRiffs[ar].parentNode.removeChild(allRiffs[ar])
-      }, 50)
+      allRiffs[ar].remove();
     }
   }
 }
@@ -55,6 +53,7 @@ export const collectRiffNotes = () => {
   let noteids = [];
   let fretnums = [];
   for (let n = 0; n < notes.length; n++) {
+    console.log(notes[n])
     noteids.push(notes[n].dataset.noteid);
     fretnums.push(notes[n].textContent);
   }
