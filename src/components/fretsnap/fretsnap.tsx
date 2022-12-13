@@ -28,15 +28,17 @@ export const FretSnap: React.FC<FretSnapProps> = (props) => {
     return theNotes;
   }, [step]);
 
-  console.log(notes[0]);
-  let filtered = [];
-  for (let j = 0; j < notes.length; j++) {
-    if (notes[j] !== 'x') {
-      if (notes[j] !== '0') {
-        filtered.push(parseInt(notes[j]));
+  const filtered = useMemo(() => {
+    let theFiltered = [];
+    for (let j = 0; j < notes.length; j++) {
+      if (notes[j] !== 'x') {
+        if (notes[j] !== '0') {
+          theFiltered.push(parseInt(notes[j]));
+        }
       }
     }
-  }
+    return theFiltered;
+  }, [step]);
 
   const fretStart = Math.min(...filtered);
 
