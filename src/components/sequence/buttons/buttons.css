@@ -1,7 +1,7 @@
 .sequence-btns-inner {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(7, 50px);
+  grid-template-columns: repeat(8, 50px);
   float: left;
   margin: 10px 0px;
   width: 100%;

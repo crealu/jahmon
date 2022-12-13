@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, updateStep, clearSequence, theActiveStep, setActionText, theAction } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, theActiveStep, setActionText, theAction, toggleFretsnap, seqIsFretsnap } from '../../../slices/sequence-slice';
 import { toggleSaveSequence, toggleSaveStep, toggleSettings } from '../../../slices/view-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
@@ -17,6 +17,7 @@ export const Buttons: React.FC = () => {
   const active = useAppSelector(theActiveStep);
   const action = useAppSelector(theAction);
   const snapshotName = useAppSelector(theSnapshotName);
+  const fretsnap = useAppSelector(seqIsFretsnap);
 
   const returnNewStep = () => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
@@ -43,6 +44,7 @@ export const Buttons: React.FC = () => {
   const saveThisStep = () => { dispatch(toggleSaveStep(true)) };
   const saveSeq = () => { dispatch(toggleSaveSequence(true)) };
   const openSettings = () => { dispatch(toggleSettings(true)) };
+  const changeStep = () => { dispatch(toggleFretsnap(!fretsnap)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
   const handleLeave = () => { dispatch(setActionText('')) };
   const setOpacity = () => { return action == '' ? '0' : '1' }
@@ -55,12 +57,13 @@ export const Buttons: React.FC = () => {
       ['', 'update', 'Update step', updateThisStep],
       ['', 'save-step', 'Save step', saveThisStep],
       ['', 'save-seq', 'Save sequence', saveSeq],
-      ['', 'settings', 'Settings', openSettings]
+      ['', 'settings', 'Settings', openSettings],
+      ['', 'fretsnap', 'Toggle fretsnap', changeStep]
     ];
     return data.map(btn => {
       return new Button(btn[0], btn[1], btn[2], btn[3])
     })
-  }, [mode]);
+  }, [mode, fretsnap]);
 
   return (
     <div className="sequence-btn-wrapper">
