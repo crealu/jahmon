@@ -94,11 +94,12 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     }
   }
 
-  const addRiffFromStep = (parent, fretnum) => {
+  const addRiffFromStep = (parent, noteid, fretnum) => {
     const riffNote = document.createElement('div');
     riffNote.classList.add('riff-note');
     riffNote.textContent = fretnum;
     riffNote.draggable = true;
+    riffNote.setAttribute('data-noteid', noteid);
     riffNote.addEventListener('dragstart', (event) => {
       dispatch(setRiffen(event.target));
     });
@@ -115,7 +116,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       for (let fn = 0; fn < fretNotes.length; fn++) {
         if (noteIds[n] == fretNotes[fn].dataset.noteid) {
           if (step.dataset.mode == 'riff') {
-            addRiffFromStep(fretNotes[fn].parentNode, fretnums[n]);
+            addRiffFromStep(fretNotes[fn].parentNode, noteIds[n], fretnums[n]);
           } else {
             fretNotes[fn].style.display = 'block';
           }
