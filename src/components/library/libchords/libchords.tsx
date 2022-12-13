@@ -5,22 +5,23 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../../slices/library-slice';
-import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName } from '../../../slices/fretboard-slice';
+import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName, setMode } from '../../../slices/fretboard-slice';
 import { setActiveStep } from '../../../slices/sequence-slice';
-import { clearFretboard, codifySnapshot, unstyleActive } from '../../../common/helpers';
+import { clearFretboard, clearRiffs, codifySnapshot, unstyleActive } from '../../../common/helpers';
 
 export const LibChords: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const chords = useAppSelector(theChords);
 
   const placeNotes = (event) => {
+    clearRiffs();
     clearFretboard();
     dispatch(setActiveStep(null));
     unstyleActive();
 
     dispatch(clearSnapshot());
     dispatch(setSnapshotName(event.target.textContent));
-
+    dispatch(setMode('chord'));
     // take noteids and add to snapshot
 
     const noteIds = event.target.dataset.noteids.split(',');
