@@ -1,12 +1,18 @@
+.steps {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
 .steps-wrapper {
   position: relative;
   width: 100%;
   height: 70px;
   background: rgba(0, 0, 0, 0.1);
-  overflow-x: scroll;
-  overflow-y: hidden;
 }
 
-.steps-wrapper::-webkit-scrollbar {
+.steps::-webkit-scrollbar {
   display: none;
 }

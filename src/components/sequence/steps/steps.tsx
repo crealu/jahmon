@@ -50,6 +50,14 @@ export const Steps: React.FC = () => {
     event.target.style.background = 'none';
   }
 
+  const scrollSteps = (event) => {
+    if (event.deltaY > 0) {
+      event.target.parentNode.parentNode.scrollLeft += 40;
+    } else {
+      event.target.parentNode.parentNode.scrollLeft -= 40;
+    }
+  }
+
   const returnSeqStep = () => {
     return seq.map((step, i) => { return <SeqStep step={step} idx={i} /> })
   }
@@ -60,13 +68,24 @@ export const Steps: React.FC = () => {
 
   return (
     <div
-      className="steps-wrapper"
-      onDrop={(e) => dropHandler(e)}
-      onDragOver={(e) => dragOverHandler(e)}
-      onDragLeave={(e) => dragLeaveHandler(e)}
-      style={{height: `${fretsnap ? '150px' : '80px'}`}}
+      className="steps"
+      onWheel={(e) => scrollSteps(e)}
+      style={{
+        height: `${fretsnap ? '150px' : '80px'}`,
+      }}
     >
-      {fretsnap ? returnFretSnap() : returnSeqStep()}
+      <div
+        className="steps-wrapper"
+        onDrop={(e) => dropHandler(e)}
+        onDragOver={(e) => dragOverHandler(e)}
+        onDragLeave={(e) => dragLeaveHandler(e)}
+        style={{
+          height: `${fretsnap ? '150px' : '80px'}`,
+          width: `${seq.length > 8 ? seq.length * 100 + 'px' : '100%'}`
+        }}
+      >
+        {fretsnap ? returnFretSnap() : returnSeqStep()}
+      </div>
     </div>
   )
 }
