@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { currentTitle, currentSeq, seqIsNew } from '../../slices/sequence-slice';
-import { isPrinting, togglePrint } from '../../slices/view-slice';
+import { isPrinting, togglePrint, setCurrentScreen } from '../../slices/view-slice';
 import { theChordName, setChordName } from '../../slices/library-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/helpers';
@@ -17,7 +17,7 @@ export const Print: React.FC = () => {
   const title = useAppSelector(currentTitle);
   const printing = useAppSelector(isPrinting);
 
-  const hideForm = () => { dispatch(togglePrint(false)) };
+  const hideForm = () => { dispatch(setCurrentScreen('base')) };
 
   const printSeq = (e) => {
     e.target.style.display = 'none';
@@ -28,7 +28,7 @@ export const Print: React.FC = () => {
   }
 
   return (
-    <div className="print-form" style={{display: printing ? 'block' : 'none'}}>
+    <div className="print-form">
       <div className="print-form-inner">
         <div className="print-title">{title}</div>
         <StepData />

@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks';
 import { setActiveSequence, setIsNew, setActiveStep } from '../../slices/sequence-slice';
 import { setSnapshotName } from '../../slices/fretboard-slice';
 import { updateAllLines } from '../../slices/lyrics-slice';
+import { setCurrentScreen } from '../../slices/view-slice';
 import { clearFretboard, unstyleActive } from '../../common/helpers';
 import NewSeqBtn from './newseq';
 import axios from 'axios';
@@ -24,6 +25,10 @@ export const SequencesDB: React.FC = () => {
     dispatch(setActiveStep(null));
     dispatch(setSnapshotName(''));
     clearFretboard();
+  }
+
+  const changeScreen = () => {
+    dispatch(setCurrentScreen('gig'));
   }
 
   const getHandler = () => {
@@ -49,6 +54,7 @@ export const SequencesDB: React.FC = () => {
           )
         })}
         <NewSeqBtn />
+        <button onClick={() => changeScreen()}>GIG</button>
       </div>
     </div>
   )

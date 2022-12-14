@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theActiveLine, updateAllLines, addLine, deleteLine, deletePanelStep } from '../../../slices/lyrics-slice';
-import { togglePrint } from '../../../slices/view-slice';
+import { setCurrentScreen } from '../../../slices/view-slice';
 import axios from 'axios';
 import './buttons.css';
 
@@ -41,7 +41,7 @@ export const Buttons: React.FC = () => {
   }
 
   const openPrintView = () => {
-    dispatch(togglePrint(true))
+    dispatch(setCurrentScreen('print'))
   }
 
   return (

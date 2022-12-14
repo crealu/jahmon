@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord } from '../../../slices/library-slice';
 import { theActiveLine, activateLine, updateLine } from '../../../slices/lyrics-slice';
-import { isPrinting } from '../../../slices/view-slice';
+import { theScreen } from '../../../slices/view-slice';
 
 type LineProps<any> = {
   width: number;
@@ -20,7 +20,7 @@ const context = canvas.getContext("2d");
 export const Line: React.FC<LineProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const active = useAppSelector(theActiveLine);
-  const printing = useAppSelector(isPrinting);
+  const screen = useAppSelector(theScreen);
   const { width, setWidth, text, lineNum } = props;
 
   const changeName = (event) => {
@@ -35,7 +35,7 @@ export const Line: React.FC<LineProps> = (props) => {
 
   return (
     <input
-      className={`lyric-line ${printing ? 'lyric-line-print' : ''}`}
+      className={`lyric-line ${screen == 'print' ? 'lyric-line-print' : ''}`}
       onChange={(e) => changeName(e)}
       onClick={(e) => setActive(lineNum)}
       value={text}
