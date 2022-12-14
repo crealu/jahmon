@@ -4,11 +4,14 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
-import { currentSeq } from '../../slices/sequence-slice';
+import { currentSeq, seqIsFretsnap } from '../../slices/sequence-slice';
+
+import FretSnap from '../fretsnap/fretsnap';
 
 export const StepData: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const steps = useAppSelector(currentSeq);
+  const fretsnap = useAppSelector(seqIsFretsnap);
 
   const filterNoteIds = useCallback((noteid) => {
     let ids = noteid.replaceAll('s', '').replaceAll('f', '').split(',').reverse();
@@ -22,15 +25,19 @@ export const StepData: React.FC = () => {
     return notes.join(' ');
   }, [steps]);
 
+  const returnStripped = (step) => {
+    return (
+      <div className="print-steps-row">
+        <div className="print-steps-left">{step.title}</div>
+        <div className="print-steps-right">{filterNoteIds(step.noteids)}</div>
+      </div>
+    )
+  }
+
   return (
     <div className="print-steps">
-      {steps.map(step => {
-        return (
-          <div className="print-steps-row">
-            <div className="print-steps-left">{step.title}</div>
-            <div className="print-steps-right">{filterNoteIds(step.noteids)}</div>
-          </div>
-        )
+      {steps.map((step, idx) => {
+        return fretsnap ? <FretSnap step={step} idx={idx} /> : returnStripped(step);
       })}
     </div>
   )

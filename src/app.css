@@ -4,10 +4,14 @@
   size: auto;
   margin: 0mm;
 } */
+/* @page {
+  size: 210mm 297mm;
+  margin: 0mm;
+} */
 
 @media print {
   @page {
-    size: 210mm 297mm;
+    size: 800px 1000px;
     margin: 0mm;
   }
 }

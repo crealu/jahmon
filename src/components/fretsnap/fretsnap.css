@@ -54,7 +54,7 @@
 
 .fs-fret {
   height: 1px;
-  background: black;
+  border-bottom: 1px solid black;
 }
 
 .fs-note {
