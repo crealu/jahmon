@@ -9,7 +9,7 @@ import { isPrinting, togglePrint } from '../../slices/view-slice';
 import { theChordName, setChordName } from '../../slices/library-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { refresh } from '../../common/helpers';
-import Wrapper from '../lyrics/wrapper/wrapper';
+import Wrapper from '../../components/lyrics/wrapper/wrapper';
 import StepData from './stepdata';
 
 export const Print: React.FC = () => {
@@ -23,6 +23,8 @@ export const Print: React.FC = () => {
     e.target.style.display = 'none';
     e.target.nextSibling.style.display = 'none';
     window.print();
+    e.target.style.display = 'block';
+    e.target.nextSibling.style.display = 'block';
   }
 
   return (

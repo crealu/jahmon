@@ -5,8 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
 import { currentSeq, seqIsFretsnap } from '../../slices/sequence-slice';
-
-import FretSnap from '../fretsnap/fretsnap';
+import FretSnap from '../../components/fretsnap/fretsnap';
 
 export const StepData: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
