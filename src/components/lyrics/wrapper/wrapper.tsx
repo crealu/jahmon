@@ -9,12 +9,18 @@ import { isPrinting } from '../../../slices/view-slice';
 import Line from '../line/line';
 import Panel from '../panel/panel';
 
-const Wrapper: React.FC = () => {
+type WrapperProps = {
+  lines: object[];
+}
+
+const Wrapper: React.FC<WrapperProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
-  const lines = useAppSelector(lyricLines);
+  // const lines = useAppSelector(lyricLines);
   const active = useAppSelector(theActiveLine);
   const printing = useAppSelector(isPrinting);
   const [lineWidth, setLineWidth] = useState(100);
+
+  const { lines } = props;
 
   const deleteThisLine = (event) => {
     console.log(event.target.previousSibling.value)

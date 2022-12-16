@@ -16,6 +16,7 @@ export const Print: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const title = useAppSelector(currentTitle);
   const printing = useAppSelector(isPrinting);
+  const lines = useAppSelector(lyricLines);
 
   const hideForm = () => { dispatch(setCurrentScreen('base')) };
 
@@ -32,7 +33,7 @@ export const Print: React.FC = () => {
       <div className="print-form-inner">
         <div className="print-title">{title}</div>
         <StepData />
-        <Wrapper />
+        <Wrapper lines={lines}/>
       </div>
       <div className="print-form-btns-wrapper">
         <button className="save-btn save-form-btn" onClick={(e) => printSeq(e)}>Print</button>
