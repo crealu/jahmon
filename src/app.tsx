@@ -19,11 +19,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="app">
-      { current == 'base' ? <Base /> : ''}
-      { current == 'print' ? <Print /> : ''}
-      { current == 'gig' ? <Gig /> : ''}
+      {returnScreen()}
+
     </div>
   )
 }
 
 export default App;
+
+// { current == 'base' ? <Base /> : ''}
+// { current == 'print' ? <Print /> : ''}
+// { current == 'gig' ? <Gig /> : ''}

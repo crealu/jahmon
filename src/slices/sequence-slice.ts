@@ -9,6 +9,7 @@ export interface SequenceState {
   stepName: string;
   action: string;
   isFretsnap: boolean;
+  sequences: object[];
 }
 
 export const sequenceInitialState: SequenceState = {
@@ -19,6 +20,7 @@ export const sequenceInitialState: SequenceState = {
   stepName: '',
   action: '',
   isFretsnap: false,
+  sequences: [],
 };
 
 export const sequenceSlice = createSlice({
@@ -65,7 +67,10 @@ export const sequenceSlice = createSlice({
     },
     toggleFretsnap(state, action: PayloadAction<boolean>) {
       state.isFretsnap = action.payload;
-    }
+    },
+    setAllSequences(state, action: PayloadAction<object[]>) {
+      state.sequences = action.payload;
+    },
   }
 });
 
@@ -81,7 +86,8 @@ export const {
   setStepName,
   resetStepName,
   setActionText,
-  toggleFretsnap
+  toggleFretsnap,
+  setAllSequences,
  } = sequenceSlice.actions;
 
 export const currentTitle = ({ sequence: { title }}: RootState): string => title;
@@ -91,5 +97,6 @@ export const seqIsNew = ({ sequence: { isNew }}: RootState): boolean => isNew;
 export const theStepName = ({ sequence: { stepName }}: RootState): string => stepName;
 export const theAction = ({ sequence: { action }}: RootState): string => action;
 export const seqIsFretsnap = ({ sequence: { isFretsnap }}: RootState): boolean => isFretsnap;
+export const allSequences = ({ sequence: { sequences }}: RootState): object[] => sequences;
 
 export default sequenceSlice.reducer;

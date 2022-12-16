@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { setActiveSequence, setIsNew, setActiveStep } from '../../slices/sequence-slice';
+import { setActiveSequence, setIsNew, setActiveStep, setAllSequences, allSequences } from '../../slices/sequence-slice';
 import { setSnapshotName } from '../../slices/fretboard-slice';
 import { updateAllLines } from '../../slices/lyrics-slice';
 import { setCurrentScreen } from '../../slices/view-slice';
@@ -13,8 +13,9 @@ import NewSeqBtn from './newseq';
 import axios from 'axios';
 
 export const SequencesDB: React.FC = () => {
-  const [sequences, setSequences] = useState([]);
+  // const [sequences, setSequences] = useState([]);
   const dispatch = useDispatch<AppDispatch>();
+  const sequences = useAppSelector(allSequences);
 
   const changeSequence = (event, steps, lyrics) => {
     const title = event.target.textContent;
@@ -33,7 +34,10 @@ export const SequencesDB: React.FC = () => {
 
   const getHandler = () => {
     axios.get('/api-get-jahms')
-      .then(res => { setSequences(res.data) })
+      .then(res => {
+        // setSequences(res.data)
+        dispatch(setAllSequences(res.data));
+      })
       .catch(err => { throw err });
   }
 
