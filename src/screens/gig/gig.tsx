@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks';
 import { allSequences } from '../../slices/sequence-slice.ts';
 import { lyricLines } from '../../slices/lyrics-slice.ts';
 import FretSnap from '../../components/fretsnap/fretsnap';
+import BasicSnap from '../print/basicsnap';
 import Wrapper from '../../components/lyrics/wrapper/wrapper';
 
 export const Gig: React.FC = () => {
@@ -23,7 +24,7 @@ export const Gig: React.FC = () => {
             <div className="gig-seq-steps-wrapper">
               <div className="gig-sequence-steps">
                 {sequence.steps.map((step, idx) => {
-                  return <FretSnap step={step} idx={idx} />
+                  return <BasicSnap step={step} idx={idx} />
                 })}
               </div>
             </div>

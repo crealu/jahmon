@@ -9,6 +9,12 @@ body {
   width: 90%;
 }
 
+.gig-sequence {
+  margin: 40px 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--skel_text_color);
+}
+
 .gig-sequence-title {
 
 }
@@ -23,7 +29,7 @@ body {
 }
 
 .gig-sequence-steps {
-  height: 100px;
+  height: 50px;
 }
 
 .gig-seq-lyrics-wrapper {

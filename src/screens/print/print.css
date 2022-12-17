@@ -31,10 +31,12 @@
 }
 
 .basic-snap {
+  position: relative;
   display: grid;
-  grid-template-columns: 20% 80%;
-  width: 500px;
-  height: 30px;
+  grid-template-rows: repeat(2, 24px);
+  width: 110px;
+  height: 40px;
+  float: left;
 }
 
 .print-form-btns-wrapper {
