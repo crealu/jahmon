@@ -11,24 +11,28 @@ import Wrapper from '../../components/lyrics/wrapper/wrapper';
 
 export const Gig: React.FC = () => {
   const sequences = useAppSelector(allSequences);
-  const lines = useAppSelector(lyricLines);
+  // const lines = useAppSelector(lyricLines);
   console.log(sequences);
 
   return (
     <div className="gig">
       {sequences.map(sequence => {
         return (
-          <div>
+          <div className="gig-sequence">
             <h3 className="gig-sequence-title">{sequence.title}</h3>
-            <div className="gig-sequence-steps">
-              {sequence.steps.map((step, idx) => {
-                return <FretSnap step={step} idx={idx} />
-              })}
+            <div className="gig-seq-steps-wrapper">
+              <div className="gig-sequence-steps">
+                {sequence.steps.map((step, idx) => {
+                  return <FretSnap step={step} idx={idx} />
+                })}
+              </div>
             </div>
-            <div className="gig-sequence-lyrics">
-              {sequence.lyrics.map((lyric, idx) => {
-                return <Wrapper lines={lines} />
-              })}
+            <div className="gig-seq-lyrics-wrapper">
+              <div className="gig-sequence-lyrics">
+                {sequence.lyrics.map((lyric) => {
+                  return <Wrapper lines={new Array(lyric)} />
+                })}
+              </div>
             </div>
           </div>
         )
@@ -36,5 +40,9 @@ export const Gig: React.FC = () => {
     </div>
   )
 }
+
+// {sequence.lyrics.map((lines, idx) => {
+//   return <Wrapper lines={lines} />
+// })}
 
 export default Gig;

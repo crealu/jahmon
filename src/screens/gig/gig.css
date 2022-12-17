@@ -1,0 +1,35 @@
+body {
+  overflow-y: scroll;
+}
+
+.gig {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.gig-sequence-title {
+
+}
+
+.gig-seq-steps-wrapper {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.gig-seq-steps-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.gig-sequence-steps {
+  height: 100px;
+}
+
+.gig-seq-lyrics-wrapper {
+  height: auto;
+}
+
+.gig-sequence-lyrics {
+
+}
