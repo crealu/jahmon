@@ -20,7 +20,7 @@ export const BasicSnap: React.FC<BasicSnapProps> = (props) => {
     }
 
     return notes.join(' ');
-  }, [steps]);
+  }, [step]);
 
   return (
     <div className="basic-snap">
@@ -29,6 +29,5 @@ export const BasicSnap: React.FC<BasicSnapProps> = (props) => {
     </div>
   )
 }
-
 
 export default BasicSnap;

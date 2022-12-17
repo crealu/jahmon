@@ -30,7 +30,7 @@
   height: 200px;
 }
 
-.print-steps-row {
+.basic-snap {
   display: grid;
   grid-template-columns: 20% 80%;
   width: 500px;
