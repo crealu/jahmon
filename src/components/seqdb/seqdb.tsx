@@ -28,8 +28,8 @@ export const SequencesDB: React.FC = () => {
     clearFretboard();
   }
 
-  const changeScreen = () => {
-    dispatch(setCurrentScreen('gig'));
+  const changeScreen = (screen) => {
+    dispatch(setCurrentScreen(screen));
   }
 
   const getHandler = () => {
@@ -58,7 +58,8 @@ export const SequencesDB: React.FC = () => {
           )
         })}
         <NewSeqBtn />
-        <button onClick={() => changeScreen()}>GIG</button>
+        <button onClick={() => changeScreen('gig')}>GIG</button>
+        <button onClick={() => changeScreen('jambook')}>JAMBOOK</button>
       </div>
     </div>
   )
