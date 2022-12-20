@@ -7,6 +7,7 @@ export interface ViewState {
   settings: boolean;
   print: boolean;
   currentScreen: string;
+  currentBook: string;
 }
 
 export const viewInitialState: ViewState = {
@@ -15,6 +16,7 @@ export const viewInitialState: ViewState = {
   settings: false,
   print: false,
   currentScreen: 'base',
+  currentBook: 'songs'
 };
 
 export const viewSlice = createSlice({
@@ -33,8 +35,11 @@ export const viewSlice = createSlice({
     togglePrint(state, action: PayloadAction<boolean>) {
       return { ...state, print: action.payload };
     },
-    setCurrentScreen(state, action: PayloadAction<boolean>) {
+    setCurrentScreen(state, action: PayloadAction<string>) {
       return { ...state, currentScreen: action.payload }
+    },
+    setCurrentBook(state, action: PayloadAction<string>) {
+      return { ...state, currentBook: action.payload }
     },
   }
 });
@@ -45,6 +50,7 @@ export const {
   toggleSettings,
   togglePrint,
   setCurrentScreen,
+  setCurrentBook,
 } = viewSlice.actions;
 
 export const isSavingSeq = ({ view: { saveSequence }}: RootState): boolean => saveSequence;
@@ -52,5 +58,6 @@ export const isSavingStep = ({ view: { saveStep }}: RootState): boolean => saveS
 export const isSettings = ({ view: { settings }}: RootState): boolean => settings;
 export const isPrinting = ({ view: { print }}: RootState): boolean => print;
 export const theScreen = ({ view: { currentScreen }}: RootState): boolean => currentScreen;
+export const theBook = ({ view: { currentBook }}: RootState): boolean => currentBook;
 
 export default viewSlice.reducer;

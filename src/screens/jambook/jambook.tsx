@@ -6,18 +6,22 @@ import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { allSequences } from '../../slices/sequence-slice.ts';
 import { lyricLines } from '../../slices/lyrics-slice.ts';
+import { theBook } from '../../slices/view-slice.ts';
 import FretSnap from '../../components/fretsnap/fretsnap';
 import BasicSnap from '../print/basicsnap';
 import Wrapper from '../../components/lyrics/wrapper/wrapper';
+import Menu from './menu/menu';
 
 export const Jambook: React.FC = () => {
   const sequences = useAppSelector(allSequences);
+  const book = useAppSelector(theBook);
   // const lines = useAppSelector(lyricLines);
   console.log(sequences);
 
   return (
     <div className="jambook">
       <div className="jambook-ui jambook-left">
+        <h2 className="current-book-title">{book}</h2>
         {sequences.map(sequence => {
           return (
             <div className="gig-sequence">
@@ -41,8 +45,7 @@ export const Jambook: React.FC = () => {
         })}
       </div>
       <div className="jambook-ui jambook-right">
-        <h2>Jambook</h2>
-        <div className="jambook-menu">Menu</div>
+        <Menu />
       </div>
     </div>
   )
