@@ -4,9 +4,9 @@ import { useMemo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { allSequences } from '../../../slices/sequence-slice.ts';
-import { lyricLines } from '../../../slices/lyrics-slice.ts';
-import { setCurrentBook } from '../../../slices/view-slice.ts';
+import { allSequences } from '../../../slices/sequence-slice';
+import { lyricLines } from '../../../slices/lyrics-slice';
+import { setCurrentBook } from '../../../slices/view-slice';
 
 export const Menu: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

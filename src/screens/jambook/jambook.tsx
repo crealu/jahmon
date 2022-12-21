@@ -1,48 +1,33 @@
 import * as React from 'react';
 import './jambook.css';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
+// import { useDispatch } from 'react-redux';
+// import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { allSequences } from '../../slices/sequence-slice.ts';
-import { lyricLines } from '../../slices/lyrics-slice.ts';
-import { theBook } from '../../slices/view-slice.ts';
-import FretSnap from '../../components/fretsnap/fretsnap';
-import BasicSnap from '../print/basicsnap';
-import Wrapper from '../../components/lyrics/wrapper/wrapper';
+import { theBook } from '../../slices/view-slice';
 import Menu from './menu/menu';
+import Songs from './songs/songs';
 
 export const Jambook: React.FC = () => {
-  const sequences = useAppSelector(allSequences);
   const book = useAppSelector(theBook);
-  // const lines = useAppSelector(lyricLines);
-  console.log(sequences);
+
+  const renderContent = useCallback(() => {
+    return book == 'Songs' ? <Songs />
+         : book == 'Sets' ? 'Sets'
+         : book == 'Sequences' ? 'Sequences'
+         : book == 'Tabs' ? 'Tabs'
+         : book == 'Library' ? 'Library'
+         : book == 'Settings' ? 'Settings'
+         : ''
+  }, [book])
 
   return (
     <div className="jambook">
       <div className="jambook-ui jambook-left">
         <h2 className="current-book-title">{book}</h2>
-        {sequences.map(sequence => {
-          return (
-            <div className="gig-sequence">
-              <h3 className="gig-sequence-title">{sequence.title}</h3>
-              <div className="gig-seq-steps-wrapper">
-                <div className="gig-sequence-steps">
-                  {sequence.steps.map((step, idx) => {
-                    return <BasicSnap step={step} idx={idx} />
-                  })}
-                </div>
-              </div>
-              <div className="gig-seq-lyrics-wrapper">
-                <div className="gig-sequence-lyrics">
-                  {sequence.lyrics.map((lyric) => {
-                    return <Wrapper lines={new Array(lyric)} />
-                  })}
-                </div>
-              </div>
-            </div>
-          )
-        })}
+        <div className="book-wrapper">
+          {renderContent()}
+        </div>
       </div>
       <div className="jambook-ui jambook-right">
         <Menu />

@@ -1,22 +1,22 @@
 import * as React from 'react';
-import './gig.css';
-import { useCallback } from 'react';
+import './songs.css';
+import { useMemo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
-import { useAppSelector } from '../../hooks';
-import { allSequences } from '../../slices/sequence-slice';
-import { lyricLines } from '../../slices/lyrics-slice';
-import FretSnap from '../../components/fretsnap/fretsnap';
-import BasicSnap from '../print/basicsnap';
-import Wrapper from '../../components/lyrics/wrapper/wrapper';
+import { AppDispatch } from '../../../store';
+import { useAppSelector } from '../../../hooks';
+import { allSequences } from '../../../slices/sequence-slice';
+import { lyricLines } from '../../../slices/lyrics-slice';
+import { setCurrentBook } from '../../../slices/view-slice';
+import FretSnap from '../../../components/fretsnap/fretsnap';
+import BasicSnap from '../../print/basicsnap';
+import Wrapper from '../../../components/lyrics/wrapper/wrapper';
 
-export const Gig: React.FC = () => {
+export const Songs: React.FC = () => {
   const sequences = useAppSelector(allSequences);
-  // const lines = useAppSelector(lyricLines);
-  console.log(sequences);
+  // const dispatch = useDispatch<AppDispatch>();
 
   return (
-    <div className="gig">
+    <div className="jambook-songs">
       {sequences.map(sequence => {
         return (
           <div className="gig-sequence">
@@ -42,8 +42,4 @@ export const Gig: React.FC = () => {
   )
 }
 
-// {sequence.lyrics.map((lines, idx) => {
-//   return <Wrapper lines={lines} />
-// })}
-
-export default Gig;
+export default Songs;
