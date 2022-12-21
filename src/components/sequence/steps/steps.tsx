@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { currentSeq, theActiveStep, setActiveStep, addStep, seqIsFretsnap } from '../../../slices/sequence-slice';
-import { theMode, setMode, setRiffen } from '../../../slices/fretboard-slice';
+import { theMode, setMode, setRiffen, theSnapshot, theSnapshotName } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs } from '../../../common/helpers';
 import './steps.css';
@@ -17,6 +17,8 @@ export const Steps: React.FC = () => {
   const mode = useAppSelector(theMode);
   const libraryChord = useAppSelector(libChord);
   const fretsnap = useAppSelector(seqIsFretsnap);
+  const snapshot = useAppSelector(theSnapshot);
+  const snapshotName = useAppSelector(theSnapshotName);
 
   const dragOverHandler = (event) => {
     event.preventDefault();

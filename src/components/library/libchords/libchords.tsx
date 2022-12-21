@@ -12,6 +12,7 @@ import { clearFretboard, clearRiffs, codifySnapshot, unstyleActive } from '../..
 export const LibChords: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const chords = useAppSelector(theChords);
+  const snapshot = useAppSelector(theSnapshot);
 
   const placeNotes = (event) => {
     clearRiffs();

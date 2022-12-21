@@ -8,7 +8,6 @@ export const Sequence: React.FC = () => {
   return (
     <div className="sequence">
       <SequenceTop />
-      <Steps />
       <Buttons />
     </div>
   )
