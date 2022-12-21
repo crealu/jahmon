@@ -35,11 +35,11 @@ body {
 
 .jahmon-ui {
   display: grid;
-  grid-template-columns: 15vw 85vw;
+  grid-template-columns: 85vw 15vw;
 }
 
-.ui-right {
-  margin: 0px 100px;
+.ui-left {
+  margin: 0px 50px;
 }
 
 .modal {

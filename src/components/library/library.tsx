@@ -42,7 +42,6 @@ export const Library: React.FC = () => {
 
   return (
     <div className="library">
-      <h3 className="section-title library-title">Library</h3>
       <LibNav />
       <LibChords />
     </div>

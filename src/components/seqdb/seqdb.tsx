@@ -45,7 +45,6 @@ export const SequencesDB: React.FC = () => {
 
   return (
     <div className="sequences">
-      <h3 className="section-title seqdb-title">Sequences</h3>
       <div className="db-sequences">
         {sequences.map(sequence => {
           return (

@@ -14,22 +14,32 @@ import Wrapper from '../../../components/lyrics/wrapper/wrapper';
 export const Songs: React.FC = () => {
   const sequences = useAppSelector(allSequences);
   // const dispatch = useDispatch<AppDispatch>();
+  const expandSong = (event) => {
+    if (event.target.nextSibling.style.display == 'block') {
+      event.target.nextSibling.style.display = 'none'
+      event.target.nextSibling.nextSibling.style.display = 'none';
+    } else {
+      event.target.nextSibling.style.display = 'block'
+      event.target.nextSibling.nextSibling.style.display = 'block';
+    }
+  }
 
   return (
     <div className="jambook-songs">
       {sequences.map(sequence => {
         return (
-          <div className="gig-sequence">
-            <h3 className="gig-sequence-title">{sequence.title}</h3>
-            <div className="gig-seq-steps-wrapper">
-              <div className="gig-sequence-steps">
+          <div className="song">
+            <h3 className="song-title" onClick={(e) => expandSong(e)}>{sequence.title}</h3>
+            <div className="song-steps-wrapper">
+              Steps:
+              <div className="song-steps">
                 {sequence.steps.map((step, idx) => {
-                  return <BasicSnap step={step} idx={idx} />
+                  return (<div>{step.title}</div>)
                 })}
               </div>
             </div>
-            <div className="gig-seq-lyrics-wrapper">
-              <div className="gig-sequence-lyrics">
+            <div className="song-lyrics-wrapper">
+              <div className="song-lyrics">
                 {sequence.lyrics.map((lyric) => {
                   return <Wrapper lines={new Array(lyric)} />
                 })}

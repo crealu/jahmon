@@ -6,13 +6,13 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { allSequences } from '../../../slices/sequence-slice';
 import { lyricLines } from '../../../slices/lyrics-slice';
-import { setCurrentBook } from '../../../slices/view-slice';
+// import { setCurrentBook } from '../../../slices/view-slice';
 
 export const Menu: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const changeBook = (event) => {
-    dispatch(setCurrentBook(event.target.alt));
+    // dispatch(setCurrentBook(event.target.alt));
   }
 
   const buttons = useMemo(() => {

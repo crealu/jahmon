@@ -1,8 +1,6 @@
 .sequences {
   position: relative;
   height: 40vh;
-  border-right: 1px solid var(--dark-divider);
-  border-top: 1px solid var(--dark-divider);
 }
 
 .seqdb-title {
