@@ -33,9 +33,14 @@ body {
   color: var(--skel_text_color);
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .jahmon-ui {
   display: grid;
-  grid-template-columns: 85vw 15vw;
+  grid-template-columns: 80vw 15vw;
+  margin-top: 50px;
 }
 
 .ui-left {

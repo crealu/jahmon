@@ -20,7 +20,9 @@ export const Menu: React.FC = () => {
   return (
     <div className="menu">
       <h3 className="menu-title">{menu}</h3>
-      {returnMenu()}
+      <div className="menu-content">
+        {returnMenu()}
+      </div>
     </div>
   )
 }

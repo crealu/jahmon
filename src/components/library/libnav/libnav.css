@@ -1,11 +1,8 @@
-
 .lib-chord-nav {
   position: absolute;
   float: right;
   right: 0px;
-  left: 11vw;
-  top: 18px;
-  padding: 10px;
+  left: 180px;
   background: var(--dark-bg);
   z-index: 10;
 }

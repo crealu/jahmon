@@ -1,20 +1,8 @@
 import * as React from 'react';
 import './libnav.css';
 
-const musicKeys = [
-  'A',
-  'A♯',
-  'B',
-  'C',
-  'C♯',
-  'D',
-  'D♯',
-  'E',
-  'F',
-  'F♯',
-  'G',
-  'G♯'
-];
+const musicKeys = [ 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯'];
+// const musicKeys = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ];
 
 export const LibNav: React.FC = () => {
   const scroll = (event) => {
@@ -26,7 +14,7 @@ export const LibNav: React.FC = () => {
         console.log(allChords[i].scrollTop);
       }
     }
-    
+
     wrapper.scrollTo({
       top: 40 * 19 * event.target.tabIndex,
       behavior: 'smooth'
@@ -44,7 +32,6 @@ export const LibNav: React.FC = () => {
 
   return (
     <div className="lib-chord-nav">
-      <div className="key-btn" onClick={() => toggleKeyList()}>Key</div>
       <div className="nav-keys">
         {musicKeys.map((key, idx) => {
           return (
@@ -61,5 +48,7 @@ export const LibNav: React.FC = () => {
     </div>
   )
 }
+
+// <div className="key-btn" onClick={() => toggleKeyList()}>Key</div>
 
 export default LibNav;

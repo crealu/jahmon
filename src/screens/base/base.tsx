@@ -19,8 +19,8 @@ export const Base: React.FC = () => {
         <Lyrics />
       </div>
       <div className="jahmon-ui-col ui-right">
-        <MenuSelect />
         <Menu />
+        <MenuSelect />
       </div>
       <Save />
       <Settings />

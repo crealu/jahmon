@@ -18,11 +18,9 @@ export const LibChords: React.FC = () => {
     clearFretboard();
     dispatch(setActiveStep(null));
     unstyleActive();
-
     dispatch(clearSnapshot());
     dispatch(setSnapshotName(event.target.textContent));
     dispatch(setMode('chord'));
-    // take noteids and add to snapshot
 
     const noteIds = event.target.dataset.noteids.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
