@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './fretboard.css';
+import './buttons.css';
 
 export const Eye: React.FC = () => {
   const toggleView = () => {

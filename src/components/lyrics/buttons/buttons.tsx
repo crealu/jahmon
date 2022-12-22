@@ -22,28 +22,6 @@ export const Buttons: React.FC = () => {
     dispatch(deleteLine(event.target.previousSibling.value));
   }
 
-  const dropHandler = (event) => {
-    event.preventDefault();
-    const movedPanelStep = document.getElementsByClassName('moved-panel-chord')[0];
-    if (event.target.classList[0] == 'lyrics-trash-btn') {
-      console.log(event.target.parentNode);
-      event.target.parentNode.appendChild(movedPanelStep);
-      event.target.parentNode.removeChild(movedPanelStep);
-    } else {
-      event.target.appendChild(movedPanelStep);
-      event.target.removeChild(movedPanelStep);
-    }
-    dispatch(deletePanelStep(movedPanelStep.textContent));
-  }
-
-  const dragOverHandler = (event) => {
-    event.preventDefault();
-  }
-
-  const openPrintView = () => {
-    dispatch(setCurrentScreen('print'))
-  }
-
   return (
     <div className="lyrics-btns-wrapper">
       <img
@@ -51,22 +29,6 @@ export const Buttons: React.FC = () => {
         src="img/icons/seq-btn-gray/add.png"
         onClick={() => addNewLine()}
       />
-      <div
-        className="trash-wrapper lyrics-btn"
-        onDrop={(e) => dropHandler(e)}
-        onDragOver={(e) => dragOverHandler(e)}
-      >
-        <img
-          className="lyrics-trash-btn"
-          src="img/icons/trash-bin-gray.png"
-        />
-      </div>
-      <img
-        className="lyrics-btn print-btn"
-        src="img/icons/seq-btn-gray/print.png"
-        onClick={() => openPrintView()}
-      />
-
     </div>
   )
 }

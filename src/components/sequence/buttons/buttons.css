@@ -1,8 +1,9 @@
 .sequence-btns-inner {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(8, 50px);
-  float: left;
+  display: flex;
+  justify-content: left;
+  align-content: center;
+  flex-direction: row;
   margin: 10px 0px;
   width: 100%;
 }
@@ -10,6 +11,7 @@
 .sequence-btn {
   position: relative;
   width: 25px;
+  height: 25px;
   margin: 0px 30px 0px 0px;
   opacity: 0.7;
   transition: 0.25s ease;
@@ -33,7 +35,8 @@
 .clear-btn {
   top: 3px;
   left: 0px;
-  width: 22px;
+  width: 20px;
+  height: 20px;
 }
 
 .action-text {
@@ -43,4 +46,34 @@
   opacity: 0;
   float: left;
   transition: 0.25s ease;
+}
+
+.toggle-view-btn {
+  height: 20px;
+  padding: 2px 8px;
+  margin-top: 5px;
+  border-top: 2px solid var(--skel_text_color);
+  border-radius: 20px;
+  float: right;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.center-circle {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  background: var(--skel_text_color);
+  height: 12px;
+  width: 12px;
+  border-radius: 8px;
+  transition: 0.25s ease;
+}
+
+.toggle-view-btn:hover {
+  border-top: 2px solid lightblue;
+}
+
+.toggle-view-btn:hover .center-circle {
+  background: lightblue;
 }

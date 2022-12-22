@@ -25,7 +25,10 @@
 
 .delete-lyric-btn {
   display: none;
+  position: absolute;
   margin-left: 10px;
+  float: left;
+  left: -50px;
   height: 3px;
   border: 1px solid var(--dark-divider);
   transition: 0.2s ease;

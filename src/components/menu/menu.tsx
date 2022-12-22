@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks';
 import { theMenu } from '../../slices/view-slice';
 import Library from '../library/library';
 import SequencesDB from '../seqdb/seqdb';
+import MenuSelect from './menuselect';
 
 export const Menu: React.FC = () => {
   const menu = useAppSelector(theMenu);
@@ -19,7 +20,10 @@ export const Menu: React.FC = () => {
 
   return (
     <div className="menu">
-      <h3 className="menu-title">{menu}</h3>
+      <div className="menu-top">
+        <MenuSelect />
+        <h3 className="menu-title">{menu}</h3>
+      </div>
       <div className="menu-content">
         {returnMenu()}
       </div>

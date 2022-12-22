@@ -10,8 +10,8 @@ export const Lyrics: React.FC = () => {
 
   return (
     <div className="lyrics">
-      <Buttons />
       <Wrapper lines={lines}/>
+      <Buttons />
     </div>
   )
 }
