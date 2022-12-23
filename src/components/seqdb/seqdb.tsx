@@ -13,7 +13,6 @@ import NewSeqBtn from './newseq';
 import axios from 'axios';
 
 export const SequencesDB: React.FC = () => {
-  // const [sequences, setSequences] = useState([]);
   const dispatch = useDispatch<AppDispatch>();
   const sequences = useAppSelector(allSequences);
 
@@ -32,16 +31,29 @@ export const SequencesDB: React.FC = () => {
     dispatch(setCurrentScreen(screen));
   }
 
-  const getHandler = () => {
+  const getSongsFromDB = () => {
     axios.get('/api-get-jahms')
       .then(res => {
-        // setSequences(res.data)
         dispatch(setAllSequences(res.data));
+        localStorage.setItem('songs', JSON.stringify(res.data));
       })
       .catch(err => { throw err });
   }
 
-  useEffect(() => { getHandler() }, [])
+  const getSongsFromStorage = () => {
+    const songs = JSON.parse(localStorage.getItem('songs'));
+    dispatch(setAllSequences(songs));
+    console.log('got songs from storage');
+  }
+
+  useEffect(() => {
+    const localSongs = localStorage.getItem('songs');
+    if (localSongs == undefined) {
+      getSongsFromDB();
+    } else {
+      getSongsFromStorage();
+    }
+  }, []);
 
   return (
     <div className="sequences">

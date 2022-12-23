@@ -55,9 +55,9 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     event.preventDefault();
     const dropPoint = Math.round((event.nativeEvent.x - 30) / 70);
     if (event.target.tabIndex == dropPoint) {
-      event.target.borderLeft = '1px solid pink';
+      event.target.borderLeft = '1px solid var(--skel_text_color)';
     } else if (event.target.tabIndex < dropPoint) {
-      event.target.borderRight = '1px solid pink';
+      event.target.borderRight = '1px solid var(--skel_text_color)';
     }
   }
 

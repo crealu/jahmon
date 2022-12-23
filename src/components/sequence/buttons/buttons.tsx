@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { addStep, deleteStep, updateStep, clearSequence, theActiveStep, setActionText, theAction, toggleFretsnap, seqIsFretsnap } from '../../../slices/sequence-slice';
-import { toggleSaveSequence, toggleSaveStep, toggleSettings } from '../../../slices/view-slice';
+import { toggleSaveSequence, toggleSaveStep, toggleSettings, setCurrentScreen } from '../../../slices/view-slice';
 import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import { Step, Button } from '../../../common/classes';
@@ -33,6 +33,7 @@ export const Buttons: React.FC = () => {
     }
   }
 
+
   const addThisStep = () => { dispatch(addStep(returnNewStep())) };
   const updateThisStep = () => { dispatch(updateStep(returnNewStep())) };
 
@@ -57,10 +58,10 @@ export const Buttons: React.FC = () => {
       ['delete-btn', 'delete', 'Delete step', deleteThisStep],
       ['clear-btn', 'clear', 'Clear sequence', clearSeq],
       ['', 'update', 'Update step', updateThisStep],
-      ['', 'save-step', 'Save step', saveThisStep],
+      // ['', 'save-step', 'Save step', saveThisStep],
       ['', 'save-seq', 'Save sequence', saveSeq],
       ['', 'settings', 'Settings', openSettings],
-      ['', 'fretsnap', 'Toggle fretsnap', changeStep],
+      // ['', 'fretsnap', 'Toggle fretsnap', changeStep],
       ['print-btn', 'print', 'Print song', openPrintView]
     ];
     return data.map(btn => {

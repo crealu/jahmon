@@ -18,7 +18,7 @@ export const viewInitialState: ViewState = {
   print: false,
   currentScreen: 'base',
   currentBook: 'songs',
-  currentMenu: 'Songs',
+  currentMenu: 'Library',
 };
 
 export const viewSlice = createSlice({
