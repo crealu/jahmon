@@ -1,3 +1,7 @@
+:root {
+  --menu-transition: 0.25s ease;
+}
+
 .menu {
   height: calc(100vh - 100px);
   overflow-y: hidden;
@@ -23,6 +27,11 @@
   background: none;
   color: var(--skel_text_color);
   font-size: 20px;
+  transition: var(--menu-transition);
+}
+
+.menu-content {
+  transition: var(--menu-transition);
 }
 
 .menu-select {
