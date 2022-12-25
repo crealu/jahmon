@@ -44,7 +44,8 @@ export const Panel: React.FC<PanelProps> = (props) => {
   const dropHandler = (event) => {
     event.preventDefault();
     event.target.style.background = 'none';
-    const offsetLeft = event.clientX - ((21 * window.innerWidth) / 100) + 'px';
+    const offsetLeft = event.clientX - 75 + 'px';
+    // const offsetLeft = event.clientX - ((21 * window.innerWidth) / 100) + 'px';
     const panelChord = {
       chord: chord.title,
       offset: offsetLeft,
