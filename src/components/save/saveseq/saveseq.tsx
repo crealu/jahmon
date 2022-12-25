@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentTitle, currentSeq, seqIsNew } from '../../../slices/sequence-slice';
+import { currentTitle, currentSeq, seqIsNew, setAllSequences } from '../../../slices/sequence-slice';
 import { toggleSaveSequence } from '../../../slices/view-slice';
 import { lyricLines } from '../../../slices/lyrics-slice';
 import { refresh } from '../../../common/helpers';
@@ -22,11 +22,20 @@ export const SaveSeq: React.FC = () => {
     const data = { title: title, steps: steps, lyrics: lyrics }
     const url = isNew ? '/api-save-seq' : '/api-update-seq';
     axios.post(url, data)
-      .then(res => {
-        console.log(res)
-        setSaveRes(res.data);
-      })
+      .then(res => { processResponse(res.data) })
       .catch(err => { throw err });
+  }
+
+  const processResponse = (data) => {
+    setSaveRes(data);
+    if (data == 'Save successful') {
+      axios.get('/api-get-jahms')
+        .then(res => {
+          dispatch(setAllSequences(res.data));
+          localStorage.setItem('songs', JSON.stringify(res.data));
+        })
+        .catch(err => { throw err });
+    }
   }
 
   const hideForm = () => { dispatch(toggleSaveSequence(false)) };
