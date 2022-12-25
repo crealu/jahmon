@@ -48,6 +48,12 @@ body::-webkit-scrollbar {
   padding-left: 20px;
 }
 
+.ui-right {
+  position: fixed;
+  display: block;
+  left: 80vw;
+}
+
 .modal {
   background: var(--dark-bg);
   color: var(--skel_text_color);
