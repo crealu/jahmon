@@ -4,10 +4,10 @@ import './buttons.css';
 export const Eye: React.FC = () => {
   const toggleView = () => {
     const fretboard = document.getElementsByClassName('fretboard')[0];
-    if (fretboard.style.display == 'block') {
-      fretboard.style.display = 'none';
+    if (fretboard.style.height == '300px') {
+      fretboard.style.height = '0px';
     } else {
-      fretboard.style.display = 'block';
+      fretboard.style.height = '300px';
     }
   }
 

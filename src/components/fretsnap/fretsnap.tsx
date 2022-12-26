@@ -43,7 +43,6 @@ export const FretSnap: React.FC<FretSnapProps> = (props) => {
   const fretStart = Math.min(...filtered);
 
   useEffect(() => {
-    console.log(filtered);
     console.log(fretStart);
   }, [])
 

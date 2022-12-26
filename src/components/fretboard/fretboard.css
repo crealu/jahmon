@@ -1,6 +1,8 @@
 .fretboard {
-  display: none;
-  margin: 20px 0px;
+  display: block;
+  height: 0px;
+  overflow: hidden;
+  transition: 0.3s ease;
 }
 
 .fretboard-top {

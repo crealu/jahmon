@@ -1,13 +1,13 @@
 :root {
   --step-width: 90px;
-  --step-height: 68px;
+  --step-height: 100px;
 }
 
 .seq-step {
   position: relative;
   width: var(--step-width);
   height: var(--step-height);
-  border: 1px solid var(--skel_text_color);
+  border-left: 1px solid var(--skel_text_color);
   background: var(--dark-bg);
   text-align: center;
   float: left;
@@ -24,6 +24,6 @@
 }
 
 .active-step {
-  border: 1px solid white;
+  border-left: 1px solid white;
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.7);
 }

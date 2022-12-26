@@ -72,9 +72,6 @@ export const Steps: React.FC = () => {
     <div
       className="steps"
       onWheel={(e) => scrollSteps(e)}
-      style={{
-        height: `${fretsnap ? '150px' : '80px'}`,
-      }}
     >
       <div
         className="steps-wrapper"
@@ -82,7 +79,6 @@ export const Steps: React.FC = () => {
         onDragOver={(e) => dragOverHandler(e)}
         onDragLeave={(e) => dragLeaveHandler(e)}
         style={{
-          height: `${fretsnap ? '150px' : '80px'}`,
           width: `${seq.length > 8 ? seq.length * 100 + 'px' : '100%'}`
         }}
       >

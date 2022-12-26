@@ -45,6 +45,7 @@ body::-webkit-scrollbar {
 
 .ui-left {
   margin: 0px 50px;
+  margin-top: 15px;
   padding-left: 20px;
 }
 

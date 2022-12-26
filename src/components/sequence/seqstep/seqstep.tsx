@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theActiveStep, setActiveStep, setStepName, theStepName } from '../../../slices/sequence-slice';
-import { theMode, setMode, setRiffen, setSnapshotName } from '../../../slices/fretboard-slice';
+import { theMode, setMode, setRiffen, setSnapshotName, addToSnapshot, clearSnapshot } from '../../../slices/fretboard-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs, restyleSteps, unstyleActive } from '../../../common/helpers';
 import './seqstep.css';
@@ -21,6 +21,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
   const { step, idx } = props;
 
   const updateActiveStep = (event) => {
+    event.stopPropagation();
     const step = event.target;
     if (step.tabIndex == active) {
       unstyleActive();
@@ -30,13 +31,14 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       clearFretboard();
       return;
     }
-    console.log(step);
     restyleSteps(step);
 
+    dispatch(clearSnapshot());
     dispatch(setMode(step.dataset.mode));
     dispatch(setStepName(step.textContent));
-    dispatch(setSnapshotName(step.textContent));
     dispatch(setActiveStep(parseInt(step.tabIndex)));
+    dispatch(addToSnapshot(step.dataset.noteids));
+    // dispatch(setSnapshotName(step.textContent));
     showFretNotes(step);
   }
 
