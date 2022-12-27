@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
-import { addPanelStep, updatePanelStep } from '../../../slices/lyrics-slice';
+import { addPanelStep, updatePanelStep, deletePanelStep } from '../../../slices/lyrics-slice';
 import { isPrinting } from '../../../slices/view-slice';
 import './panel.css';
 
@@ -46,7 +46,6 @@ export const Panel: React.FC<PanelProps> = (props) => {
     event.preventDefault();
     event.target.style.background = 'none';
     const offsetLeft = event.clientX - 75 + 'px';
-    // const offsetLeft = event.clientX - ((21 * window.innerWidth) / 100) + 'px';
     console.log(event.target.tabIndex);
     const lineNumber = event.target.tabIndex;
     const panelChord = {
@@ -60,6 +59,11 @@ export const Panel: React.FC<PanelProps> = (props) => {
     } else {
       dispatch(addPanelStep(payload))
     }
+  }
+
+  const deleteStep = (event, lineNum, index) => {
+    const panelStep = { lineNumber: lineNum, chordNumber: index }
+    dispatch(deletePanelStep(panelStep));
   }
 
   return (
@@ -79,8 +83,14 @@ export const Panel: React.FC<PanelProps> = (props) => {
             draggable="true"
             onDragStart={(e) => dragStartHandler(e, idx)}
             onDragOver={() => {}}
+            tabIndex={idx}
           >
             {step.chord}
+            <span
+              className="delete-panel-step"
+              onClick={(e) => deleteStep(e, lineNum, idx)}>
+              x
+            </span>
           </div>
         )
       })}

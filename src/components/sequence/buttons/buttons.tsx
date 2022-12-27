@@ -10,6 +10,7 @@ import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-s
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import { Step, Button } from '../../../common/classes';
 import Eye from './eye';
+import Trash from './trash';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -69,24 +70,6 @@ export const Buttons: React.FC = () => {
     })
   }, [mode, fretsnap]);
 
-  const dropHandler = (event) => {
-    event.preventDefault();
-    const movedPanelStep = document.getElementsByClassName('moved-panel-chord')[0];
-    if (event.target.classList[0] == 'lyrics-trash-btn') {
-      console.log(event.target.parentNode);
-      event.target.parentNode.appendChild(movedPanelStep);
-      event.target.parentNode.removeChild(movedPanelStep);
-    } else {
-      event.target.appendChild(movedPanelStep);
-      event.target.removeChild(movedPanelStep);
-    }
-    dispatch(deletePanelStep(movedPanelStep.textContent));
-  }
-
-  const dragOverHandler = (event) => {
-    event.preventDefault();
-  }
-
   return (
     <div className="sequence-btn-wrapper">
       <div className="sequence-btns-inner">
@@ -102,16 +85,6 @@ export const Buttons: React.FC = () => {
             />
           )
         })}
-        <div
-          className="sequence-btn"
-          onDrop={(e) => dropHandler(e)}
-          onDragOver={(e) => dragOverHandler(e)}
-        >
-          <img
-            className="lyrics-trash-btn"
-            src="img/icons/seq-btn-gray/trash.png"
-          />
-        </div>
         <Eye />
       </div>
       <div className="action-text" style={{opacity: setOpacity()}}>{action}</div>

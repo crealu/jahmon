@@ -9,8 +9,21 @@
   margin: 0px;
   font-size: 14px;
   color: #03a9f4;
+  cursor: pointer;
+}
+
+.panel-step:hover .delete-panel-step {
+  opacity: 1;
 }
 
 .panel-step-print {
   color: black;
+}
+
+.delete-panel-step {
+  position: absolute;
+  opacity: 0;
+  left: 115%;
+  top: -10px;
+  transition: 0.3s ease;
 }
