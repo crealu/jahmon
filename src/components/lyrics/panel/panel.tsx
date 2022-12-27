@@ -7,6 +7,7 @@ import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { addPanelStep, updatePanelStep, deletePanelStep } from '../../../slices/lyrics-slice';
 import { isPrinting } from '../../../slices/view-slice';
 import './panel.css';
+import PanelStep from './panelstep';
 
 type PanelProps<any> = {
   width: number;
@@ -19,18 +20,6 @@ export const Panel: React.FC<PanelProps> = (props) => {
   const chord = useAppSelector(libChord);
   const printing = useAppSelector(isPrinting);
   const { width, steps, lineNum } = props;
-
-  const dragStartHandler = (event, idx) => {
-    event.dataTransfer.dropEffect = 'move';
-    event.target.classList.add('moved-panel-chord')
-    const chord = {
-      title: event.target.textContent,
-      noteids: '',
-      ofPanel: true,
-      num: idx,
-    }
-    dispatch(setGrabbed(chord));
-  }
 
   const dragOverHandler = (event) => {
     event.preventDefault();
@@ -61,11 +50,6 @@ export const Panel: React.FC<PanelProps> = (props) => {
     }
   }
 
-  const deleteStep = (event, lineNum, index) => {
-    const panelStep = { lineNumber: lineNum, chordNumber: index }
-    dispatch(deletePanelStep(panelStep));
-  }
-
   return (
     <div
       className="lyric-panel"
@@ -76,23 +60,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
       tabIndex={lineNum}
     >
       {steps.map((step, idx) => {
-        return (
-          <div
-            className={`panel-step ${printing ? 'panel-step-print' : ''}`}
-            style={{left: step.offset}}
-            draggable="true"
-            onDragStart={(e) => dragStartHandler(e, idx)}
-            onDragOver={() => {}}
-            tabIndex={idx}
-          >
-            {step.chord}
-            <span
-              className="delete-panel-step"
-              onClick={(e) => deleteStep(e, lineNum, idx)}>
-              x
-            </span>
-          </div>
-        )
+        return <PanelStep step={step} index={idx} lineNumber={lineNum} />
       })}
     </div>
   )
