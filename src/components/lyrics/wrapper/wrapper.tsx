@@ -32,7 +32,7 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
       {lines.map((line, idx) => {
         return (
           <div className="line-group">
-            <Panel width={lineWidth} steps={line.panel} />
+            <Panel width={lineWidth} steps={line.panel} lineNum={idx}/>
             <Line width={lineWidth} setWidth={setLineWidth} lineNum={idx} text={line.text} />
             {printing ? ''
               : <img

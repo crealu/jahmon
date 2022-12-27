@@ -11,13 +11,14 @@ import './panel.css';
 type PanelProps<any> = {
   width: number;
   steps: any[];
+  lineNum: number;
 }
 
 export const Panel: React.FC<PanelProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const chord = useAppSelector(libChord);
   const printing = useAppSelector(isPrinting);
-  const { width, steps } = props;
+  const { width, steps, lineNum } = props;
 
   const dragStartHandler = (event, idx) => {
     event.dataTransfer.dropEffect = 'move';
@@ -46,15 +47,18 @@ export const Panel: React.FC<PanelProps> = (props) => {
     event.target.style.background = 'none';
     const offsetLeft = event.clientX - 75 + 'px';
     // const offsetLeft = event.clientX - ((21 * window.innerWidth) / 100) + 'px';
+    console.log(event.target.tabIndex);
+    const lineNumber = event.target.tabIndex;
     const panelChord = {
       chord: chord.title,
       offset: offsetLeft,
       num: chord.num,
     }
+    const payload = { number: lineNumber, step: panelChord };
     if (chord.hasOwnProperty('ofPanel')) {
-      dispatch(updatePanelStep(panelChord))
+      dispatch(updatePanelStep(payload))
     } else {
-      dispatch(addPanelStep(panelChord))
+      dispatch(addPanelStep(payload))
     }
   }
 
@@ -65,6 +69,7 @@ export const Panel: React.FC<PanelProps> = (props) => {
       onDrop={(e) => dropHandler(e)}
       onDragOver={(e) => dragOverHandler(e)}
       onDragLeave={(e) => dragLeaveHandler(e)}
+      tabIndex={lineNum}
     >
       {steps.map((step, idx) => {
         return (

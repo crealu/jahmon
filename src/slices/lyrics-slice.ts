@@ -16,25 +16,45 @@ export const lyricsSlice = createSlice({
   name: 'lyrics',
   reducers: {
     addLine(state, action: PayloadAction<any>) {
-      state.lines = [...state.lines, action.payload]
+      // state.lines = [...state.lines, action.payload]
+      return {
+        ...state,
+        lines: [ ...state.lines, action.payload ]
+      }
     },
     deleteLine(state, action: PayloadAction<any>) {
-      state.lines = state.lines.filter(line => line.text != action.payload )
+      // state.lines = state.lines.filter(line => line.text != action.payload )
+      return {
+        ...state,
+        lines: state.lines.filter(line => line.text != action.payload)
+      }
     },
     updateLine(state, action: PayloadAction<string>) {
       state.lines[state.activeLine].text = action.payload;
+      // let updatedLines = state.lines;
+      // updatedLines[state.activeLine].text = action.payload;
+      // return {
+      //   ...state,
+      //   lines: updatedLines
+      // }
     },
     updateAllLines(state, action: PayloadAction<any>) {
-      state.lines = action.payload;
+      return {
+        ...state,
+        lines: action.payload
+      }
     },
     activateLine(state, action: PayloadAction<number>) {
-      state.activeLine = action.payload;
+      return {
+        ...state,
+        activeLine: action.payload
+      }
     },
     addPanelStep(state, action: PayloadAction<object>) {
-      state.lines[state.activeLine].panel.push(action.payload);
+      state.lines[action.payload.number].panel.push(action.payload.step);
     },
-    updatePanelStep(state, action: PayloadAction<any>) {
-      state.lines[state.activeLine].panel[action.payload.num].offset = action.payload.offset
+    updatePanelStep(state, action: PayloadAction<object>) {
+      state.lines[action.payload.number].panel[action.payload.step.num].offset = action.payload.step.offset
     },
     deletePanelStep(state, action: PayloadAction<any>) {
       state.lines[state.activeLine].panel.filter(p => p.chord != action.payload);
