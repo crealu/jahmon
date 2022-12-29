@@ -37,9 +37,16 @@ export const librarySlice = createSlice({
   }
 });
 
-export const { setLibraryChords, setChordIds, setGrabbed, setChordName } = librarySlice.actions;
+export const {
+  setLibraryChords,
+  setChordIds,
+  setGrabbed,
+  setChordName
+} = librarySlice.actions;
+
 export const theChordName = ({ library: { chordName }}: RootState): string => chordName;
 export const theChords = ({ library: { chords }}: RootState): any[] => chords;
 export const theChordIds = ({ library: { chordIds }}: RootState): any[] => chordIds;
 export const libChord = ({ library: { grabbed }}: RootState): object => grabbed;
+
 export default librarySlice.reducer;

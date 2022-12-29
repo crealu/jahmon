@@ -77,5 +77,4 @@ export const FretSnap: React.FC<FretSnapProps> = (props) => {
   )
 }
 
-// style={{left: `${2 * (sn - 6)}px`}}
 export default FretSnap;

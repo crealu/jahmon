@@ -27,7 +27,3 @@ export const App: React.FC = () => {
 }
 
 export default App;
-
-// { current == 'base' ? <Base /> : ''}
-// { current == 'print' ? <Print /> : ''}
-// { current == 'gig' ? <Gig /> : ''}

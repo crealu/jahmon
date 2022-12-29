@@ -15,7 +15,6 @@ type WrapperProps = {
 
 const Wrapper: React.FC<WrapperProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
-  // const lines = useAppSelector(lyricLines);
   const active = useAppSelector(theActiveLine);
   const printing = useAppSelector(isPrinting);
   const [lineWidth, setLineWidth] = useState(100);

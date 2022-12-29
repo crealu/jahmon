@@ -19,8 +19,6 @@ export const Strings: React.FC = () => {
   const mode = useAppSelector(theMode);
   const strings = useMemo(() => { return new Array(6).fill(0) }, []);
   const frets = useMemo(() => { return new Array(22).fill(0) }, []);
-  // const snapshot = useAppSelector(theSnapshot);
-  // const trueSnapshot = codifySnapshot(snapshot);
 
   const returnStringClass = (sn) => {
     return mode == 'chord'
