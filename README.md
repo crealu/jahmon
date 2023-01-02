@@ -1,16 +1,14 @@
 # Jahmon
-Music tabulating web app.
+Music tabulating web app. This app can be used to save songs, chord progressions, lyrics, and custom guitar riffs.
+
 
 &nbsp;
 ## Usage
-This app can be used to save sequences of chords and riffs written/played on the guitar. The user selects the notes that they are using in their song writing and saves them as a step in the sequence they are creating.
 
+Follow theses steps
+1. Clone or download repository
+2. Navigate to directory
+3. Run `npm run devb`
+4. Run `npm run devf`
 
-&nbsp;
-## Dev
-To run on your local, copy this repo and run the following commands in the terminal.
-
-`npm run devb`
-`npm run devf`
-
-In order to save sequences, you will need to configure an external (mongo) database with a URI key.
+In order to save song data, you will need to configure the server to connect to an external (mongo) database with a URI key.
