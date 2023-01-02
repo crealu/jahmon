@@ -25,7 +25,7 @@ export const Steps: React.FC = () => {
     if (event.target.classList[0] == 'steps-wrapper') {
       event.target.style.background = 'rgba(210, 100, 150, 0.4)';
     } else {
-      event.target.style.border = '1px solid pink';
+      event.target.style.borderLeft = '1px solid var(--skel_text_color)';
     }
   }
 
@@ -34,7 +34,7 @@ export const Steps: React.FC = () => {
     if (event.target.classList[0] == 'steps-wrapper') {
       event.target.style.background = 'none';
     } else {
-      event.target.style.border = '1px solid var(--skel_text_color)';
+      event.target.style.borderLeft = '1px solid var(--skel_text_color)';
     }
   }
 
