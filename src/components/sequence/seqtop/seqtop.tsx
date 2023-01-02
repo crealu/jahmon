@@ -44,6 +44,15 @@ export const SequenceTop: React.FC = () => {
     return new Button('add-step-btn', 'add', 'Add step', addThisStep);
   }, []);
 
+  const stepData = useMemo(() => {
+    return {
+      title: snapshot[0] != null ? snapshotName : '...',
+      noteids: snapshot[0] != null ? snapshot.join(',') : 's1f0,s2f2,s4f0,s5f2',
+      mode: 'chord',
+      fretnums: ''
+    }
+  }, [snapshot]);
+
   return (
     <div className="sequence-top">
       <div className="sequence-top-left">
@@ -56,21 +65,7 @@ export const SequenceTop: React.FC = () => {
         <Steps />
       </div>
       <div className="chord-view">
-        {console.log(snapshot)}
-        {snapshot[0] != null
-          ? <FretSnap step={{
-              title: snapshotName,
-              noteids: snapshot.join(','),
-              mode: 'chord',
-              fretnums: ''
-            }} idx={0} />
-          : <FretSnap step={{
-              title: '...',
-              noteids: 's1f0,s2f2,s4f0,s5f2',
-              mode: 'chord',
-              fretnums: '1'
-            }} idx={0} />
-        }
+        <FretSnap step={stepData} idx={0} />
         <img
           className={addButton.classes}
           src={addButton.src}
@@ -83,5 +78,20 @@ export const SequenceTop: React.FC = () => {
     </div>
   )
 }
+//
+// {snapshot[0] != null
+//   ? <FretSnap step={{
+//       title: snapshotName,
+//       noteids: snapshot.join(','),
+//       mode: 'chord',
+//       fretnums: ''
+//     }} idx={0} />
+//   : <FretSnap step={{
+//       title: '...',
+//       noteids: 's1f0,s2f2,s4f0,s5f2',
+//       mode: 'chord',
+//       fretnums: '1'
+//     }} idx={0} />
+// }
 
 export default SequenceTop;

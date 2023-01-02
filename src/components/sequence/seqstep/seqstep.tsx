@@ -38,7 +38,8 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     dispatch(setStepName(step.textContent));
     dispatch(setActiveStep(parseInt(step.tabIndex)));
     dispatch(addToSnapshot(step.dataset.noteids));
-    // dispatch(setSnapshotName(step.textContent));
+    dispatch(setSnapshotName(step.textContent));
+    console.log(step.textContent);
     showFretNotes(step);
   }
 
