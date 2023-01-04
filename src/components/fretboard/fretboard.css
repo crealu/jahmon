@@ -3,6 +3,9 @@
   height: 0px;
   overflow: hidden;
   transition: 0.3s ease;
+  position: relative;
+  float: left;
+  width: 100%;
 }
 
 .fretboard-top {

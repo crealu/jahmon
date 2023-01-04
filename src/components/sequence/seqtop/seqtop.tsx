@@ -78,20 +78,5 @@ export const SequenceTop: React.FC = () => {
     </div>
   )
 }
-//
-// {snapshot[0] != null
-//   ? <FretSnap step={{
-//       title: snapshotName,
-//       noteids: snapshot.join(','),
-//       mode: 'chord',
-//       fretnums: ''
-//     }} idx={0} />
-//   : <FretSnap step={{
-//       title: '...',
-//       noteids: 's1f0,s2f2,s4f0,s5f2',
-//       mode: 'chord',
-//       fretnums: '1'
-//     }} idx={0} />
-// }
 
 export default SequenceTop;

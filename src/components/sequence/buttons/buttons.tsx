@@ -49,8 +49,8 @@ export const Buttons: React.FC = () => {
   const openSettings = () => { dispatch(toggleSettings(true)) };
   const changeStep = () => { dispatch(toggleFretsnap(!fretsnap)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
-  const handleLeave = () => { dispatch(setActionText('')) };
-  const setOpacity = () => { return action == '' ? '0' : '1' };
+  const handleLeave = () => { dispatch(setActionText('...')) };
+  const setOpacity = () => { return action == '...' ? '0' : '1' };
   const openPrintView = () => { dispatch(setCurrentScreen('print')) };
 
   const buttons = useMemo(() => {
