@@ -41,4 +41,14 @@ router.post('/api-update-seq', (req, res) => {
   res.send('Save successful');
 });
 
+router.post('/api-delete-seq', (req, res) => {
+  atlas.db.collection('jahms')
+    .findOneAndDelete({ title: req.body.title },
+      (err, result) => {
+        if (err) { return console.log(err) }
+        res.send(`Deleted ${req.body.title}`);
+      })
+});
+
+
 module.exports = router;
