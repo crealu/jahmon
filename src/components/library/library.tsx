@@ -20,20 +20,21 @@ export const Library: React.FC = () => {
         dispatch(setLibraryChords(res.data));
         dispatch(setChordIds(convertChordIds(res.data)));
         localStorage.setItem('chords', JSON.stringify(res.data));
+        localStorage.setItem('chordIds', JSON.stringify(convertChordIds(res.data)));
       })
       .catch(err => { throw err });
   }
 
   const getChordsFromStorage = () => {
     const storageChords = JSON.parse(localStorage.getItem('chords'));
-    const storageIds = localStorage.getItem('chordIds');
+    const storageIds = JSON.parse(localStorage.getItem('chordIds'));
     dispatch(setLibraryChords(storageChords));
     dispatch(setChordIds(storageIds));
   }
 
   useEffect(() => {
     const localChords = localStorage.getItem('chords');
-    if (localChords == undefined) {
+    if (localChords == null) {
       getChordsFromDB();
     } else {
       getChordsFromStorage();

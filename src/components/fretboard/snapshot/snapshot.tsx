@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector, useKeyPress } from '../../../hooks';
 import { theMode, theSnapshot, setSnapshotName, theSnapshotName } from '../../../slices/fretboard-slice';
 import { theChords, theChordIds } from '../../../slices/library-slice';
 import { codifySnapshot } from '../../../common/helpers';
@@ -16,8 +16,7 @@ export const Snapshot: React.FC = () => {
   const chordIds = useAppSelector(theChordIds);
   const trueSnapshot = codifySnapshot(snapshot);
   const snapshotName = useAppSelector(theSnapshotName);
-
-  const trueIds = chordIds.toString().split(',').map(id => { return parseInt(id) })
+  const trueIds = chordIds.toString().split(',').map(id => { return parseInt(id) });
 
   const matchedSnapshot = useMemo(() => {
     let chordName = '';
@@ -26,8 +25,13 @@ export const Snapshot: React.FC = () => {
         chordName = chords[i].name;
       }
     });
-    dispatch(setSnapshotName(chordName));
+    // dispatch(setSnapshotName(chordName));
   }, [snapshot]);
+
+  useKeyPress('j', () => {
+    console.log(chords[0]);
+    console.log(chordIds[0]);
+  });
 
   return (
     <div
