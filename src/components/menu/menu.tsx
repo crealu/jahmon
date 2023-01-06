@@ -1,8 +1,6 @@
 import * as React from 'react';
 import './menu.css';
-import { useMemo, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
+import { useCallback } from 'react';
 import { useAppSelector } from '../../hooks';
 import { theMenu } from '../../slices/view-slice';
 import Library from '../library/library';
@@ -14,7 +12,7 @@ export const Menu: React.FC = () => {
 
   const returnMenu = useCallback(() => {
     return menu == 'Library' ? <Library />
-         : menu == 'Songs' ? <SequencesDB />
+         : menu == 'Songs'   ? <SequencesDB />
          : '';
   }, [menu]);
 

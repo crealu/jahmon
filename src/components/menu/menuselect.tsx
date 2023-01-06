@@ -19,9 +19,7 @@ export const MenuSelect: React.FC = () => {
     }
   }
 
-  const options = useMemo(() => {
-    return ['Songs', 'Library']
-  }, []);
+  const options = useMemo(() => { return ['Songs', 'Library'] }, []);
 
   return (
     <div className="menu-select">
