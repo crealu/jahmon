@@ -3,7 +3,7 @@ import './lyrics.css';
 import { useAppSelector } from '../../hooks';
 import { lyricLines } from '../../slices/lyrics-slice';
 import Wrapper from './wrapper/wrapper';
-import Buttons from './buttons/buttons';
+import AddButton from './buttons/add/addbtn';
 
 export const Lyrics: React.FC = () => {
   const lines = useAppSelector(lyricLines);
@@ -11,7 +11,7 @@ export const Lyrics: React.FC = () => {
   return (
     <div className="lyrics">
       <Wrapper lines={lines}/>
-      <Buttons />
+      <AddButton />
     </div>
   )
 }

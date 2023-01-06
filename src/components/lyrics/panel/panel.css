@@ -12,18 +12,18 @@
   cursor: pointer;
 }
 
-.panel-step:hover .delete-panel-step {
+.panel-step:hover .delete-panel-btn {
   opacity: 1;
 }
 
-.panel-step-print {
-  color: black;
-}
-
-.delete-panel-step {
+.delete-panel-btn {
   position: absolute;
   opacity: 0;
   left: 115%;
   top: -10px;
   transition: 0.3s ease;
+}
+
+.panel-step-print {
+  color: black;
 }

@@ -2,20 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 export interface LyricsState {
-  lines: any[];
   activeLine: number;
   activePanelStep: object;
+  lines: any[];
+
 }
 
 export const lyricsInitialState: LyricsState = {
+  activeLine: 0,
+  activePanelStep: {},
   lines: [{
     text: '..lyrics..',
     panel: [{
       chord: '', offset: ''
     }]
   }],
-  activeLine: 0,
-  activePanelStep: {}
 };
 
 export const lyricsSlice = createSlice({
