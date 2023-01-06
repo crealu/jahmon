@@ -5,7 +5,7 @@
   align-content: center;
   flex-direction: row;
   margin: 10px 0px;
-  width: 100%;
+  width: calc(100% - 200px);
 }
 
 .sequence-btn {

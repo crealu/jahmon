@@ -6,16 +6,19 @@ export interface LibraryState {
   chords: any[];
   chordIds: string[];
   grabbed: object;
+  diagramNotes: string[];
+  diagramName: string;
+  diagramMode: string;
 }
 
 export const libraryInitialState: LibraryState = {
   chordName: '',
   chords: [],
   chordIds: [],
-  grabbed: {
-    name: '',
-    noteids: ''
-  }
+  grabbed: { name: '', noteids: '' },
+  diagramNotes: [],
+  diagramName: '',
+  diagramMode: ''
 };
 
 export const librarySlice = createSlice({
@@ -34,6 +37,15 @@ export const librarySlice = createSlice({
     setGrabbed(state,  action: PayloadAction<object>) {
       return {...state, grabbed: action.payload}
     },
+    setDiagramNotes(state, action: PayloadAction<string[]>) {
+      return { ...state, diagramNotes: action.payload }
+    },
+    setDiagramName(state, action: PayloadAction<string>) {
+      return { ...state, diagramName: action.payload }
+    },
+    setDiagramMode(state, action: PayloadAction<string>) {
+      return { ...state, diagramMode: action.payload }
+    },
   }
 });
 
@@ -41,12 +53,19 @@ export const {
   setLibraryChords,
   setChordIds,
   setGrabbed,
-  setChordName
+  setChordName,
+  addToDiagram,
+  setDiagramNotes,
+  setDiagramName,
+  setDiagramMode,
 } = librarySlice.actions;
 
 export const theChordName = ({ library: { chordName }}: RootState): string => chordName;
 export const theChords = ({ library: { chords }}: RootState): any[] => chords;
 export const theChordIds = ({ library: { chordIds }}: RootState): any[] => chordIds;
 export const libChord = ({ library: { grabbed }}: RootState): object => grabbed;
+export const theDiagramNotes = ({ library: { diagramNotes }}: RootState): string[] => diagramNotes;
+export const theDiagramName = ({ library: { diagramName }}: RootState): string => diagramName;
+export const theDiagramMode = ({ library: { diagramMode }}: RootState): string => diagramMode;
 
 export default librarySlice.reducer;

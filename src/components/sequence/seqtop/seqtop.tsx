@@ -4,8 +4,9 @@ import { useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { resetStepName, theStepName, currentTitle, setCurrentTitle } from '../../../slices/sequence-slice';
+import { resetStepName, theStepName, currentTitle, setCurrentTitle, setActionText, addStep } from '../../../slices/sequence-slice';
 import { theMode, setMode, setRiffen, theSnapshot, theSnapshotName } from '../../../slices/fretboard-slice';
+import { theDiagramNotes, theDiagramName, theDiagramMode } from '../../../slices/library-slice';
 import FretSnap from '../../fretsnap/fretsnap';
 import Steps from '../steps/steps';
 import { Button } from '../../../common/classes';
@@ -16,6 +17,9 @@ export const SequenceTop: React.FC = () => {
   const title = useAppSelector(currentTitle);
   const snapshot = useAppSelector(theSnapshot);
   const snapshotName = useAppSelector(theSnapshotName);
+  const diagramNotes = useAppSelector(theDiagramNotes);
+  const diagramName = useAppSelector(theDiagramName);
+  const diagramMode = useAppSelector(theDiagramMode);
 
   const updateStepName = (event) => {
     dispatch(resetStepName(event.target.value));
@@ -26,32 +30,35 @@ export const SequenceTop: React.FC = () => {
   }
 
   const returnNewStep = () => {
-    const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-    const stepTitle = mode == 'chord' ?
-      document.getElementsByClassName('snapshot')[0].textContent
-      : 'Riff';
+    // const noteData = diagramMode == 'chord' ? collectChordNotes() : collectRiffNotes();
+    // const stepTitle = diagramMode == 'chord' ?
+    //   document.getElementsByClassName('snapshot')[0].textContent
+    //   : 'Riff';
     return {
-      title: stepTitle,
-      mode: mode,
-      noteids: noteData[0],
-      fretnums: noteData[1]
+      title: diagramName,
+      mode: diagramMode,
+      noteids: diagramNotes,
+      fretnums: ''
     }
   }
 
   const addThisStep = () => { dispatch(addStep(returnNewStep())) };
 
   const addButton = useMemo(() => {
-    return new Button('add-step-btn', 'add', 'Add step', addThisStep);
+    return new Button('add-step-btn', 'add', 'Add chord', addThisStep);
   }, []);
 
-  const stepData = useMemo(() => {
+  const diagramData = useMemo(() => {
     return {
-      title: snapshot[0] != null ? snapshotName : '...',
-      noteids: snapshot[0] != null ? snapshot.join(',') : 's1f0,s2f2,s4f0,s5f2',
+      title: diagramNotes[0] != undefined ? diagramName : '...',
+      noteids: diagramNotes[0] != undefined ? diagramNotes.join(',') : 's1f0',
       mode: 'chord',
       fretnums: ''
     }
-  }, [snapshot]);
+  }, [diagramNotes]);
+
+  const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
+  const handleLeave = () => { dispatch(setActionText('...')) };
 
   return (
     <div className="sequence-top">
@@ -65,12 +72,12 @@ export const SequenceTop: React.FC = () => {
         <Steps />
       </div>
       <div className="chord-view">
-        <FretSnap step={stepData} idx={0} />
+        <FretSnap step={diagramData} idx={0} />
         <img
           className={addButton.classes}
           src={addButton.src}
           alt={addButton.action}
-          onClick={() => addButton.click()}
+          onClick={() => addThisStep()}
           onMouseEnter={(e) => handleEnter(e)}
           onMouseLeave={() => handleLeave()}
         />
@@ -78,5 +85,7 @@ export const SequenceTop: React.FC = () => {
     </div>
   )
 }
+
+
 
 export default SequenceTop;

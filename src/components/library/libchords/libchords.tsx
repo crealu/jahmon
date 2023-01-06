@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theChords, setLibraryChords, setGrabbed, setChordIds } from '../../../slices/library-slice';
+import { theChords, setGrabbed, setDiagramNotes, setDiagramName, setDiagramMode } from '../../../slices/library-slice';
 import { theSnapshot, addToSnapshot, clearSnapshot, setSnapshotName, setMode } from '../../../slices/fretboard-slice';
 import { setActiveStep } from '../../../slices/sequence-slice';
 import { clearFretboard, clearRiffs, codifySnapshot, unstyleActive } from '../../../common/helpers';
@@ -15,24 +15,10 @@ export const LibChords: React.FC = () => {
   const snapshot = useAppSelector(theSnapshot);
 
   const placeNotes = (event) => {
-    clearRiffs();
-    clearFretboard();
-    dispatch(setActiveStep(null));
-    unstyleActive();
-    dispatch(clearSnapshot());
-    dispatch(setSnapshotName(event.target.textContent));
-    dispatch(setMode('chord'));
-
     const noteIds = event.target.dataset.noteids.split(',');
-    const fretNotes = document.getElementsByClassName('fret-note');
-    for (let n = 0; n < noteIds.length; n++) {
-      for (let fn = 0; fn < fretNotes.length; fn++) {
-        if (noteIds[n] == fretNotes[fn].dataset.noteid) {
-          fretNotes[fn].style.display = 'block';
-          dispatch(addToSnapshot(noteIds[n]));
-        }
-      }
-    }
+    dispatch(setDiagramNotes(noteIds));
+    dispatch(setDiagramName(event.target.textContent));
+    dispatch(setDiagramMode('chord'));
   }
 
   const dragStartHandler = (event) => {
