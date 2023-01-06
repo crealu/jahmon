@@ -1,16 +1,4 @@
-.lib-chord-wrapper {
-  display: inline-block;
-  width: 100%;
-  height: calc(100vh - 80px);
-  margin-bottom: 20px;
-  overflow-y: scroll;
-}
-
-.lib-chord-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.lib-chord {
+.library-chord {
   position: relative;
   width: calc(100% - 30px);
   padding: 10px 0px;
@@ -26,7 +14,7 @@
   transition: 0.25s ease
 }
 
-.lib-chord:hover {
+.library-chord:hover {
   border-top: 1px solid var(--skel_text_color);
   border-bottom: 1px solid var(--skel_text_color);
 }

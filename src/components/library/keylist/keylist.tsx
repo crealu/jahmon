@@ -1,9 +1,9 @@
 import * as React from 'react';
-import './libnav.css';
+import './keylist.css';
 
 const musicKeys = [ 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯'];
 
-export const LibNav: React.FC = () => {
+export const KeyList: React.FC = () => {
   const scroll = (event) => {
     const wrapper = document.getElementsByClassName('lib-chord-wrapper')[0];
     const allChords = document.getElementsByClassName('lib-chord');
@@ -30,7 +30,7 @@ export const LibNav: React.FC = () => {
   }
 
   return (
-    <div className="lib-chord-nav">
+    <div className="key-list">
       <div className="nav-keys">
         {musicKeys.map((key, idx) => {
           return (
@@ -49,4 +49,4 @@ export const LibNav: React.FC = () => {
 }
 
 
-export default LibNav;
+export default KeyList;
