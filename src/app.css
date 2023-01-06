@@ -53,6 +53,7 @@ body::-webkit-scrollbar {
   position: fixed;
   display: block;
   left: 80vw;
+  margin-right: 70px;
 }
 
 .modal {
