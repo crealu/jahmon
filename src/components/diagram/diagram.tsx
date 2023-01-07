@@ -19,37 +19,30 @@ export const Diagram: React.FC<DiagramProps> = (props) => {
   const notes = useMemo((noteid) => {
     let ids = step.noteids.replaceAll('s', '').replaceAll('f', '').split(',').reverse();
     let theNotes = new Array(6).fill('x');
-
-    console.log('Ids ' + ids);
-
     for (let i = 0; i < ids.length; i++) {
       let index = parseInt(ids[i][0]) - 1;
       theNotes[index] = ids[i].replace(ids[i][0], '');
     }
-
     return theNotes;
   }, [step]);
 
   const filtered = useMemo(() => {
     let theFiltered = [];
-    console.log('Notes ' + notes);
     for (let j = 0; j < notes.length; j++) {
-      if (notes[j] !== 'x') {
-        if (notes[j] !== '0') {
-          theFiltered.push(parseInt(notes[j]));
-        }
+      if (notes[j] !== 'x' && notes[j] !== '0') {
+        theFiltered.push(parseInt(notes[j]));
       }
     }
     return theFiltered;
   }, [step]);
 
-  // const fretStart = filtered != null ? Math.min(...filtered) : '';
-
   const fretStart = useMemo(() => {
     return filtered != '' ? Math.min(...filtered) : null;
   }, [filtered])
 
-  useEffect(() => { console.log(fretStart) }, [])
+  const getClass = useCallback((stringNumber) => {
+    return `diagram-fret ${stringNumber == 5 && 'diagram-last-fret'}`;
+  }, [])
 
   return (
     <div className="diagram">
@@ -66,7 +59,7 @@ export const Diagram: React.FC<DiagramProps> = (props) => {
               </div>
               {frets.map((fret, fn) => {
                 return (
-                  <div className="diagram-fret" key={fn}>
+                  <div className={getClass(sn)} key={fn}>
                     {notes[sn] - fretStart == fn
                       ? <div className="diagram-note"></div>
                       : ''
