@@ -1,24 +1,20 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import './steps.css';
+import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentSeq, theActiveStep, setActiveStep, addStep, seqIsFretsnap } from '../../../slices/sequence-slice';
-import { theMode, setMode, setRiffen, theSnapshot, theSnapshotName } from '../../../slices/fretboard-slice';
+import { currentSeq, seqIsFretsnap, addStep } from '../../../slices/sequence-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
-import { clearFretboard, clearRiffs } from '../../../common/helpers';
-import './steps.css';
+import { scrollSteps } from '../../../common/helpers';
 import SeqStep from '../seqstep/seqstep';
 import FretSnap from '../../fretsnap/fretsnap';
 
 export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const seq = useAppSelector(currentSeq);
-  const mode = useAppSelector(theMode);
   const libraryChord = useAppSelector(libChord);
   const fretsnap = useAppSelector(seqIsFretsnap);
-  const snapshot = useAppSelector(theSnapshot);
-  const snapshotName = useAppSelector(theSnapshotName);
 
   const dragOverHandler = (event) => {
     event.preventDefault();
@@ -52,37 +48,26 @@ export const Steps: React.FC = () => {
     event.target.style.background = 'none';
   }
 
-  const scrollSteps = (event) => {
-    if (event.deltaY > 0) {
-      event.target.parentNode.parentNode.scrollLeft += 40;
-    } else {
-      event.target.parentNode.parentNode.scrollLeft -= 40;
-    }
-  }
+  const returnSteps = useCallback(() => {
+    return fretsnap
+      ? seq.map((step, i) => { return <FretSnap step={step} idx={i} /> })
+      : seq.map((step, i) => { return <SeqStep step={step} idx={i} /> })
+  }, [seq]);
 
-  const returnSeqStep = () => {
-    return seq.map((step, i) => { return <SeqStep step={step} idx={i} /> })
-  }
-
-  const returnFretSnap = () => {
-    return seq.map((step, i) => { return <FretSnap step={step} idx={i} /> })
-  }
+  const wrapperWidth = useMemo(() => {
+    return `${seq.length > 8 ? seq.length * 100 + 'px' : '100%'}`
+  }, [seq])
 
   return (
-    <div
-      className="steps"
-      onWheel={(e) => scrollSteps(e)}
-    >
+    <div className="steps" onWheel={(e) => scrollSteps(e)}>
       <div
         className="steps-wrapper"
         onDrop={(e) => dropHandler(e)}
         onDragOver={(e) => dragOverHandler(e)}
         onDragLeave={(e) => dragLeaveHandler(e)}
-        style={{
-          width: `${seq.length > 8 ? seq.length * 100 + 'px' : '100%'}`
-        }}
+        style={{ width: wrapperWidth }}
       >
-        {fretsnap ? returnFretSnap() : returnSeqStep()}
+        {returnSteps()}
       </div>
     </div>
   )

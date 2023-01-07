@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import './seqstep.css';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theActiveStep, setActiveStep, setStepName, theStepName } from '../../../slices/sequence-slice';
 import { theMode, setMode, setRiffen, setSnapshotName, addToSnapshot, clearSnapshot } from '../../../slices/fretboard-slice';
-import { libChord, setGrabbed } from '../../../slices/library-slice';
+import { setGrabbed } from '../../../slices/library-slice';
 import { clearFretboard, clearRiffs, restyleSteps, unstyleActive } from '../../../common/helpers';
-import './seqstep.css';
 
 type SeqStepProps = {
   step: object;
@@ -21,8 +21,11 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
   const { step, idx } = props;
 
   const updateActiveStep = (event) => {
+    event.preventDefault();
     event.stopPropagation();
+
     const step = event.target;
+
     if (step.tabIndex == active) {
       unstyleActive();
       dispatch(setActiveStep(null));
@@ -31,8 +34,8 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       clearFretboard();
       return;
     }
-    restyleSteps(step);
 
+    restyleSteps(step);
     dispatch(clearSnapshot());
     dispatch(setMode(step.dataset.mode));
     dispatch(setStepName(step.textContent));
@@ -44,57 +47,14 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
   }
 
   const dragStartHandler = (event) => {
-    const draggedNumber = event.target.cloneNode(true);
+    let draggedStep = event.target.cloneNode(true);
+    draggedStep.style.backgroundColor = 'green';
     event.dataTransfer.dropEffect = 'copy';
     const chord = {
       title: event.target.textContent,
       noteids: event.target.dataset.noteids
     }
     dispatch(setGrabbed(chord));
-    event.target.classList.add('moved-step');
-  }
-
-  const dragOverStepHandler = (event) => {
-    event.preventDefault();
-    const dropPoint = Math.round((event.nativeEvent.x - 30) / 70);
-    if (event.target.tabIndex == dropPoint) {
-      event.target.borderLeft = '1px solid var(--skel_text_color)';
-    } else if (event.target.tabIndex < dropPoint) {
-      event.target.borderRight = '1px solid var(--skel_text_color)';
-    }
-  }
-
-  const resetStepNumbers = () => {
-    const steps = document.getElementsByClassName('seq-step');
-     for (let s = 1; s < steps.length; s++) {
-       steps[s].setAttribute('data-stepnum', s);
-       steps[s].addEventListener('dragstart', dragStartHandler);
-     }
-  }
-
-  const dropStepHandler = (event) => {
-    event.preventDefault();
-    const movedStep = document.getElementsByClassName('moved-step')[0];
-    if (event.target.classList[0] == 'seq-step') {
-      const dropPoint = Math.round((event.nativeEvent.x - 30) / 70);
-      if (event.target.tabIndex == dropPoint) {
-        event.target.parentNode.insertBefore(movedStep, event.target);
-      } else if (event.target.tabIndex < dropPoint) {
-        event.target.insertAdjacentElement('afterend', movedStep);
-      }
-    } else if (event.target.classList[0] == 'step-wrapper') {
-      event.target.appendChild(movedStep);
-    }
-    resetStepNumbers();
-  }
-
-  const resetFretNotes = () => {
-    const riffFretNotes = document.getElementsByClassName('riff-note');
-    for (let n = 0; n < riffFretNotes.length; n++) {
-      riffFretNotes[n].addEventListener('dragstart', (event) => {
-        dispatch(setRiffen(event.target));
-      });
-    }
   }
 
   const addRiffFromStep = (parent, noteid, fretnum) => {
@@ -109,16 +69,16 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     parent.appendChild(riffNote);
   }
 
-  function showFretNotes(step) {
+  const showFretNotes = useCallback((step) => {
     clearFretboard();
     clearRiffs();
     const noteIds = step.dataset.noteids.split(',');
-    const fretnums = step.dataset.fretnums.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
     for (let n = 0; n < noteIds.length; n++) {
       for (let fn = 0; fn < fretNotes.length; fn++) {
         if (noteIds[n] == fretNotes[fn].dataset.noteid) {
           if (step.dataset.mode == 'riff') {
+            const fretnums = step.dataset.fretnums.split(',');
             addRiffFromStep(fretNotes[fn].parentNode, noteIds[n], fretnums[n]);
           } else {
             fretNotes[fn].style.display = 'block';
@@ -126,21 +86,18 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
         }
       }
     }
-    resetFretNotes();
-  }
+  }, [step])
 
   return (
     <div
       className="seq-step"
+      draggable="true"
       tabIndex={idx}
       data-noteids={step.noteids}
       data-mode={step.mode}
       data-fretnums={step.fretnums}
-      draggable="true"
       onClick={(e) => updateActiveStep(e)}
       onDragStart={(e) => dragStartHandler(e)}
-      onDragOver={(e) => dragOverStepHandler(e)}
-      onDrop={(e) => dropStepHandler(e)}
     >
       {idx == active ? stepName : step.title}
     </div>

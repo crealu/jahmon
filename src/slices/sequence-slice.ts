@@ -47,7 +47,11 @@ export const sequenceSlice = createSlice({
       state.title = action.payload;
     },
     setActiveStep(state, action: PayloadAction<number>) {
-      state.activeStep = action.payload;
+      // state.activeStep = action.payload;
+      return {
+        ...state,
+        activeStep: action.payload
+      }
     },
     setStepName(state, action: PayloadAction<string>) {
       state.stepName = action.payload;

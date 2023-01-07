@@ -83,4 +83,21 @@ export const convertChordIds = (tchords) => {
   return chordIds.join(',');
 }
 
+export const scrollSteps = (event) => {
+  if (event.deltaY > 0) {
+    event.target.parentNode.parentNode.scrollLeft += 40;
+  } else {
+    event.target.parentNode.parentNode.scrollLeft -= 40;
+  }
+}
+
 export const refresh = () => { location.reload() }
+
+// const resetFretNotes = () => {
+//   const riffFretNotes = document.getElementsByClassName('riff-note');
+//   for (let n = 0; n < riffFretNotes.length; n++) {
+//     riffFretNotes[n].addEventListener('dragstart', (event) => {
+//       dispatch(setRiffen(event.target));
+//     });
+//   }
+// }

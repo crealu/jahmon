@@ -1,6 +1,16 @@
 .snapshot {
   position: relative;
-  margin-top: 0;
   float: left;
+  width: 50px;
   padding-top: 10px;
+  margin-top: 0;
+  border: none;
+  border-bottom: 1px solid var(--skel_text_color);
+  color: var(--skel_text_color);
+  background: none;
+  font-size: 18px;
+}
+
+.snapshot:focus {
+  outline: none;
 }

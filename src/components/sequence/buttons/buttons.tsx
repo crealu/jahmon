@@ -21,10 +21,11 @@ export const Buttons: React.FC = () => {
   const snapshotName = useAppSelector(theSnapshotName);
   const fretsnap = useAppSelector(seqIsFretsnap);
 
-  const returnNewStep = () => {
+  const newStep = useMemo(() => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-    const stepTitle = mode == 'chord' ?
-      document.getElementsByClassName('snapshot')[0].textContent
+    const stepTitle = mode == 'chord'
+      ? snapshotName
+      // document.getElementsByClassName('snapshot')[0].textContent
       : 'Riff';
     return {
       title: stepTitle,
@@ -32,11 +33,11 @@ export const Buttons: React.FC = () => {
       noteids: noteData[0],
       fretnums: noteData[1]
     }
-  }
+  }, [])
 
 
-  const addThisStep = () => { dispatch(addStep(returnNewStep())) };
-  const updateThisStep = () => { dispatch(updateStep(returnNewStep())) };
+  // const addThisStep = () => { dispatch(addStep(newStep)) };
+  const updateThisStep = () => { dispatch(updateStep(newStep)) };
 
   const deleteThisStep = () => {
     dispatch(deleteStep());
@@ -55,7 +56,7 @@ export const Buttons: React.FC = () => {
 
   const buttons = useMemo(() => {
     const data = [
-      ['add-step-btn', 'add', 'Add step', addThisStep],
+      // ['add-step-btn', 'add', 'Add step', addThisStep],
       ['delete-btn', 'delete', 'Delete step', deleteThisStep],
       ['clear-btn', 'clear', 'Clear sequence', clearSeq],
       ['', 'update', 'Update step', updateThisStep],
