@@ -1,4 +1,4 @@
-.sequences {
+.songs {
   position: relative;
 }
 
@@ -6,18 +6,18 @@
   padding-bottom: 20px;
 }
 
-.db-sequences {
+.db-songs {
   margin-top: 20px;
   overflow-y: scroll;
   overflow-x: hidden;
   width: 100%;
 }
 
-.db-sequences::-webkit-scrollbar {
+.db-songs::-webkit-scrollbar {
   display: none;
 }
 
-.db-sequence {
+.db-song {
   position: relative;
   display: block;
   padding: 10px 0px;
@@ -28,7 +28,7 @@
   overflow-y: hidden;
 }
 
-.db-sequence:hover {
+.db-song:hover {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
 }

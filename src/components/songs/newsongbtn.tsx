@@ -8,9 +8,9 @@ import { updateAllLines } from '../../slices/lyrics-slice';
 import { setCurrentMenu, theMenu } from '../../slices/view-slice';
 import { animateChange } from '../../common/animate';
 import axios from 'axios';
-import './seqdb.css';
+import './songs.css';
 
-export const NewSeqBtn: React.FC = () => {
+export const NewSongBtn: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const newLyrics = useMemo(() => {
@@ -22,9 +22,7 @@ export const NewSeqBtn: React.FC = () => {
   }, []);
 
   const startNewSequence = (event) => {
-    animateChange('Library', (title) => {
-      dispatch(setCurrentMenu(title));
-    });
+    animateChange('Library', (title) => { dispatch(setCurrentMenu(title)) });
     dispatch(setActiveSequence(newSong))
     dispatch(updateAllLines(newLyrics));
     dispatch(setIsNew(true));
@@ -44,4 +42,4 @@ export const NewSeqBtn: React.FC = () => {
   )
 }
 
-export default NewSeqBtn;
+export default NewSongBtn;

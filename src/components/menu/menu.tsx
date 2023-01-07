@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { useAppSelector } from '../../hooks';
 import { theMenu } from '../../slices/view-slice';
 import Library from '../library/library';
-import SequencesDB from '../seqdb/seqdb';
+import Songs from '../songs/songs';
 import MenuSelect from './menuselect';
 
 export const Menu: React.FC = () => {
@@ -12,7 +12,7 @@ export const Menu: React.FC = () => {
 
   const returnMenu = useCallback(() => {
     return menu == 'Library' ? <Library />
-         : menu == 'Songs'   ? <SequencesDB />
+         : menu == 'Songs'   ? <Songs />
          : '';
   }, [menu]);
 
