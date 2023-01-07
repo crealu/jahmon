@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentSeq, seqIsFretsnap, addStep } from '../../../slices/sequence-slice';
+import { theSteps, addStep, seqIsFretsnap } from '../../../slices/sequence-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { scrollSteps } from '../../../common/helpers';
 import SeqStep from '../seqstep/seqstep';
@@ -12,7 +12,7 @@ import Diagram from '../../diagram/diagram';
 
 export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const seq = useAppSelector(currentSeq);
+  const steps = useAppSelector(theSteps);
   const libraryChord = useAppSelector(libChord);
   const fretsnap = useAppSelector(seqIsFretsnap);
 
@@ -50,13 +50,13 @@ export const Steps: React.FC = () => {
 
   const returnSteps = useCallback(() => {
     return fretsnap
-      ? seq.map((step, i) => { return <Diagram step={step} idx={i} /> })
-      : seq.map((step, i) => { return <SeqStep step={step} idx={i} /> })
-  }, [seq]);
+      ? steps.map((step, i) => { return <Diagram step={step} idx={i} /> })
+      : steps.map((step, i) => { return <SeqStep step={step} idx={i} /> })
+  }, [steps]);
 
   const wrapperWidth = useMemo(() => {
-    return `${seq.length > 8 ? seq.length * 100 + 'px' : '100%'}`
-  }, [seq])
+    return `${steps.length > 8 ? steps.length * 100 + 'px' : '100%'}`
+  }, [steps])
 
   return (
     <div className="steps" onWheel={(e) => scrollSteps(e)}>

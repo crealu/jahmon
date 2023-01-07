@@ -5,7 +5,8 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../hooks';
 import { isSettings, toggleSettings } from '../../slices/view-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
-import { currentTitle, setAllSequences } from '../../slices/sequence-slice';
+import { setSteps } from '../../slices/sequence-slice';
+import { theSongTitle } from '../../slices/song-slice';
 import { refresh } from '../../common/helpers';
 import axios from 'axios';
 import './settings.css';
@@ -13,7 +14,7 @@ import './settings.css';
 export const Settings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const settings = useAppSelector(isSettings);
-  const title = useAppSelector(currentTitle);
+  const title = useAppSelector(theSongTitle);
   const closeModal = () => { dispatch(toggleSettings(false)) };
   const [username, setUsername] = useState('');
   const [deleteResponse, setDeleteResponse] = useState('');
@@ -38,7 +39,7 @@ export const Settings: React.FC = () => {
   const getSongsFromDB = () => {
     axios.get('/api-get-jahms')
       .then(res => {
-        dispatch(setAllSequences(res.data));
+        dispatch(setSteps(res.data));
         localStorage.setItem('songs', JSON.stringify(res.data));
       })
       .catch(err => { throw err });

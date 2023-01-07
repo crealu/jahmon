@@ -5,29 +5,27 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { setCurrentScreen } from '../../slices/view-slice';
-import { setAllSequences, allSequences } from '../../slices/sequence-slice';
+import { setSongs, theSongs } from '../../slices/song-slice';
 import NewSongBtn from './newsongbtn';
 import Song from './song';
 import axios from 'axios';
 
 export const Songs: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const songs = useAppSelector(allSequences);
-
-  const changeScreen = (screen) => { dispatch(setCurrentScreen(screen)) }
+  const songs = useAppSelector(theSongs);
 
   const getSongsFromDB = () => {
     axios.get('/api-get-jahms')
       .then(res => {
-        dispatch(setAllSequences(res.data));
+        dispatch(setSongs(res.data));
         localStorage.setItem('songs', JSON.stringify(res.data));
       })
       .catch(err => { throw err });
   }
 
   const getSongsFromStorage = () => {
-    const songs = JSON.parse(localStorage.getItem('songs'));
-    dispatch(setAllSequences(songs));
+    const localSongs = JSON.parse(localStorage.getItem('songs'));
+    dispatch(setSongs(localSongs));
   }
 
   useEffect(() => {
@@ -49,6 +47,7 @@ export const Songs: React.FC = () => {
   )
 }
 
+// const changeScreen = (screen) => { dispatch(setCurrentScreen(screen)) }
 // <button onClick={() => changeScreen('gig')}>GIG</button>
 // <button onClick={() => changeScreen('jambook')}>JAMBOOK</button>
 

@@ -4,7 +4,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentTitle, setCurrentTitle, setActionText, addStep } from '../../../slices/sequence-slice';
+import { setActionText, addStep } from '../../../slices/sequence-slice';
+import { theSongTitle, setSongTitle } from '../../../slices/song-slice';
 import { theDiagramNotes, theDiagramName, theDiagramMode } from '../../../slices/library-slice';
 import Diagram from '../../diagram/diagram';
 import Steps from '../steps/steps';
@@ -12,12 +13,12 @@ import { Step, Button } from '../../../common/classes';
 
 export const SequenceTop: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const songTitle = useAppSelector(currentTitle);
+  const songTitle = useAppSelector(theSongTitle);
   const diagramNotes = useAppSelector(theDiagramNotes);
   const diagramName = useAppSelector(theDiagramName);
   const diagramMode = useAppSelector(theDiagramMode);
 
-  const updateTitle = (event) => { dispatch(setCurrentTitle(event.target.value)) }
+  const updateTitle = (event) => { dispatch(setSongTitle(event.target.value)) }
   const addThisStep = () => { dispatch(addStep(newStep)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
   const handleLeave = () => { dispatch(setActionText('...')) };

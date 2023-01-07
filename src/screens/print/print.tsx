@@ -4,7 +4,8 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { currentTitle, currentSeq, seqIsNew } from '../../slices/sequence-slice';
+import { theSteps } from '../../slices/sequence-slice';
+import { theSongTitle  } from '../../slices/song-slice';
 import { isPrinting, togglePrint, setCurrentScreen } from '../../slices/view-slice';
 import { theChordName, setChordName } from '../../slices/library-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
@@ -14,7 +15,7 @@ import StepData from './stepdata';
 
 export const Print: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const title = useAppSelector(currentTitle);
+  const title = useAppSelector(theSongTitle);
   const printing = useAppSelector(isPrinting);
   const lines = useAppSelector(lyricLines);
 

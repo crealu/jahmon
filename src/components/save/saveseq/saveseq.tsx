@@ -4,7 +4,8 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { currentTitle, currentSeq, seqIsNew, setAllSequences } from '../../../slices/sequence-slice';
+import { theSteps, setSteps } from '../../../slices/sequence-slice';
+import { theSongTitle, newSong } from '../../../slices/song-slice';
 import { toggleSaveSequence } from '../../../slices/view-slice';
 import { lyricLines } from '../../../slices/lyrics-slice';
 import { refresh } from '../../../common/helpers';
@@ -12,10 +13,10 @@ import axios from 'axios';
 
 export const SaveSeq: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const title = useAppSelector(currentTitle);
-  const steps = useAppSelector(currentSeq);
+  const title = useAppSelector(theSongTitle);
+  const steps = useAppSelector(theSteps);
   const lyrics = useAppSelector(lyricLines);
-  const isNew = useAppSelector(seqIsNew);
+  const isNew = useAppSelector(newSong);
   const [saveRes, setSaveRes] = useState('');
 
   const saveSeq = () => {
@@ -31,7 +32,7 @@ export const SaveSeq: React.FC = () => {
     if (data == 'Save successful') {
       axios.get('/api-get-jahms')
         .then(res => {
-          dispatch(setAllSequences(res.data));
+          dispatch(setSteps(res.data));
           localStorage.setItem('songs', JSON.stringify(res.data));
         })
         .catch(err => { throw err });

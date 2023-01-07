@@ -7,7 +7,6 @@ export interface ViewState {
   settings: boolean;
   print: boolean;
   currentScreen: string;
-  currentBook: string;
   currentMenu: string;
 }
 
@@ -17,7 +16,6 @@ export const viewInitialState: ViewState = {
   settings: false,
   print: false,
   currentScreen: 'base',
-  currentBook: 'songs',
   currentMenu: 'Library',
 };
 
@@ -60,7 +58,6 @@ export const isSavingStep = ({ view: { saveStep }}: RootState): boolean => saveS
 export const isSettings = ({ view: { settings }}: RootState): boolean => settings;
 export const isPrinting = ({ view: { print }}: RootState): boolean => print;
 export const theScreen = ({ view: { currentScreen }}: RootState): boolean => currentScreen;
-export const theBook = ({ view: { currentBook }}: RootState): boolean => currentBook;
 export const theMenu = ({ view: { currentMenu }}: RootState): string => currentMenu;
 
 export default viewSlice.reducer;

@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { setActiveSequence, setIsNew } from '../../slices/sequence-slice';
+import { newSong, setIsNew } from '../../slices/song-slice';
 import { updateAllLines } from '../../slices/lyrics-slice';
 import { setCurrentMenu, theMenu } from '../../slices/view-slice';
 import { animateChange } from '../../common/animate';
@@ -17,13 +17,13 @@ export const NewSongBtn: React.FC = () => {
     return [{ text: '...lyrics...', panel: [{ chord: '', offset: '' }] }]
   }, []);
 
-  const newSong = useMemo(() => {
+  const aNewSong = useMemo(() => {
     return { title: 'untitled', steps: [] };
   }, []);
 
   const startNewSequence = (event) => {
     animateChange('Library', (title) => { dispatch(setCurrentMenu(title)) });
-    dispatch(setActiveSequence(newSong))
+    dispatch(setActiveSequence(aNewSong))
     dispatch(updateAllLines(newLyrics));
     dispatch(setIsNew(true));
   }

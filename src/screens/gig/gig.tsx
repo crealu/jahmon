@@ -3,13 +3,13 @@ import './gig.css';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { allSequences } from '../../slices/sequence-slice';
+import { theSongs } from '../../slices/song-slice';
 import Diagram from '../../components/fretsnap/fretsnap';
 import BasicSnap from '../print/basicsnap';
 import Wrapper from '../../components/lyrics/wrapper/wrapper';
 
 export const Gig: React.FC = () => {
-  const sequences = useAppSelector(allSequences);
+  const sequences = useAppSelector(theSongs);
 
   return (
     <div className="gig">
