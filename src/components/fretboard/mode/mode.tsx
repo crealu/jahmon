@@ -1,11 +1,11 @@
 import * as React from 'react';
+import './mode.css';
 import { useState } from 'react';
-import { useAppSelector } from '../../../hooks';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
+import { useAppSelector } from '../../../hooks';
 import { setMode, theMode } from '../../../slices/fretboard-slice';
 import { clearFretboard, toggleRiffs } from '../../../common/helpers';
-import './mode.css';
 
 export const Mode: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

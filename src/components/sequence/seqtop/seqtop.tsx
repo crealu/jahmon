@@ -27,8 +27,8 @@ export const SequenceTop: React.FC = () => {
     return {
       title: diagramName,
       mode: diagramMode,
-      noteids: diagramNotes,
-      frenums: ''
+      noteids: !diagramNotes[0] ? ',' : diagramNotes,
+      frenums: ','
     }
   }, [diagramName]);
 

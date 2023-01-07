@@ -6,7 +6,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { addStep, deleteStep, updateStep, clearSequence, theActiveStep, setActionText, theAction, toggleFretsnap, seqIsFretsnap } from '../../../slices/sequence-slice';
 import { toggleSaveSequence, toggleSaveStep, toggleSettings, setCurrentScreen } from '../../../slices/view-slice';
-import { theMode, theRiffen, theSnapshotName } from '../../../slices/fretboard-slice';
+import { theMode, theRiffen, theSnapshot, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import { Step, Button } from '../../../common/classes';
 import Eye from './eye';
@@ -18,8 +18,9 @@ export const Buttons: React.FC = () => {
   // const riffen = useAppSelector(theRiffen);
   const active = useAppSelector(theActiveStep);
   const action = useAppSelector(theAction);
-  const snapshotName = useAppSelector(theSnapshotName);
   const fretsnap = useAppSelector(seqIsFretsnap);
+  const snapshotName = useAppSelector(theSnapshotName);
+  const snapshot = useAppSelector(theSnapshot);
 
   const newStep = useMemo(() => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
@@ -30,11 +31,17 @@ export const Buttons: React.FC = () => {
       noteids: noteData[0],
       fretnums: noteData[1]
     }
-  }, [])
-
+  }, [snapshot, snapshotName]);
 
   // const addThisStep = () => { dispatch(addStep(newStep)) };
-  const updateThisStep = () => { dispatch(updateStep(newStep)) };
+  const updateThisStep = () => {
+    if (active == null) {
+      dispatch(setActionText('Please add a step'));
+      return;
+    }
+    console.log(newStep);
+    dispatch(updateStep(newStep));
+  };
 
   const deleteThisStep = () => {
     dispatch(deleteStep());
@@ -66,7 +73,7 @@ export const Buttons: React.FC = () => {
     return data.map(btn => {
       return new Button(btn[0], btn[1], btn[2], btn[3])
     })
-  }, [mode, fretsnap]);
+  }, [mode, fretsnap, snapshot, snapshotName]);
 
   return (
     <div className="sequence-btn-wrapper">

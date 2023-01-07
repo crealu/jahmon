@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theMode, theRiffen, setRiffen } from '../../../slices/fretboard-slice';
 import { theChords } from '../../../slices/library-slice';
+import { checkNoteID } from '../../../common/helpers';
 import './fret.css';
 
 type FretProps = {
@@ -67,25 +68,14 @@ const Fret: React.FC<FretProps> = (props) => {
     }
   }
 
-  const checkNoteID = (noteID) => {
-    const markedFrets = ['3', '5', '7', '9', '12', '15', '17'];
-    return markedFrets.some(num => {
-      return noteID.includes('s3f' + num) ? true : false;
-    });
-  }
-
   const addFretDetails = (noteID) => {
     if (checkNoteID(noteID)) {
-      if (noteID == 's3f12') {
-        return (
-          <div>
+      return noteID == 's3f12'
+        ? <div>
             <div className={`fret-circle-12_1 fret-circle`}></div>
             <div className={`fret-circle-12_2 fret-circle`}></div>
           </div>
-        )
-      } else {
-        return <div className="fret-circle"></div>
-      }
+        : <div className="fret-circle"></div>
     }
   }
 

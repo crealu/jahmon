@@ -83,6 +83,7 @@ export const convertChordIds = (tchords) => {
   return chordIds.join(',');
 }
 
+// steps
 export const scrollSteps = (event) => {
   if (event.deltaY > 0) {
     event.target.parentNode.parentNode.scrollLeft += 40;
@@ -92,6 +93,26 @@ export const scrollSteps = (event) => {
 }
 
 export const refresh = () => { location.reload() }
+
+// fret.tsx
+export const checkNoteID = (noteID) => {
+  const markedFrets = ['3', '5', '7', '9', '12', '15', '17'];
+  return markedFrets.some(num => {
+    return noteID.includes('s3f' + num) ? true : false;
+  });
+}
+
+export const targetIsDetail = (target) => {
+  if (
+    target.classList[0] == 'fret-circle-12_1' ||
+    target.classList[0] == 'fret-circle-12_2' ||
+    target.classList[0] == 'fret-circle'
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 // const resetFretNotes = () => {
 //   const riffFretNotes = document.getElementsByClassName('riff-note');

@@ -5,6 +5,7 @@ export interface LibraryState {
   chordName: string;
   chords: any[];
   chordIds: string[];
+  trueIds: string[];
   grabbed: object;
   diagramNotes: string[];
   diagramName: string;
@@ -15,10 +16,11 @@ export const libraryInitialState: LibraryState = {
   chordName: '',
   chords: [],
   chordIds: [],
+  trueIds: [],
   grabbed: { name: '', noteids: '' },
   diagramNotes: [],
-  diagramName: '',
-  diagramMode: ''
+  diagramName: '...',
+  diagramMode: 'chord'
 };
 
 export const librarySlice = createSlice({
@@ -32,9 +34,13 @@ export const librarySlice = createSlice({
       return { ...state, chords: action.payload }
     },
     setChordIds(state, action: PayloadAction<string[]>) {
-      return { ...state, chordIds: action.payload }
+      return {
+        ...state,
+        chordIds: action.payload,
+        trueIds: action.payload.toString().split(',').map(id => { return parseInt(id) })
+      }
     },
-    setGrabbed(state,  action: PayloadAction<object>) {
+    setGrabbed(state, action: PayloadAction<object>) {
       return { ...state, grabbed: action.payload }
     },
     setDiagramNotes(state, action: PayloadAction<string[]>) {
@@ -63,6 +69,7 @@ export const {
 export const theChordName = ({ library: { chordName }}: RootState): string => chordName;
 export const theChords = ({ library: { chords }}: RootState): any[] => chords;
 export const theChordIds = ({ library: { chordIds }}: RootState): any[] => chordIds;
+export const theTrueIds = ({ library: { trueIds }}: RootState): string[] => trueIds;
 export const libChord = ({ library: { grabbed }}: RootState): object => grabbed;
 export const theDiagramNotes = ({ library: { diagramNotes }}: RootState): string[] => diagramNotes;
 export const theDiagramName = ({ library: { diagramName }}: RootState): string => diagramName;

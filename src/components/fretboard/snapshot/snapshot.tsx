@@ -1,58 +1,55 @@
 import * as React from 'react';
-import { useState, useMemo } from 'react';
+import './snapshot.css';
+import { useEffect, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector, useKeyPress } from '../../../hooks';
-import { theMode, theSnapshot, setSnapshotName, theSnapshotName } from '../../../slices/fretboard-slice';
+import { theMode, theSnapshot, setSnapshotName } from '../../../slices/fretboard-slice';
 import { resetStepName } from '../../../slices/sequence-slice';
-import { theChords, theChordIds } from '../../../slices/library-slice';
+import { theChords, theTrueIds } from '../../../slices/library-slice';
 import { codifySnapshot } from '../../../common/helpers';
-import './snapshot.css';
 
 export const Snapshot: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const snapshot = useAppSelector(theSnapshot);
   const mode = useAppSelector(theMode);
+  const snapshot = useAppSelector(theSnapshot);
   const chords = useAppSelector(theChords);
-  const chordIds = useAppSelector(theChordIds);
+  const trueIds = useAppSelector(theTrueIds);
   const trueSnapshot = codifySnapshot(snapshot);
-  const snapshotName = useAppSelector(theSnapshotName);
-  const trueIds = chordIds.toString().split(',').map(id => { return parseInt(id) });
   const [snapInput, setSnapInput] = useState('');
-
-  const matchedSnapshot = useMemo(() => {
-    let chordName = '';
-    trueIds.forEach((id, i) => {
-      chordName = id == trueSnapshot ? chords[i].name : '';
-    });
-    // dispatch(setSnapshotName(chordName));
-  }, [snapshot]);
-
-  useKeyPress('j', () => {
-    console.log(chords[0]);
-    console.log(chordIds[0]);
-  });
 
   const changeSnapshot = (event) => {
     dispatch(resetStepName(event.target.value));
     dispatch(setSnapshotName(event.target.value))
   }
 
+  const aName = useMemo(() => {
+    let name = '';
+    trueIds.forEach((id, i) => {
+      if (id == trueSnapshot) {
+        name = chords[i].name;
+        dispatch(setSnapshotName(name));
+      }
+    });
+    return name;
+  }, [snapshot])
+
   return (
-    <input
+    <div
       className="snapshot"
       style={{display: `${mode == 'chord' ? 'block' : 'none'}`}}
-      value={snapshotName != '' ? snapshotName : snapInput}
-      onChange={(e) => changeSnapshot(e)}
-    />
+    >
+      {aName}
+    </div>
   )
 }
-
-// <div
+// <input
 //   className="snapshot"
 //   style={{display: `${mode == 'chord' ? 'block' : 'none'}`}}
-// >
-//   {snapshotName != '' ? '...' : snapshotName}
-// </div>
+//   value={snapshotName != '' ? snapshotName : snapInput}
+//   onChange={(e) => changeSnapshot(e)}
+// />
+// {snapshotName != '' ? '...' : snapshotName}
+
 
 export default Snapshot

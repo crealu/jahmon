@@ -99,7 +99,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       onClick={(e) => updateActiveStep(e)}
       onDragStart={(e) => dragStartHandler(e)}
     >
-      {idx == active ? stepName : step.title}
+      {step.title}
     </div>
   )
 }

@@ -1,17 +1,11 @@
 import * as React from 'react';
 import './strings.css';
-import { useState, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import {
-  theMode,
-  theSnapshot,
-  addToSnapshot,
-  removeFromSnapshot,
-  setSnapshotName,
-} from '../../../slices/fretboard-slice';
-import { codifySnapshot } from '../../../common/helpers';
+import { theMode, addToSnapshot, removeFromSnapshot } from '../../../slices/fretboard-slice';
+import { targetIsDetail } from '../../../common/helpers.ts';
 import Fret from '../fret/fret';
 
 export const Strings: React.FC = () => {
@@ -20,48 +14,52 @@ export const Strings: React.FC = () => {
   const strings = useMemo(() => { return new Array(6).fill(0) }, []);
   const frets = useMemo(() => { return new Array(22).fill(0) }, []);
 
-  const returnStringClass = (sn) => {
-    return mode == 'chord'
-      ? `string-row ${sn == 0 ? ' small-e-string' : sn == 5 ? ' big-e-string' : ''}`
-      : `string-row ${sn == 0 ? ' small-e-riff' : sn == 5 ? ' big-e-riff' : ''}`
-  };
-
   const toggleNote = (element) => {
-    element.style.display = element.style.display == 'block' ? 'none' : 'block';
-    snap(element);
+    if (element.style.display == 'block') {
+      element.style.display = 'none';
+      dispatch(removeFromSnapshot(element.dataset.noteid));
+    } else {
+      element.style.display = 'block';
+      dispatch(addToSnapshot(element.dataset.noteid));
+    }
   }
 
-  const placeNote = (e) => {
+  const placeNote = (event) => {
     if (mode == 'chord') {
-      if (e.target.children[0]) {
-        toggleNote(e.target.children[0]);
-      } else if (e.target.classList[0] == 'fret-circle') {
-        toggleNote(e.target.previousSibling);
+      if (event.target.children[0]) {
+        toggleNote(event.target.children[0]);
+      } else if (targetIsDetail(event.target)) {
+        toggleNote(event.target.parentNode.previousSibling);
       } else {
-        toggleNote(e.target);
+        toggleNote(event.target);
       }
     }
   };
 
-  const snap = (element) => {
-    if (element.style.display == 'block') {
-      dispatch(addToSnapshot(element.dataset.noteid));
-    } else {
-      dispatch(removeFromSnapshot(element.dataset.noteid));
-    }
-  }
+  const getStringClass = useCallback((sn) => {
+    const name = mode == 'chord' ? 'string' : 'riff';
+    return `string-row ${sn == 0 ? 'small-e-' : sn == 5 ? 'big-e-' : ''}-e-${name}`;
+  }, []);
 
   return (
     <div className="strings">
       {strings.map((string, sn) => {
         return (
-          <div className={returnStringClass(sn)}>
+          <div className={getStringClass(sn)}>
             <div className="string-div"></div>
-            <div className={`fret fret-open-${mode}`} onClick={(e) => placeNote(e)}>
+            <div
+              className={`fret fret-open-${mode}`}
+              onClick={(e) => placeNote(e)}
+            >
               <div className="fret-note" data-noteid={`s${6-sn}f0`}></div>
             </div>
             {frets.map((fret, fn) => {
-              return <Fret noteid={`s${6-sn}f${fn + 1}`} placeNote={(e) => placeNote(e)}/>
+              return (
+                <Fret
+                  noteid={`s${6-sn}f${fn + 1}`}
+                  placeNote={(e) => placeNote(e)}
+                />
+              )
             })}
           </div>
         )
