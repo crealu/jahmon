@@ -1,16 +1,16 @@
 import * as React from 'react';
+import './diagram.css';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import './fretsnap.css';
 
-type FretSnapProps = {
+type DiagramProps = {
   step: object;
   idx: number;
 }
 
-export const FretSnap: React.FC<FretSnapProps> = (props) => {
+export const Diagram: React.FC<DiagramProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const strings = useMemo(() => { return new Array(6).fill(0) }, []);
   const frets = useMemo(() => { return new Array(5).fill(0) }, []);
@@ -19,6 +19,8 @@ export const FretSnap: React.FC<FretSnapProps> = (props) => {
   const notes = useMemo((noteid) => {
     let ids = step.noteids.replaceAll('s', '').replaceAll('f', '').split(',').reverse();
     let theNotes = new Array(6).fill('x');
+
+    console.log('Ids ' + ids);
 
     for (let i = 0; i < ids.length; i++) {
       let index = parseInt(ids[i][0]) - 1;
@@ -30,6 +32,7 @@ export const FretSnap: React.FC<FretSnapProps> = (props) => {
 
   const filtered = useMemo(() => {
     let theFiltered = [];
+    console.log('Notes ' + notes);
     for (let j = 0; j < notes.length; j++) {
       if (notes[j] !== 'x') {
         if (notes[j] !== '0') {
@@ -40,30 +43,32 @@ export const FretSnap: React.FC<FretSnapProps> = (props) => {
     return theFiltered;
   }, [step]);
 
-  const fretStart = Math.min(...filtered);
+  // const fretStart = filtered != null ? Math.min(...filtered) : '';
 
-  useEffect(() => {
-    console.log(fretStart);
-  }, [])
+  const fretStart = useMemo(() => {
+    return filtered != '' ? Math.min(...filtered) : null;
+  }, [filtered])
+
+  useEffect(() => { console.log(fretStart) }, [])
 
   return (
-    <div className="fret-snap">
-      <div className="fs-chord-name">{step.title}</div>
-      <div className="fs-muted"></div>
-      <div className="fs-start">{fretStart.toString()}</div>
-      <div className="fs-shape">
+    <div className="diagram">
+      <div className="diagram-chord-name">{step.title}</div>
+      <div className="diagram-muted"></div>
+      <div className="diagram-start">{fretStart == null ? '2' : fretStart}</div>
+      <div className="diagram-shape">
         {strings.map((string, sn) => {
           return (
-            <div className="fs-string">
-              <div className="fs-top">
-                {notes[sn] === 'x' ? <div className="fs-muted">x</div> : ''}
-                {notes[sn] == '0' ? <div className="fs-open">o</div> : ''}
+            <div className="diagram-string" key={sn}>
+              <div className="diagram-top">
+                {notes[sn] === 'x' ? <div className="diagram-muted">x</div> : ''}
+                {notes[sn] == '0' ? <div className="diagram-open">o</div> : ''}
               </div>
               {frets.map((fret, fn) => {
                 return (
-                  <div className="fs-fret">
+                  <div className="diagram-fret" key={fn}>
                     {notes[sn] - fretStart == fn
-                      ? <div className="fs-note"></div>
+                      ? <div className="diagram-note"></div>
                       : ''
                     }
                   </div>
@@ -77,4 +82,4 @@ export const FretSnap: React.FC<FretSnapProps> = (props) => {
   )
 }
 
-export default FretSnap;
+export default Diagram;

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { allSequences } from '../../slices/sequence-slice';
-import FretSnap from '../../components/fretsnap/fretsnap';
+import Diagram from '../../components/fretsnap/fretsnap';
 import BasicSnap from '../print/basicsnap';
 import Wrapper from '../../components/lyrics/wrapper/wrapper';
 

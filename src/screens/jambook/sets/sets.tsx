@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../hooks';
 import { allSequences } from '../../../slices/sequence-slice';
 import { lyricLines } from '../../../slices/lyrics-slice';
 import { setCurrentBook } from '../../../slices/view-slice';
-import FretSnap from '../../../components/fretsnap/fretsnap';
+import Diagram from '../../../components/diagram/diagram';
 import BasicSnap from '../../print/basicsnap';
 import Wrapper from '../../../components/lyrics/wrapper/wrapper';
 

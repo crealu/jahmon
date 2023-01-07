@@ -23,9 +23,7 @@ export const Snapshot: React.FC = () => {
   const matchedSnapshot = useMemo(() => {
     let chordName = '';
     trueIds.forEach((id, i) => {
-      if (id == trueSnapshot) {
-        chordName = chords[i].name;
-      }
+      chordName = id == trueSnapshot ? chords[i].name : '';
     });
     // dispatch(setSnapshotName(chordName));
   }, [snapshot]);

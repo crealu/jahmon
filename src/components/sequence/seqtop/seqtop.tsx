@@ -6,7 +6,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { currentTitle, setCurrentTitle, setActionText, addStep } from '../../../slices/sequence-slice';
 import { theDiagramNotes, theDiagramName, theDiagramMode } from '../../../slices/library-slice';
-import FretSnap from '../../fretsnap/fretsnap';
+import Diagram from '../../diagram/diagram';
 import Steps from '../steps/steps';
 import { Step, Button } from '../../../common/classes';
 
@@ -53,8 +53,8 @@ export const SequenceTop: React.FC = () => {
         />
         <Steps />
       </div>
-      <div className="chord-view">
-        <FretSnap step={diagramData} idx={0} />
+      <div className="diagram-view">
+        <Diagram step={diagramData} idx={0} />
         <img
           className={addButton.classes}
           src={addButton.src}

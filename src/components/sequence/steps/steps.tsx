@@ -8,7 +8,7 @@ import { currentSeq, seqIsFretsnap, addStep } from '../../../slices/sequence-sli
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { scrollSteps } from '../../../common/helpers';
 import SeqStep from '../seqstep/seqstep';
-import FretSnap from '../../fretsnap/fretsnap';
+import Diagram from '../../diagram/diagram';
 
 export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -50,7 +50,7 @@ export const Steps: React.FC = () => {
 
   const returnSteps = useCallback(() => {
     return fretsnap
-      ? seq.map((step, i) => { return <FretSnap step={step} idx={i} /> })
+      ? seq.map((step, i) => { return <Diagram step={step} idx={i} /> })
       : seq.map((step, i) => { return <SeqStep step={step} idx={i} /> })
   }, [seq]);
 

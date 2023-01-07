@@ -15,7 +15,7 @@ import Trash from './trash';
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
-  const riffen = useAppSelector(theRiffen);
+  // const riffen = useAppSelector(theRiffen);
   const active = useAppSelector(theActiveStep);
   const action = useAppSelector(theAction);
   const snapshotName = useAppSelector(theSnapshotName);
@@ -23,10 +23,7 @@ export const Buttons: React.FC = () => {
 
   const newStep = useMemo(() => {
     const noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
-    const stepTitle = mode == 'chord'
-      ? snapshotName
-      // document.getElementsByClassName('snapshot')[0].textContent
-      : 'Riff';
+    const stepTitle = mode == 'chord' ? snapshotName : 'Riff';
     return {
       title: stepTitle,
       mode: mode,
@@ -63,7 +60,7 @@ export const Buttons: React.FC = () => {
       // ['', 'save-step', 'Save step', saveThisStep],
       ['', 'save-seq', 'Save sequence', saveSeq],
       ['', 'settings', 'Settings', openSettings],
-      // ['', 'fretsnap', 'Toggle fretsnap', changeStep],
+      // ['', 'fretsnap', 'Toggle Diagram', changeStep],
       ['print-btn', 'print', 'Print song', openPrintView]
     ];
     return data.map(btn => {
