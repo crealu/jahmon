@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { addStep, deleteStep, updateStep, clearSequence, theActiveStep, setActionText, theAction, toggleFretsnap, seqIsFretsnap } from '../../../slices/sequence-slice';
+import { addStep, deleteStep, updateStep, clearSequence, theActiveStep, setActionText, theAction, toggleStepStyle, stepIsDiagram } from '../../../slices/sequence-slice';
 import { toggleSaveSequence, toggleSaveStep, toggleSettings, setCurrentScreen } from '../../../slices/view-slice';
 import { theMode, theRiffen, theSnapshot, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
@@ -18,7 +18,7 @@ export const Buttons: React.FC = () => {
   // const riffen = useAppSelector(theRiffen);
   const active = useAppSelector(theActiveStep);
   const action = useAppSelector(theAction);
-  const fretsnap = useAppSelector(seqIsFretsnap);
+  const isDiagram = useAppSelector(stepIsDiagram);
   const snapshotName = useAppSelector(theSnapshotName);
   const snapshot = useAppSelector(theSnapshot);
 
@@ -52,7 +52,7 @@ export const Buttons: React.FC = () => {
   const saveThisStep = () => { dispatch(toggleSaveStep(true)) };
   const saveSeq = () => { dispatch(toggleSaveSequence(true)) };
   const openSettings = () => { dispatch(toggleSettings(true)) };
-  const changeStep = () => { dispatch(toggleFretsnap(!fretsnap)) };
+  const changeStep = () => { dispatch(toggleFretsnap(!isDiagram)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
   const handleLeave = () => { dispatch(setActionText('...')) };
   const setOpacity = () => { return action == '...' ? '0' : '1' };
@@ -73,7 +73,7 @@ export const Buttons: React.FC = () => {
     return data.map(btn => {
       return new Button(btn[0], btn[1], btn[2], btn[3])
     })
-  }, [mode, fretsnap, snapshot, snapshotName]);
+  }, [mode, snapshot, snapshotName]);
 
   return (
     <div className="sequence-btn-wrapper">

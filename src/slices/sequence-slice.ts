@@ -6,7 +6,7 @@ export interface SequenceState {
   activeStep: number;
   stepName: string;
   action: string;
-  isFretsnap: boolean;
+  isDiagram: boolean;
 }
 
 export const sequenceInitialState: SequenceState = {
@@ -14,7 +14,7 @@ export const sequenceInitialState: SequenceState = {
   activeStep: null,
   stepName: '',
   action: '',
-  isFretsnap: false,
+  isDiagram: false,
 };
 
 export const sequenceSlice = createSlice({
@@ -52,8 +52,8 @@ export const sequenceSlice = createSlice({
     setActionText(state, action: PayloadAction<string>) {
       state.action = action.payload;
     },
-    toggleFretsnap(state, action: PayloadAction<boolean>) {
-      state.isFretsnap = action.payload;
+    toggleStepStyle(state, action: PayloadAction<boolean>) {
+      return { ...state, isDiagram: action.payload }
     },
     clearSequence(state) {
       state.steps = [];
@@ -70,7 +70,7 @@ export const {
   setStepName,
   resetStepName,
   setActionText,
-  toggleFretsnap,
+  toggleStepStyle,
   clearSequence,
  } = sequenceSlice.actions;
 
@@ -78,6 +78,6 @@ export const theSteps = ({ sequence: { steps }}: RootState): object[] => steps;
 export const theActiveStep = ({ sequence: { activeStep }}: RootState): number => activeStep;
 export const theStepName = ({ sequence: { stepName }}: RootState): string => stepName;
 export const theAction = ({ sequence: { action }}: RootState): string => action;
-export const seqIsFretsnap = ({ sequence: { isFretsnap }}: RootState): boolean => isFretsnap;
+export const stepIsDiagram = ({ sequence: { isDiagram }}: RootState): boolean => isDiagram;
 
 export default sequenceSlice.reducer;

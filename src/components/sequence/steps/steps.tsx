@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theSteps, addStep, seqIsFretsnap } from '../../../slices/sequence-slice';
+import { theSteps, addStep } from '../../../slices/sequence-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { scrollSteps } from '../../../common/helpers';
 import SeqStep from '../seqstep/seqstep';
@@ -14,7 +14,6 @@ export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const steps = useAppSelector(theSteps);
   const libraryChord = useAppSelector(libChord);
-  const fretsnap = useAppSelector(seqIsFretsnap);
 
   const dragOverHandler = (event) => {
     event.preventDefault();
@@ -49,9 +48,7 @@ export const Steps: React.FC = () => {
   }
 
   const returnSteps = useCallback(() => {
-    return fretsnap
-      ? steps.map((step, i) => { return <Diagram step={step} idx={i} /> })
-      : steps.map((step, i) => { return <SeqStep step={step} idx={i} /> })
+    return steps.map((step, i) => { return <SeqStep step={step} idx={i} /> })
   }, [steps]);
 
   const wrapperWidth = useMemo(() => {
