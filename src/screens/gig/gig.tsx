@@ -5,7 +5,7 @@ import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { theSongs } from '../../slices/song-slice';
 import Diagram from '../../components/fretsnap/fretsnap';
-import BasicSnap from '../print/basicsnap';
+import ChordFret from '../print/chordfret';
 import Wrapper from '../../components/lyrics/wrapper/wrapper';
 
 export const Gig: React.FC = () => {
@@ -20,7 +20,7 @@ export const Gig: React.FC = () => {
             <div className="gig-seq-steps-wrapper">
               <div className="gig-sequence-steps">
                 {sequence.steps.map((step, idx) => {
-                  return <BasicSnap step={step} idx={idx} />
+                  return <ChordFret step={step} idx={idx} />
                 })}
               </div>
             </div>

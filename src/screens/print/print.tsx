@@ -1,32 +1,28 @@
 import * as React from 'react';
 import './print.css';
-import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
-import { theSteps } from '../../slices/sequence-slice';
 import { theSongTitle  } from '../../slices/song-slice';
-import { isPrinting, togglePrint, setCurrentScreen } from '../../slices/view-slice';
-import { theChordName, setChordName } from '../../slices/library-slice';
+import { theSteps } from '../../slices/sequence-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
-import { refresh } from '../../common/helpers';
+import { setCurrentScreen } from '../../slices/view-slice';
 import Wrapper from '../../components/lyrics/wrapper/wrapper';
 import StepData from './stepdata';
 
 export const Print: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const title = useAppSelector(theSongTitle);
-  const printing = useAppSelector(isPrinting);
   const lines = useAppSelector(lyricLines);
 
   const hideForm = () => { dispatch(setCurrentScreen('base')) };
 
-  const printSeq = (e) => {
-    e.target.style.display = 'none';
-    e.target.nextSibling.style.display = 'none';
+  const printSong = (event) => {
+    event.target.style.display = 'none';
+    event.target.nextSibling.style.display = 'none';
     window.print();
-    e.target.style.display = 'block';
-    e.target.nextSibling.style.display = 'block';
+    event.target.style.display = 'block';
+    event.target.nextSibling.style.display = 'block';
   }
 
   return (
@@ -37,7 +33,7 @@ export const Print: React.FC = () => {
         <Wrapper lines={lines}/>
       </div>
       <div className="print-form-btns-wrapper">
-        <button className="save-btn save-form-btn" onClick={(e) => printSeq(e)}>Print</button>
+        <button className="save-btn save-form-btn" onClick={(e) => printSong(e)}>Print</button>
         <button className="cancel-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
       </div>
     </div>

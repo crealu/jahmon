@@ -8,14 +8,14 @@ import Print from './screens/print/print';
 import Gig from './screens/gig/gig';
 
 export const App: React.FC = () => {
-  const current: string = useAppSelector(theScreen);
+  const screen: string = useAppSelector(theScreen);
 
   const returnScreen = useCallback(() => {
-    return current == 'base' ? <Base />
-         : current == 'print' ? <Print />
-         : current == 'gig' ? <Gig />
+    return screen == 'base' ? <Base />
+         : screen == 'print' ? <Print />
+         : screen == 'gig' ? <Gig />
          : '';
-  }, [current])
+  }, [screen])
 
   return (
     <div className="app">

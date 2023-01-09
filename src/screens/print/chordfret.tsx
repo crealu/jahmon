@@ -2,16 +2,18 @@ import * as React from 'react';
 import './print.css';
 import { useCallback } from 'react';
 
-type BasicSnapProps = {
+type ChordFret = {
   step: object;
   idx: number;
 }
 
-export const BasicSnap: React.FC<BasicSnapProps> = (props) => {
+export const ChordFret: React.FC<ChordFret> = (props) => {
   const { step, idx } = props;
 
   const filterNoteIds = useCallback((noteid) => {
-    let ids = noteid.replaceAll('s', '').replaceAll('f', '').split(',').reverse();
+    let ids = noteid != null
+      ? noteid.replaceAll('s', '').replaceAll('f', '').split(',').reverse()
+      : '';
     let notes = new Array(6).fill('x');
 
     for (let i = 0; i < ids.length; i++) {
@@ -30,4 +32,4 @@ export const BasicSnap: React.FC<BasicSnapProps> = (props) => {
   )
 }
 
-export default BasicSnap;
+export default ChordFret;
