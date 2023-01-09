@@ -1,11 +1,11 @@
 import * as React from 'react';
 import './saveseq.css';
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theSteps, setSteps } from '../../../slices/sequence-slice';
-import { theSongTitle, newSong } from '../../../slices/song-slice';
+import { theSteps } from '../../../slices/sequence-slice';
+import { theSongTitle, newSong, setSongs } from '../../../slices/song-slice';
 import { toggleSaveSequence } from '../../../slices/view-slice';
 import { lyricLines } from '../../../slices/lyrics-slice';
 import { refresh } from '../../../common/helpers';
@@ -23,23 +23,27 @@ export const SaveSeq: React.FC = () => {
     const data = { title: title, steps: steps, lyrics: lyrics }
     const url = isNew ? '/api-save-seq' : '/api-update-seq';
     axios.post(url, data)
-      .then(res => { processResponse(res.data) })
+      .then(res => { setSaveRes(res.data) })
       .catch(err => { throw err });
   }
 
-  const processResponse = (data) => {
-    setSaveRes(data);
-    if (data == 'Save successful') {
+  const processResponse = useCallback(() => {
+    if (saveRes == 'Save successful') {
       axios.get('/api-get-jahms')
         .then(res => {
-          dispatch(setSteps(res.data));
+          dispatch(setSongs(res.data));
           localStorage.setItem('songs', JSON.stringify(res.data));
         })
         .catch(err => { throw err });
     }
-  }
+  }, [saveRes]);
 
-  const hideForm = () => { dispatch(toggleSaveSequence(false)) };
+  const hideForm = () => {
+    setSaveRes('');
+    dispatch(toggleSaveSequence(false))
+  };
+
+  useEffect(() => { processResponse() }, [saveRes]);
 
   return (
     <div className="seq-form-view form-view">

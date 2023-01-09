@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import { isSettings, toggleSettings } from '../../slices/view-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { setSteps } from '../../slices/sequence-slice';
-import { theSongTitle } from '../../slices/song-slice';
+import { theSongTitle, setSongs } from '../../slices/song-slice';
 import { refresh } from '../../common/helpers';
 import axios from 'axios';
 import './settings.css';
@@ -39,7 +39,7 @@ export const Settings: React.FC = () => {
   const getSongsFromDB = () => {
     axios.get('/api-get-jahms')
       .then(res => {
-        dispatch(setSteps(res.data));
+        dispatch(setSongs(res.data));
         localStorage.setItem('songs', JSON.stringify(res.data));
       })
       .catch(err => { throw err });
