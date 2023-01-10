@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './steps.css';
-import { useCallback, useMemo } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
@@ -48,12 +48,14 @@ export const Steps: React.FC = () => {
   }
 
   const returnSteps = useCallback(() => {
-    return steps.map((step, i) => { return <SeqStep step={step} idx={i} /> })
+    return steps.map((step, i) => { return <SeqStep step={step} idx={i} key={i} /> })
   }, [steps]);
 
   const wrapperWidth = useMemo(() => {
     return `${steps.length > 8 ? steps.length * 100 + 'px' : '100%'}`
-  }, [steps])
+  }, [steps]);
+
+  useEffect(() => { console.log(steps) }, [steps]);
 
   return (
     <div className="steps" onWheel={(e) => scrollSteps(e)}>

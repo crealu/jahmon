@@ -27,9 +27,9 @@ export const SequenceTop: React.FC = () => {
     // return new Step(diagramName, diagramMode, diagramNotes, '')
     return {
       title: diagramName,
+      noteids: !diagramNotes[0] ? ',' : diagramNotes.join(','),
       mode: diagramMode,
-      noteids: !diagramNotes[0] ? ',' : diagramNotes,
-      frenums: ','
+      frenums: ''
     }
   }, [diagramName]);
 

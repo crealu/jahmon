@@ -10,7 +10,9 @@ type ChordFret = {
 export const ChordFret: React.FC<ChordFret> = (props) => {
   const { step, idx } = props;
 
-  const filterNoteIds = useCallback((noteid) => {
+  console.log(step);
+
+  const filterNoteIds = (noteid) => {
     let ids = noteid != null
       ? noteid.replaceAll('s', '').replaceAll('f', '').split(',').reverse()
       : '';
@@ -22,7 +24,7 @@ export const ChordFret: React.FC<ChordFret> = (props) => {
     }
 
     return notes.join(' ');
-  }, [step]);
+  };
 
   return (
     <div className="basic-snap">
