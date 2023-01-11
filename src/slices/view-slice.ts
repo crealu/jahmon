@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 export interface ViewState {
-  saveSequence: boolean;
+  saveSong: boolean;
   saveStep: boolean;
   settings: boolean;
   print: boolean;
@@ -11,7 +11,7 @@ export interface ViewState {
 }
 
 export const viewInitialState: ViewState = {
-  saveSequence: false,
+  saveSong: false,
   saveStep: false,
   settings: false,
   print: false,
@@ -24,7 +24,7 @@ export const viewSlice = createSlice({
   name: 'view',
   reducers: {
     toggleSaveSequence(state, action: PayloadAction<boolean>) {
-      return { ...state, saveSequence: action.payload };
+      return { ...state, saveSong: action.payload };
     },
     toggleSaveStep(state, action: PayloadAction<boolean>) {
       return { ...state, saveStep: action.payload };
@@ -53,7 +53,7 @@ export const {
   setCurrentMenu,
 } = viewSlice.actions;
 
-export const isSavingSeq = ({ view: { saveSequence }}: RootState): boolean => saveSequence;
+export const isSavingSong = ({ view: { saveSong }}: RootState): boolean => saveSong;
 export const isSavingStep = ({ view: { saveStep }}: RootState): boolean => saveStep;
 export const isSettings = ({ view: { settings }}: RootState): boolean => settings;
 export const isPrinting = ({ view: { print }}: RootState): boolean => print;

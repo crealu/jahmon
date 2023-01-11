@@ -1,44 +1,47 @@
 import * as React from 'react';
 import './savestep.css';
+import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
-import { useAppSelector } from '../../../hooks';
-import { theChordName, setChordName } from '../../../slices/library-slice';
 import { toggleSaveStep } from '../../../slices/view-slice';
-import { refresh } from '../../../common/helpers';
+import { collectChordNotes } from '../../../common/helpers';
 import axios from 'axios';
 
 export const SaveStep: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const chordName = useAppSelector(theChordName);
+  const [name, setName] = useState('');
+  const [saveResponse, setSaveResponse] = useState('');
 
   const saveStep = () => {
-    let fretNotes = document.getElementsByClassName('fret-note');
-    let noteids = [];
-    for (let n = 0; n < fretNotes.length; n++) {
-      if (fretNotes[n].style.display == 'block') {
-        noteids.push(fretNotes[n].dataset.noteid);
-      }
-    }
-    const data = {
-      name: chordName,
-      noteids: noteids
-    };
+    const noteids = collectChordNotes()[0].split(',');
+    const data = { name: name, noteids: noteids };
     axios.post('/api-save-chord', data)
-      .then(res => { console.log(res)})
+      .then(res => { setSaveResponse(res.data) })
       .catch(err => { throw err });
   };
 
-  const changeChordName = (event) => { dispatch(setChordName(event.target.value)) }
-  const hideForm = () => { dispatch(toggleSaveStep(false)) };
+  const updateName = (event) => { setName(event.target.value) };
+  const cancel = () => { dispatch(toggleSaveStep(false)) };
 
   return (
     <div className="step-form-view form-view">
-      <div className="step-name-label">Chord name:</div>
-      <input className="step-name-input" onChange={(e) => changeChordName(e)}/>
+      <div className="name-wrapper">
+        <div className="step-name-label">Name:</div>
+        <input className="step-name-input" onChange={(e) => updateName(e)}/>
+      </div>
       <div className="save-form-btns">
-        <button className="save-btn save-form-btn" onClick={() => saveStep()}>Save</button>
-        <button className="cancel-btn save-form-btn" onClick={() => hideForm()}>Cancel</button>
+        <button
+          className="save-btn save-form-btn"
+          onClick={() => saveStep()}
+        >
+          Save
+        </button>
+        <button
+          className="cancel-btn save-form-btn"
+          onClick={() => cancel()}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   )
