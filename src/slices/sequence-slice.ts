@@ -5,6 +5,7 @@ export interface SequenceState {
   steps: object[];
   activeStep: number;
   stepName: string;
+  stepTitles: string[];
   action: string;
   isDiagram: boolean;
 }
@@ -13,6 +14,7 @@ export const sequenceInitialState: SequenceState = {
   steps: [],
   activeStep: null,
   stepName: '',
+  stepTitles: [],
   action: '',
   isDiagram: false,
 };
@@ -22,19 +24,34 @@ export const sequenceSlice = createSlice({
   name: 'sequence',
   reducers: {
     setSteps(state, action: PayloadAction<object[]>) {
+      console.log(action.payload.map(step => { return step.title }));
       return {
         ...state,
         steps: action.payload,
-        activeSteps: null,
+        stepTitles: action.payload.map(step => { return step.title }),
+        activeStep: null
       }
     },
     addStep(state, action: PayloadAction<object>) {
-      return { ...state, steps: [...state.steps, action.payload] }
+      if (!state.stepTitles.includes(action.payload.title)) {
+        return { 
+          ...state, 
+          steps: [...state.steps, action.payload],
+          stepTitles: [...state.stepTitles, action.payload.title]
+        }
+      }
     },
     deleteStep(state) {
-      state.steps = state.steps.filter((s, i) => i != state.activeStep);
-      state.activeStep = null;
-      state.stepName = '';
+      return {
+        ...state,
+        steps: state.steps.filter((s, i) => i != state.activeStep),
+        stepTitle: state.stepTitles.filter((s, i) => i != state.activeStep),
+        stepName: '',
+        activeStep: null
+      }
+      // state.steps = state.steps.filter((s, i) => i != state.activeStep);
+      // state.activeStep = null;
+      // state.stepName = '';
     },
     updateStep(state, action: PayloadAction<object>) {
       state.steps[state.activeStep] = action.payload;
