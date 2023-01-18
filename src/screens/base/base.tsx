@@ -5,8 +5,8 @@ import Fretboard from '../../components/fretboard/fretboard';
 import Eye from '../../components/fretboard/eye';
 import Lyrics from '../../components/lyrics/lyrics';
 import Save from '../../components/save/save';
-import Settings from '../../components/settings/settings';
-import Menu from '../../components/menu/menu';
+import Settings from '../../components/Settings/Settings';
+import Menu from '../../components/Menu/Menu';
 
 export const Base: React.FC = () => {
   return (

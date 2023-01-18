@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './diagram.css';
+import './Diagram.css';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';

@@ -9,7 +9,7 @@ import { setSteps } from '../../slices/sequence-slice';
 import { theSongTitle, setSongs } from '../../slices/song-slice';
 // import { refresh } from '../../common/helpers';
 import axios from 'axios';
-import './settings.css';
+import './Settings.css';
 
 export const Settings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

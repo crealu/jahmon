@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './menu.css';
+import './Menu.css';
 import { useMemo, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';

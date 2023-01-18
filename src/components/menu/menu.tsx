@@ -1,11 +1,11 @@
 import * as React from 'react';
-import './menu.css';
+import './Menu.css';
 import { useCallback } from 'react';
 import { useAppSelector } from '../../hooks';
 import { theMenu } from '../../slices/view-slice';
 import Library from '../library/library';
 import Songs from '../songs/songs';
-import MenuSelect from './menuselect';
+import MenuSelect from './MenuSelect';
 
 export const Menu: React.FC = () => {
   const menu = useAppSelector(theMenu);

@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../hooks';
 import { setActionText, addStep } from '../../../slices/sequence-slice';
 import { theSongTitle, setSongTitle } from '../../../slices/song-slice';
 import { theDiagramNotes, theDiagramName, theDiagramMode } from '../../../slices/library-slice';
-import Diagram from '../../diagram/diagram';
+import Diagram from '../../Diagram/Diagram';
 import Steps from '../steps/steps';
 import { Step, Button } from '../../../common/classes';
 
