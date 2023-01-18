@@ -9,20 +9,25 @@ import axios from 'axios';
 
 export const SaveStep: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [name, setName] = useState('');
+  const [stepName, setStepName] = useState('');
   const [saveResponse, setSaveResponse] = useState('');
 
-  const saveStep = () => {
+  const saveStep = useCallback(() => {
     const noteids = collectChordNotes()[0].split(',');
-    const data = { name: name, noteids: noteids };
+    const data = { name: stepName, noteids: noteids };
     axios.post('/api-save-chord', data)
       .then(res => { setSaveResponse(res.data) })
       .catch(err => { throw err });
+  }, [stepName]);
+
+  const updateName = (event) => { setStepName(event.target.value) };
+
+  const cancel = () => {
+    setSaveResponse('')
+    dispatch(toggleSaveStep(false)) 
   };
 
-  const updateName = (event) => { setName(event.target.value) };
-
-  const cancel = () => { dispatch(toggleSaveStep(false)) };
+  useEffect(() => { processResponse() }, [saveResponse]);
 
   return (
     <div className="step-form-view form-view">
