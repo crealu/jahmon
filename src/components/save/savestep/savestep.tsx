@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './SaveStep.css';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { toggleSaveStep } from '../../../slices/view-slice';
@@ -26,8 +26,6 @@ export const SaveStep: React.FC = () => {
     setSaveResponse('')
     dispatch(toggleSaveStep(false)) 
   };
-
-  useEffect(() => { processResponse() }, [saveResponse]);
 
   return (
     <div className="step-form-view form-view">
