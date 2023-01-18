@@ -1,13 +1,13 @@
 import * as React from 'react';
-import './wrapper.css';
+import './Wrapper.css';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theActiveLine, deleteLine } from '../../../slices/lyrics-slice';
 import { isPrinting } from '../../../slices/view-slice';
-import Line from '../line/line';
-import Panel from '../panel/panel';
-import DeleteButton from '../buttons/delete/deletebtn';
+import Line from '../Line/Line';
+import Panel from '../Panel/Panel';
+import DeleteButton from '../Buttons/Delete/DeleteBtn';
 
 type WrapperProps<any> = {
   lines: object[];

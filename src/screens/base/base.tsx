@@ -1,10 +1,9 @@
 import * as React from 'react';
 import './base.css';
-import Sequence from '../../components/sequence/sequence';
-import Fretboard from '../../components/fretboard/fretboard';
-import Eye from '../../components/fretboard/eye';
-import Lyrics from '../../components/lyrics/lyrics';
-import Save from '../../components/save/save';
+import Sequence from '../../components/Sequence/Sequence';
+import Fretboard from '../../components/Fretboard/Fretboard';
+import Lyrics from '../../components/Lyrics/Lyrics';
+import Save from '../../components/Save/Save';
 import Settings from '../../components/Settings/Settings';
 import Menu from '../../components/Menu/Menu';
 

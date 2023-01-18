@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 import { theSongs } from '../../slices/song-slice';
 import Diagram from '../../components/Diagram/Diagram';
 import ChordFret from '../print/chordfret';
-import Wrapper from '../../components/lyrics/wrapper/wrapper';
+import Wrapper from '../../components/Lyrics/Wrapper/Wrapper';
 
 export const Gig: React.FC = () => {
   const sequences = useAppSelector(theSongs);

@@ -2,8 +2,8 @@ import * as React from 'react';
 import './save.css';
 import { useAppSelector } from '../../hooks';
 import { isSavingSong, isSavingStep } from '../../slices/view-slice';
-import SaveSong from './savesong/savesong';
-import SaveStep from './savestep/savestep';
+import SaveSong from './SaveSong/SaveSong';
+import SaveStep from './SaveStep/SaveStep';
 
 export const Save: React.FC = () => {
   const saveSong = useAppSelector(isSavingSong);

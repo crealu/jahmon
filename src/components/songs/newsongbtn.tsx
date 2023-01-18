@@ -9,7 +9,7 @@ import { updateAllLines } from '../../slices/lyrics-slice';
 import { setCurrentMenu, theMenu } from '../../slices/view-slice';
 import { animateChange } from '../../common/animate';
 import axios from 'axios';
-import './songs.css';
+import './Songs.css';
 
 export const NewSongBtn: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

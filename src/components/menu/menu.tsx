@@ -3,8 +3,8 @@ import './Menu.css';
 import { useCallback } from 'react';
 import { useAppSelector } from '../../hooks';
 import { theMenu } from '../../slices/view-slice';
-import Library from '../library/library';
-import Songs from '../songs/songs';
+import Library from '../Library/Library';
+import Songs from '../Songs/Songs';
 import MenuSelect from './MenuSelect';
 
 export const Menu: React.FC = () => {

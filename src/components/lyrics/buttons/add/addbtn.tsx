@@ -1,9 +1,9 @@
 import * as React from 'react';
+import './AddBtn.css';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../store';
 import { useAppSelector } from '../../../../hooks';
 import { theActiveLine, addLine } from '../../../../slices/lyrics-slice';
-import './addbtn.css';
 
 export const AddButton: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import './panel.css';
+import './Panel.css';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { addPanelStep, updatePanelStep } from '../../../slices/lyrics-slice';
 import { libChord } from '../../../slices/library-slice';
 import { isPrinting } from '../../../slices/view-slice';
-import PanelStep from './panelstep';
+import PanelStep from './PanelStep';
 
 type PanelProps<any> = {
   steps: any[];

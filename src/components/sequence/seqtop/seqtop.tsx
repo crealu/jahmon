@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './seqtop.css';
+import './SeqTop.css';
 import { useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -7,9 +7,9 @@ import { useAppSelector } from '../../../hooks';
 import { setActionText, addStep } from '../../../slices/sequence-slice';
 import { theSongTitle, setSongTitle } from '../../../slices/song-slice';
 import { theDiagramNotes, theDiagramName, theDiagramMode } from '../../../slices/library-slice';
-import Diagram from '../../Diagram/Diagram';
-import Steps from '../steps/steps';
 import { Step, Button } from '../../../common/classes';
+import Diagram from '../../Diagram/Diagram';
+import Steps from '../Steps/Steps';
 
 export const SequenceTop: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

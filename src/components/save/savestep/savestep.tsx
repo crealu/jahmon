@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './savestep.css';
+import './SaveStep.css';
 import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -21,6 +21,7 @@ export const SaveStep: React.FC = () => {
   };
 
   const updateName = (event) => { setName(event.target.value) };
+  
   const cancel = () => { dispatch(toggleSaveStep(false)) };
 
   return (

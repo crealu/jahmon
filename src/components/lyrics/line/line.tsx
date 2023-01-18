@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './line.css';
+import './Line.css';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';

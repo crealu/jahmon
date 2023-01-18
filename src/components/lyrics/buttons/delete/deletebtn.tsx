@@ -1,8 +1,9 @@
 import * as React from 'react';
+import './DeleteBtn.css';
 import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../../store';
 import { deleteLine } from '../../../../slices/lyrics-slice';
-import './deletebtn.css';
 
 type DeleteButtonProps = {
   lineNumber: number;

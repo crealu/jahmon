@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Fret.css';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -6,7 +7,6 @@ import { useAppSelector } from '../../../hooks';
 import { theMode, theRiffen, setRiffen } from '../../../slices/fretboard-slice';
 import { theChords } from '../../../slices/library-slice';
 import { checkNoteID } from '../../../common/helpers';
-import './fret.css';
 
 type FretProps = {
   noteid: string;

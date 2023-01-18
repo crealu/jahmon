@@ -7,7 +7,7 @@ import { theSongTitle  } from '../../slices/song-slice';
 import { theSteps } from '../../slices/sequence-slice';
 import { lyricLines } from '../../slices/lyrics-slice';
 import { setCurrentScreen } from '../../slices/view-slice';
-import Wrapper from '../../components/lyrics/wrapper/wrapper';
+import Wrapper from '../../components/Lyrics/Wrapper/Wrapper';
 import StepData from './stepdata';
 
 export const Print: React.FC = () => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './mode.css';
+import './Mode.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';

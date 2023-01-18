@@ -2,7 +2,7 @@ import * as React from 'react';
 import './print.css';
 import { useAppSelector } from '../../hooks';
 import { theSteps, stepIsDiagram } from '../../slices/sequence-slice';
-import Diagram from '../../components/diagram/diagram';
+import Diagram from '../../components/Diagram/Diagram';
 import ChordFret from './chordfret';
 
 export const StepData: React.FC = () => {

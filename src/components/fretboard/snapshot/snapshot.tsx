@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './snapshot.css';
+import './Snapshot.css';
 import { useEffect, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';

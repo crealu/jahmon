@@ -1,12 +1,12 @@
 import * as React from 'react';
-import './strings.css';
+import './Strings.css';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theMode, addToSnapshot, removeFromSnapshot } from '../../../slices/fretboard-slice';
 import { targetIsDetail } from '../../../common/helpers.ts';
-import Fret from '../fret/fret';
+import Fret from '../Fret/Fret';
 
 export const Strings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

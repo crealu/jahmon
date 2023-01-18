@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './riffnums.css';
+import './RiffNums.css';
 import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -9,6 +9,7 @@ import { setRiffen, theMode } from '../../../slices/fretboard-slice';
 export const Riff = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
+  
   const numbers = useMemo(() => {
     return new Array(21).fill(0).map((n, i) => { return i })
   }, []);

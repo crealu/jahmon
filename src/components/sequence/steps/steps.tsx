@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './steps.css';
+import './Steps.css';
 import { useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -7,8 +7,8 @@ import { useAppSelector } from '../../../hooks';
 import { theSteps, addStep } from '../../../slices/sequence-slice';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { scrollSteps } from '../../../common/helpers';
-import SeqStep from '../seqstep/seqstep';
-import Diagram from '../../diagram/diagram';
+import SeqStep from '../Seqstep/Seqstep';
+import Diagram from '../../Diagram/Diagram';
 
 export const Steps: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

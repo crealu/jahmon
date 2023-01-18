@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './buttons.css';
+import './Buttons.css';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -9,8 +9,8 @@ import { toggleSaveSequence, toggleSaveStep, toggleSettings, setCurrentScreen } 
 import { theMode, theRiffen, theSnapshot, theSnapshotName } from '../../../slices/fretboard-slice';
 import { unstyleActive, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
 import { Step, Button } from '../../../common/classes';
-import Eye from './eye';
-import Trash from './trash';
+import Eye from './Eye';
+import Trash from './Trash';
 
 export const Buttons: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

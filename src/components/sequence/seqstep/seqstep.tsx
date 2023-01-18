@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './seqstep.css';
+import './SeqStep.css';
 import { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';

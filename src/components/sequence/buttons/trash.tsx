@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './buttons.css';
+import './Buttons.css';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import './sequence.css';
-import SequenceTop from './seqtop/seqtop';
-import Buttons from './buttons/buttons';
+import './Sequence.css';
+import SequenceTop from './SeqTop/SeqTop';
+import Buttons from './Buttons/Buttons';
 
 export const Sequence: React.FC = () => {
   return (

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import './lyrics.css';
+import './Lyrics.css';
 import { useAppSelector } from '../../hooks';
 import { lyricLines } from '../../slices/lyrics-slice';
-import Wrapper from './wrapper/wrapper';
-import AddButton from './buttons/add/addbtn';
+import Wrapper from './Wrapper/Wrapper';
+import AddButton from './Buttons/Add/AddBtn';
 
 export const Lyrics: React.FC = () => {
   const lines = useAppSelector(lyricLines);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './chords.css';
+import './Chords.css';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
@@ -7,7 +7,7 @@ import { useAppSelector } from '../../../hooks';
 import { theChords, setLibraryChords, setChordIds } from '../../../slices/library-slice';
 import { convertChordIds } from '../../../common/helpers';
 import axios from 'axios';
-import Chord from '../chord/chord';
+import Chord from '../Chord/Chord';
 
 export const Chords: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

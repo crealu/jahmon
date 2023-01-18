@@ -1,7 +1,7 @@
 import * as React from 'react';
-import './library.css';
-import Chords from './chords/chords';
-import KeyList from './keylist/keylist';
+import './Library.css';
+import Chords from './Chords/Chords';
+import KeyList from './Keylist/Keylist';
 
 export const Library: React.FC = () => {
   return (

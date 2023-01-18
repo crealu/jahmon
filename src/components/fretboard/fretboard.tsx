@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Strings from './strings/strings';
-import RiffNums from './riffnums/riffnums';
-import Snapshot from './snapshot/snapshot';
-import Mode from './mode/mode';
-import Buttons from './buttons/buttons';
-import './fretboard.css';
+import './Fretboard.css';
+import Strings from './Strings/Strings';
+import RiffNums from './Riffnums/Riffnums';
+import Snapshot from './Snapshot/Snapshot';
+import Mode from './Mode/Mode';
+import Buttons from './Buttons/Buttons';
 
 export const Fretboard: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './keylist.css';
+import './Keylist.css';
 
 const musicKeys = [ 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯'];
 
