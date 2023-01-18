@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theActiveLine, deleteLine } from '../../../slices/lyrics-slice';
-import { isPrinting } from '../../../slices/view-slice';
+import { theScreen } from '../../../slices/view-slice';
 import Line from '../Line/Line';
 import Panel from '../Panel/Panel';
 import DeleteButton from '../Buttons/Delete/DeleteBtn';
@@ -16,7 +16,7 @@ type WrapperProps<any> = {
 const Wrapper: React.FC<WrapperProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const active = useAppSelector(theActiveLine);
-  const printing = useAppSelector(isPrinting);
+  const screen = useAppSelector(theScreen);
 
   const { lines } = props;
 
@@ -27,7 +27,7 @@ const Wrapper: React.FC<WrapperProps> = (props) => {
           <div className="line-group">
             <Panel steps={line.panel} lineNumber={idx} />
             <Line text={line.text} lineNumber={idx} />
-            {!printing && <DeleteButton activeLine={active} lineNumber={idx} />}
+            {screen != 'print' && <DeleteButton activeLine={active} lineNumber={idx} />}
           </div>
         )
       })}

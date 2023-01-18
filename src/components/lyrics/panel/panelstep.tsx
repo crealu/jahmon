@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { libChord, setGrabbed } from '../../../slices/library-slice';
 import { deletePanelStep } from '../../../slices/lyrics-slice';
-import { isPrinting } from '../../../slices/view-slice';
+import { theScreen } from '../../../slices/view-slice';
 
 type PanelStepProps<any> = {
   step: object;
@@ -16,7 +16,7 @@ type PanelStepProps<any> = {
 export const PanelStep: React.FC<PanelStepProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const chord = useAppSelector(libChord);
-  const printing = useAppSelector(isPrinting);
+  const screen = useAppSelector(theScreen);
   const { step, index, lineNumber } = props;
 
   const dragStartHandler = (event) => {
@@ -38,7 +38,7 @@ export const PanelStep: React.FC<PanelStepProps> = (props) => {
 
   return (
     <div
-      className={`panel-step ${printing ? 'panel-step-print' : ''}`}
+      className={`panel-step ${screen == 'print' ? 'panel-step-print' : ''}`}
       style={{left: step.offset}}
       draggable="true"
       onDragStart={(e) => dragStartHandler(e)}

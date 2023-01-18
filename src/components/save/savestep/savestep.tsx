@@ -21,7 +21,7 @@ export const SaveStep: React.FC = () => {
   };
 
   const updateName = (event) => { setName(event.target.value) };
-  
+
   const cancel = () => { dispatch(toggleSaveStep(false)) };
 
   return (

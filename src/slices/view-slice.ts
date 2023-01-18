@@ -5,7 +5,6 @@ export interface ViewState {
   saveSong: boolean;
   saveStep: boolean;
   settings: boolean;
-  print: boolean;
   currentScreen: string;
   currentMenu: string;
 }
@@ -14,7 +13,6 @@ export const viewInitialState: ViewState = {
   saveSong: false,
   saveStep: false,
   settings: false,
-  print: false,
   currentScreen: 'base',
   currentMenu: 'Library',
 };
@@ -32,9 +30,6 @@ export const viewSlice = createSlice({
     toggleSettings(state, action: PayloadAction<boolean>) {
       return { ...state, settings: action.payload };
     },
-    togglePrint(state, action: PayloadAction<boolean>) {
-      return { ...state, print: action.payload };
-    },
     setCurrentScreen(state, action: PayloadAction<string>) {
       return { ...state, currentScreen: action.payload }
     },
@@ -48,7 +43,6 @@ export const {
   toggleSaveSequence,
   toggleSaveStep,
   toggleSettings,
-  togglePrint,
   setCurrentScreen,
   setCurrentMenu,
 } = viewSlice.actions;
@@ -56,7 +50,6 @@ export const {
 export const isSavingSong = ({ view: { saveSong }}: RootState): boolean => saveSong;
 export const isSavingStep = ({ view: { saveStep }}: RootState): boolean => saveStep;
 export const isSettings = ({ view: { settings }}: RootState): boolean => settings;
-export const isPrinting = ({ view: { print }}: RootState): boolean => print;
 export const theScreen = ({ view: { currentScreen }}: RootState): boolean => currentScreen;
 export const theMenu = ({ view: { currentMenu }}: RootState): string => currentMenu;
 
