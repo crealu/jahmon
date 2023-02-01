@@ -24,7 +24,7 @@ export const sequenceSlice = createSlice({
   name: 'sequence',
   reducers: {
     setSteps(state, action: PayloadAction<object[]>) {
-      console.log(action.payload.map(step => { return step.title }));
+      // console.log(action.payload.map(step => { return step.title }));
       return {
         ...state,
         steps: action.payload,
@@ -34,8 +34,8 @@ export const sequenceSlice = createSlice({
     },
     addStep(state, action: PayloadAction<object>) {
       if (!state.stepTitles.includes(action.payload.title)) {
-        return { 
-          ...state, 
+        return {
+          ...state,
           steps: [...state.steps, action.payload],
           stepTitles: [...state.stepTitles, action.payload.title]
         }
@@ -49,9 +49,6 @@ export const sequenceSlice = createSlice({
         stepName: '',
         activeStep: null
       }
-      // state.steps = state.steps.filter((s, i) => i != state.activeStep);
-      // state.activeStep = null;
-      // state.stepName = '';
     },
     updateStep(state, action: PayloadAction<object>) {
       state.steps[state.activeStep] = action.payload;

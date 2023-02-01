@@ -1,11 +1,15 @@
 .riff-numbers-wrapper {
   position: relative;
-  float: left;
-  width: 90%;
+  display: flex;
+  float: right;
+  width: 100%;
   height: 30px;
   margin-top: 10px;
   opacity: 1;
   transition: 0.5s ease;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .riff-note {
@@ -28,14 +32,12 @@
   text-align: center;
 }
 
-
-
 .riff-number {
   position: relative;
   width: 22px;
   height: 22px;
   padding: 1px;
-  margin: 10px 10px 10px 0px;
+  margin: 10px 0px 10px 10px;
   border-radius: 50%;
   color: var(--skel_text_color);
   text-align: center;
@@ -53,6 +55,6 @@
 }
 
 .riff-number-0 {
-  text-align: left;
-  margin-right: 5px;
+  text-align: right;
+  margin-left: 5px;
 }

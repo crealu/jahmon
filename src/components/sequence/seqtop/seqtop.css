@@ -6,23 +6,6 @@
   margin-right: 50px;
 }
 
-.sequence-title {
-  position: relative;
-  float: left;
-  text-align: left;
-  top: 0px;
-  right: 0px;
-  font-size: 18px;
-  margin-bottom: 20px;
-  background:none;
-  color: var(--skel_text_color);
-  border: none;
-}
-
-.sequence-title:focus-visible {
-  outline: none;
-}
-
 .step-name {
   width: 62px;
   font-size: 16px;
@@ -36,4 +19,37 @@
 
 .step-name:focus-visible {
   outline: none;
+}
+
+.diagram-view {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+}
+
+.dia-add-btn-wrapper {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 5px;
+  padding: 4px 0px;
+  height: 26px;
+  background: #202020;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.dia-add-btn-wrapper:hover {
+  background: black;
+}
+
+.diagram-add-btn {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  bottom:0px;
+  width: 20px;
 }

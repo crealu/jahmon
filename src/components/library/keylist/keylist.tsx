@@ -5,8 +5,8 @@ const musicKeys = [ 'A', 'A♯', 'B', 'C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯'
 
 export const KeyList: React.FC = () => {
   const scroll = (event) => {
-    const wrapper = document.getElementsByClassName('lib-chord-wrapper')[0];
-    const allChords = document.getElementsByClassName('lib-chord');
+    const wrapper = document.getElementsByClassName('library-chords-wrapper')[0];
+    const allChords = document.getElementsByClassName('library-chord');
 
     for (let i = 0; i < allChords.length; i++) {
       if (allChords[i].textContent == event.target.textContent) {

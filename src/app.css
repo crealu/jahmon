@@ -37,25 +37,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-.jahmon-ui {
-  display: grid;
-  grid-template-columns: 80vw 15vw;
-  margin-top: 50px;
-}
-
-.ui-left {
-  margin: 0px 50px;
-  margin-top: 15px;
-  padding-left: 20px;
-}
-
-.ui-right {
-  position: fixed;
-  display: block;
-  left: 80vw;
-  margin-right: 70px;
-}
-
 .modal {
   background: var(--dark-bg);
   color: var(--skel_text_color);

@@ -7,7 +7,8 @@ import { useAppSelector, useKeyPress } from '../../../hooks';
 import { theMode, theSnapshot, setSnapshotName } from '../../../slices/fretboard-slice';
 import { resetStepName } from '../../../slices/sequence-slice';
 import { theChords, theTrueIds } from '../../../slices/library-slice';
-import { codifySnapshot } from '../../../common/helpers';
+import { codifySnapshot, collectChordNotes, collectRiffNotes } from '../../../common/helpers';
+import { addStep } from '../../../slices/sequence-slice';
 
 export const Snapshot: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,6 +18,18 @@ export const Snapshot: React.FC = () => {
   const trueIds = useAppSelector(theTrueIds);
   const trueSnapshot = codifySnapshot(snapshot);
   const [snapInput, setSnapInput] = useState('');
+
+  const newStep = useMemo(() => {
+    let noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
+    return {
+      title: snapInput,
+      noteids: noteData[0],
+      mode: mode,
+      frenums: noteData[1]
+    }
+  }, [snapshot, snapInput]);
+
+  const addThisStep = () => { dispatch(addStep(newStep)) };
 
   const changeSnapshot = (event) => {
     dispatch(resetStepName(event.target.value));
@@ -35,21 +48,31 @@ export const Snapshot: React.FC = () => {
   }, [snapshot])
 
   return (
-    <div
-      className="snapshot"
-      style={{display: `${mode == 'chord' ? 'block' : 'none'}`}}
-    >
-      {aName}
+    <div className="snapshot-wrapper">
+      <div className="fb-add-btn-wrapper">
+        <img
+          className="fb-add-btn"
+          src="img/icons/seq-btn-gray/add.png"
+          onClick={() => addThisStep()}
+        />
+      </div>
+      <input
+        className="snapshot"
+        value={aName == '' ? snapInput : aName}
+        onChange={(e) => setSnapInput(e.target.value)}
+      />
     </div>
   )
 }
-// <input
+
+// // {snapshotName != '' ? '...' : snapshotName}
+// <div
 //   className="snapshot"
 //   style={{display: `${mode == 'chord' ? 'block' : 'none'}`}}
-//   value={snapshotName != '' ? snapshotName : snapInput}
 //   onChange={(e) => changeSnapshot(e)}
-// />
-// {snapshotName != '' ? '...' : snapshotName}
-
+// >
+//   {aName}
+//   <img class="fb-add-btn" src="img/icons/seq-btn-gray/add.png" />
+// </div>
 
 export default Snapshot

@@ -2,17 +2,14 @@
   position: relative;
   display: grid;
   float: left;
-  width: 100px;
-  height: 150px;
-  padding: 8px;
-  margin-right: 60px;
-  top: -4px;
+  padding: 0px;
+  float: right;
 }
 
 .diagram-chord-name {
   text-align: center;
   padding-bottom: 10px;
-  height: 20px;
+  height: 30px;
 }
 
 .diagram-top {

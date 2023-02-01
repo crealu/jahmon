@@ -1,11 +1,9 @@
-import * as React from 'react';
 import './SeqTop.css';
 import { useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { setActionText, addStep } from '../../../slices/sequence-slice';
-import { theSongTitle, setSongTitle } from '../../../slices/song-slice';
 import { theDiagramNotes, theDiagramName, theDiagramMode } from '../../../slices/library-slice';
 import { Step, Button } from '../../../common/classes';
 import Diagram from '../../Diagram/Diagram';
@@ -13,12 +11,10 @@ import Steps from '../Steps/Steps';
 
 export const SequenceTop: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const songTitle = useAppSelector(theSongTitle);
   const diagramNotes = useAppSelector(theDiagramNotes);
   const diagramName = useAppSelector(theDiagramName);
   const diagramMode = useAppSelector(theDiagramMode);
 
-  const updateTitle = (event) => { dispatch(setSongTitle(event.target.value)) }
   const addThisStep = () => { dispatch(addStep(newStep)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
   const handleLeave = () => { dispatch(setActionText('...')) };
@@ -45,25 +41,21 @@ export const SequenceTop: React.FC = () => {
 
   return (
     <div className="sequence-top">
-      <div className="sequence-top-left">
-        <input
-          className="sequence-title"
-          onChange={(e) => updateTitle(e)}
-          value={songTitle}
-          placeholder="untitled"
-        />
+      <div className="step-view">
         <Steps />
       </div>
       <div className="diagram-view">
         <Diagram step={diagramData} idx={0} />
-        <img
-          className={addButton.classes}
-          src={addButton.src}
-          alt={addButton.action}
+        <div
+          className="dia-add-btn-wrapper"
           onClick={() => addThisStep()}
-          onMouseEnter={(e) => handleEnter(e)}
-          onMouseLeave={() => handleLeave()}
-        />
+        >
+          <img
+            className="diagram-add-btn"
+            src={addButton.src}
+            alt={addButton.action}
+          />
+        </div>
       </div>
     </div>
   )

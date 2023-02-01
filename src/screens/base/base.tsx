@@ -13,7 +13,6 @@ export const Base: React.FC = () => {
       <div className="jahmon-ui-col ui-left">
         <Sequence />
         <Fretboard />
-        <Lyrics />
       </div>
       <div className="jahmon-ui-col ui-right">
         <Menu />
