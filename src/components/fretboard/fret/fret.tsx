@@ -4,20 +4,22 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theMode, theRiffen, setRiffen } from '../../../slices/fretboard-slice';
+import { theMode, theRiffen, setRiffen} from '../../../slices/fretboard-slice';
 import { theChords } from '../../../slices/library-slice';
 import { checkNoteID } from '../../../common/helpers';
+import { Fin } from '../Fin/Fin';
 
 type FretProps = {
   noteid: string;
   placeNote: () => {};
+  getsFin: boolean;
 }
 
 const Fret: React.FC<FretProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
   const riffen = useAppSelector(theRiffen);
-  const { noteid, placeNote } = props;
+  const { noteid, placeNote, getsFin } = props;
 
   const dragOverHandler = (event) => {
     event.preventDefault();
@@ -54,7 +56,6 @@ const Fret: React.FC<FretProps> = (props) => {
 
   const dropHandler = (event) => {
     event.preventDefault();
-    // event.stopPropagation();
     if (fretIsAvailable(event.target)) {
       event.target.appendChild(riffen);
       riffen.classList.add('riff-note');
@@ -89,6 +90,7 @@ const Fret: React.FC<FretProps> = (props) => {
     >
       <div className="fret-note" data-noteid={noteid}></div>
       {mode == 'chord' ? addFretDetails(noteid) : ''}
+      {getsFin && <Fin />}
     </div>
   )
 }

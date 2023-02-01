@@ -6,6 +6,8 @@ export interface FretboardState {
   riffen: any;
   snapshot: string[];
   snapshotName: string;
+  finVisible: boolean;
+  finCoords: number[];
 }
 
 export const fretboardInitialState: FretboardState = {
@@ -13,6 +15,8 @@ export const fretboardInitialState: FretboardState = {
   riffen: '',
   snapshot: [],
   snapshotName: '',
+  finVisible: false,
+  finCoords: [0, 0],
 };
 
 export const fretboardSlice = createSlice({
@@ -40,6 +44,15 @@ export const fretboardSlice = createSlice({
     setSnapshotName(state, action: PayloadAction<string>) {
       return {...state, snapshotName: action.payload};
     },
+    toggleFin(state) {
+      let visiblity = !state.finVisible;
+      // state.finVisible = visiblity;
+      // // console.log(visiblity);
+      return { ...state, finVisible: visiblity };
+    },
+    setFinCoords(state, action: PayloadAction<number[]>) {
+      return { ...state, finCoords: action.payload }
+    }
   }
 });
 
@@ -50,11 +63,15 @@ export const {
   removeFromSnapshot,
   setSnapshotName,
   clearSnapshot,
+  toggleFin,
+  setFinCoords
  } = fretboardSlice.actions;
 
 export const theRiffen = ({ fretboard: { riffen }}: RootState): any => riffen;
 export const theMode = ({ fretboard: { mode }}: RootState): string => mode;
 export const theSnapshot = ({ fretboard: { snapshot }}: RootState): string[] => snapshot;
 export const theSnapshotName = ({ fretboard: { snapshotName }}: RootState): string => snapshotName;
+export const finIsVisible = ({ fretboard: { finVisible }}: RootState): boolean => finVisible;
+export const theFinCoords = ({ fretboard: { finCoords }}: RootState): number[] => finCoords;
 
 export default fretboardSlice.reducer;

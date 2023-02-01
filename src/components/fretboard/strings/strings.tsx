@@ -4,13 +4,15 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { theMode, addToSnapshot, removeFromSnapshot } from '../../../slices/fretboard-slice';
+import { theMode, addToSnapshot, removeFromSnapshot, theFinCoords, toggleFin } from '../../../slices/fretboard-slice';
 import { targetIsDetail } from '../../../common/helpers.ts';
+import { useKeyPress } from '../../../hooks';
 import Fret from '../Fret/Fret';
 
 export const Strings: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const mode = useAppSelector(theMode);
+  const finCoords = useAppSelector(theFinCoords);
   const strings = useMemo(() => { return new Array(6).fill(0) }, []);
   const frets = useMemo(() => { return new Array(22).fill(0) }, []);
 
@@ -36,6 +38,11 @@ export const Strings: React.FC = () => {
     }
   };
 
+  useKeyPress('b', () => {
+    dispatch(toggleFin());
+    console.log('set fin display true');
+  });
+
   const getStringClass = useCallback((sn) => {
     const name = mode == 'chord' ? 'string' : 'riff';
     return `string-row ${sn == 0 ? 'small-e-' : sn == 5 ? 'big-e-' : ''}-e-${name}`;
@@ -58,6 +65,7 @@ export const Strings: React.FC = () => {
                 <Fret
                   noteid={`s${6-sn}f${fn + 1}`}
                   placeNote={(e) => placeNote(e)}
+                  getsFin={sn == finCoords[0] && fn == finCoords[1]}
                 />
               )
             })}
