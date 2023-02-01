@@ -19,17 +19,20 @@ export const Snapshot: React.FC = () => {
   const trueSnapshot = codifySnapshot(snapshot);
   const [snapInput, setSnapInput] = useState('');
 
-  const newStep = useMemo(() => {
+  const newStep = () => {
     let noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
     return {
       title: snapInput,
       noteids: noteData[0],
       mode: mode,
-      frenums: noteData[1]
+      fretnums: noteData[1]
     }
-  }, [snapshot, snapInput]);
+  };
 
-  const addThisStep = () => { dispatch(addStep(newStep)) };
+  const addThisStep = () => {
+    let theNewStep = newStep();
+    dispatch(addStep(theNewStep))
+  };
 
   const changeSnapshot = (event) => {
     dispatch(resetStepName(event.target.value));

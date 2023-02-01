@@ -25,7 +25,6 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
     event.stopPropagation();
 
     const stepTarget = event.target;
-    console.dir(stepTarget);
 
     if (stepTarget.tabIndex == active) {
       unstyleActive();
@@ -36,7 +35,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       return;
     }
 
-    restyleSteps(step);
+    restyleSteps(stepTarget);
     dispatch(clearSnapshot());
     dispatch(setMode(stepTarget.dataset.mode));
     dispatch(setStepName(stepTarget.textContent));
@@ -72,7 +71,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
   const showFretNotes = (stepTarget) => {
     clearFretboard();
     clearRiffs();
-    console.log(stepTarget);
+    console.log(step.fretnums, stepTarget.dataset.fretnums);
     const noteIds = stepTarget.dataset.noteids.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
     for (let n = 0; n < noteIds.length; n++) {
@@ -80,7 +79,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
         if (noteIds[n] == fretNotes[fn].dataset.noteid) {
           if (stepTarget.dataset.mode == 'riff') {
             // console.log(stepTarget);
-            const fretnums = stepTarget.dataset.fretnums.split(',');
+            const fretnums = step.fretnums.split(',');
             addRiffFromStep(fretNotes[fn].parentNode, noteIds[n], fretnums[n]);
           } else {
             fretNotes[fn].style.display = 'block';
