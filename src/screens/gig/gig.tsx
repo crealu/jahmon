@@ -7,12 +7,14 @@ import { theSongs } from '../../slices/song-slice';
 import Diagram from '../../components/Diagram/Diagram';
 import ChordFret from '../print/chordfret';
 import Wrapper from '../../components/Lyrics/Wrapper/Wrapper';
+import Carousel from '../../components/Carousel/Carousel';
 
 export const Gig: React.FC = () => {
   const sequences = useAppSelector(theSongs);
 
   return (
     <div className="gig">
+      <Carousel />
       {sequences.map(sequence => {
         return (
           <div className="gig-sequence">
