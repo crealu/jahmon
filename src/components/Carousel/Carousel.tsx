@@ -31,7 +31,10 @@ export const Carousel: React.FC = () => {
 	}
 
 	const renderSegment = (idx) => {
-		return <div className={`segment ${slideNum == idx ? 'active-segment': ''}`}></div>
+		return <div className={`segment 
+			${slideNum > idx ? 'completed-segment':''}
+			${slideNum == idx ? 'active-segment' : ''}
+		`}></div>
 	}
 
 	return (

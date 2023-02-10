@@ -52,5 +52,9 @@
 }
 
 .active-segment {
+	border: 3px solid var(--skel_text_color);
+}
+
+.completed-segment {
 	background: lightgreen;
 }
