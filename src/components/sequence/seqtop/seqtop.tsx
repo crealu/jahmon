@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
-import { setActionText, addStep } from '../../../slices/sequence-slice';
+import { setActionText, addStep, theActiveStep, theSteps } from '../../../slices/sequence-slice';
 import { theDiagramNotes, theDiagramName, theDiagramMode } from '../../../slices/library-slice';
 import { Step, Button } from '../../../common/classes';
 import Diagram from '../../Diagram/Diagram';
@@ -14,6 +14,8 @@ export const SequenceTop: React.FC = () => {
   const diagramNotes = useAppSelector(theDiagramNotes);
   const diagramName = useAppSelector(theDiagramName);
   const diagramMode = useAppSelector(theDiagramMode);
+  const active = useAppSelector(theActiveStep);
+  const steps = useAppSelector(theSteps);
 
   const addThisStep = () => { dispatch(addStep(newStep)) };
   const handleEnter = (event) => { dispatch(setActionText(event.target.alt)) };
@@ -45,7 +47,7 @@ export const SequenceTop: React.FC = () => {
         <Steps />
       </div>
       <div className="diagram-view">
-        <Diagram step={diagramData} idx={0} />
+        <Diagram step={active ? steps[active]: diagramData} idx={0} />
         <div
           className="dia-add-btn-wrapper"
           onClick={() => addThisStep()}
