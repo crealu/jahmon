@@ -27,11 +27,13 @@
 .diagram-muted {
   position: absolute;
   top: -20px;
+  transition: 0.25s ease;
 }
 
 .diagram-open {
   position: absolute;
   top: -20px;
+  transition: 0.25s ease;
 }
 
 .diagram-shape {
@@ -69,4 +71,5 @@
   border-radius: 50%;
   left: -7px;
   top: 4px;
+  transition: 0.25s ease;
 }
