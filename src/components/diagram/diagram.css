@@ -21,7 +21,7 @@
 .diagram-start {
   position: absolute;
   left: 120px;
-  top: 68px;
+  top: 64px;
 }
 
 .diagram-muted {
@@ -69,7 +69,7 @@
   background: var(--dark-bg);
   border: 1px solid var(--skel_text_color);
   border-radius: 50%;
-  left: -7px;
+  left: -8px;
   top: 4px;
   transition: 0.25s ease;
 }
