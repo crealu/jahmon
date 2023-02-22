@@ -13,8 +13,9 @@ export const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const screen: string = useAppSelector(theScreen);
 
-  useKeyPress('t', () => {
-    dispatch(setCurrentScreen('gig'));
+  useKeyPress('Tab', () => {
+    let newScreen = screen == 'gig' ? 'base' : 'gig';
+    dispatch(setCurrentScreen(newScreen));
   });
 
   const returnScreen = useCallback(() => {
