@@ -33,11 +33,14 @@ export const librarySlice = createSlice({
     setLibraryChords(state, action: PayloadAction<any[]>) {
       return { ...state, chords: action.payload }
     },
-    setChordIds(state, action: PayloadAction<string[]>) {
+    setChordIds(state, action: PayloadAction<string>) {
+      // console.log(action.payload.split(',')[0]);
+      let splitIds = action.payload.split(',');
+      console.log(splitIds);
       return {
         ...state,
         chordIds: action.payload,
-        trueIds: action.payload.toString().split(',').map(id => { return parseInt(id) })
+        trueIds: splitIds.map(id => { return parseInt(id) })
       }
     },
     setGrabbed(state, action: PayloadAction<object>) {
