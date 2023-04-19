@@ -19,6 +19,8 @@ export const Snapshot: React.FC = () => {
   const trueSnapshot = codifySnapshot(snapshot);
   const [snapInput, setSnapInput] = useState('');
 
+  console.log(chords[trueSnapshot]);
+
   const newStep = () => {
     let noteData = mode == 'chord' ? collectChordNotes() : collectRiffNotes();
     return {
@@ -30,8 +32,7 @@ export const Snapshot: React.FC = () => {
   };
 
   const addThisStep = () => {
-    let theNewStep = newStep();
-    dispatch(addStep(theNewStep))
+    dispatch(addStep(newStep()))
   };
 
   const changeSnapshot = (event) => {

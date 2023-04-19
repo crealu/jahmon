@@ -35,6 +35,8 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
       return;
     }
 
+    console.log(stepTarget.textContent);
+
     restyleSteps(stepTarget);
     dispatch(clearSnapshot());
     dispatch(setMode(stepTarget.dataset.mode));
@@ -71,7 +73,7 @@ export const SeqStep: React.FC<SeqStepProps> = (props) => {
   const showFretNotes = (stepTarget) => {
     clearFretboard();
     clearRiffs();
-    console.log(step.fretnums, stepTarget.dataset.fretnums);
+    // console.log(step.fretnums, stepTarget.dataset.fretnums);
     const noteIds = stepTarget.dataset.noteids.split(',');
     const fretNotes = document.getElementsByClassName('fret-note');
     for (let n = 0; n < noteIds.length; n++) {
