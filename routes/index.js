@@ -5,7 +5,8 @@ const router = express.Router();
 const pathToBuild = path.join(__dirname, '../build');
 
 router.get('/', (req, res) => {
-  res.render('index.ejs')
+  // res.render('index.ejs')
+  res.sendFile('index.html', { root: './build' });
 });
 
 router.get('/app', ensureAuthenticated, (req, res) => {
