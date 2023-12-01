@@ -13,7 +13,7 @@ export const viewInitialState: ViewState = {
   saveSong: false,
   saveStep: false,
   settings: false,
-  currentScreen: 'base',
+  currentScreen: 'chordbook',
   currentMenu: 'Library',
 };
 

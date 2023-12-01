@@ -56,7 +56,11 @@ export const Steps: React.FC = () => {
   }, [steps]);
 
   return (
-    <div className="steps" onWheel={(e) => scrollSteps(e)}>
+    <div 
+      className="steps" 
+      onWheel={(e) => scrollSteps(e)}
+      style={{ width: `${steps.length > 8 ? '100%' : '100%'}`}}
+    >
       <div
         className="steps-wrapper"
         onDrop={(e) => dropHandler(e)}

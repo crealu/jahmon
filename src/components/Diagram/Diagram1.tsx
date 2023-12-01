@@ -10,14 +10,15 @@ type DiagramProps = {
   idx: number;
 }
 
-export const Diagram: React.FC<DiagramProps> = (props) => {
+export const Diagram1: React.FC<DiagramProps> = (props) => {
   const dispatch = useDispatch<AppDispatch>();
   const strings = useMemo(() => { return new Array(6).fill(0) }, []);
   const frets = useMemo(() => { return new Array(5).fill(0) }, []);
   const { step, idx } = props;
 
   const notes = useMemo((noteid) => {
-    let ids = step.noteids.replaceAll('s', '').replaceAll('f', '').split(',').reverse();
+    let theIds = step.noteids.join();
+    let ids = theIds.replaceAll('s', '').replaceAll('f', '').split(',').reverse();
     let theNotes = new Array(6).fill('x');
     for (let i = 0; i < ids.length; i++) {
       let index = parseInt(ids[i][0]) - 1;
@@ -46,7 +47,7 @@ export const Diagram: React.FC<DiagramProps> = (props) => {
 
   return (
     <div className="diagram">
-      <div className="diagram-chord-name">{step.title ? step.title : step.name}</div>
+      <div className="diagram-chord-name">{step.name}</div>
       <div className="diagram-muted"></div>
       <div className="diagram-start">{fretStart == null ? '2' : fretStart}</div>
       <div className="diagram-shape">
@@ -75,4 +76,4 @@ export const Diagram: React.FC<DiagramProps> = (props) => {
   )
 }
 
-export default Diagram;
+export default Diagram1;

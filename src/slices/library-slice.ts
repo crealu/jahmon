@@ -12,6 +12,11 @@ export interface LibraryState {
   diagramMode: string;
 }
 
+// let person = {
+//   name: '',
+//   age: 0
+// }
+
 export const libraryInitialState: LibraryState = {
   chordName: '',
   chords: [],
