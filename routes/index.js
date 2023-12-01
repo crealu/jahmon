@@ -6,6 +6,7 @@ const pathToBuild = path.join(__dirname, '../build');
 
 router.get('/', (req, res) => {
   // res.render('index.ejs')
+  router.use(express.static(pathToBuild));
   res.sendFile('index.html', { root: './build' });
 });
 
