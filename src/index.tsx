@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App';
 import { Provider } from 'react-redux';
-import store from './store';
 import regeneratorRuntime from 'regenerator-runtime';
+import App from './App';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
