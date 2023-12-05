@@ -15,9 +15,7 @@ export const App: React.FC = () => {
   const screen: string = useAppSelector(theScreen);
 
   useKeyPress('Tab', () => {
-    // let newScreen = screen == 'gig' ? 'base' : 'gig';
     let newScreen = 'base';
-
     dispatch(setCurrentScreen(newScreen));
   });
 

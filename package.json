@@ -2,7 +2,7 @@
   "name": "jahmon",
   "version": "1.0.0",
   "description": "Collaborative music tabulating app",
-  "main": "server.js",
+  "main": "./src/index.tsx",
   "scripts": {
     "start": "node server",
     "devf": "webpack serve --open --hot",
