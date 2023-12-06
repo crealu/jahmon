@@ -14,9 +14,11 @@ const app = express();
 
 initPassport(passport);
 
+mongoose.set('strictQuery', false);
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(console.log('Connected to database'))
   .catch(err => console.log(err));
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
