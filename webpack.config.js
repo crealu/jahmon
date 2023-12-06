@@ -3,10 +3,10 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: path.join(__dirname, 'src', 'index.tsx'),
+  entry: path.join(__dirname, './src', 'index.tsx'),
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
-    modules: [path.join(__dirname, 'src'), 'node_modules'],
+    modules: [path.join(__dirname, './src'), 'node_modules'],
     alias: {
       react: path.join(__dirname, 'node_modules', 'react')
     },
