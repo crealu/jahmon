@@ -7,7 +7,7 @@
     "start": "node server",
     "devf": "webpack serve --open --hot",
     "devb": "nodemon server",
-    "build": "webpack --mode=production",
+    // "build": "webpack --mode=production",
     "status": "webpack --progress --display-error-details"
   },
   "repository": {
