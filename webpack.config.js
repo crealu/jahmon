@@ -10,7 +10,8 @@ module.exports = {
     extensions: ['.ts', '.js', '.tsx', '.jsx'],
     modules: [path.join(__dirname, './src'), 'node_modules'],
     alias: {
-      react: path.join(__dirname, 'node_modules', 'react')
+      react: path.join(__dirname, 'node_modules', 'react'),
+      browser: path.join(__dirname, 'node_modules', 'browser')
     },
     fallback: {
       "path": false,
