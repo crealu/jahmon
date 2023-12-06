@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './Carousel.css';
 import { useState, useEffect } from 'react';
-import { useAppSelector } from '../../hooks';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
+import { useAppSelector } from '../../hooks';
 import { theActiveStep, setActiveStep, setStepName, theStepName, theSteps, addStep } from '../../slices/sequence-slice';
 import Diagram from '../Diagram/Diagram';
 

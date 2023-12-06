@@ -1,11 +1,11 @@
 import * as React from 'react';
+import './chordbook.css';
 import { useState, useEffect } from 'react';
 import { theChords } from '../../slices/library-slice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { useAppSelector } from '../../hooks';
 import Diagram1 from '../../components/Diagram/Diagram1';
-import './chordbook.css';
 
 export const ChordBook: React.FC = () => {
 	const [allChords, setAllChords] = useState(JSON.parse(localStorage.chords));

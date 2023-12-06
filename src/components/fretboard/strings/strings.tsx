@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../store';
 import { useAppSelector } from '../../../hooks';
 import { theMode, addToSnapshot, removeFromSnapshot, theFinCoords, toggleFin } from '../../../slices/fretboard-slice';
-import { targetIsDetail } from '../../../common/helpers.ts';
+import { targetIsDetail } from '../../../common/helpers';
 import { useKeyPress } from '../../../hooks';
 import Fret from '../Fret/Fret';
 

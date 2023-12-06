@@ -2,8 +2,8 @@ import * as React from 'react';
 import './Diagram.css';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../store';
-import { useAppSelector } from '../../../hooks';
+import { AppDispatch } from '../../store';
+import { useAppSelector } from '../../hooks';
 
 type DiagramProps = {
   step: object;

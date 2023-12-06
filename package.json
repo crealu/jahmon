@@ -2,12 +2,13 @@
   "name": "jahmon",
   "version": "1.0.0",
   "description": "Collaborative music tabulating app",
-  "main": "./src/index.tsx",
+  "main": "index.js",
   "scripts": {
     "start": "node server",
     "devf": "webpack serve --open --hot",
     "devb": "nodemon server",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "status": "webpack --progress --display-error-details"
   },
   "repository": {
     "type": "git",
