@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito|Comfortaa&display=swap');
+
+body {
+  overflow: hidden;
+  font-family: 'Comfortaa';
+  padding: 0px;
+  margin: 0px;
+}
+
+.login-nav-bar {
+  position: fixed;
+  display: block;
+  opacity: 1;
+  background: black;
+  margin: 0 auto;
+  color: white;
+  width: 100vw;
+  height: 50px;
+  text-align: center;
+  transform: scale(1.0);
+  transition: 0.5s ease;
+  z-index: 100;
+}
+
+.signup-login-content {
+  width: 400px;
+  height: 440px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+  background: black;
+  opacity: 0;
+  top: 200px;
+  animation: 0.5s ease 0.25s 1 forwards vertical_slide;
+}
+
+.signup-content {
+  height: 500px;
+}
+
+@keyframes vertical_slide {
+  0% {
+    opacity: 0;
+    transform: translate(0px, -20px);
+    display: none;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0px, 0px);
+    display: block;
+  }
+}
+
+.login-title {
+  position: relative;
+  display: block;
+  margin: 30px 0px;
+  letter-spacing: 1.25px;
+  text-align: center;
+}
+
+.login-form {
+  position: relative;
+  display: block;
+  letter-spacing: 1px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.form-group {
+  padding: 20px 0px;
+}
+
+.login-form-label {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 4px 0px 4px 0px;
+}
+
+.login-form-input {
+  position: relative;
+  display: block;
+  width: calc(100% - 12px);
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+}
+
+.login-submit-btn {
+  position: relative;
+  display: block;
+  width: 100px;
+  padding: 10px 0px 10px 0px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(155, 155, 155, 0.8);
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  transition: 0.15s ease;
+  cursor: pointer;
+}
+
+.login-submit-btn:hover {
+  background: rgba(255, 255, 255, 1.0);
+}
+
+.login-signup-btn {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  background: none;
+  cursor: pointer;
+  border: none;
+  color: white;
+  transition: 0.15s ease;
+  font-size: 18px;
+  left: -4%;
+  float: right;
+  text-decoration: none;
+  top: -40px;
+}
+
+.login-signup-btn:hover {
+  text-decoration: underline;
+}
+
+.forgot-password-btn {
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  background: none;
+  cursor: pointer;
+  border: none;
+  color: #676767;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.forgot-password-btn:hover {
+  text-decoration: underline;
+}
+
+.password-reset-submit {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(155, 155, 155, 0.8);
+  text-align: center;
+  font-size: 20px;
+  color: black;
+  transition: 0.15s ease;
+  cursor: pointer;
+}
+
+.password-reset-submit:hover {
+  background: rgba(255, 255, 255, 1.0);
+}
+
+.error-msg {
+  background: rgba(150, 20, 40, 1);
+  color: white;
+  padding: 8px;
+  margin-top: 30px;
+}

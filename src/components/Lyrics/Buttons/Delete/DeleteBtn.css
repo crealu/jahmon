@@ -1,0 +1,17 @@
+.delete-lyric-btn {
+  position: absolute;
+  display: none;
+  float: left;
+  left: -50px;
+  width: 20px;
+  height: 3px;
+  padding: 2px;
+  margin-left: 10px;
+  border: 1px solid var(--dark-divider);
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.delete-lyric-btn-active {
+  display: inline-block;
+}

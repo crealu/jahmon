@@ -1,0 +1,12 @@
+.lyrics {
+  position: relative;
+  float: left;
+  display: block;
+  width: calc(100% - 30px);
+  padding-top: 10px;
+  margin: 30px 0px 0px 0px;
+}
+
+.lyrics::-webkit-scrollbar {
+  display: none;
+}

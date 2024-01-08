@@ -1,0 +1,10 @@
+.library {
+  position: relative;
+  width: 100%;
+  border-right: 1px solid var(--dark-divider);
+  margin-top: 20px;
+}
+
+.library-title {
+  padding-bottom: 20px;
+}

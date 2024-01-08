@@ -1,0 +1,46 @@
+.snapshot-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.snapshot {
+  position: relative;
+  float: left;
+  width: 100px;
+  padding-top: 10px;
+  margin-top: 0;
+  border: none;
+  border-bottom: 1px solid var(--skel_text_color);
+  color: var(--skel_text_color);
+  background: none;
+  font-size: 18px;
+}
+
+.snapshot:focus {
+  outline: none;
+}
+
+.fb-add-btn-wrapper {
+  position: relative;
+  float: left;
+  margin-right: 20px;
+  background: #202020;
+  width: 50px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.fb-add-btn-wrapper:hover {
+  background: black;
+}
+
+.fb-add-btn {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 20px;
+}

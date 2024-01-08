@@ -1,0 +1,46 @@
+.songs {
+  position: relative;
+}
+
+.seqdb-title {
+  padding-bottom: 20px;
+}
+
+.db-songs {
+  margin-top: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.db-songs::-webkit-scrollbar {
+  display: none;
+}
+
+.db-song {
+  position: relative;
+  display: block;
+  padding: 10px 0px;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: 0.25s ease;
+  overflow-y: hidden;
+}
+
+.db-song:hover {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}
+
+.new-seq-btn-img {
+  float: left;
+  width: 20px;
+}
+
+.new-seq-btn-text {
+  float: left;
+  padding-left: 10px;
+  margin: 0px;
+  margin-top: 3px;
+}
