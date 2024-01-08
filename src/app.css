@@ -1,82 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito|Comfortaa&display=swap');
 
-/* @page {
-  size: auto;
-  margin: 0mm;
-} */
-/* @page {
-  size: 210mm 297mm;
-  margin: 0mm;
-} */
-
-@media print {
-  @page {
-    size: 800px 1000px;
-    margin: 0mm;
-  }
-}
-
 :root {
-  --dark-bg: #2B2B2B;
-  --dark-divider: #606060;
-  --skel_text_color: #B7B7B7;
-  --skel_bg_color: #FFFFFF;
-  --skel_sel_color: #D6D6D6;
+  --c1: #2B2B2B;
+  --c2: #FFFFFF;
 }
 
 body {
-  overflow: hidden;
   font-family: 'Comfortaa';
   margin: 0;
   padding: 0px;
-  background: var(--dark-bg);
-  color: var(--skel_text_color);
+  background: var(--c1);
+  color: var(--c2);
+  overflow-x: hidden;
 }
 
-body::-webkit-scrollbar {
-  display: none;
+.app-title {
+	text-align: center;
 }
 
-.modal {
-  background: var(--dark-bg);
-  color: var(--skel_text_color);
-  box-shadow: 0px 0px 10px var(--skel_text_color);
-  border-radius: 10px;
-  z-index: 20;
-}
-
-.section-title {
-  position: relative;
-  float: left;
-  margin: 10px 30px;
-  top: 15px;
-  font-size: 18px;
-  background:none;
-  color: var(--skel_text_color);
-  border: none;
-}
-
-.section-title:focus-visible {
-  outline: none;
-}
-
-.saved-wrapper {
-  position: relative;
-  display: grid;
-  grid-template-columns: 50% 50%;
-}
-
-.saved {
-  position: relative;
-  float: left;
-}
-
-.delete-btn {
-  position: relative;
-  float: right;
-}
-
-.delete-btn:hover {
-  cursor: pointer;
-  color: red;
+.diagram-wrapper {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 40px;
 }

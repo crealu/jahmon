@@ -4,28 +4,14 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    main: path.join(__dirname, './src', 'index.tsx')
+    main: path.join(__dirname, './src', 'index.jsx')
   },
   resolve: {
-    extensions: ['.ts', '.js', '.tsx', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [path.join(__dirname, './src'), 'node_modules'],
     alias: {
-      react: path.join(__dirname, 'node_modules', 'react'),
-      browser: path.join(__dirname, 'node_modules', 'browser')
+      react: path.join(__dirname, 'node_modules', 'react')
     },
-    fallback: {
-      "path": false,
-      "console": false,
-      "url": false,
-      "vm": false,
-      "util": false,
-      "tty": false,
-      "https": false,
-      "fs": false,
-      "http": false,
-      "os": false,
-      "lodash": false
-    }
   },
   module: {
     rules: [
